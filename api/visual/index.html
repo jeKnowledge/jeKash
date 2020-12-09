@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Give me my money back</title>
+</head>
+<body>
+  <h1>Lista de dividas</h1>
+  <ul>
+    <ul id="dividas">
+  </ul>
+  <h1>Lista de dividas tech</h1>
+  <ul>
+    <ul id="tech">
+  </ul>
+  <h1>Lista de dividas intern</h1>
+  <ul>
+    <ul id="intern">
+  </ul>
+  <h1>Lista de dividas innovation</h1>
+  <ul>
+    <ul id="innovation">
+  </ul>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script>
+    // Para isto tudo funcionar temos de ter um servidor com npm start e outro com http-server. O "link" é abrir este ficheiro com live server
+    // Caso contrario para testar cenas, adicionar dividas, etc. usar postman com localhost:5000/dividas
+  axios.get('http://localhost:5000/dividas')
+    //.then(response => console.log(response.data["Dividas"]))
+    //.catch(error => console.log(error))
+    .then(response => criaLista(response.data["Dividas"]))
+    .catch(error => console.log(error))
+
+    // Função que cria a lista
+    const criaLista = ( dividas ) => {
+        // criar lista atraves do id definido em cima
+    const ulDividas = document.getElementById('dividas')
+    dividas.map(divida => {
+      const listaDivida = document.createElement('li')
+      listaDivida.innerHTML = `Quantia: ${divida.quantia} - Devedor: ${divida.devedor} - Credor: ${divida.credor} - Descrição: ${divida.descrição}`
+      ulDividas.appendChild(listaDivida)
+    })
+  }
+
+  axios.get('http://localhost:5000/dividas/Tech')
+    .then(response => listaTech(response.data["Dividas"]))
+    .catch(error => console.log(error))
+
+    const listaTech = ( dividas ) => {
+    const ulDividasTech = document.getElementById('tech')
+    dividas.map(divida => {
+      const listaDividaTech = document.createElement('li')
+      listaDividaTech.innerHTML = `Quantia: ${divida.quantia} - Devedor: ${divida.devedor} - Credor: ${divida.credor} - Descrição: ${divida.descrição}`
+      ulDividasTech.appendChild(listaDividaTech)
+    })
+  }
+
+  axios.get('http://localhost:5000/dividas/Intern')
+    .then(response => listaIntern(response.data["Dividas"]))
+    .catch(error => console.log(error))
+
+    const listaIntern = ( dividas ) => {
+    const ulDividasIntern = document.getElementById('intern')
+    dividas.map(divida => {
+      const listaDividaIntern = document.createElement('li')
+      listaDividaIntern.innerHTML = `Quantia: ${divida.quantia} - Devedor: ${divida.devedor} - Credor: ${divida.credor} - Descrição: ${divida.descrição}`
+      ulDividasIntern.appendChild(listaDividaIntern)
+    })
+  }
+
+  axios.get('http://localhost:5000/dividas/Innovation')
+    .then(response => listaInnovation(response.data["Dividas"]))
+    .catch(error => console.log(error))
+
+    const listaInnovation = ( dividas ) => {
+    const ulDividasInnovation = document.getElementById('innovation')
+    dividas.map(divida => {
+      const listaDividaInnovation = document.createElement('li')
+      listaDividaInnovation.innerHTML = `Quantia: ${divida.quantia} - Devedor: ${divida.devedor} - Credor: ${divida.credor} - Descrição: ${divida.descrição}`
+      ulDividasInnovation.appendChild(listaDividaInnovation)
+    })
+  }
+</script>
+</html>
