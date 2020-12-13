@@ -80,8 +80,6 @@ exports.signup =  (req,res,next) =>{ // criar um novo user no servidor
 };
 
 exports.login = (req,res,next)=>{
-    res.send("login");
-    console.log("a");
     User.findOne({email: req.body.email})
     .exec()
     .then( user =>{

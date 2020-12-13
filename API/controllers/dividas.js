@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Divida = require("../models/divida"); //modelo para a divida do Tesoureiro
+const Jeker = require("../models/jeker");
 
 //controler para criar uma divida de um Jeker daí o nome "criar_divida_jeK"
 exports.criar_divida_jeK = (req, res, next) => {
@@ -15,8 +16,8 @@ exports.criar_divida_jeK = (req, res, next) => {
     _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
 
     //Estamos no request de um Jeker:
-    useraqueDeve: "JeKnowledge", //Vai ser a Jeknowledge neste caso
-    useraDever: req.body.useraDever, //ATENÇÃO DAR FIX: Não sei o que meter aqui, vou buscar o email do user através do log in ??**
+    credor: "JeKnowledge", //Vai ser a Jeknowledge neste caso
+    devedor: req.body.devedor, //ATENÇÃO DAR FIX: Não sei o que meter aqui, vou buscar o email do user através do log in ??**
     quantia: req.body.quantia, //vai buscar a quantia ao body do json
     descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
     date: "Data: " + date + " às: " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
@@ -32,8 +33,8 @@ exports.criar_divida_jeK = (req, res, next) => {
         message: "Divida criada!",
         DividaCriada: {
           //passo o nome, a quantia e o id criados da divida e um request
-          useraqueDeve: "JeKnowledge", //Vai ser  Jeknowledge
-          useraDever: req.body.useraDever, //Não sei o que meter aqui, vou buscar o email do user através do log in ??**
+          credor: "JeKnowledge", //Vai ser  Jeknowledge
+          devedor: req.body.devedor, //Não sei o que meter aqui, vou buscar o email do user através do log in ??**
           quantia: result.quantia,
           descricao: result.descricao,
           _id: result._id,
@@ -73,8 +74,8 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
 
   let divida = new Divida({
     _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
-    useraqueDeve: req.body.useraqueDeve, //Vou buscar o user a que deve
-    useraDever: req.body.useraDever, //vou buscar o user a Dever
+    credor: req.body.credor, //Vou buscar o user a que deve
+    devedor: req.body.devedor, //vou buscar o user a Dever
     quantia: req.body.quantia, //vou buscar a quantia
     descricao: req.body.descricao, //vou buscar a descrição
     date: "Data: " + date + ", às " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
@@ -89,9 +90,9 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
         //para confirmar passo um json com a messagem, eventuais warnings e a divida criada
         message: "Divida criada!",
         DividaCriada: {
-          //passo o useraqueDeve, o useraDever, a quantia, uma eventual descrição o id criados da divida e o request que apresenta alguma informação
-          useraqueDeve: result.useraqueDeve,
-          useraDever: result.useraDever,
+          //passo o credor, o devedor, a quantia, uma eventual descrição o id criados da divida e o request que apresenta alguma informação
+          credor: result.credor,
+          devedor: result.devedor,
           quantia: result.quantia,
           descricao: result.descricao,
           date: result.date,
@@ -133,8 +134,8 @@ exports.get_all_dividas = (req, res, next) => {
           return {
             // Return da informação das dividas
             id: doc._id, //adicionei id porque ajuda a testar
-            useraqueDeve: doc.useraqueDeve,
-            useraDever: doc.useraDever,
+            credor: doc.credor,
+            devedor: doc.devedor,
             quantia: doc.quantia,
             descricao: doc.descricao,
             date: doc.date,

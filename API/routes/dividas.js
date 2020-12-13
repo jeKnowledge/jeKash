@@ -1,6 +1,7 @@
 //esta file controla as dividas em geral.
 const express = require("express");
 const router = express.Router();
+const checkLogin = require("../middleware/check-login");
 
 const DividasController = require("../controllers/Dividas");
 //controller das dividas
@@ -8,9 +9,20 @@ const DividasController = require("../controllers/Dividas");
 
 //post de uma divida da JEK e do Tesoureiro
 router.post("/", DividasController.criar_divida_jeK);
-router.post("/", DividasController.criar_divida_Tesoureiro);
+router.post("/tesoureiro", DividasController.criar_divida_Tesoureiro);
 
 // GET REQUEST DE TODAS AS DIVIDAS para ajudar a testar
-router.get("/", DividasController.get_all_dividas);
+router.get("/", checkLogin,  DividasController.get_all_dividas);
+
+// ---------------------------------------------GET DIVIDAS POR DEPARTAMENTO
+
+// INTERN
+router.get("/intern", checkLogin, DividasController.dividas_intern);
+
+// TECH
+router.get("/tech", checkLogin, DividasController.dividas_tech);
+
+// INNOVATION
+router.get("/innovation",  checkLogin, DividasController.dividas_innovation);
 
 module.exports = router;
