@@ -1,14 +1,16 @@
-const express = require('express');
-const mongoose = require('mongoose');
+//esta file controla as dividas em geral.
+const express = require("express");
 const router = express.Router();
-const checkAdmin = require('../middleware/check-admin');
-const checkLogin = require('../middleware/check-login');
-const dividastControllers = require('../controllers/dividas');
 
-router.get("/",checkLogin,dividastControllers.get_all_dividas);
+const DividasController = require("../controllers/Dividas");
+//controller das dividas
+//const checkAuth = require("../middleware/check-auth")//a checkAuth é a middleware do log-in
 
-router.post("/",checkAdmin,checkLogin,dividastControllers.criar_divida);
+//post de uma divida da JEK e do Tesoureiro
+router.post("/", DividasController.criar_divida_jeK);
+router.post("/", DividasController.criar_divida_Tesoureiro);
 
-
+// GET REQUEST DE TODAS AS DIVIDAS para ajudar a testar
+router.get("/", DividasController.get_all_dividas);
 
 module.exports = router;
