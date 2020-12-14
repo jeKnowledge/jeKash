@@ -178,7 +178,7 @@ exports.dividas_departamento = (req, res, next) => {
           let depart = [];
           for (i = 0; i < docs.length; i++) {
             for (let j = 0; j < jekers.length; j++) {
-              // Se o user for um devedor ou um credor e se o seu departamento for Intern, entao a divida adiciona-se ao array das dividas deste departamento
+              // Se o user for um devedor ou um credor e se o seu departamento for o especificado na route, entao a divida adiciona-se ao array das dividas deste departamento
               if ((docs[i]["devedor"] === jekers[j]["nome"] || docs[i]["credor"] === jekers[j]["nome"]) && jekers[j]["departamento"] == departement) {
                   depart.push(docs[i]);
               }
