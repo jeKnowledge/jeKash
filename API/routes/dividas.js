@@ -14,15 +14,7 @@ router.post("/tesoureiro", DividasController.criar_divida_Tesoureiro);
 // GET REQUEST DE TODAS AS DIVIDAS para ajudar a testar
 router.get("/", checkLogin,  DividasController.get_all_dividas);
 
-// ---------------------------------------------GET DIVIDAS POR DEPARTAMENTO
-
-// INTERN
-router.get("/intern", checkLogin, DividasController.dividas_intern);
-
-// TECH
-router.get("/tech", checkLogin, DividasController.dividas_tech);
-
-// INNOVATION
-router.get("/innovation",  checkLogin, DividasController.dividas_innovation);
+// GET DIVIDAS POR DEPARTAMENTO
+router.get("/:departement", checkLogin, DividasController.dividas_departamento);
 
 module.exports = router;
