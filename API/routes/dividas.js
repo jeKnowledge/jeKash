@@ -11,8 +11,8 @@ const DividasController = require("../controllers/Dividas");
 router.post("/", DividasController.criar_divida_jeK);
 router.post("/tesoureiro", DividasController.criar_divida_Tesoureiro);
 
-// GET REQUEST DE TODAS AS DIVIDAS para ajudar a testar
-router.get("/", checkLogin,  DividasController.get_all_dividas);
+router.get("/getall",DividasController.get_all_dividas);
+
 
 // ---------------------------------------------GET DIVIDAS POR DEPARTAMENTO
 

@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Divida = require("../models/divida"); //modelo para a divida do Tesoureiro
-const Jeker = require("../models/jeker");
+const User = require("../models/users");
 
-//controler para criar uma divida de um Jeker daí o nome "criar_divida_jeK"
+//controler para criar uma divida de um User daí o nome "criar_divida_jeK"
 exports.criar_divida_jeK = (req, res, next) => {
   //Quando uma divida é criada preciso de a data, hora e minutos de hoje.
   let today = new Date(); //com a class Date consigo pedir a data e a hora a que foi criada a divida
@@ -15,7 +15,7 @@ exports.criar_divida_jeK = (req, res, next) => {
   let divida = new Divida({
     _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
 
-    //Estamos no request de um Jeker:
+    //Estamos no request de um User:
     credor: "JeKnowledge", //Vai ser a Jeknowledge neste caso
     devedor: req.body.devedor, //ATENÇÃO DAR FIX: Não sei o que meter aqui, vou buscar o email do user através do log in ??**
     quantia: req.body.quantia, //vai buscar a quantia ao body do json
@@ -152,6 +152,40 @@ exports.get_all_dividas = (req, res, next) => {
     });
 };
 
+
+  //GET REQUEST DE TODAS AS DIVIDAS POR USER
+exports.get_all_dividas_user = (req, res, next) => {
+  // find() sem argumentos devolve todos as dívidas
+  Divida.find()
+    .exec()
+    .then((docs) => {
+      // array docs com todos os objetos
+      // OUTPUT
+      const response = {
+        count: docs.length, // Numero total de dividas
+        Dividas: docs.map((doc) => {
+          // map cria um array com as informações seguintes de cada divida
+          return {
+            // Return da informação das dividas
+            id: doc._id, //adicionei id porque ajuda a testar
+            devedor: doc.devedor,
+            quantia: doc.quantia,
+            descricao: doc.descricao,
+            date: doc.date,
+          };
+        }),
+      };
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      // se a promise der erro
+      res.status(500).json({
+        error: err,
+      });
+    });
+};
+
+
 // ---------------------------------------------GET DIVIDAS POR DEPARTAMENTO
 
 // INTERN
@@ -162,26 +196,26 @@ exports.dividas_intern = (req, res, next) => {
     .select("quantia devedor credor descrição")
     .exec()
     .then((docs) => {
-      let jekers = [];
-      Jeker.find()
+      let users = [];
+      User.find()
         .select("nome departamento")
-        .exec() // Vamos buscar os jekers para ver em que departamento se inserem
-        .then((jeker) => {
-          // Basicamente aqui dentro estamos na promise da Divida e do Jeker
+        .exec() // Vamos buscar os users para ver em que departamento se inserem
+        .then((user) => {
+          // Basicamente aqui dentro estamos na promise da Divida e do User
 
-          // Armazenar todos os jekers no array "jekers"
-          for (let i = 0; i < jeker.length; i++) {
-            jekers.push(jeker[i]);
+          // Armazenar todos os users no array "users"
+          for (let i = 0; i < users.length; i++) {
+            users.push(users[i]);
           }
           // array que vai ter todas as dividas deste departamento
           let depart = [];
           for (i = 0; i < docs.length; i++) {
-            for (let j = 0; j < jekers.length; j++) {
+            for (let j = 0; j < users.length; j++) {
               // Se o user for um devedor ou um credor e se o seu departamento for Intern, entao a divida adiciona-se ao array das dividas deste departamento
               if (
-                (docs[i]["devedor"] === jekers[j]["nome"] ||
-                  docs[i]["credor"] === jekers[j]["nome"]) &&
-                jekers[j]["departamento"] == "Intern"
+                (docs[i]["devedor"] === users[j]["nome"] ||
+                  docs[i]["credor"] === users[j]["nome"]) &&
+                users[j]["departamento"] == "Intern"
               ) {
                 depart.push(docs[i]);
               }
@@ -223,26 +257,26 @@ exports.dividas_tech = (req, res, next) => {
     .select("quantia devedor credor descrição")
     .exec()
     .then((docs) => {
-      let jekers = [];
-      Jeker.find()
+      let users = [];
+      User.find()
         .select("nome departamento")
-        .exec() // Vamos buscar os jekers para ver em que departamento se inserem
-        .then((jeker) => {
-          // Basicamente aqui dentro estamos na promise da Divida e do Jeker
+        .exec() // Vamos buscar os users para ver em que departamento se inserem
+        .then((User) => {
+          // Basicamente aqui dentro estamos na promise da Divida e do User
 
-          // Armazenar todos os jekers no array "jekers"
-          for (let i = 0; i < jeker.length; i++) {
-            jekers.push(jeker[i]);
+          // Armazenar todos os users no array "users"
+          for (let i = 0; i < users.length; i++) {
+            users.push(users[i]);
           }
           // array que vai ter todas as dividas deste departamento
           let depart = [];
           for (i = 0; i < docs.length; i++) {
-            for (let j = 0; j < jekers.length; j++) {
+            for (let j = 0; j < users.length; j++) {
               // Se o user for um devedor ou um credor e se o seu departamento for Tech, entao a divida adiciona-se ao array das dividas deste departamento
               if (
-                (docs[i]["devedor"] === jekers[j]["nome"] ||
-                  docs[i]["credor"] === jekers[j]["nome"]) &&
-                jekers[j]["departamento"] == "Tech"
+                (docs[i]["devedor"] === users[j]["nome"] ||
+                  docs[i]["credor"] === users[j]["nome"]) &&
+                users[j]["departamento"] == "Tech"
               ) {
                 depart.push(docs[i]);
               }
@@ -284,26 +318,26 @@ exports.dividas_innovation = (req, res, next) => {
     .select("quantia devedor credor descrição")
     .exec()
     .then((docs) => {
-      let jekers = [];
-      Jeker.find()
+      let users = [];
+      this.get_all_dividas_user.find()
         .select("nome departamento")
-        .exec() // Vamos buscar os jekers para ver em que departamento se inserem
-        .then((jeker) => {
-          // Basicamente aqui dentro estamos na promise da Divida e do Jeker
+        .exec() // Vamos buscar os users para ver em que departamento se inserem
+        .then((user) => {
+          // Basicamente aqui dentro estamos na promise da Divida e do User
 
-          // Armazenar todos os jekers no array "jekers"
-          for (let i = 0; i < jeker.length; i++) {
-            jekers.push(jeker[i]);
+          // Armazenar todos os users no array "users"
+          for (let i = 0; i < users.length; i++) {
+            users.push(users[i]);
           }
           // array que vai ter todas as dividas deste departamento
           let depart = [];
           for (i = 0; i < docs.length; i++) {
-            for (let j = 0; j < jekers.length; j++) {
+            for (let j = 0; j < users.length; j++) {
               // Se o user for um devedor ou um credor e se o seu departamento for Innovation, entao a divida adiciona-se ao array das dividas deste departamento
               if (
-                (docs[i]["devedor"] === jekers[j]["nome"] ||
-                  docs[i]["credor"] === jekers[j]["nome"]) &&
-                jekers[j]["departamento"] == "Innovation"
+                (docs[i]["devedor"] === users[j]["nome"] ||
+                  docs[i]["credor"] === users[j]["nome"]) &&
+                users[j]["departamento"] == "Innovation"
               ) {
                 depart.push(docs[i]);
               }
