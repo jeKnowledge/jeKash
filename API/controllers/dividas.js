@@ -17,7 +17,7 @@ exports.criar_divida_jeK = (req, res, next) => {
 
     //Estamos no request de um Jeker:
     credor: "JeKnowledge", //Vai ser a Jeknowledge neste caso
-    devedor: req.body.devedor, //ATENÇÃO DAR FIX: Não sei o que meter aqui, vou buscar o email do user através do log in ??**
+    devedor: req.body.devedor, //IR BUSCAR À SESSÃO QUEM E O USER QUE ESTA A CRIAR ESTA DIVIDA!
     quantia: req.body.quantia, //vai buscar a quantia ao body do json
     descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
     date: "Data: " + date + " às: " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
