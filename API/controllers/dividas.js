@@ -164,7 +164,7 @@ exports.dividas_departamento = (req, res, next) => {
     .exec()
     .then((docs) => {
       let jekers = [];
-      Jeker.find()
+      Jeker.find({departamento: departement})
         .select("nome departamento")
         .exec() // Vamos buscar os jekers para ver em que departamento se inserem
         .then((jeker) => {
@@ -179,7 +179,7 @@ exports.dividas_departamento = (req, res, next) => {
           for (i = 0; i < docs.length; i++) {
             for (let j = 0; j < jekers.length; j++) {
               // Se o user for um devedor ou um credor e se o seu departamento for o especificado na route, entao a divida adiciona-se ao array das dividas deste departamento
-              if ((docs[i]["devedor"] === jekers[j]["nome"] || docs[i]["credor"] === jekers[j]["nome"]) && jekers[j]["departamento"] == departement) {
+              if ((docs[i]["devedor"] === jekers[j]["nome"] || docs[i]["credor"] === jekers[j]["nome"])) {
                   depart.push(docs[i]);
               }
             }
