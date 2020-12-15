@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const Divida = require('../models/divida');
 
 
+// Vai ser usado para verificar se o user que criou a divida, é o que está a atualizá-la
 module.exports = (req,res,next) =>{
 
     try {
