@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Divida = require("../models/divida"); //modelo para a divida do Tesoureiro
 const User = require("../models/users");
-const checkUser = require("../middleware/check-user");
 const jwt = require('jsonwebtoken');
 
 //controler para criar uma divida de um User daí o nome "criar_divida_jeK"
@@ -13,6 +12,7 @@ exports.criar_divida_jeK = (req, res, next) => {
   let time =
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(); //a string que diz o tempo atual
 
+  // Para ir buscar o id do user logado
   const token = req.headers.authorization.split(" ")[1]; 
   const decoded = jwt.verify(token,"secret");
   const id = decoded.userId
@@ -28,7 +28,7 @@ exports.criar_divida_jeK = (req, res, next) => {
     quantia: req.body.quantia, //vai buscar a quantia ao body do json
     descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
     paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
-    userCriador: id,
+    userCriador: id, // User que cria a divida
     date: "Data: " + date + " às: " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
   });
 
@@ -47,7 +47,7 @@ exports.criar_divida_jeK = (req, res, next) => {
           quantia: result.quantia,
           descricao: result.descricao,
           paga: result.paga,
-          userCriador: result.userCriador,
+          userCriador: result.userCriador, // User que cria a divida
           _id: result._id,
           date: result.date,
           request: {
@@ -83,6 +83,7 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
   let time =
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(); //a string que diz o tempo atual
 
+  // Para ir buscar o id do user logado
   const token = req.headers.authorization.split(" ")[1]; 
   const decoded = jwt.verify(token,"secret");
   const id = decoded.userId
@@ -94,7 +95,7 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
     quantia: req.body.quantia, //vou buscar a quantia
     descricao: req.body.descricao, //vou buscar a descrição
     paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
-    userCriador: id,
+    userCriador: id, // User que cria a divida
     date: "Data: " + date + ", às " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
   });
 
