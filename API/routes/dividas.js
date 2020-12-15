@@ -2,6 +2,7 @@
 const express = require("express");
 const router = express.Router();
 const checkLogin = require("../middleware/check-login");
+const checkUser = require("../middleware/check-user");
 
 const DividasController = require("../controllers/Dividas");
 //controller das dividas
@@ -19,6 +20,10 @@ router.get("/i?n?ativas", checkLogin, DividasController.dividas_ativas_inativas)
 
 // GET DIVIDAS POR DEPARTAMENTO
 router.get("/:departement", checkLogin, DividasController.dividas_departamento);
+
+
+// Opção para dar uma divida como paga
+router.patch("/:dividaID", checkLogin, checkUser, DividasController.altera_divida)
 
 
 module.exports = router;
