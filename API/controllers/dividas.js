@@ -16,7 +16,8 @@ exports.criar_divida_jeK = (req, res, next) => {
     _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
 
     //Estamos no request de um User:
-    credor: "JeKnowledge", //Vai ser a Jeknowledge neste caso
+    //credor: "JeKnowledge", //Vai ser a Jeknowledge neste caso
+    credor: req.body.credor,
     devedor: req.body.devedor, //ATENÇÃO DAR FIX: Não sei o que meter aqui, vou buscar o email do user através do log in ??**
     quantia: req.body.quantia, //vai buscar a quantia ao body do json
     descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
@@ -33,7 +34,7 @@ exports.criar_divida_jeK = (req, res, next) => {
         message: "Divida criada!",
         DividaCriada: {
           //passo o nome, a quantia e o id criados da divida e um request
-          credor: "JeKnowledge", //Vai ser  Jeknowledge
+          credor: req.body.credor, //Vai ser  Jeknowledge
           devedor: req.body.devedor, //Não sei o que meter aqui, vou buscar o email do user através do log in ??**
           quantia: result.quantia,
           descricao: result.descricao,
@@ -124,21 +125,21 @@ exports.get_all_dividas = (req, res, next) => {
   // find() sem argumentos devolve todos as dívidas
   Divida.find()
     .exec()
-    .then((docs) => {
-      // array docs com todos os objetos
+    .then((dividas) => {
+      // array dividas com todos os objetos
       // OUTPUT
       const response = {
-        count: docs.length, // Numero total de dividas
-        Dividas: docs.map((doc) => {
+        count: dividas.length, // Numero total de dividas
+        Dividas: dividas.map((divida) => {
           // map cria um array com as informações seguintes de cada divida
           return {
             // Return da informação das dividas
-            id: doc._id, //adicionei id porque ajuda a testar
-            credor: doc.credor,
-            devedor: doc.devedor,
-            quantia: doc.quantia,
-            descricao: doc.descricao,
-            date: doc.date,
+            id: divida._id, //adicionei id porque ajuda a testar
+            credor: divida.credor,
+            devedor: divida.devedor,
+            quantia: divida.quantia,
+            descricao: divida.descricao,
+            date: divida.date,
           };
         }),
       };
@@ -158,20 +159,20 @@ exports.get_all_dividas_user = (req, res, next) => {
   // find() sem argumentos devolve todos as dívidas
   Divida.find()
     .exec()
-    .then((docs) => {
-      // array docs com todos os objetos
+    .then((dividas) => {
+      // array dividas com todos os objetos
       // OUTPUT
       const response = {
-        count: docs.length, // Numero total de dividas
-        Dividas: docs.map((doc) => {
+        count: dividas.length, // Numero total de dividas
+        Dividas: dividas.map((divida) => {
           // map cria um array com as informações seguintes de cada divida
           return {
             // Return da informação das dividas
-            id: doc._id, //adicionei id porque ajuda a testar
-            devedor: doc.devedor,
-            quantia: doc.quantia,
-            descricao: doc.descricao,
-            date: doc.date,
+            id: divida._id, //adicionei id porque ajuda a testar
+            devedor: divida.credor,
+            quantia: divida.devedor,
+            descricao: divida.descricao,
+            date: divida.date,
           };
         }),
       };
@@ -186,184 +187,48 @@ exports.get_all_dividas_user = (req, res, next) => {
 };
 
 
-// ---------------------------------------------GET DIVIDAS POR DEPARTAMENTO
+// GET DIVIDAS POR DEPARTAMENTO
 
-// INTERN
-exports.dividas_intern = (req, res, next) => {
-  // find() sem argumentos devolve todos as dívidas
-  // select() para apenas dar display daqueles elementos e nao o v_0 por exemplo
-  Divida.find()
-    .select("quantia devedor credor descrição")
-    .exec()
-    .then((docs) => {
-      let users = [];
-      User.find()
-        .select("nome departamento")
-        .exec() // Vamos buscar os users para ver em que departamento se inserem
-        .then((user) => {
-          // Basicamente aqui dentro estamos na promise da Divida e do User
+exports.dividas_departamento = (req, res, next) => {
+  const dep = req.params.departement;
+  // find() devolve todos os users do departamento indicado na route
+  User.find({department: dep})
+  .select("_id name department")
+  .exec()
+  .then((users) => {
+    // users - array com todos os users do departamento
+      Divida.find({$or: [
+                        {credor: {$in: users}},
+                        {devedor: {$in: users}} 
+                        ]}) // encontra todas as dividas com credores ou devedores que estão no array users
+      .select("quantia devedor credor descrição")
+      .exec()
+      .then((dividas) => {
+        // dividas - array com todas as dívidas do departamento
+      
+        // OUTPUT
+        const response = {
+          count: dividas.length, // Numero total de dividas
+          Dividas: dividas.map((divida) => {
+            // map cria um array com as informações seguintes de cada divida
+            return {
+              // Return da informação das dividas
+              quantia: divida.quantia,
+              devedor: divida.credor,
+              credor: divida.devedor,
+              descrição: divida.descrição,
+            };
+          }),
+        };
+        res.status(200).json(response);
+        //res.status(200).json({message: "ola"}); - so para testar coisas
 
-          // Armazenar todos os users no array "users"
-          for (let i = 0; i < users.length; i++) {
-            users.push(users[i]);
-          }
-          // array que vai ter todas as dividas deste departamento
-          let depart = [];
-          for (i = 0; i < docs.length; i++) {
-            for (let j = 0; j < users.length; j++) {
-              // Se o user for um devedor ou um credor e se o seu departamento for Intern, entao a divida adiciona-se ao array das dividas deste departamento
-              if (
-                (docs[i]["devedor"] === users[j]["nome"] ||
-                  docs[i]["credor"] === users[j]["nome"]) &&
-                users[j]["departamento"] == "Intern"
-              ) {
-                depart.push(docs[i]);
-              }
-            }
-          }
-
-          // OUTPUT
-          const response = {
-            count: depart.length, // Numero total de dividas
-            Dividas: depart.map((dep) => {
-              // map cria um array com as informações seguintes de cada divida
-              return {
-                // Return da informação das dividas
-                quantia: dep.quantia,
-                devedor: dep.devedor,
-                credor: dep.credor,
-                descrição: dep.descrição,
-              };
-            }),
-          };
-          res.status(200).json(response);
         })
         .catch((err) => {
           console.log(err);
           res.status(500).json({ error: err });
         });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ error: err });
-    });
-};
 
-// TECH
-exports.dividas_tech = (req, res, next) => {
-  // find() sem argumentos devolve todos as dívidas
-  // select() para apenas dar display daqueles elementos e nao o v_0 por exemplo
-  Divida.find()
-    .select("quantia devedor credor descrição")
-    .exec()
-    .then((docs) => {
-      let users = [];
-      User.find()
-        .select("nome departamento")
-        .exec() // Vamos buscar os users para ver em que departamento se inserem
-        .then((User) => {
-          // Basicamente aqui dentro estamos na promise da Divida e do User
-
-          // Armazenar todos os users no array "users"
-          for (let i = 0; i < users.length; i++) {
-            users.push(users[i]);
-          }
-          // array que vai ter todas as dividas deste departamento
-          let depart = [];
-          for (i = 0; i < docs.length; i++) {
-            for (let j = 0; j < users.length; j++) {
-              // Se o user for um devedor ou um credor e se o seu departamento for Tech, entao a divida adiciona-se ao array das dividas deste departamento
-              if (
-                (docs[i]["devedor"] === users[j]["nome"] ||
-                  docs[i]["credor"] === users[j]["nome"]) &&
-                users[j]["departamento"] == "Tech"
-              ) {
-                depart.push(docs[i]);
-              }
-            }
-          }
-
-          // OUTPUT
-          const response = {
-            count: depart.length, // Numero total de dividas
-            Dividas: depart.map((dep) => {
-              // map cria um array com as informações seguintes de cada divida
-              return {
-                // Return da informação das dividas
-                quantia: dep.quantia,
-                devedor: dep.devedor,
-                credor: dep.credor,
-                descrição: dep.descrição,
-              };
-            }),
-          };
-          res.status(200).json(response);
-        })
-        .catch((err) => {
-          console.log(err);
-          res.status(500).json({ error: err });
-        });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ error: err });
-    });
-};
-
-// INNOVATION
-exports.dividas_innovation = (req, res, next) => {
-  // find() sem argumentos devolve todos as dívidas
-  // select() para apenas dar display daqueles elementos e nao o v_0 por exemplo
-  Divida.find()
-    .select("quantia devedor credor descrição")
-    .exec()
-    .then((docs) => {
-      let users = [];
-      this.get_all_dividas_user.find()
-        .select("nome departamento")
-        .exec() // Vamos buscar os users para ver em que departamento se inserem
-        .then((user) => {
-          // Basicamente aqui dentro estamos na promise da Divida e do User
-
-          // Armazenar todos os users no array "users"
-          for (let i = 0; i < users.length; i++) {
-            users.push(users[i]);
-          }
-          // array que vai ter todas as dividas deste departamento
-          let depart = [];
-          for (i = 0; i < docs.length; i++) {
-            for (let j = 0; j < users.length; j++) {
-              // Se o user for um devedor ou um credor e se o seu departamento for Innovation, entao a divida adiciona-se ao array das dividas deste departamento
-              if (
-                (docs[i]["devedor"] === users[j]["nome"] ||
-                  docs[i]["credor"] === users[j]["nome"]) &&
-                users[j]["departamento"] == "Innovation"
-              ) {
-                depart.push(docs[i]);
-              }
-            }
-          }
-
-          // OUTPUT
-          const response = {
-            count: depart.length, // Numero total de dividas
-            Dividas: depart.map((dep) => {
-              // map cria um array com as informações seguintes de cada divida
-              return {
-                // Return da informação das dividas
-                quantia: dep.quantia,
-                devedor: dep.devedor,
-                credor: dep.credor,
-                descrição: dep.descrição,
-              };
-            }),
-          };
-          res.status(200).json(response);
-        })
-        .catch((err) => {
-          console.log(err);
-          res.status(500).json({ error: err });
-        });
     })
     .catch((err) => {
       console.log(err);

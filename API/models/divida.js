@@ -5,8 +5,8 @@ const DividaTESScheme = mongoose.Schema(
   {
     _id: mongoose.Schema.Types.ObjectId, //objeto ID da divida
     //Todos os campos como obrigatórios:
-    credor: { type: String, required: true },
-    devedor: { type: String, required: true }, //ira sempre haver um user a dever neste scheme
+    credor: { type: mongoose.Schema.Types.ObjectID, ref: "User", required: true, unique: true},  // Conectar o devedor e o credor a um user. Unique porque só existe 1 id igual
+    devedor: {  type: mongoose.Schema.Types.ObjectID, ref: "User", required: true, unique: true }, //ira sempre haver um user a dever neste scheme
     quantia: { type: Number, required: true }, //preciso de ter a certeza que a quantia é um numero
     descricao: { type: String }, //pode ter ou nao uma descricao
 
