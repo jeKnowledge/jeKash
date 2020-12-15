@@ -17,10 +17,11 @@ exports.criar_divida_jeK = (req, res, next) => {
 
     //Estamos no request de um User:
     //credor: "JeKnowledge", //Vai ser a Jeknowledge neste caso
-    credor: req.body.credor,
-    devedor: req.body.devedor, //ATENÇÃO DAR FIX: Não sei o que meter aqui, vou buscar o email do user através do log in ??**
+    credor: req.body.credor, //ID do credor
+    devedor: req.body.devedor, //ID do devedor
     quantia: req.body.quantia, //vai buscar a quantia ao body do json
     descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
+    estado: "inativa", // se vamos criar uma dívida não faz sentido ela estar ativa. Por isso o seu estado inicial será sempre inativa
     date: "Data: " + date + " às: " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
   });
 
@@ -34,10 +35,11 @@ exports.criar_divida_jeK = (req, res, next) => {
         message: "Divida criada!",
         DividaCriada: {
           //passo o nome, a quantia e o id criados da divida e um request
-          credor: req.body.credor, //Vai ser  Jeknowledge
-          devedor: req.body.devedor, //Não sei o que meter aqui, vou buscar o email do user através do log in ??**
+          credor: result.credor, //ID do credor
+          devedor: result.devedor, //ID do devedor
           quantia: result.quantia,
           descricao: result.descricao,
+          estado: result.estado,
           _id: result._id,
           date: result.date,
           request: {
@@ -79,6 +81,7 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
     devedor: req.body.devedor, //vou buscar o user a Dever
     quantia: req.body.quantia, //vou buscar a quantia
     descricao: req.body.descricao, //vou buscar a descrição
+    estado: "inativa", // se vamos criar uma dívida não faz sentido ela estar ativa. Por isso o seu estado inicial será sempre inativa
     date: "Data: " + date + ", às " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
   });
 
@@ -96,6 +99,7 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
           devedor: result.devedor,
           quantia: result.quantia,
           descricao: result.descricao,
+          estado: result.estado,
           date: result.date,
           _id: result._id,
           request: {
@@ -197,7 +201,7 @@ exports.dividas_departamento = (req, res, next) => {
   .exec()
   .then((users) => {
     // users - array com todos os users do departamento
-      Divida.find({$or: [
+      Divida.find({$or: [ // or para considerar os dois "pedidos"
                         {credor: {$in: users}},
                         {devedor: {$in: users}} 
                         ]}) // encontra todas as dividas com credores ou devedores que estão no array users

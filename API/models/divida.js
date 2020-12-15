@@ -9,6 +9,7 @@ const DividaTESScheme = mongoose.Schema(
     devedor: {  type: mongoose.Schema.Types.ObjectID, ref: "User", required: true, unique: true }, //ira sempre haver um user a dever neste scheme
     quantia: { type: Number, required: true }, //preciso de ter a certeza que a quantia é um numero
     descricao: { type: String }, //pode ter ou nao uma descricao
+    estado: {type: String, default: "inativa"},   // estado se a divida está ativa ou inativa. Começa com o valor inativa se nada for introduzido
 
     //Super importante é necessário guardar a Data da criação de uma divida de modo a calcular o tempo e a ligação com os emails!
     date: { type: String, required: true },
