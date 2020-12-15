@@ -13,8 +13,12 @@ router.post("/tesoureiro", DividasController.criar_divida_Tesoureiro);
 
 router.get("/getall",DividasController.get_all_dividas);
 
+// GET DIVIDAS ATIVAS E INATIVAS
+router.get("/i?n?ativas", checkLogin, DividasController.dividas_ativas_inativas)
+//router.get("/(in)?ativas", checkLogin, DividasController.dividas_ativas_inativas) - da erro :(
 
 // GET DIVIDAS POR DEPARTAMENTO
 router.get("/:departement", checkLogin, DividasController.dividas_departamento);
+
 
 module.exports = router;

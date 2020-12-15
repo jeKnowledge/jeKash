@@ -21,7 +21,7 @@ exports.criar_divida_jeK = (req, res, next) => {
     devedor: req.body.devedor, //ID do devedor
     quantia: req.body.quantia, //vai buscar a quantia ao body do json
     descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
-    estado: "inativa", // se vamos criar uma dívida não faz sentido ela estar ativa. Por isso o seu estado inicial será sempre inativa
+    paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
     date: "Data: " + date + " às: " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
   });
 
@@ -39,7 +39,7 @@ exports.criar_divida_jeK = (req, res, next) => {
           devedor: result.devedor, //ID do devedor
           quantia: result.quantia,
           descricao: result.descricao,
-          estado: result.estado,
+          paga: result.paga,
           _id: result._id,
           date: result.date,
           request: {
@@ -81,7 +81,7 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
     devedor: req.body.devedor, //vou buscar o user a Dever
     quantia: req.body.quantia, //vou buscar a quantia
     descricao: req.body.descricao, //vou buscar a descrição
-    estado: "inativa", // se vamos criar uma dívida não faz sentido ela estar ativa. Por isso o seu estado inicial será sempre inativa
+    paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
     date: "Data: " + date + ", às " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
   });
 
@@ -99,7 +99,7 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
           devedor: result.devedor,
           quantia: result.quantia,
           descricao: result.descricao,
-          estado: result.estado,
+          paga: result.paga,
           date: result.date,
           _id: result._id,
           request: {
@@ -239,3 +239,43 @@ exports.dividas_departamento = (req, res, next) => {
       res.status(500).json({ error: err });
     });
 };
+
+exports.dividas_ativas_inativas = (req, res, next) => {
+  let url = req.originalUrl.split("/")  // vamos buscar o dividas/ativas ou dividas/inativas e criamos uma lista com cada valor separado por /
+  let estado
+  if(url[2] == "ativas"){ // se for /dividas/ativas
+    estado = false
+  } else if(url[2] == "inativas"){ // se for /dividas/inativas
+    estado = true
+  } else console.log("algo de errado não está certo")
+
+  console.log(estado);
+  Divida.find({paga: estado}) // vai buscar as dividas com flag especificada no estadp
+    .select("quantia devedor credor descrição")
+    .exec()
+    .then((dividas) => {
+      // dividas - array com todas as dívidas ativas
+    
+      // OUTPUT
+      const response = {
+        count: dividas.length, // Numero total de dividas
+        Dividas: dividas.map((divida) => {
+          // map cria um array com as informações seguintes de cada divida
+          return {
+            // Return da informação das dividas
+            quantia: divida.quantia,
+            devedor: divida.credor,
+            credor: divida.devedor,
+            descrição: divida.descrição,
+          };
+        }),
+      };
+      res.status(200).json(response);
+      //res.status(200).json({message: "ola"}); - so para testar coisas
+
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({ error: err });
+      });
+}
