@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Divida = require("../models/divida"); //modelo para a divida do Tesoureiro
 const User = require("../models/users");
+const checkUser = require("../middleware/check-user");
+const jwt = require('jsonwebtoken');
 
 //controler para criar uma divida de um User daí o nome "criar_divida_jeK"
 exports.criar_divida_jeK = (req, res, next) => {
@@ -10,6 +12,10 @@ exports.criar_divida_jeK = (req, res, next) => {
     today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //a string que diz a data atual
   let time =
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(); //a string que diz o tempo atual
+
+  const token = req.headers.authorization.split(" ")[1]; 
+  const decoded = jwt.verify(token,"secret");
+  const id = decoded.userId
 
   //constructor onde vou passar a data da divida.
   let divida = new Divida({
@@ -22,6 +28,7 @@ exports.criar_divida_jeK = (req, res, next) => {
     quantia: req.body.quantia, //vai buscar a quantia ao body do json
     descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
     paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
+    userCriador: id,
     date: "Data: " + date + " às: " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
   });
 
@@ -40,6 +47,7 @@ exports.criar_divida_jeK = (req, res, next) => {
           quantia: result.quantia,
           descricao: result.descricao,
           paga: result.paga,
+          userCriador: result.userCriador,
           _id: result._id,
           date: result.date,
           request: {
@@ -75,6 +83,10 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
   let time =
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(); //a string que diz o tempo atual
 
+  const token = req.headers.authorization.split(" ")[1]; 
+  const decoded = jwt.verify(token,"secret");
+  const id = decoded.userId
+
   let divida = new Divida({
     _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
     credor: req.body.credor, //Vou buscar o user a que deve
@@ -82,6 +94,7 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
     quantia: req.body.quantia, //vou buscar a quantia
     descricao: req.body.descricao, //vou buscar a descrição
     paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
+    userCriador: id,
     date: "Data: " + date + ", às " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
   });
 
@@ -100,6 +113,7 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
           quantia: result.quantia,
           descricao: result.descricao,
           paga: result.paga,
+          userCriador: result.userCriador,
           date: result.date,
           _id: result._id,
           request: {
@@ -143,6 +157,7 @@ exports.get_all_dividas = (req, res, next) => {
             devedor: divida.devedor,
             quantia: divida.quantia,
             descricao: divida.descricao,
+            userCriador: divida.userCriador,
             date: divida.date,
           };
         }),
@@ -205,7 +220,7 @@ exports.dividas_departamento = (req, res, next) => {
                         {credor: {$in: users}},
                         {devedor: {$in: users}} 
                         ]}) // encontra todas as dividas com credores ou devedores que estão no array users
-      .select("quantia devedor credor descrição")
+      .select("quantia devedor credor descricao userCriador")
       .exec()
       .then((dividas) => {
         // dividas - array com todas as dívidas do departamento
@@ -220,7 +235,8 @@ exports.dividas_departamento = (req, res, next) => {
               quantia: divida.quantia,
               devedor: divida.credor,
               credor: divida.devedor,
-              descrição: divida.descrição,
+              descricao: divida.descricao,
+              userCriador: divida.userCriador
             };
           }),
         };
@@ -249,9 +265,8 @@ exports.dividas_ativas_inativas = (req, res, next) => {
     estado = true
   } else console.log("algo de errado não está certo")
 
-  console.log(estado);
   Divida.find({paga: estado}) // vai buscar as dividas com flag especificada no estadp
-    .select("quantia devedor credor descrição")
+    .select("quantia devedor credor descricao userCriador")
     .exec()
     .then((dividas) => {
       // dividas - array com todas as dívidas ativas
@@ -266,7 +281,8 @@ exports.dividas_ativas_inativas = (req, res, next) => {
             quantia: divida.quantia,
             devedor: divida.credor,
             credor: divida.devedor,
-            descrição: divida.descrição,
+            descricao: divida.descricao,
+            userCriador: divida.userCriador
           };
         }),
       };

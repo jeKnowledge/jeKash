@@ -8,10 +8,10 @@ const DividasController = require("../controllers/Dividas");
 //const checkAuth = require("../middleware/check-auth")//a checkAuth é a middleware do log-in
 
 //post de uma divida da JEK e do Tesoureiro
-router.post("/", DividasController.criar_divida_jeK);
-router.post("/tesoureiro", DividasController.criar_divida_Tesoureiro);
+router.post("/", checkLogin, DividasController.criar_divida_jeK);
+router.post("/tesoureiro", checkLogin, DividasController.criar_divida_Tesoureiro);
 
-router.get("/getall",DividasController.get_all_dividas);
+router.get("/getall", checkLogin, DividasController.get_all_dividas);
 
 // GET DIVIDAS ATIVAS E INATIVAS
 router.get("/i?n?ativas", checkLogin, DividasController.dividas_ativas_inativas)
