@@ -7,13 +7,15 @@ router.get('/login',(req,res,next)=>{
     res.render('login');
 })
 
-router.get('/register',(req,res,next)=>{
-    res.render('register')
+router.get('/signup',(req,res,next)=>{
+    res.render('signup')
 })
 
 
 router.get('/logout',(req,res,next)=>{
-    //res.render('register')
+    req.logout;
+    req.flash('sucess_msg','Foste desconectado!');
+    res.redirect('login')
 })
 
 router.post('/',dividasController.criar_divida_jeK);
