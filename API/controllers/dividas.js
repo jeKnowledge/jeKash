@@ -321,7 +321,6 @@ exports.altera_divida = (req, res, next) => {
 // Vamos procurar a divida com o id dado no url, e atualizamos as informações que foram disponibilix«zadas no JSON
   Divida.update({_id: id_divida}, {$set: updateOps}).exec()
   .then(result => {
-    console.log({id: id_divida})
     res.status(200).json({
       message: "Divida atualizada",
       request: {
