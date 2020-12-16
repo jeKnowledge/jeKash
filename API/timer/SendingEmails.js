@@ -1,7 +1,8 @@
 const nodemailer = require("nodemailer");
 const express = require("express");
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-const timer = 3000; //tempo de espera que o codigo vai atualizar Agora pra debug esta 3s, ou seja de 3 em 3 s vou ver se o tempo passou ou não.
+//fazer de dia a dia
+const timer = 3000; //fazer de semana a semana
 
 const aUrl = "http://localhost:5000/dividas/all_dividas_para_o_email"; //url para fazer o request de todas as dividas.
 
@@ -14,7 +15,7 @@ var HttpClient = function() {
                 aCallback(anHttpRequest.responseText); // é como se fosse um return ao minha resposta atraves do callBack
         }
 
-        anHttpRequest.open( "GET", aUrl, true );//faço um GET request ao Url
+        anHttpRequest.open("GET", aUrl, true );//faço um GET request ao Url
         //mando um post com um header a dizer server e com esta server key
 
         //para provar que sou o server vou as headers e se o header server tiver a localserverkey e porque sou eu.
@@ -144,6 +145,7 @@ setInterval(() => {
   console.log("Checking..."); //para avisar que a função vai correr
   
     (function(){
+
       //funcao que vai correr e ver se as datas ja passaram ou nao
       checkDates()
       

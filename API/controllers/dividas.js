@@ -33,8 +33,9 @@ exports.criar_divida_jeK = (req, res, next) => {
     _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
 
     //Estamos no request de um Jeker:
-    credor: "JeKnowledge", //Vai ser a Jeknowledge neste caso
-    devedor: userEmail, //com a authToken consegui ir buscar o email
+
+    credor: "JeKnowledge", //mudar esta string para user JeKnowledge id
+    devedor: userEmail, //com a authToken consegui ir buscar o id de um jeker não o email
     quantia: req.body.quantia, //vai buscar a quantia ao body do json
     descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
     date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
