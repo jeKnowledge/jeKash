@@ -6,7 +6,7 @@ const DividaTESScheme = mongoose.Schema(
     _id: mongoose.Schema.Types.ObjectId, //objeto ID da divida
     //Todos os campos como obrigatórios:
     credor: { type: String, required: true },
-    devedor: { type: String, required: true }, //ira sempre haver um user a dever neste scheme
+    devedor: { type: String, required: true }, //Atenção isto representa um email válido.
     quantia: { type: Number, required: true }, //preciso de ter a certeza que a quantia é um numero
     descricao: { type: String }, //pode ter ou nao uma descricao
 

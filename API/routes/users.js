@@ -1,12 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userControllers = require('../controllers/users');
-const User = require('../models/users');
 const dividasController = require("../controllers/dividas")
-
-const checkAuth = require("../middleware/check-auth")
-
-
 
 router.get('/login',(req,res,next)=>{
     res.render('login');
@@ -25,7 +20,7 @@ router.post('/',dividasController.criar_divida_jeK);
 
 router.post('/',dividasController.criar_divida_Tesoureiro);
 
-router.get("/getall", userControllers.get_all_users);
+router.get("/getall",userControllers.get_all_users);
 
 router.post("/signup",userControllers.signup);
 

@@ -1,26 +1,43 @@
 const mongoose = require("mongoose");
 const Divida = require("../models/divida"); //modelo para a divida do Tesoureiro
 const Jeker = require("../models/jeker");
+const jwt = require("jsonwebtoken");
 
 //controler para criar uma divida de um Jeker daí o nome "criar_divida_jeK"
 exports.criar_divida_jeK = (req, res, next) => {
   //Quando uma divida é criada preciso de a data, hora e minutos de hoje.
   let today = new Date(); //com a class Date consigo pedir a data e a hora a que foi criada a divida
-  let date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //a string que diz a data atual
-  let time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(); //a string que diz o tempo atual
 
+ //adicionei os zeros à direita tambem porque assim fica melhor para exportar e fazer contas com as datas
+  let date =
+    today.getFullYear() + "-" + ("0"+(today.getMonth() + 1)).slice(-2) + "-" + ("0"+today.getDate()).slice(-2); //a string que diz a data atual
+  //faço slice(-2) porque slice(-2) da me sempre os ultimos dois characteres da string, e assim se adicionar um zero a mais fico sempre com os ultimos dois characteres e portanto apaga-o
+  
+  let time =
+     ("0"+today.getHours()).slice(-2) + ":" +  ("0"+today.getMinutes()).slice(-2) + ":" +  ("0"+today.getSeconds()).slice(-2); //a string que diz o tempo atual
+  
+  //validar o user authorization e retirar desse token o info dele para postar uma divida:
+  var authorization = (req.headers.authorization).split(" ")[1],decoded;
+  try {
+      decoded = jwt.verify(authorization, "secret"); //secret e a chave da authToken
+  } catch (e) {
+      //console.log(e);
+      return res.status(401).send('unauthorized'); //e porque nao foi conseguido ler o email na auth token
+  }
+  
+  //finalmente com a authtoken decoded conseguimos ter o email
+  let userEmail = decoded.email;
+  //console.log(userEmail);
   //constructor onde vou passar a data da divida.
   let divida = new Divida({
     _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
 
     //Estamos no request de um Jeker:
     credor: "JeKnowledge", //Vai ser a Jeknowledge neste caso
-    devedor: req.body.devedor, //IR BUSCAR À SESSÃO QUEM E O USER QUE ESTA A CRIAR ESTA DIVIDA!
+    devedor: userEmail, //com a authToken consegui ir buscar o email
     quantia: req.body.quantia, //vai buscar a quantia ao body do json
     descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
-    date: "Data: " + date + " às: " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
+    date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
   });
 
   //salvo a divida
@@ -33,8 +50,8 @@ exports.criar_divida_jeK = (req, res, next) => {
         message: "Divida criada!",
         DividaCriada: {
           //passo o nome, a quantia e o id criados da divida e um request
-          credor: "JeKnowledge", //Vai ser  Jeknowledge
-          devedor: req.body.devedor, //Não sei o que meter aqui, vou buscar o email do user através do log in ??**
+          credor: result.credor, //Vai ser  Jeknowledge
+          devedor: result.devedor, //Vai ser o email do criador.
           quantia: result.quantia,
           descricao: result.descricao,
           _id: result._id,
@@ -46,7 +63,6 @@ exports.criar_divida_jeK = (req, res, next) => {
               "://" +
               req.get("host") +
               req.originalUrl +
-              "/" +
               result._id, //formatei uma string para apresentar o url da divida (pode se tirar acho que quando fizeremos tudo vai se ligar tudo)
           },
         },
@@ -54,7 +70,8 @@ exports.criar_divida_jeK = (req, res, next) => {
     })
     .catch((err) => {
       //catch eventuias erros
-      // *Debug purposes*-console.log(err);
+      // *Debug purposes*;
+      console.log(err);
       res.status(500).json({
         //apresento eventuais eros
         error: err,
@@ -67,18 +84,23 @@ exports.criar_divida_jeK = (req, res, next) => {
 exports.criar_divida_Tesoureiro = (req, res, next) => {
   //Quando uma divida é criada preciso de a data, hora e minutos de hoje.
   let today = new Date(); //com a class Date consigo pedir a data e a hora a que foi criada a divida
+
+  //adicionei os zeros à direita tambem porque assim fica melhor para exportar e fazer contas com as datas
   let date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //a string que diz a data atual
+    today.getFullYear() + "-" + ("0"+(today.getMonth() + 1)).slice(-2) + "-" + ("0"+today.getDate()).slice(-2); //a string que diz a data atual
+  //faço slice(-2) porque slice(-2) da me sempre os ultimos dois characteres da string, e assim se adicionar um zero a mais fico sempre com os ultimos dois characteres e portanto apaga-o
+
   let time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(); //a string que diz o tempo atual
+    ("0"+today.getHours()).slice(-2) + ":" +  ("0"+today.getMinutes()).slice(-2) + ":" +  ("0"+today.getSeconds()).slice(-2); //a string que diz o tempo atual
+
 
   let divida = new Divida({
     _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
-    credor: req.body.credor, //Vou buscar o user a que deve
-    devedor: req.body.devedor, //vou buscar o user a Dever
+    credor: req.body.credor, //Vou buscar o user a que deve, O EMAIL!
+    devedor: req.body.devedor, //vou buscar o user a Dever atenção meter um email, O EMAIL!
     quantia: req.body.quantia, //vou buscar a quantia
     descricao: req.body.descricao, //vou buscar a descrição
-    date: "Data: " + date + ", às " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
+    date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
   });
 
   //salvo a divida
@@ -104,7 +126,6 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
               "://" +
               req.get("host") +
               req.originalUrl +
-              "/" +
               result._id,
             //formatei uma string para dar o URL atual
           },
@@ -118,6 +139,8 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
       });
     });
 };
+
+
 
 // GET REQUEST DE TODAS AS DIVIDAS
 exports.get_all_dividas = (req, res, next) => {

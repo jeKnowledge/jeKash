@@ -1,22 +1,27 @@
-const bodyParser = require("body-parser");
 const express = require("express");
-const morgan =  require("morgan");
-const mongoose = require("mongoose");
-const emails = require("./api/timer/SendingEmails")
-const server = require("http").createServer();
 const app = express();
+const bodyParser = require("body-parser");
+const morgan = require("morgan");
+const mongoose = require("mongoose");
+const expressEjsLayout = require("express-ejs-layouts");
 
-//defenir a variaveis paraas routes
-const dividaRoutes = require("./api/routes/dividas");
+const emails = require("./API/timer/SendingEmails")
+const dividasRoutes = require("./API/routes/dividas");
+const usersRoutes = require("./API/routes/users");
+const indexRoutes = require("./API/routes/index");
+const jekersRoutes = require("./API/routes/jekers");
 
 
+app.set("view engine", "ejs");
 
-app.use(morgan("dev")); //dev bc its developer
-app.use('/uploads',express.static("uploads"))
+app.use(expressEjsLayout);
+app.use(morgan("dev"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //conectar à minha DB (Testing purposes)
-mongoose.connect("mongodb+srv://jeknowledge:" + process.env.PASSWORD_DB + "@jek-project.25zmf.mongodb.net/<dbname>?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true  });
+mongoose.connect("mongodb+srv://edu:"+process.env.PASSWORD_DB+"@cluster0.b5mks.mongodb.net/<dbname>?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true  });
 mongoose.Promise = global.Promise
 
 //browser headers stuff, allowting to send headers
@@ -32,9 +37,11 @@ app.use((req, res, next) => {
 });
 
 
-
 //MyRoutes
-app.use("/dividas",dividaRoutes);
+app.use("/", indexRoutes);
+app.use("/users", usersRoutes);
+app.use("/dividas", dividasRoutes);
+app.use("/jekers", jekersRoutes);
 
 
 // ERROS

@@ -8,7 +8,7 @@ const admin_email = "goncalocorreia@jeknowledge.com"
 
 
 exports.get_all_users = (req,res,next) =>{
-
+    
     User.find().select().exec() //array de users
     .then( list_users =>{
         const response ={ // o que vai ser printado no ecrã
@@ -83,7 +83,7 @@ exports.login = (req,res,next)=>{
     User.findOne({email: req.body.email})
     .exec()
     .then( user =>{
-        console.log("a");
+        //console.log("a");
         if(user.length <1){ // user nao existe, email nao encontrado, login falhado
             return res.status(401).json({
                 message: 'Email ou Password Invalidos'
