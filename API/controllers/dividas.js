@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Divida = require("../models/divida"); //modelo para a divida do Tesoureiro
 const User = require("../models/users");
 const jwt = require('jsonwebtoken');
+const idcontaJEK = "5fdb9a550526f0142042c8f3"; //! ID DA CONTA PRINCIPAL DA JEK depois mudar para o defenitivo
 
 //controler para criar uma divida de um User daí o nome "criar_divida_jeK"
 exports.criar_divida_jeK = (req, res, next) => {
@@ -17,32 +18,34 @@ exports.criar_divida_jeK = (req, res, next) => {
      ("0"+today.getHours()).slice(-2) + ":" +  ("0"+today.getMinutes()).slice(-2) + ":" +  ("0"+today.getSeconds()).slice(-2); //a string que diz o tempo atual
   
   //validar o user authorization e retirar desse token o info dele para postar uma divida:
-  var authorization = (req.headers.authorization).split(" ")[1],decoded;
+  var authorization = req.headers.authorization.split(" ")[1],decoded;
   try {
       decoded = jwt.verify(authorization, "secret"); //secret e a chave da authToken
+      //? console.log(decoded);
   } catch (e) {
-      // ? console.log(e);
+      console.log(e);
       return res.status(401).send('unauthorized'); //e porque nao foi conseguido ler o email na auth token
   }
-  
   // * finalmente com a authtoken decoded conseguimos ter o id do user:
-  let userID = decoded.id;
-  // ? console.log(userEmail);
-
+  let userID = decoded.userId;
+  //? console.log(userID);
+  
+  
   //constructor onde vou passar a data da divida.
   let divida = new Divida({
     _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
 
     //Estamos no request de um User:
-    credor: req.body.credor, //todo MUDAR PARA O ID DA CONTA DA JEKNOWLEDGE!
+    credor: idcontaJEK, //todo MUDAR PARA O ID DA CONTA DA JEKNOWLEDGE!
     devedor: userID, // * ID do devedor acima referido
     quantia: req.body.quantia, //vai buscar a quantia ao body do json
     descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
     paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
-    userCriador: id, // User que cria a divida
+    userCriador: userID, // Mudei isto, aqui o user que vai criar a divida vai corresponder ao userID
     date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
+    timesemailsent: 0 //para conseguir ver o limite da divida mandada e quanto ja passou o tempo
   });
-
+ 
   //salvo a divida
   divida
     .save()
@@ -61,6 +64,7 @@ exports.criar_divida_jeK = (req, res, next) => {
           userCriador: result.userCriador, // User que cria a divida
           _id: result._id,
           date: result.date,
+          timesemailsent:result.timesemailsent,
           request: {
             type: "POST", //o tipo e um POST
             url:
@@ -77,7 +81,6 @@ exports.criar_divida_jeK = (req, res, next) => {
       //? Debug purposes
       console.log(err);
       res.status(500).json({
-        
         error: err,
       });
     });
@@ -112,6 +115,7 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
     paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
     userCriador: id, // User que cria a divida
     date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
+    timesemailsent: 0
   });
 
   //salvo a divida
@@ -132,6 +136,7 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
           userCriador: result.userCriador,
           date: result.date,
           _id: result._id,
+          timesemailsent: result.timesemailsent,
           request: {
             type: "POST", //o tipo e um POST
             url:
@@ -170,12 +175,14 @@ exports.get_all_dividas = (req, res, next) => {
           return {
             // Return da informação das dividas
             id: divida._id, //adicionei id porque ajuda a testar
+            paga: divida.paga,
             credor: divida.credor,
             devedor: divida.devedor,
             quantia: divida.quantia,
             descricao: divida.descricao,
             userCriador: divida.userCriador,
             date: divida.date,
+            timesemailsent: divida.timesemailsent
           };
         }),
       };
@@ -205,6 +212,7 @@ exports.get_all_dividas_user = (req, res, next) => {
           return {
             // Return da informação das dividas
             id: divida._id, //adicionei id porque ajuda a testar
+            paga: divida.paga,
             devedor: divida.credor,
             quantia: divida.devedor,
             descricao: divida.descricao,

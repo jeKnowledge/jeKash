@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userControllers = require('../controllers/users');
-const dividasController = require("../controllers/dividas")
+const checkServer= require("../middleware/check-server");
 
 router.get('/login',(req,res,next)=>{
     res.render('login');
@@ -18,11 +18,8 @@ router.get('/logout',(req,res,next)=>{
     res.redirect('login')
 })
 
-router.post('/',dividasController.criar_divida_jeK);
-
-router.post('/',dividasController.criar_divida_Tesoureiro);
-
-router.get("/getall",userControllers.get_all_users);
+//* O server vai precisar desta para conseguir o email de um user!
+router.get("/getall",checkServer,userControllers.get_all_users);
 
 router.post("/signup",userControllers.signup);
 

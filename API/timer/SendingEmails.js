@@ -1,12 +1,13 @@
 const nodemailer = require("nodemailer");
+const cron = require('node-cron');
 const express = require("express");
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 //fazer de dia a dia
-const timer = 5000; //! No final mudar para ser algo diario const timer = 86400;
+const timer = 2500; //! No final mudar para ser algo diario const timer = 86400;
 
 //url para fazer o request de todas as dividas.
-const aUrl = "http://localhost:5000/dividas/all_dividas_para_o_email"; //! No final mudar
-
+const GETdividasServerURL = "http://localhost:5000/dividas/all_dividas_para_o_email"; //! No final mudar
+const GETuserServerURL = "http://localhost:5000/users/getall";
 
 //Função client que me dá o GET request
 var HttpClient = function() {
@@ -27,7 +28,7 @@ var HttpClient = function() {
 }
 
 function timepassed(date){
-  //transformo-a em "tipo Date":
+  //! em dias
   let dataDivida = new Date(date);
   //console.log(dataDivida);
 
@@ -39,94 +40,99 @@ function timepassed(date){
 
   //conta para a diferença:
   let diferencadias =  (dateNOWCorrectformat.getTime()- dataDivida.getTime())/(1000 * 3600 * 24); //faço a conta para me dar a diferença em dias
-  //console.log(diferencadias);
-  
-  if (diferencadias > 21){
-    return 3; //o warning sera 3
-  }
-  else if (diferencadias >14){
-    return 2; //o warning sera 2
-  }
-  else if(diferencadias >7){
-    return 1; //o warning sera 1
-  }
-  else{
-    return 0; //se nao houver warnings ainda passo 0
-  }
+
+  return diferencadias
 }
 
 function checkDates(){ //função que recebe as datas
-
-  //Vou precisar da data de hoje para calcular se devo mandar um email ou não:
-  let today = new Date();
-  let dateNOW =
-    today.getFullYear() + "-" + ("0"+(today.getMonth() + 1)).slice(-2) + "-" + ("0"+today.getDate()).slice(-2);
-   
-  let dateNOWF = new Date(dateNOW);
-
-
   var client = new HttpClient(); //crio uma nova instancia da função acima
-  //preciso de me autenticar se nao não me deixa fazer o GET request
-  client.get(aUrl,function(response){ //e simplesmente faço um get que vai fazer uma função que vai ter como parametro a resposta da API
+  
+  //*preciso de me autenticar se nao não me deixa fazer o GET request as dividas
+  client.get(GETdividasServerURL,function(responseDivida){ //e simplesmente faço um get que vai fazer uma função que vai ter como parametro a resposta da API
+    //*preciso de me autenticar se nao não me deixa fazer o GET request aos users!
+    client.get(GETuserServerURL,function(responseUser){
+      //passo para JSON visto que a resposta veio em pleno texto
+      var responseJSONDIVIDAS = JSON.parse(responseDivida);
+      var responseJSONUSER = JSON.parse(responseUser);
 
-    //passo para JSON visto que a resposta veio em pleno texto
-    var responseJSON = JSON.parse(response);
-    for(let dividaskeys in Object.keys(responseJSON.Dividas)){
-      //para me dar todas as datas de todas as dividas:
-      let userdivida = responseJSON.Dividas[dividaskeys].devedor; //email do devedor
-      let quantiadivida = responseJSON.Dividas[dividaskeys].quantia;
-      let datadivida = responseJSON.Dividas[dividaskeys].date;
-      let levelwarning = timepassed(datadivida); //função que calcula qual e o tipo de warning que devo tomar consoante o tempo passado.
-      
-      // ? console.log(userdivida);
-      // ? console.log(datadivida);
-      // ? console.log(levelwarning);
-      
-      
-      //* O level of warning pode ser:
-      //* 1: >7 dias sem ser pago
-      //* 2: >14 dias sem ser pago
-      //* 3: >21 dias sem ser pago
+      for(let dividaskeys in Object.keys(responseJSONDIVIDAS.Dividas)){
+        //dou assign a values que sa calhar tenho de trabalhar com
+        let dividaID = responseJSONDIVIDAS.Dividas[dividaskeys]._id; //Id da divida
+        let paga = responseJSONDIVIDAS.Dividas[dividaskeys].paga; //situação de pagamento
+        let userdivida = responseJSONDIVIDAS.Dividas[dividaskeys].devedor; //id do devedor
+        let quantiadivida = responseJSONDIVIDAS.Dividas[dividaskeys].quantia; //quantia
+        let datadivida = responseJSONDIVIDAS.Dividas[dividaskeys].date; //importante para calcular o levelwarning
+        let emailmandado = responseJSONDIVIDAS.Dividas[dividaskeys].timesemailsent;
+        let tempopassadodias = timepassed(datadivida); //função que calcula qual e o tipo de warning que devo tomar consoante o tempo passado.
+        
+        console.log(emailmandado);
+        //looping through all users to find the respective one
+        for (let userinDB in Object.keys(responseJSONUSER.list)){
+          if(responseJSONUSER.list[userinDB]._id=== userdivida){ //encontrei o user que corresponde à divida
+            var useremail = responseJSONUSER.list[userinDB].email; //guardo numa variavel o email dela.
+          } 
+        }
 
-      let message = "";
-      switch(levelwarning){
-        case 0:
-          //* não faço nada, em vez de dar break saio só do loop com o continue for porque esta divida não me interessa
-          continue;
+        //todo send emails correctly
+        if (paga===false){
+          if (tempopassadodias>21 && emailmandado ===2){
+            //! E necessário dar loop diario TODOS OS DIAS À MEIA NOITE
+            let myjob = cron.schedule[lvl3]; //para o job anterior
+            myjob.stop();
+            var j3=cron.schedule(lvl3,'0 0 0 * * *', () => { 
+              sendEmail("3 sem, agora vai ser diariamente",useremail);
+            });
+            
+            dividaupdate(dividaID,3);//para dizer que agora vai ser de diariamente, estamos no nivel 3
+            return;
+          }
+          else if(emailmandado>14 && emailmandado ===1){
+            //! E necessário dar loop de 3 em 3 dias, vejo só se e divisivel por 3
+            var j2 = cron.schedule(lvl2,'0 0 */3 * *', () => {
+              sendEmail("2 sem, agora vai ser de 3 em 3",useremail);
+            });
 
-        case 1:
-          // * passou + de 7 dias
-          
-          message = "Olá "+ userdivida +" deves uma divida de "+ quantiadivida + " há mais de 7 dias!";
-          break;
-
-        case 2:
-          // * passou + de 14 dias
-          message = "Olá "+ userdivida +" deves uma divida de "+ quantiadivida + " há mais de 14 dias!";
-          break;
-
-        case 3:
-          // * passou + de 21 dias
-          message = "Olá "+ userdivida +" deves uma divida de "+ quantiadivida + " há mais de 21 dias!!!";
-          break;
-      }
-
-      
-
-      // todo ATENÇÃO ELE AGORA ESTA CONSTANTEMENTE A MANDAR EMAILS!!! Fazer uma cena de datas again para ver se ja passou:
-      
-      
-
-      // todo Se o levelwarning = 1, mandar so uma vez.
-      // todo Se o levelwarning = 2, mandar de 3 EM 3 DIAS.
-      // todo Se o levelwarning = 3, mandar de dia a dia.
-
-      sendEmail(message,userdivida); 
-    };
-  });
+            dividaupdate(dividaID,2)//para dizer que agora vai ser de 3 em 3 dias e ja estamos no nivel 2
+            return;
+          }
+          else if(emailmandado>7 && emailmandado ===0){
+            //! Não e necessário dar loops porque daqui a uma semana ja vou ver se pagou ou n
+            sendEmail("1 sem",useremail); 
+            //dar update à divida
+            dividaupdate(dividaID,1) //para dizer que ja foi mandado um email e ja estamos no nivel 1
+            return;
+          }
+        }
+        else{
+          //para todos os jobs
+        }
+      };
+    });
+  }); 
 }
 
-async function sendEmail(message,usermail){
+function dividaupdate(id_divida,emailstatus){
+  const updateOps = {};
+  updateOps[timesemailsent] = emailstatus;
+  Divida.update({_id: id_divida}, {$set: updateOps}).exec()
+  .then(result => {
+    console.log({id: id_divida})
+    res.status(200).json({
+      message: "Divida atualizada com o estatus novo!",
+      request: {
+        type: "GET",
+        url: "http://localhost:3000/dividas/inativas"
+      }
+    })
+  })
+  .catch(err => {
+      res.status(500).json({
+          errors: err
+      })
+    });
+}
+
+async function sendEmail(message,user){
   //esta função pede um "levelofwaning" para indicar o quanto a divida já passou de ser paga.
   
   // * Ethereal e uma coisa que me vai ajudar a simular mandar emails:
@@ -145,7 +151,7 @@ async function sendEmail(message,usermail){
 
   let info = await transporter.sendMail({
       from: '"Yo" <JeknowledgeFIXE@example.com>', // ? sender address
-      to: usermail, //todo Buscar o user email em causa como ?
+      to: user, //todo Buscar o user email em causa como ?
       subject: "Dividas Jeknowledge.", // Subject line
       text: message, // plain text body: dizer estas a dever uma certa quantia por agora so
       //html: "<b>Hello world?</b>", // html body para depois fazer isto bonito
