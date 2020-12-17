@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/users')
-const express = require('express');
-const flash = require('connect-flash');
+var localStorage = require('local-storage');
 
 const admin_email = "goncalocorreia@jeknowledge.com" 
 
@@ -156,10 +155,10 @@ exports.login = (req,res,next)=>{
                                 {
                                     expiresIn: "1h"
                                 },function(err,token){
+                                    console.log(localStorage('Authorization',token));
                                     console.log(user);
                                     console.log("Token:"+token);
                                 }
-
                             );
                         res.redirect('/home');
                     }  

@@ -25,10 +25,12 @@
     "express-session": "^1.17.1",
     "handlebars": "^4.7.6",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.4",
+    "local-storage": "^2.0.0",
+    "mongoose": "^5.11.8",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

@@ -1,7 +1,9 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 const userControllers = require('../controllers/users');
 const User = require('../models/users');
+
 
 
 router.get('/login',(req,res,next)=>{

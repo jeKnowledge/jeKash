@@ -164,6 +164,7 @@ exports.get_all_dividas = (req, res, next) => {
         }),
       };
       res.status(200).json(response);
+      //res.render('dividastotais');
     })
     .catch((err) => {
       // se a promise der erro
@@ -335,7 +336,47 @@ exports.altera_divida = (req, res, next) => {
           errors: err
       })
     });
-}
+};
+
+
+
+exports.get_dividas_user = (req,res,next) =>{
+
+  console.log("a");
+  const token = localStorage.get('Authorization'); 
+  //console.log(token);
+  const decoded = jwt.verify(token,"secret");
+  userId = decoded.userId;
+
+  
+
+  Divida.find({credor: userId}) // vai buscar as dividas com flag especificada no estadp
+  .select("quantia devedor credor descricao userCriador paga")
+  .exec()
+  .then((dividas_user) => {
+    // dividas - array com todas as dívidas ativas relativas a um user
+  
+    // OUTPUT
+    const response = {
+      count: dividas_user.length, 
+      Dividas: dividas_user.map((divida) => {
+        return {
+          quantia: divida.quantia,
+          devedor: divida.credor,
+          credor: divida.devedor,
+          descricao: divida.descricao,
+          userCriador: divida.userCriador,
+          paga: divida.paga
+        };
+      }),
+    };
+    res.status(200).json(response);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ error: err });
+    });
+};
 
 
 
