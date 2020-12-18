@@ -3,7 +3,7 @@ const express = require("express");
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const Divida = require("../models/divida");
 //? Se quiserem mudar para testar e recomendado mudar esta variavel
-const timer = 5000; //! MAS No final mudar para ser algo diario const timer = 86400;
+const timer = 86400; //! MAS No final mudar para ser algo diario const timer = 86400;
 
 //*url para fazer o request de todas as dividas.
 //! No final mudar para os defenitivos!!
@@ -152,8 +152,8 @@ async function sendEmail(message,user){
     });
   
   // ? DEBUGGING EMAILS:
-  console.log("Message sent: %s", info.messageId); 
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // ? console.log("Message sent: %s", info.messageId); 
+  // ? console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   
 }
 
@@ -162,8 +162,7 @@ setInterval(() => {
     (function(){
 
       //funcao que vai correr e ver se as datas ja passaram ou nao
-      checkDates()
-      
+      checkDates()  
   })();
 
-}, timer);
+}, timer); //? um dia
