@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Divida = require("../models/divida"); //modelo para a divida do Tesoureiro
+const Divida = require("../models/divida");
 const User = require("../models/users");
 const jwt = require('jsonwebtoken');
 const idcontaJEK = "5fdb9a550526f0142042c8f3"; //! ID DA CONTA PRINCIPAL DA JEK depois mudar para o defenitivo
@@ -345,7 +345,7 @@ exports.altera_divida = (req, res, next) => {
 // Vamos procurar a divida com o id dado no url, e atualizamos as informações que foram disponibilix«zadas no JSON
   Divida.update({_id: id_divida}, {$set: updateOps}).exec()
   .then(result => {
-    console.log({id: id_divida})
+    console.log({id: id_divida});
     res.status(200).json({
       message: "Divida atualizada",
       request: {

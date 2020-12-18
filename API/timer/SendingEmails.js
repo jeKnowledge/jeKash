@@ -1,12 +1,13 @@
 const nodemailer = require("nodemailer");
-const cron = require('node-cron');
 const express = require("express");
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
-//fazer de dia a dia
-const timer = 2500; //! No final mudar para ser algo diario const timer = 86400;
+const Divida = require("../models/divida");
+//? Se quiserem mudar para testar e recomendado mudar esta variavel
+const timer = 5000; //! MAS No final mudar para ser algo diario const timer = 86400;
 
-//url para fazer o request de todas as dividas.
-const GETdividasServerURL = "http://localhost:5000/dividas/all_dividas_para_o_email"; //! No final mudar
+//*url para fazer o request de todas as dividas.
+//! No final mudar para os defenitivos!!
+const GETdividasServerURL = "http://localhost:5000/dividas/all_dividas_para_o_email"; 
 const GETuserServerURL = "http://localhost:5000/users/getall";
 
 //Função client que me dá o GET request
@@ -14,14 +15,14 @@ var HttpClient = function() {
     this.get = function(aUrl, aCallback) {
         var anHttpRequest = new XMLHttpRequest(); //crio uma nova instancia da class para fazer um request 
         anHttpRequest.onreadystatechange = function() {  //quando a API estiver pronta
-            if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200) //e se estiver tudo bem
-                aCallback(anHttpRequest.responseText); //* é como se fosse um return ao minha resposta atraves do callBack
+          if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200) //e se estiver tudo bem
+              aCallback(anHttpRequest.responseText); //* é como se fosse um return ao minha resposta atraves do callBack
         }
 
         anHttpRequest.open("GET", aUrl, true );//faço um GET request ao Url
         //mando um post com um header a dizer server e com esta server key
 
-        // !para provar que sou o server vou as headers e se o header server tiver a localserverkey e porque sou eu.
+        //* para provar que sou o server vou as headers e se o header server tiver a localserverkey e porque sou eu.
         anHttpRequest.setRequestHeader("Server",process.env.LOCAL_SERVERKEY);
         anHttpRequest.send( null ); //Como e um GET não mando nada
     }
@@ -41,7 +42,7 @@ function timepassed(date){
   //conta para a diferença:
   let diferencadias =  (dateNOWCorrectformat.getTime()- dataDivida.getTime())/(1000 * 3600 * 24); //faço a conta para me dar a diferença em dias
 
-  return diferencadias
+  return diferencadias;
 }
 
 function checkDates(){ //função que recebe as datas
@@ -57,7 +58,7 @@ function checkDates(){ //função que recebe as datas
 
       for(let dividaskeys in Object.keys(responseJSONDIVIDAS.Dividas)){
         //dou assign a values que sa calhar tenho de trabalhar com
-        let dividaID = responseJSONDIVIDAS.Dividas[dividaskeys]._id; //Id da divida
+        let dividaID = responseJSONDIVIDAS.Dividas[dividaskeys].id; //Id da divida
         let paga = responseJSONDIVIDAS.Dividas[dividaskeys].paga; //situação de pagamento
         let userdivida = responseJSONDIVIDAS.Dividas[dividaskeys].devedor; //id do devedor
         let quantiadivida = responseJSONDIVIDAS.Dividas[dividaskeys].quantia; //quantia
@@ -65,70 +66,63 @@ function checkDates(){ //função que recebe as datas
         let emailmandado = responseJSONDIVIDAS.Dividas[dividaskeys].timesemailsent;
         let tempopassadodias = timepassed(datadivida); //função que calcula qual e o tipo de warning que devo tomar consoante o tempo passado.
         
-        console.log(emailmandado);
         //looping through all users to find the respective one
         for (let userinDB in Object.keys(responseJSONUSER.list)){
           if(responseJSONUSER.list[userinDB]._id=== userdivida){ //encontrei o user que corresponde à divida
             var useremail = responseJSONUSER.list[userinDB].email; //guardo numa variavel o email dela.
           } 
         }
+        //*   dividaupdatestatus = 0  --> Não estão a ser mandados warnings
+        //*   dividaupdatestatus = 1  --> Ao 7º dia foi mandado um warning
+        //*   dividaupdatestatus = 2  --> Ao 14º dia foi mandado outro warning (+7)
+        //*   dividaupdatestatus = 3  --> Ao 18º dia foi mandado outro warning (+3) e apartir de agora e diariamente ate cancelar o job.
 
-        //todo send emails correctly
+
+        // Tentei fazer com jobs, provou-se muito unrealiable (os jobs não paravam mesmo com dividas ja pagas)
+        // Não estou nada contente com esta solução porque tem mais ifs do que linhas de codigo
+
+        //default msg depois podemos mudar:
+        let msg = "Hey deves " + quantiadivida+ " há mais de "+ Math.floor(tempopassadodias) +" dias!";
         if (paga===false){
-          if (tempopassadodias>21 && emailmandado ===2){
-            //! E necessário dar loop diario TODOS OS DIAS À MEIA NOITE
-            let myjob = cron.schedule[lvl3]; //para o job anterior
-            myjob.stop();
-            var j3=cron.schedule(lvl3,'0 0 0 * * *', () => { 
-              sendEmail("3 sem, agora vai ser diariamente",useremail);
-            });
+          console.log(tempopassadodias, emailmandado)
+          if (tempopassadodias>=21 && emailmandado ===3){
+            //* Vai correr diariamente porque a função corrediaramente
+            sendEmail(msg,useremail);
+            return;
+          }
+          else if(tempopassadodias>=18 && emailmandado ===2)
+          {
+            sendEmail(msg,useremail);
+            dividaupdatestatus(dividaID,3);//para dizer que agora vai ser de 3 em 3 dias e ja estamos no nivel 4
+            return;
+          }
+          else if(tempopassadodias>=14 && emailmandado ===1){
             
-            dividaupdate(dividaID,3);//para dizer que agora vai ser de diariamente, estamos no nivel 3
+            sendEmail(msg,useremail);
+            dividaupdatestatus(dividaID,2);//para dizer que agora vai ser de 3 em 3 dias e ja estamos no nivel 2
             return;
           }
-          else if(emailmandado>14 && emailmandado ===1){
-            //! E necessário dar loop de 3 em 3 dias, vejo só se e divisivel por 3
-            var j2 = cron.schedule(lvl2,'0 0 */3 * *', () => {
-              sendEmail("2 sem, agora vai ser de 3 em 3",useremail);
-            });
-
-            dividaupdate(dividaID,2)//para dizer que agora vai ser de 3 em 3 dias e ja estamos no nivel 2
+          else if(tempopassadodias>=7 && emailmandado ===0){
+            
+            sendEmail(msg,useremail); 
+            dividaupdatestatus(dividaID,1); //para dizer que ja foi mandado um email e ja estamos no nivel 1
             return;
           }
-          else if(emailmandado>7 && emailmandado ===0){
-            //! Não e necessário dar loops porque daqui a uma semana ja vou ver se pagou ou n
-            sendEmail("1 sem",useremail); 
-            //dar update à divida
-            dividaupdate(dividaID,1) //para dizer que ja foi mandado um email e ja estamos no nivel 1
-            return;
-          }
-        }
-        else{
-          //para todos os jobs
         }
       };
     });
   }); 
 }
 
-function dividaupdate(id_divida,emailstatus){
+function dividaupdatestatus(id_divida,emailstatus,){
   const updateOps = {};
-  updateOps[timesemailsent] = emailstatus;
+  updateOps["timesemailsent"] = emailstatus;
   Divida.update({_id: id_divida}, {$set: updateOps}).exec()
   .then(result => {
-    console.log({id: id_divida})
-    res.status(200).json({
-      message: "Divida atualizada com o estatus novo!",
-      request: {
-        type: "GET",
-        url: "http://localhost:3000/dividas/inativas"
-      }
-    })
+    console.log({id: id_divida}); //? debug purposes
   })
   .catch(err => {
-      res.status(500).json({
-          errors: err
-      })
+      console.log(err); //? debug purposes
     });
 }
 
@@ -150,8 +144,8 @@ async function sendEmail(message,user){
   });
 
   let info = await transporter.sendMail({
-      from: '"Yo" <JeknowledgeFIXE@example.com>', // ? sender address
-      to: user, //todo Buscar o user email em causa como ?
+      from: '"Yo" <JeknowledgeFIXE@example.com>', // ! sender address MUDAR para o defenitivo
+      to: user, //* parametro do email do user que fui buscar
       subject: "Dividas Jeknowledge.", // Subject line
       text: message, // plain text body: dizer estas a dever uma certa quantia por agora so
       //html: "<b>Hello world?</b>", // html body para depois fazer isto bonito
@@ -165,8 +159,6 @@ async function sendEmail(message,user){
 
 setInterval(() => {
   //codigo que vai correr de X em X tempo (X=timer)
-  console.log("Checking..."); //para avisar que a função vai correr
-  
     (function(){
 
       //funcao que vai correr e ver se as datas ja passaram ou nao
