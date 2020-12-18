@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Divida = require("../models/divida");
 const User = require("../models/users");
 const jwt = require('jsonwebtoken');
+//! CRIAR NA DATABASE UMA CONTA JEK DEFAULT PARA DAR AS DIVIDAS CRIADAS POR UM JEKER
 const idcontaJEK = "5fdb9a550526f0142042c8f3"; //! ID DA CONTA PRINCIPAL DA JEK depois mudar para o defenitivo
 
 //controler para criar uma divida de um User daí o nome "criar_divida_jeK"
