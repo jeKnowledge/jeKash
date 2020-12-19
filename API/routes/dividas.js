@@ -15,7 +15,7 @@ router.post("/tesoureiro", checkLogin, DividasController.criar_divida_Tesoureiro
 router.get("/getall", checkLogin, DividasController.get_all_dividas);
 
 // GET DIVIDAS ATIVAS E INATIVAS
-router.get("/i?n?ativas", checkLogin, DividasController.dividas_ativas_inativas)
+router.get(/^\/(in)?ativas/, checkLogin, DividasController.dividas_ativas_inativas)
 //router.get("/(in)?ativas", checkLogin, DividasController.dividas_ativas_inativas) - da erro :(
 
 // GET DIVIDAS POR DEPARTAMENTO

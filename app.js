@@ -21,7 +21,7 @@ mongoose.connect(
     useUnifiedTopology: true,
   }
 );
-// ola
+
 mongoose.Promise = global.Promise;
 
 app.set("view engine", "ejs");
