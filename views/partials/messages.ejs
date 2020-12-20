@@ -1,4 +1,4 @@
-<!--<% if(typeof errors!= 'undefined') { %>
+<% if(typeof errors!= 'undefined') { %>
 <%    errors.forEach(function(error){ %>
 <p> <%= error.msg %></p>
 <%    })        %>
@@ -8,3 +8,9 @@
 <p><%=success_msg %> </p>
 <% } %>
 
+<% if(error_msg != '') { %>
+    <%= error_msg %> 
+<% } %> 
+<% if(error != '') { %>
+    <%= error %>
+<% } %>

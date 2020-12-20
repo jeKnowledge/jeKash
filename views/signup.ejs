@@ -1,6 +1,14 @@
 <h1>SignUp</h1>
 
-
+<div class="flash_messages">
+  <% if(errors !== "") { %>
+      <% errors.forEach((item) => { %>
+          <div class="alert-danger">
+            <%- item %>
+          </div>
+      <%})%>
+    <% } %>
+</div>
 <form action="/users/signup" method="POST">
   <div>
     <label for="name">Name</label>
@@ -49,12 +57,6 @@
   </div>
   <div>
     <label for="department">Departamento</label>
-   <!-- <input
-      type="department"
-      name="department"
-      placeholder="Departamento"
-      value="<%= typeof department != 'undefined' ? department : '' %>"
-    />-->
     <select  type="department" name="department" placeholder="Departamento" value="<%= typeof department != 'undefined' ? department : '' %>">
             <option name="Intern" value="Intern">Intern</option>
             <option name="Innovation" value="Innovation">Innovation</option>

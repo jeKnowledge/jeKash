@@ -2,9 +2,12 @@ const mongoose = require("mongoose");
 const Divida = require("../models/divida"); //modelo para a divida do Tesoureiro
 const User = require("../models/users");
 const jwt = require('jsonwebtoken');
+const localStorage = require('local-storage');
 
 //controler para criar uma divida de um User daí o nome "criar_divida_jeK"
-exports.criar_divida_jeK = (req, res, next) => {
+
+
+exports.criar_divida_jeK = (req,res,next)=>{
   //Quando uma divida é criada preciso de a data, hora e minutos de hoje.
   let today = new Date(); //com a class Date consigo pedir a data e a hora a que foi criada a divida
   let date =
@@ -13,65 +16,83 @@ exports.criar_divida_jeK = (req, res, next) => {
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(); //a string que diz o tempo atual
 
   // Para ir buscar o id do user logado
-  const token = req.headers.authorization.split(" ")[1]; 
+  const token = localStorage.get('Authorization'); 
   const decoded = jwt.verify(token,"secret");
-  const id = decoded.userId
+  const id = decoded.userId;
 
-  //constructor onde vou passar a data da divida.
-  let divida = new Divida({
-    _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
 
-    //Estamos no request de um User:
-    //credor: "JeKnowledge", //Vai ser a Jeknowledge neste caso
-    credor: req.body.credor, //ID do credor
-    devedor: req.body.devedor, //ID do devedor
-    quantia: req.body.quantia, //vai buscar a quantia ao body do json
-    descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
-    paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
-    userCriador: id, // User que cria a divida
-    date: "Data: " + date + " às: " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
+    User.findOne({email:req.body.credor}).exec().then(user_credor => {
+
+            User.findOne({email:req.body.devedor}).select().exec().then(user_devedor =>{
+              let divida = new Divida({
+                _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
+            
+                //Estamos no request de um User:
+                //credor: "JeKnowledge", //Vai ser a Jeknowledge neste caso
+                credor: user_credor._id, //ID do credor
+                devedor: user_devedor._id, //ID do devedor
+                quantia: req.body.quantia, //vai buscar a quantia ao body do json
+                descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
+                paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
+                userCriador: id, // User que cria a divida
+                date: "Data: " + date + " às: " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
+              });
+            
+              //salvo a divida
+              divida
+                .save()
+                .then((result) => {
+                  res.status(201).json({
+                    //codigo 201 para indicar que foi tudo feito com sucesso
+                    //para confirmar passo um json com uma messagem, eventuais warnings(que por agora não existem) e a divida criada
+                    message: "Divida criada!",
+                    DividaCriada: {
+                      //passo o nome, a quantia e o id criados da divida e um request
+                      credor: result.credor, //ID do credor
+                      devedor: result.devedor, //ID do devedor
+                      quantia: result.quantia,
+                      descricao: result.descricao,
+                      paga: result.paga,
+                      userCriador: result.userCriador, // User que cria a divida
+                      _id: result._id,
+                      date: result.date,
+                      request: {
+                        type: "POST", //o tipo e um POST
+                        url:
+                          req.protocol +
+                          "://" +
+                          req.get("host") +
+                          req.originalUrl +
+                          "/" +
+                          result._id, //formatei uma string para apresentar o url da divida (pode se tirar acho que quando fizeremos tudo vai se ligar tudo)
+                      },
+                    },
+                  });
+                })
+                .catch((err) => {
+                  //catch eventuias erros
+                  // *Debug purposes*-console.log(err);
+                  res.status(500).json({
+                    //apresento eventuais eros
+                    error: err,
+                  });
+                });
+        })
+        .catch(err =>{
+        console.log(err);
+        res.status(500).json({
+            error:err
+        });
   });
-
-  //salvo a divida
-  divida
-    .save()
-    .then((result) => {
-      res.status(201).json({
-        //codigo 201 para indicar que foi tudo feito com sucesso
-        //para confirmar passo um json com uma messagem, eventuais warnings(que por agora não existem) e a divida criada
-        message: "Divida criada!",
-        DividaCriada: {
-          //passo o nome, a quantia e o id criados da divida e um request
-          credor: result.credor, //ID do credor
-          devedor: result.devedor, //ID do devedor
-          quantia: result.quantia,
-          descricao: result.descricao,
-          paga: result.paga,
-          userCriador: result.userCriador, // User que cria a divida
-          _id: result._id,
-          date: result.date,
-          request: {
-            type: "POST", //o tipo e um POST
-            url:
-              req.protocol +
-              "://" +
-              req.get("host") +
-              req.originalUrl +
-              "/" +
-              result._id, //formatei uma string para apresentar o url da divida (pode se tirar acho que quando fizeremos tudo vai se ligar tudo)
-          },
-        },
-      });
-    })
-    .catch((err) => {
-      //catch eventuias erros
-      // *Debug purposes*-console.log(err);
+  }).catch(err =>{
+      console.log(err);
       res.status(500).json({
-        //apresento eventuais eros
-        error: err,
+          error:err
       });
-    });
-};
+  });
+}
+
+
 
 //chamei à logica deste controller "criar_divida_Tesoureiro" visto que
 //e este request que o tesoureiro vai chamar quando criar uma divida
@@ -137,12 +158,15 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
         error: err,
       });
     });
+
 };
 
+
+
 // GET REQUEST DE TODAS AS DIVIDAS
-exports.get_all_dividas = (req, res, next) => {
+exports.get_all_dividas = async (req, res, next) => {
   // find() sem argumentos devolve todos as dívidas
-  Divida.find()
+  await Divida.find()
     .exec()
     .then((dividas) => {
       // array dividas com todos os objetos
@@ -160,12 +184,14 @@ exports.get_all_dividas = (req, res, next) => {
             descricao: divida.descricao,
             userCriador: divida.userCriador,
             date: divida.date,
+            async: true
           };
         }),
       };
-      res.status(200).json(response);
-      //res.render('dividastotais');
+     return res.render('dividastotais',{dividas:JSON.stringify(dividas)});
     })
+
+
     .catch((err) => {
       // se a promise der erro
       res.status(500).json({
@@ -175,29 +201,62 @@ exports.get_all_dividas = (req, res, next) => {
 };
 
 
-  //GET REQUEST DE TODAS AS DIVIDAS POR USER
+
 exports.get_all_dividas_user = (req, res, next) => {
-  // find() sem argumentos devolve todos as dívidas
-  Divida.find()
+ 
+  const token = localStorage.get('Authorization'); 
+  const decoded = jwt.verify(token,"secret");
+  userId = decoded.userId;
+
+  Divida.find({credor_id: userId})
     .exec()
-    .then((dividas) => {
-      // array dividas com todos os objetos
-      // OUTPUT
-      const response = {
-        count: dividas.length, // Numero total de dividas
-        Dividas: dividas.map((divida) => {
-          // map cria um array com as informações seguintes de cada divida
-          return {
-            // Return da informação das dividas
-            id: divida._id, //adicionei id porque ajuda a testar
-            devedor: divida.credor,
-            quantia: divida.devedor,
-            descricao: divida.descricao,
-            date: divida.date,
+    .then((err,dividas) => {
+
+      if(err){
+        Divida.find({devedor_id: userId})
+        .exec()
+        .then((dividas) => {
+          // array dividas com todos os objetos
+          // OUTPUT
+          const response = {
+            count: dividas.length, // Numero total de dividas
+            Dividas: dividas.map((divida) => {
+              // map cria um array com as informações seguintes de cada divida
+              return {
+                // Return da informação das dividas
+                id: divida._id, //adicionei id porque ajuda a testar
+                credor: divida.credor,
+                devedor: divida.devedor,
+                quantia: divida.quantia,
+                descricao: divida.descricao,
+                userCriador: divida.userCriador,
+                date: divida.date,
+              };
+            }),
           };
-        }),
-      };
-      res.status(200).json(response);
+          res.status(200).json(response);
+          res.render('dividasUser',{user:response});
+        })
+      }
+      
+      if(dividas){
+          const response = {
+          count: dividas.length, // Numero total de dividas
+          Dividas: dividas.map((divida) => {
+            // map cria um array com as informações seguintes de cada divida
+            return {
+              // Return da informação das dividas
+              id: divida._id, //adicionei id porque ajuda a testar
+              devedor: divida.credor,
+              quantia: divida.devedor,
+              descricao: divida.descricao,
+              date: divida.date,
+            };
+          }),
+        };
+        res.status(200).json(response);
+        res.render('dividasUser',{user:response});
+      }      
     })
     .catch((err) => {
       // se a promise der erro
@@ -286,7 +345,7 @@ exports.dividas_departamento = (req, res, next) => {
         };
         res.status(200).json(response);
         //res.status(200).json({message: "ola"}); - so para testar coisas
-
+        res.render('dividasDepartment',{dividas_dep:JSON.stringify(dividas_dep)})
         })
         .catch((err) => {
           console.log(err);
@@ -305,7 +364,7 @@ exports.dividas_departamento = (req, res, next) => {
 // Opção para dar uma divida como paga
 exports.altera_divida = (req, res, next) => {
 
-  const id_divida = req.params.dividaID // id da divida introduizdo no url
+  const id_divida = req.body.dividaID // id da divida introduizdo no url
 
   // Isto é feito para se so quisermos mudar campos especificos e não ter de mudar tudo
   const updateOps = {};
@@ -338,45 +397,6 @@ exports.altera_divida = (req, res, next) => {
     });
 };
 
-
-
-exports.get_dividas_user = (req,res,next) =>{
-
-  console.log("a");
-  const token = localStorage.get('Authorization'); 
-  //console.log(token);
-  const decoded = jwt.verify(token,"secret");
-  userId = decoded.userId;
-
-  
-
-  Divida.find({credor: userId}) // vai buscar as dividas com flag especificada no estadp
-  .select("quantia devedor credor descricao userCriador paga")
-  .exec()
-  .then((dividas_user) => {
-    // dividas - array com todas as dívidas ativas relativas a um user
-  
-    // OUTPUT
-    const response = {
-      count: dividas_user.length, 
-      Dividas: dividas_user.map((divida) => {
-        return {
-          quantia: divida.quantia,
-          devedor: divida.credor,
-          credor: divida.devedor,
-          descricao: divida.descricao,
-          userCriador: divida.userCriador,
-          paga: divida.paga
-        };
-      }),
-    };
-    res.status(200).json(response);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ error: err });
-    });
-};
 
 
 

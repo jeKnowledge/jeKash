@@ -10,9 +10,35 @@ const DividasController = require("../controllers/Dividas");
 //controller das dividas
 //const checkAuth = require("../middleware/check-auth")//a checkAuth é a middleware do log-in
 
+
+
+router.get('/',(req,res,next)=>{
+    res.render('dividas');
+})
+
+router.get('/dividas/getall',(req,res,next)=>{
+    res.render('dividastotais',{dividas:dividas});
+})
+
+router.get('/dividas/:department',(req,res,next)=>{
+    res.render('dividasDepartment',{dividas_dep:dividas_dep});
+})
+
+
+router.get('/dividas/:dividaId',(req,res,next)=>{
+    res.render('eliminadivida');
+})
+
+router.get('/dividas/users',(req,res,next)=>{
+    res.render('dividasUser');
+})
+
+
+
+
 //post de uma divida da JEK e do Tesoureiro
-router.post("/", checkLogin, DividasController.criar_divida_jeK);
-router.post("/tesoureiro", checkLogin, DividasController.criar_divida_Tesoureiro);
+router.post("/",checkLogin, DividasController.criar_divida_jeK);
+router.post("/tesoureiro", checkAdmin, DividasController.criar_divida_Tesoureiro);
 
 router.get("/getall", checkLogin, DividasController.get_all_dividas);
 
@@ -25,11 +51,11 @@ router.get("/:departement", checkLogin, DividasController.dividas_departamento);
 
 
 // GET DIVIDAS POR USER
-router.get("/user",checkLogin,DividasController.get_dividas_user);
+router.get("/users",checkLogin,DividasController.get_all_dividas_user);
 
 
 // Opção para dar uma divida como paga
-router.patch("/:dividaID", checkLogin, checkUser, DividasController.altera_divida);
+router.patch("/:dividaId", checkLogin, checkUser, DividasController.altera_divida);
 
 
 

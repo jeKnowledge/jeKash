@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/users')
-var localStorage = require('local-storage');
+const localStorage = require('local-storage');
 
 const admin_email = "goncalocorreia@jeknowledge.com" 
 
@@ -66,8 +66,9 @@ exports.signup =  (req,res,next) =>{ // criar um novo user no servidor
         .exec()
         .then( user =>{ // verifica se o email do novo usuario ja existe na base de dados
             if(user.length >0){   
-                errors.push({msg:'Email já existe!'});
-                render(res,errors,req.body.name.req.body.lastname,req.body.email,req.body.password,req.body.password2,req.body.department)
+                reject('Este email já existe!');
+                res.render('register',{errors,name,email,password,password2});
+                
             } else { // se não cria um novo usario
                         bcrypt.hash(req.body.password,10,(err,hash) =>{ // encripta a password
                         if(err){
@@ -102,12 +103,13 @@ exports.signup =  (req,res,next) =>{ // criar um novo user no servidor
             }
 
         }).catch( err =>{
-                console.log(err);
-                res.status(500).json({error:err});
+                req.flash("errors",err);
+                res.redirect("signup");
         });
     }
-    
 };
+
+
 
 exports.login = (req,res,next)=>{
 
@@ -155,7 +157,7 @@ exports.login = (req,res,next)=>{
                                 {
                                     expiresIn: "1h"
                                 },function(err,token){
-                                    console.log(localStorage('Authorization',token));
+                                    localStorage('Authorization',token);
                                     console.log(user);
                                     console.log("Token:"+token);
                                 }

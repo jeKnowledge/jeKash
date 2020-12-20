@@ -1,32 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
+<h2>Dividas Jeknowledge</h2>
 
-<body>
-  <h1>Lista de dividas</h1>
-  <ul>
-    <ul id="dividas">
-  </ul>
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
-<script>
-    // Para isto tudo funcionar temos de ter um servidor com npm start e outro com http-server. O "link" é abrir este ficheiro com live server
-    // Caso contrario para testar cenas, adicionar dividas, etc. usar postman com localhost:5000/dividas
-  axios.get('dividas/getall')
-    //.then(response => console.log(response.data["Dividas"]))
-    //.catch(error => console.log(error))
-    .then(response => criaLista(response.data["Dividas"]))
-    .catch(error => console.log(error))
-​
-    // Função que cria a lista
-    const criaLista = ( dividas ) => {
-        // criar lista atraves do id definido em cima
-    const ulDividas = document.getElementById('dividas')
-    dividas.map(divida => {
-      const listaDivida = document.createElement('li')
-      listaDivida.innerHTML = `Quantia: ${divida.quantia} - Devedor: ${divida.devedor} - Credor: ${divida.credor} - Descrição: ${divida.descrição}`
-      ulDividas.appendChild(listaDivida)
-    })
-  }
+<%= dividas %>
 
-</script>
-</html>
+<ul>
+  <% dividas.forEach(function(divida) { %>
+      <li>
+          <strong><%= id: divida._id %></strong>
+          Credor:  <%= divida.credor %> ,Devedor: <%= divida.devedor %>,Quantia: <%= divida.quantia %>,Descriçao: <%= dividas.descricao %>,Paga: <%= dividas.paga %>
+      </li>
+  <% }); %>
+</ul>
+
