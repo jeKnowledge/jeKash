@@ -67,7 +67,7 @@ exports.signup =  (req,res,next) =>{ // criar um novo user no servidor
         .then( user =>{ // verifica se o email do novo usuario ja existe na base de dados
             if(user.length >0){   
                 reject('Este email já existe!');
-                res.render('register',{errors,name,email,password,password2});
+                res.redirect('/signup');
                 
             } else { // se não cria um novo usario
                         bcrypt.hash(req.body.password,10,(err,hash) =>{ // encripta a password
@@ -88,7 +88,7 @@ exports.signup =  (req,res,next) =>{ // criar um novo user no servidor
                             user.save()
                             .then( result =>{
                                 console.log(result);
-                                req.flash('sucess_msg','Já estás Registado!!');
+                                req.flash('success_msg','You have now registered!')
                                 res.redirect('/');
                             })
                             .catch( err =>{
@@ -163,6 +163,10 @@ exports.login = (req,res,next)=>{
                                 }
                             );
                         res.redirect('/home');
+                    }
+                    else{
+                        errors.push({msg: 'Password Incorreta'});
+                        res.redirect('/');
                     }  
                     
                     });

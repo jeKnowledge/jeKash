@@ -47,23 +47,20 @@ app.use(express.static("public"));
 
 
 app.use(express.urlencoded({ extended: false }));
+
 app.use(session({
-  secret:'secret',
-  resave:true,
-  saveUninitialized:false,
-  cookie:{
-    maxAge: 1000*60*60*24
-  }
-}));
-
-
-app.use(connectFlash());
-app.use((req,res,next)=>{ //este codigo permite flash messages na app
-  res.locals.sucess_msg = req.flash('sucess_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');
-  next();
-})
+  secret : 'secret',
+  resave : true,
+  saveUninitialized : true
+ }));
+ //use flash
+ app.use(connectFlash());
+ app.use((req,res,next)=> {
+   res.locals.success_msg = req.flash('success_msg');
+   res.locals.error_msg = req.flash('error_msg');
+   res.locals.error  = req.flash('error');
+ next();
+ })
 
 
 
