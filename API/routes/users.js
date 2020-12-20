@@ -3,18 +3,16 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const userControllers = require('../controllers/users');
 const User = require('../models/users');
+const messages = require('../middleware/connectFlash');
 
 
 router.get('/login',(req,res,next)=>{
-    req.flash('errors','x');
     res.render('login');
     
 })
 
 router.get('/signup',(req,res,next)=>{
-    res.render('signup',{
-        errors: req.flash("errors")
-    })
+    res.render('signup');
 })
 
 
@@ -28,9 +26,9 @@ router.get('/logout',(req,res,next)=>{
 
 router.get("/getall", userControllers.get_all_users);
 
-router.post("/signup",userControllers.signup);
+router.post("/signup",messages,userControllers.signup);
 
-router.post("/login",userControllers.login);
+router.post("/login",messages,userControllers.login);
 
 router.delete("/signout",userControllers.signout);
 

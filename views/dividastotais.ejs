@@ -1,13 +1,9 @@
 <h2>Dividas Jeknowledge</h2>
 
-<%= dividas %>
+<%- JSON.stringify(dividas) %>
 
-<ul>
-  <% dividas.forEach(function(divida) { %>
-      <li>
-          <strong><%= id: divida._id %></strong>
-          Credor:  <%= divida.credor %> ,Devedor: <%= divida.devedor %>,Quantia: <%= divida.quantia %>,Descriçao: <%= dividas.descricao %>,Paga: <%= dividas.paga %>
-      </li>
-  <% }); %>
-</ul>
+
+<% []dividas.shows.forEach(function(dividas) { %>
+  <li><%= dividas.credor %></li>
+<% }) %>
 

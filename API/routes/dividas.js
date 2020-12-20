@@ -7,6 +7,7 @@ const checkUser = require("../middleware/check-user");
 const checkAdmin = require("../middleware/check-admin");
 
 const DividasController = require("../controllers/Dividas");
+const { response } = require("express");
 //controller das dividas
 //const checkAuth = require("../middleware/check-auth")//a checkAuth é a middleware do log-in
 
@@ -16,17 +17,15 @@ router.get('/',(req,res,next)=>{
     res.render('dividas');
 })
 
-router.get('/dividas/getall',(req,res,next)=>{
-    res.render('dividastotais',{dividas:dividas});
-})
+
 
 router.get('/dividas/:department',(req,res,next)=>{
-    res.render('dividasDepartment',{dividas_dep:dividas_dep});
+    res.render('dividasdepartment',{dividas_dep:dividas_dep});
 })
 
 
-router.get('/dividas/:dividaId',(req,res,next)=>{
-    res.render('eliminadivida');
+router.get('/deletedivida',(req,res,next)=>{
+    res.render('deletedivida');
 })
 
 router.get('/dividas/users',(req,res,next)=>{
@@ -55,7 +54,7 @@ router.get("/users",checkLogin,DividasController.get_all_dividas_user);
 
 
 // Opção para dar uma divida como paga
-router.patch("/:dividaId", checkLogin, checkUser, DividasController.altera_divida);
+router.patch("/deletedivida", checkLogin, checkUser, DividasController.altera_divida);
 
 
 

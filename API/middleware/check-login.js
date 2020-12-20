@@ -11,8 +11,6 @@ module.exports = (req,res,next) =>{
     next();
     }
     catch (error) {
-        return res.status(401).json({
-            message: 'Login Failed'
-        });
+        req.flash("error", "You must be logged in to do that.");
     } 
 };

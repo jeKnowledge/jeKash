@@ -1,14 +1,6 @@
 <h1>SignUp</h1>
 
-<div class="flash_messages">
-  <% if(errors !== "") { %>
-      <% errors.forEach((item) => { %>
-          <div class="alert-danger">
-            <%- item %>
-          </div>
-      <%})%>
-    <% } %>
-</div>
+
 <form action="/users/signup" method="POST">
   <div>
     <label for="name">Name</label>

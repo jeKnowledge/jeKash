@@ -89,7 +89,7 @@ exports.signup =  (req,res,next) =>{ // criar um novo user no servidor
                             .then( result =>{
                                 console.log(result);
                                 req.flash('sucess_msg','Já estás Registado!!');
-                                res.redirect('/users/login');
+                                res.redirect('/');
                             })
                             .catch( err =>{
                                 console.log(err);
@@ -131,15 +131,15 @@ exports.login = (req,res,next)=>{
                 .exec()
                 .then( user =>{
                     if(user.length <1){ // user nao existe, email nao encontrado, login falhado
-                        return res.status(401).json({
-                            message: 'Email ou Password Invalidos'
-                        });
+                        errors.push("error", "Email nao existe");
+                        res.render('login',{errors:errors,email:req.body.email,
+                            password:req.body.password});
                     }
                     bcrypt.compare(req.body.password,user.password, (err,result) =>{
                     if(err){
-                        return res.send(401).json({
-                            message: 'Erro!'
-                        });
+                        errors.push({msg: 'email already registered'});
+                        res.render('login',{errors:errors,email:req.body.email,
+                            password:req.body.password});
                     }
                     if(result){
                         
@@ -166,13 +166,9 @@ exports.login = (req,res,next)=>{
                     }  
                     
                     });
-                }).catch(err =>{
-                    console.log(err);
-                    res.status(500).json({
-                        error:err});
-                });
-        }
-    
+                }).catch(err =>{req.flash("error", "Erro")});
+        
+            }
 }; 
 
 exports.signout = (req,res,next) =>{

@@ -164,7 +164,7 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
 
 
 // GET REQUEST DE TODAS AS DIVIDAS
-exports.get_all_dividas = async (req, res, next) => {
+exports.get_all_dividas =   async (req, res, next) => {
   // find() sem argumentos devolve todos as dívidas
   await Divida.find()
     .exec()
@@ -184,14 +184,15 @@ exports.get_all_dividas = async (req, res, next) => {
             descricao: divida.descricao,
             userCriador: divida.userCriador,
             date: divida.date,
-            async: true
           };
         }),
       };
-     return res.render('dividastotais',{dividas:JSON.stringify(dividas)});
-    })
-
-
+      //id: response._id,credor: response.credor,devedor:response.devedor,quantia:response.quantia,descricao:response.descricao 
+      //var string = "     Credor:  "+response.credor+"     Devedor: "+response.devedor+"     Quantia: "+response.quantia+"     Descriçao: "+response.descricao+"     Paga: "+response.paga;
+      //console.log(string);
+      console.log(response.Dividas);
+      return res.render('dividastotais', {dividas:(response.Dividas),async:true});
+      })
     .catch((err) => {
       // se a promise der erro
       res.status(500).json({
@@ -208,12 +209,13 @@ exports.get_all_dividas_user = (req, res, next) => {
   const decoded = jwt.verify(token,"secret");
   userId = decoded.userId;
 
-  Divida.find({credor_id: userId})
+  Divida.find({credor: userId})
     .exec()
     .then((err,dividas) => {
+      console.log(dividas);
 
       if(err){
-        Divida.find({devedor_id: userId})
+        Divida.find({devedor: userId})
         .exec()
         .then((dividas) => {
           // array dividas com todos os objetos
@@ -235,7 +237,7 @@ exports.get_all_dividas_user = (req, res, next) => {
             }),
           };
           res.status(200).json(response);
-          res.render('dividasUser',{user:response});
+          res.render('dividasuser',{user:response});
         })
       }
       
@@ -265,6 +267,11 @@ exports.get_all_dividas_user = (req, res, next) => {
       });
     });
 };
+
+
+
+
+
 
 
 // GET DIVIDAS ATIVAS E INATIVAS
@@ -345,7 +352,7 @@ exports.dividas_departamento = (req, res, next) => {
         };
         res.status(200).json(response);
         //res.status(200).json({message: "ola"}); - so para testar coisas
-        res.render('dividasDepartment',{dividas_dep:JSON.stringify(dividas_dep)})
+        res.render('dividasDepartment',{divida:response})
         })
         .catch((err) => {
           console.log(err);

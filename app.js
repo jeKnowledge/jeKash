@@ -8,11 +8,14 @@ const connectFlash = require('connect-flash');
 const session = require('express-session');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const ejsLint = require('ejs-lint');
 
 
 const dividasRoutes = require("./API/routes/dividas");
 const usersRoutes = require("./API/routes/users");
 const indexRoutes = require("./API/routes/index");
+
+
 
 mongoose.connect(
   "mongodb+srv://exp-node:givemmb@givemmb.aqww5.mongodb.net/exp-node?retryWrites=true&w=majority",
@@ -23,6 +26,8 @@ mongoose.connect(
 );
 // ola
 mongoose.Promise = global.Promise;
+
+
 
 app.set("view engine", "ejs");
 app.set("views","./views")
