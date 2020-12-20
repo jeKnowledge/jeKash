@@ -12,8 +12,12 @@ const { response } = require("express");
 //const checkAuth = require("../middleware/check-auth")//a checkAuth é a middleware do log-in
 
 
+router.get('/home',(req,res)=>{
+    res.render('home');
+})
 
-router.get('/',(req,res,next)=>{
+
+router.get('/create',(req,res,next)=>{
     res.render('dividas');
 })
 

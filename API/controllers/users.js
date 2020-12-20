@@ -51,7 +51,7 @@ exports.signup =  (req,res,next) =>{ // criar um novo user no servidor
         console.log('Password 3'+req.body.password);
     }
 
-    if(errors.length >0){
+    if(errors.length){
         res.render('signup'),{
             errors:errors,
             name:req.body.name,
@@ -66,15 +66,14 @@ exports.signup =  (req,res,next) =>{ // criar um novo user no servidor
         .exec()
         .then( user =>{ // verifica se o email do novo usuario ja existe na base de dados
             if(user.length >0){   
-                reject('Este email já existe!');
-                res.redirect('/signup');
+                errors.push({msg: 'Email already registered'});
+                render(res,errors,user.name,user.lastname,user.email,user.password,user.password2,user.department);
                 
             } else { // se não cria um novo usario
                         bcrypt.hash(req.body.password,10,(err,hash) =>{ // encripta a password
                         if(err){
-                            return res.status(500).json({
-                                error:err
-                            });
+                            errors.push({msg: 'Erro'})
+                            res.redirect('signup');
                         }
                         else{
                             const user = new User({ //cria um usario com email e password (encriptada)
@@ -89,7 +88,7 @@ exports.signup =  (req,res,next) =>{ // criar um novo user no servidor
                             .then( result =>{
                                 console.log(result);
                                 req.flash('success_msg','You have now registered!')
-                                res.redirect('/');
+                                res.redirect('login');
                             })
                             .catch( err =>{
                                 console.log(err);
@@ -101,7 +100,6 @@ exports.signup =  (req,res,next) =>{ // criar um novo user no servidor
                 
                 });
             }
-
         }).catch( err =>{
                 req.flash("errors",err);
                 res.redirect("signup");
@@ -121,7 +119,7 @@ exports.login = (req,res,next)=>{
     }
 
     if(errors.length >0){
-        res.render('login'),{
+        res.render('/'),{
             errors:errors,
             email:req.body.email,
             password:req.body.password
@@ -132,7 +130,7 @@ exports.login = (req,res,next)=>{
                 .then( user =>{
                     if(user.length <1){ // user nao existe, email nao encontrado, login falhado
                         errors.push("error", "Email nao existe");
-                        res.render('login',{errors:errors,email:req.body.email,
+                        res.render('/',{errors:errors,email:req.body.email,
                             password:req.body.password});
                     }
                     bcrypt.compare(req.body.password,user.password, (err,result) =>{

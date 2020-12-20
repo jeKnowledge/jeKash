@@ -6,6 +6,9 @@ const User = require('../models/users');
 const messages = require('../middleware/connectFlash');
 
 
+
+
+
 router.get('/login',(req,res,next)=>{
     res.render('login');
     
@@ -14,7 +17,6 @@ router.get('/login',(req,res,next)=>{
 router.get('/signup',(req,res,next)=>{
     res.render('signup');
 })
-
 
 
 router.get('/logout',(req,res,next)=>{
