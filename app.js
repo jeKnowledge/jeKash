@@ -11,20 +11,12 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
 
+const emails = require("./API/timer/SendingEmails")
 const dividasRoutes = require("./API/routes/dividas");
 const usersRoutes = require("./API/routes/users");
 const indexRoutes = require("./API/routes/index");
 
 
-mongoose.connect(
-  "mongodb+srv://exp-node:givemmb@givemmb.aqww5.mongodb.net/exp-node?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
-// ola
-mongoose.Promise = global.Promise;
 
 
 
@@ -72,19 +64,32 @@ app.use("/dividas", dividasRoutes);
 
 
 
-app.use((req, res, next) => {
-  const error = new Error("Page not Found");
-  error.status = 404;
-  next(error);
+
+// ERROS
+//req = o que recebemos, res = resposta que damos
+app.use((req, res,next)=>{
+    const err = new Error("Not found.");
+    err.status = 404;
+    next(err);
 });
 
-app.use((error, req, res, next) => {
-  res.status(error.status || 500);
-  res.json({
-    error: {
-      message: error.message,
-    },
-  });
+app.use((err,req,res,next)=>{
+    const status = err.status || 500; //se nao existir o status do erro, envia 500
+
+    //se exitir erro (por exemplo 404 se nao exitir) envia isto:
+    res.status(status).json({
+        message: 'Error not found! Status: ' + status
+    });
 });
+
+
+
+//Server Turn On
+const port = process.env.PORT|| 5000;
+//ouve neste ip esta porta
+app.listen(port,()=>{
+    //quando corre a porta com sucesso faz esta funcao
+    console.log("Server Live At: ",port)
+})
 
 module.exports = app;

@@ -1,8 +1,13 @@
 const mongoose = require("mongoose");
-const Divida = require("../models/divida"); //modelo para a divida do Tesoureiro
+const Divida = require("../models/divida");
 const User = require("../models/users");
 const jwt = require('jsonwebtoken');
+
 const localStorage = require('local-storage');
+
+//! CRIAR NA DATABASE UMA CONTA JEK DEFAULT PARA DAR AS DIVIDAS CRIADAS POR UM JEKER
+const idcontaJEK = "5fdb9a550526f0142042c8f3"; //! ID DA CONTA PRINCIPAL DA JEK depois mudar para o defenitivo
+
 
 //controler para criar uma divida de um User daí o nome "criar_divida_jeK"
 
@@ -10,9 +15,14 @@ const localStorage = require('local-storage');
 exports.criar_divida_jeK = (req,res,next)=>{
   //Quando uma divida é criada preciso de a data, hora e minutos de hoje.
   let today = new Date(); //com a class Date consigo pedir a data e a hora a que foi criada a divida
+
+ //adicionei os zeros à direita tambem porque assim fica melhor para exportar e fazer contas com as datas
   let date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //a string que diz a data atual
+    today.getFullYear() + "-" + ("0"+(today.getMonth() + 1)).slice(-2) + "-" + ("0"+today.getDate()).slice(-2); //a string que diz a data atual
+  //faço slice(-2) porque slice(-2) da me sempre os ultimos dois characteres da string, e assim se adicionar um zero a mais fico sempre com os ultimos dois characteres e portanto apaga-o
+  
   let time =
+
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(); //a string que diz o tempo atual
 
   // Para ir buscar o id do user logado
@@ -25,18 +35,18 @@ exports.criar_divida_jeK = (req,res,next)=>{
           
             User.findOne({email:req.body.devedor}).select().exec().then(user_devedor =>{
               
-              let divida = new Divida({
+             let divida = new Divida({
                 _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
-            
+
                 //Estamos no request de um User:
-                //credor: "JeKnowledge", //Vai ser a Jeknowledge neste caso
-                credor: user_credor._id, //ID do credor
-                devedor: user_devedor._id, //ID do devedor
+                credor: idcontaJEK, //todo MUDAR PARA O ID DA CONTA DA JEKNOWLEDGE!
+                devedor: userID, // * ID do devedor acima referido
                 quantia: req.body.quantia, //vai buscar a quantia ao body do json
                 descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
                 paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
-                userCriador: id, // User que cria a divida
-                date: ""+date + " às: " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
+                userCriador: userID, // Mudei isto, aqui o user que vai criar a divida vai corresponder ao userID
+                date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
+                timesemailsent: 0 //para conseguir ver o limite da divida mandada e quanto ja passou o tempo
               });
             
               //salvo a divida
@@ -70,10 +80,15 @@ exports.criar_divida_jeK = (req,res,next)=>{
 exports.criar_divida_Tesoureiro = (req, res, next) => {
   //Quando uma divida é criada preciso de a data, hora e minutos de hoje.
   let today = new Date(); //com a class Date consigo pedir a data e a hora a que foi criada a divida
+
+  //adicionei os zeros à direita tambem porque assim fica melhor para exportar e fazer contas com as datas
   let date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate(); //a string que diz a data atual
+    today.getFullYear() + "-" + ("0"+(today.getMonth() + 1)).slice(-2) + "-" + ("0"+today.getDate()).slice(-2); //a string que diz a data atual
+  //faço slice(-2) porque slice(-2) da me sempre os ultimos dois characteres da string, e assim se adicionar um zero a mais fico sempre com os ultimos dois characteres e portanto apaga-o
+
   let time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(); //a string que diz o tempo atual
+    ("0"+today.getHours()).slice(-2) + ":" +  ("0"+today.getMinutes()).slice(-2) + ":" +  ("0"+today.getSeconds()).slice(-2); //a string que diz o tempo atual
+
 
   // Para ir buscar o id do user logado
   const token = req.headers.authorization.split(" ")[1]; 
@@ -82,13 +97,14 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
 
   let divida = new Divida({
     _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
-    credor: req.body.credor, //Vou buscar o user a que deve
-    devedor: req.body.devedor, //vou buscar o user a Dever
+    credor: req.body.credor, //Vou buscar o user a que deve, O EMAIL!
+    devedor: req.body.devedor, //vou buscar o user a Dever atenção meter um email, O EMAIL!
     quantia: req.body.quantia, //vou buscar a quantia
     descricao: req.body.descricao, //vou buscar a descrição
     paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
     userCriador: id, // User que cria a divida
-    date: ""+date + ", às " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
+    date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
+    timesemailsent: 0
   });
 
   //salvo a divida
@@ -109,6 +125,7 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
           userCriador: result.userCriador,
           date: result.date,
           _id: result._id,
+          timesemailsent: result.timesemailsent,
           request: {
             type: "POST", //o tipo e um POST
             url:
@@ -116,7 +133,6 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
               "://" +
               req.get("host") +
               req.originalUrl +
-              "/" +
               result._id,
             //formatei uma string para dar o URL atual
           },
@@ -165,7 +181,6 @@ exports.get_all_dividas_user = (req, res, next) => {
     .catch((err) => {
       console.log(err);
     });
-
 };
 
 

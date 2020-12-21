@@ -4,10 +4,7 @@ const router = express.Router();
 const userControllers = require('../controllers/users');
 const User = require('../models/users');
 const messages = require('../middleware/connectFlash');
-
-
-
-
+const checkServer= require("../middleware/check-server");
 
 router.get('/login',(req,res,next)=>{
     res.render('login');
@@ -25,8 +22,9 @@ router.get('/logout',(req,res,next)=>{
     res.redirect('login');
 })
 
+//* O server vai precisar desta para conseguir o email de um user!
+router.get("/getall",checkServer,userControllers.get_all_users);
 
-router.get("/getall", userControllers.get_all_users);
 
 router.post("/signup",messages,userControllers.signup);
 

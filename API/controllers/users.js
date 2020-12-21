@@ -8,7 +8,6 @@ const admin_email = "goncalocorreia@jeknowledge.com"
 
 
 exports.get_all_users = (req,res,next) =>{
-
     User.find().select().exec() //array de users
     .then( list_users =>{
         const response ={ // o que vai ser printado no ecrã
@@ -188,3 +187,4 @@ exports.signout = (req,res,next) =>{
         });
         
 };
+

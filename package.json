@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon app.js"
   },
   "keywords": [
     "node",
@@ -34,9 +34,12 @@
     "mongoose": "^5.11.8",
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.10.0",
+    "node-cron": "^2.0.3",
+    "nodemailer": "^6.4.17",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "path": "^0.12.7"
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
