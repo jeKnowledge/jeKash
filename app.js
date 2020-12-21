@@ -16,7 +16,15 @@ const dividasRoutes = require("./API/routes/dividas");
 const usersRoutes = require("./API/routes/users");
 const indexRoutes = require("./API/routes/index");
 
-
+mongoose.connect(
+    "mongodb+srv://exp-node:givemmb@givemmb.aqww5.mongodb.net/exp-node?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  );
+  // ola
+  mongoose.Promise = global.Promise;
 
 
 
@@ -81,15 +89,5 @@ app.use((err,req,res,next)=>{
         message: 'Error not found! Status: ' + status
     });
 });
-
-
-
-//Server Turn On
-const port = process.env.PORT|| 5000;
-//ouve neste ip esta porta
-app.listen(port,()=>{
-    //quando corre a porta com sucesso faz esta funcao
-    console.log("Server Live At: ",port)
-})
 
 module.exports = app;

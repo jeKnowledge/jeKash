@@ -3,12 +3,14 @@ const express = require("express");
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const Divida = require("../models/divida");
 //? Se quiserem mudar para testar e recomendado mudar esta variavel
-const timer = 6000; //! MAS No final mudar para ser algo diario const timer = 86400;
+const timer = 3000; //! MAS No final mudar para ser algo diario const timer = 86400;
+
+
 
 //*url para fazer o request de todas as dividas.
 //! No final mudar para os defenitivos!!
-const GETdividasServerURL = "http://localhost:5000/dividas/all_dividas_para_o_email"; 
-const GETuserServerURL = "http://localhost:5000/users/getall";
+const GETdividasServerURL = "http://localhost:8000/dividas/all_dividas_para_o_email"; 
+const GETuserServerURL = "http://localhost:8000/users/getall";
 
 //Função client que me dá o GET request
 var HttpClient = function() {
