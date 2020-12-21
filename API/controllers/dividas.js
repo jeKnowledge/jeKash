@@ -176,13 +176,11 @@ exports.get_all_dividas_user = (req, res, next) => {
   Divida.find({$or: [{credor: {$in: id}},{devedor: {$in: id}} ]})
     .exec()
     .then((dividas) => {
-      return res.render('dividasuser',{dividas : dividas.map(divida =>{
+      return res.render('dividasUsers',{dividas : dividas.map(divida =>{
         return divida;
       })});
-      
     })
     .catch((err) => {
-
       console.log(err);
     });
 
