@@ -41,7 +41,7 @@ exports.criar_divida_jeK = (req, res, next) => {
     descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
     paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
     userCriador: userID, // Mudei isto, aqui o user que vai criar a divida vai corresponder ao userID
-    date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
+    date: "" +date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
     timesemailsent: 0 //para conseguir ver o limite da divida mandada e quanto ja passou o tempo
   });
  

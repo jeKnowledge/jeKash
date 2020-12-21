@@ -3,7 +3,7 @@ const express = require("express");
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const Divida = require("../models/divida");
 //? Se quiserem mudar para testar e recomendado mudar esta variavel
-const timer = 3000; //! MAS No final mudar para ser algo diario const timer = 86400;
+const timer = 6000; //! MAS No final mudar para ser algo diario const timer = 86400;
 
 //*url para fazer o request de todas as dividas.
 //! No final mudar para os defenitivos!!
@@ -132,22 +132,33 @@ async function sendEmail(message,user){
   // * Ethereal e uma coisa que me vai ajudar a simular mandar emails:
   const transporter = nodemailer.createTransport({
     // host do ethreal que e quem me esta a mandar fake emails
-    host: 'gmail', //! substituir depois pelo host do email que vamos usar
+    service: 'gmail',
+    // ? host: "smtp.ethereal.email", //! substituir depois pelo host do email que vamos usar
     // true for 465, false for other ports
+    
+    //port: 587,
+    //secure: false,
     auth: {
       //conta dada para testar:
       user: "eutestocoisas24@gmail.com", //! --- SUBSTITUIR POR O EMAIL QUE DEPOIS VAMOS USER
       pass: "eutestocoisasJek" //! --- SUBSTITUIR PALA PASS DO EMAIL QUE VAMOS USAR
     },
   });
+  var mailOptions = {
+    from: '"Dividas" <JeknowledgeFIXE@example.com>', // ! sender address MUDAR para o defenitivo
+    to: user, //* parametro do email do user que fui buscar
+    subject: "Dividas Jeknowledge.", // Subject line
+    text: message, // plain text body: dizer estas a dever uma certa quantia por agora so
+    //html: "<b>Hello world?</b>", // html body para depois fazer isto bonito
+  }
 
-  let info = await transporter.sendMail({
-      from: 'eutestocoisas24@gmail.com', // ! sender address MUDAR para o defenitivo
-      to: user, //* parametro do email do user que fui buscar
-      subject: "Dividas Jeknowledge.", // Subject line
-      text: message, // plain text body: dizer estas a dever uma certa quantia por agora so
-      //html: "<b>Hello world?</b>", // html body para depois fazer isto bonito
-    });
+  await transporter.sendMail(mailOptions, function(error,info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+  });
   
   // ? DEBUGGING EMAILS:
   // ? console.log("Message sent: %s", info.messageId); 
