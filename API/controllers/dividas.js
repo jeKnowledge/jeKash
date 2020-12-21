@@ -313,7 +313,7 @@ exports.altera_divida = (req, res, next) => {
 };
 
 exports.get_all_dividasMail = (req, res, next) => {
-  // find() sem argumentos devolve todos as dívidas
+    // find() sem argumentos devolve todos as dívidas
   Divida.find()
     .exec()
     .then((dividas) => {
@@ -337,9 +337,13 @@ exports.get_all_dividasMail = (req, res, next) => {
           };
         }),
       };
+      res.status(200).json(response);
     })
     .catch((err) => {
-      console.log(err);
+      // se a promise der erro
+      res.status(500).json({
+        error: err,
+      });
     });
 };
 

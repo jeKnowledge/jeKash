@@ -58,6 +58,10 @@ function checkDates(){ //função que recebe as datas
       var responseJSONDIVIDAS = JSON.parse(responseDivida);
       var responseJSONUSER = JSON.parse(responseUser);
 
+      //console.log(responseJSONDIVIDAS);
+      //console.log(responseJSONUSER);
+
+
       for(let dividaskeys in Object.keys(responseJSONDIVIDAS.Dividas)){
         //dou assign a values que sa calhar tenho de trabalhar com
         let dividaID = responseJSONDIVIDAS.Dividas[dividaskeys].id; //Id da divida
@@ -84,7 +88,7 @@ function checkDates(){ //função que recebe as datas
         // Não estou nada contente com esta solução porque tem mais ifs do que linhas de codigo
 
         //default msg depois podemos mudar:
-        let msg = "Hey deves " + quantiadivida+ " há mais de "+ Math.floor(tempopassadodias) +" dias!";
+        let msg = "Hey, deves " + quantiadivida+ "€ há mais de "+ Math.floor(tempopassadodias) +" dias!";
         if (paga===false){
           console.log(tempopassadodias, emailmandado)
           if (tempopassadodias>=21 && emailmandado ===3){
@@ -147,7 +151,7 @@ async function sendEmail(message,user){
     },
   });
   var mailOptions = {
-    from: '"Dividas" <JeknowledgeFIXE@example.com>', // ! sender address MUDAR para o defenitivo
+    from: 'eutestocoisas24@gmail.com', // ! sender address MUDAR para o defenitivo
     to: user, //* parametro do email do user que fui buscar
     subject: "Dividas Jeknowledge.", // Subject line
     text: message, // plain text body: dizer estas a dever uma certa quantia por agora so
