@@ -38,8 +38,7 @@ router.get("/user",checkLogin,DividasController.get_all_dividas_user);
 
 
 // Opção para dar uma divida como paga
-router.patch("/deletedivida", checkLogin, checkUser, DividasController.altera_divida);
-
+router.patch("/:dividaID", checkLogin, checkUser, DividasController.altera_divida);
 
 
 

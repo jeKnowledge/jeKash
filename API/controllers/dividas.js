@@ -183,27 +183,39 @@ exports.dividas_ativas_inativas = (req, res, next) => {
     estado = true
   } else console.log("algo de errado não está certo")
 
+  const token = localStorage.get('Authorization'); 
+  const decoded = jwt.verify(token,"secret");
+  const admin = decoded.admin;
+
+  
   Divida.find({paga: estado}) // vai buscar as dividas com flag especificada no estadp
     .select("quantia devedor credor descricao userCriador paga")
     .exec()
     .then((dividas) => {
-
+      
       if(!estado){
-        return res.render('dividastotais',{dividas : dividas.map(divida =>{
-        return divida;
-      })}); 
+            if(admin){
+              return res.render('dividastotaisadmin',{dividas : dividas.map(divida =>{
+              return divida;
+              })}); 
+            }
+            else{
+              return res.render('dividastotais',{dividas : dividas.map(divida =>{
+                return divida;
+              })}); 
+            }        
       }
       else{
         return res.render('historico',{dividas : dividas.map(divida =>{
-          return divida;
-        })}); 
+        return divida;
+      })}); 
       }
       
       })
       .catch((err) => {
         console.log(err);
       });
-}
+};
 
 // GET DIVIDAS POR DEPARTAMENTO
 
@@ -253,7 +265,7 @@ exports.dividas_departamento = (req, res, next) => {
 // Opção para dar uma divida como paga
 exports.altera_divida = (req, res, next) => {
 
-  const id_divida = req.body.dividaID // id da divida introduizdo no url
+  const id_divida = req.params.dividaID // id da divida introduizdo no url
 
   // Isto é feito para se so quisermos mudar campos especificos e não ter de mudar tudo
   const updateOps = {};
@@ -271,7 +283,7 @@ exports.altera_divida = (req, res, next) => {
   Divida.update({_id: id_divida}, {$set: updateOps}).exec()
   .then(result => {
     console.log({id: id_divida})
-    req.flash('success_msg','Divida Criada');
+    req.flash('success_msg','Divida Apagada');
     res.redirect('home');
   })
   .catch(err => {
