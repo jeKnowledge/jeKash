@@ -4,16 +4,13 @@ const Divida = require('../models/divida');
 
 // Vai ser usado para verificar se o user que criou a divida, é o que está a atualizá-la
 module.exports = (req,res,next) =>{
+
     try {
-        
         const token = req.headers.authorization.split(" ")[1]; 
         const decoded = jwt.verify(token,"secret");
         req.userData = decoded;
-
         const idUserLogado = decoded.userId;   
-
         const id_divida = req.params.dividaID
-        
         Divida.find({_id: id_divida}).exec()
         .then(result => {
             // esta com index zero porque o json enviado no patch é enviado dentro de uma lista (?)

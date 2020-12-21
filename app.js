@@ -9,20 +9,12 @@ const session = require('express-session');
 const path = require('path');
 const fileUpload = require('express-fileupload');
 
+const emails = require("./API/timer/SendingEmails")
 const dividasRoutes = require("./API/routes/dividas");
 const usersRoutes = require("./API/routes/users");
 const indexRoutes = require("./API/routes/index");
 const jekersRoutes = require("./API/routes/jekers");
 
-mongoose.connect(
-  "mongodb+srv://exp-node:givemmb@givemmb.aqww5.mongodb.net/exp-node?retryWrites=true&w=majority",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
-
-mongoose.Promise = global.Promise;
 
 app.set("view engine", "ejs");
 app.set("views","./views")
@@ -61,19 +53,32 @@ app.use("/users", usersRoutes);
 app.use("/dividas", dividasRoutes);
 app.use("/jekers", jekersRoutes);
 
-app.use((req, res, next) => {
-  const error = new Error("Page not Found");
-  error.status = 404;
-  next(error);
+
+// ERROS
+//req = o que recebemos, res = resposta que damos
+app.use((req, res,next)=>{
+    const err = new Error("Not found.");
+    err.status = 404;
+    next(err);
 });
 
-app.use((error, req, res, next) => {
-  res.status(error.status || 500);
-  res.json({
-    error: {
-      message: error.message,
-    },
-  });
+app.use((err,req,res,next)=>{
+    const status = err.status || 500; //se nao existir o status do erro, envia 500
+
+    //se exitir erro (por exemplo 404 se nao exitir) envia isto:
+    res.status(status).json({
+        message: 'Error not found! Status: ' + status
+    });
 });
+
+
+
+//Server Turn On
+const port = process.env.PORT|| 5000;
+//ouve neste ip esta porta
+app.listen(port,()=>{
+    //quando corre a porta com sucesso faz esta funcao
+    console.log("Server Live At: ",port)
+})
 
 module.exports = app;
