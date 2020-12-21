@@ -11,14 +11,11 @@ const { response } = require("express");
 //controller das dividas
 //const checkAuth = require("../middleware/check-auth")//a checkAuth é a middleware do log-in
 
-
-router.get('/home',(req,res)=>{
-    res.render('home');
-})
-
+var url = "mongodb+srv://localhost:8000/dividas/getall";
 
 router.get('/create',(req,res,next)=>{
     res.render('dividas');
+    
 })
 
 

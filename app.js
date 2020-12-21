@@ -8,13 +8,12 @@ const connectFlash = require('connect-flash');
 const session = require('express-session');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const ejsLint = require('ejs-lint');
+const cors = require('cors');
 
 
 const dividasRoutes = require("./API/routes/dividas");
 const usersRoutes = require("./API/routes/users");
 const indexRoutes = require("./API/routes/index");
-
 
 
 mongoose.connect(
@@ -32,12 +31,14 @@ mongoose.Promise = global.Promise;
 app.set("view engine", "ejs");
 app.set("views","./views")
 
+app.use(cors());
 app.use(cookieParser('secret'));
 
 app.use(expressEjsLayout);
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(express.json());
 
 
 app.use(express.static(path.join(__dirname,'/public')));
@@ -67,6 +68,9 @@ app.use(session({
 app.use("/", indexRoutes);
 app.use("/users", usersRoutes);
 app.use("/dividas", dividasRoutes);
+
+
+
 
 app.use((req, res, next) => {
   const error = new Error("Page not Found");

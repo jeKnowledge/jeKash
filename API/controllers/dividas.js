@@ -117,7 +117,7 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
     descricao: req.body.descricao, //vou buscar a descrição
     paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
     userCriador: id, // User que cria a divida
-    date: "Data: " + date + ", às " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
+    date: date + ", às " + time, //e a data de hoje ver quanto tempo passou desde a sua criação
   });
 
   //salvo a divida
@@ -164,42 +164,20 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
 
 
 // GET REQUEST DE TODAS AS DIVIDAS
-exports.get_all_dividas =   async (req, res, next) => {
+exports.get_all_dividas = (req, res, next) => {
   // find() sem argumentos devolve todos as dívidas
-  await Divida.find()
+   Divida.find()
     .exec()
-    .then((dividas) => {
-      // array dividas com todos os objetos
-      // OUTPUT
-      const response = {
-        count: dividas.length, // Numero total de dividas
-        Dividas: dividas.map((divida) => {
-          // map cria um array com as informações seguintes de cada divida
-          return {
-            // Return da informação das dividas
-            id: divida._id, //adicionei id porque ajuda a testar
-            credor: divida.credor,
-            devedor: divida.devedor,
-            quantia: divida.quantia,
-            descricao: divida.descricao,
-            userCriador: divida.userCriador,
-            date: divida.date,
-          };
-        }),
-      };
-      //id: response._id,credor: response.credor,devedor:response.devedor,quantia:response.quantia,descricao:response.descricao 
-      //var string = "     Credor:  "+response.credor+"     Devedor: "+response.devedor+"     Quantia: "+response.quantia+"     Descriçao: "+response.descricao+"     Paga: "+response.paga;
-      //console.log(string);
-      console.log(response.Dividas);
-      return res.render('dividastotais', {dividas:(response.Dividas),async:true});
+    .then( (dividas) => {
+        return res.render('dividastotais',{dividas : dividas.map(divida =>{
+          return divida;
+        })});
       })
     .catch((err) => {
-      // se a promise der erro
-      res.status(500).json({
-        error: err,
-      });
+      console.log(err);
     });
 };
+
 
 
 
@@ -209,56 +187,13 @@ exports.get_all_dividas_user = (req, res, next) => {
   const decoded = jwt.verify(token,"secret");
   userId = decoded.userId;
 
-  Divida.find({credor: userId})
+  Divida.find({$or: [{credor: userId},{devedor: {$in: userId}}]})
     .exec()
-    .then((err,dividas) => {
+    .then((dividas) => {
       console.log(dividas);
-
-      if(err){
-        Divida.find({devedor: userId})
-        .exec()
-        .then((dividas) => {
-          // array dividas com todos os objetos
-          // OUTPUT
-          const response = {
-            count: dividas.length, // Numero total de dividas
-            Dividas: dividas.map((divida) => {
-              // map cria um array com as informações seguintes de cada divida
-              return {
-                // Return da informação das dividas
-                id: divida._id, //adicionei id porque ajuda a testar
-                credor: divida.credor,
-                devedor: divida.devedor,
-                quantia: divida.quantia,
-                descricao: divida.descricao,
-                userCriador: divida.userCriador,
-                date: divida.date,
-              };
-            }),
-          };
-          res.status(200).json(response);
-          res.render('dividasuser',{user:response});
-        })
-      }
-      
-      if(dividas){
-          const response = {
-          count: dividas.length, // Numero total de dividas
-          Dividas: dividas.map((divida) => {
-            // map cria um array com as informações seguintes de cada divida
-            return {
-              // Return da informação das dividas
-              id: divida._id, //adicionei id porque ajuda a testar
-              devedor: divida.credor,
-              quantia: divida.devedor,
-              descricao: divida.descricao,
-              date: divida.date,
-            };
-          }),
-        };
-        res.status(200).json(response);
-        res.render('dividasUser',{user:response});
-      }      
+      return res.render('dividasuser',{dividas : dividas.map(divida =>{
+        return divida;
+      })});
     })
     .catch((err) => {
       // se a promise der erro
@@ -267,9 +202,6 @@ exports.get_all_dividas_user = (req, res, next) => {
       });
     });
 };
-
-
-
 
 
 
@@ -333,26 +265,21 @@ exports.dividas_departamento = (req, res, next) => {
       .select("quantia devedor credor descricao userCriador")
       .exec()
       .then((dividas) => {
-        // dividas - array com todas as dívidas do departamento
-      
-        // OUTPUT
-        const response = {
-          count: dividas.length, // Numero total de dividas
-          Dividas: dividas.map((divida) => {
-            // map cria um array com as informações seguintes de cada divida
-            return {
-              // Return da informação das dividas
-              quantia: divida.quantia,
-              devedor: divida.credor,
-              credor: divida.devedor,
-              descricao: divida.descricao,
-              userCriador: divida.userCriador
-            };
-          }),
-        };
-        res.status(200).json(response);
-        //res.status(200).json({message: "ola"}); - so para testar coisas
-        res.render('dividasDepartment',{divida:response})
+            if(dividas.department === "Tech"){
+              return res.render('dividasTech',{dividas : dividas.map(divida =>{
+              return divida;
+            })});
+            }
+            if(dividas.department === "Innovation"){
+              return res.render('dividasInnovation',{dividas : dividas.map(divida =>{
+            return divida;
+          })});
+          }
+          if(dividas.department === "Intern"){
+            return res.render('dividasIntern',{dividas : dividas.map(divida =>{
+          return divida;
+          })});
+          }
         })
         .catch((err) => {
           console.log(err);
