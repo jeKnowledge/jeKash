@@ -11,26 +11,9 @@ const { response } = require("express");
 //controller das dividas
 //const checkAuth = require("../middleware/check-auth")//a checkAuth é a middleware do log-in
 
-var url = "mongodb+srv://localhost:8000/dividas/getall";
-
 router.get('/create',(req,res,next)=>{
     res.render('dividas');
     
-})
-
-
-
-router.get('/dividas/:department',(req,res,next)=>{
-    res.render('dividasdepartment',{dividas_dep:dividas_dep});
-})
-
-
-router.get('/deletedivida',(req,res,next)=>{
-    res.render('deletedivida');
-})
-
-router.get('/dividas/users',(req,res,next)=>{
-    res.render('dividasUser');
 })
 
 
@@ -51,7 +34,7 @@ router.get("/:departement", checkLogin, DividasController.dividas_departamento);
 
 
 // GET DIVIDAS POR USER
-router.get("/users",checkLogin,DividasController.get_all_dividas_user);
+router.get("/user",checkLogin,DividasController.get_all_dividas_user);
 
 
 // Opção para dar uma divida como paga

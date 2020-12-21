@@ -2,20 +2,13 @@
 
 <div class="dividas_buttons">
     <div class="titulo_dividas_jek">
-        <h1>Dividas jeKnowledge</h1>
+        <h3>Dividas jeKnowledge</h3>
     </div>
     <ul>
     <div class="dividas">
 
-      <div class = "criar/eliminar_dividas">
 
-      <p>Alguem te deve dinheiro ? Pede-o <a href="/dividas/create">aqui</a></p>
-      <p>Já te devolveram o dinheiro?<a href="/dividas/deletedivida">Apaga a tua divida</a></p>
-
-    </div>
-
-
-      <form form action="/dividas/getall" method="GET">
+      <form form action="/dividas/ativas" method="GET">
         <dt>
        <li><button class="button_pag" onclick="myFunction('painel-0')">Dividas Totais</button></li>
         </dt>
@@ -25,7 +18,7 @@
 
       <form form action="/dividas/Intern" method="GET">
         <dt>
-       <li><button class="button_pag" onclick="myFunction('painel-0')">Dividas Intern</button></li>
+       <li><button class="button_pag" onclick="myFunction('painel-1')">Dividas Intern</button></li>
         </dt>
         <dd id="painel-1" class="transicao"> 
         </dd>
@@ -33,7 +26,7 @@
 
       <form form action="/dividas/Innovation" method="GET">
         <dt>
-       <li><button class="button_pag" onclick="myFunction('painel-0')">Dividas Innovation</button></li>
+       <li><button class="button_pag" onclick="myFunction('painel-2')">Dividas Innovation</button></li>
         </dt>
         <dd id="painel-2" class="transicao"> 
         </dd>
@@ -42,28 +35,33 @@
 
       <form form action="/dividas/Tech" method="GET">
         <dt>
-       <li><button class="button_pag" onclick="myFunction('painel-0')">Dividas Tech</button></li>
+       <li><button class="button_pag" onclick="myFunction('painel-3')">Dividas Tech</button></li>
         </dt>
         <dd id="painel-3" class="transicao"> 
         </dd>
       </form>
 
-
-
-      <form form action="dividas/users" method="GET">
+      <form form action="/dividas/user" method="GET">
         <dt>
-       <li><button class="button_pag" onclick="myFunction('painel-0')">Minhas Dividas</button></li>
+       <li><button class="button_pag" onclick="myFunction('painel-4')">As Minhas Dividas</button></li>
         </dt>
-        <dd id="painel-1" class="transicao"> 
+        <dd id="painel-4" class="transicao"> 
         </dd>
-      </form>  
-            
+      </form>
+
+      <form form action="/dividas/inativas" method="GET">
+        <dt>
+       <li><button class="button_pag" onclick="myFunction('painel-5')">Histórico</button></li>
+        </dt>
+        <dd id="painel-5" class="transicao"> 
+        </dd>
+      </form>
 
   </ul>
 </div>
 
 
-<a href="logout">Logout</a>
+<a href="users/logout">Logout</a>
 
 
 

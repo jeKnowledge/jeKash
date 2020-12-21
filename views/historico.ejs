@@ -1,4 +1,4 @@
-<h2>Dividas Jeknowledge</h2>
+<h2>Historico Dividas Jeknowledge</h2>
 
 
 <div class="result">
@@ -12,7 +12,7 @@
             <% if(divida.date !== null) { %>
                   <li class="string">
                     <strong>Id:</strong> <%= divida.id%>,<strong>Credor: </strong> <%= divida.credor%>,<strong>Devedor: </strong><%= divida.devedor%>,
-                        <strong>Quantia:</strong><%= divida.quantia%> €,<strong>Descricao: </strong><%= divida.descricao%>,<strong>Data:</strong><%= divida.date%>
+                        <strong>Quantia:</strong><%= divida.quantia%> € ,<strong>Descricao: </strong><%= divida.descricao%>,<strong>Data:</strong><%= divida.date%>
                   </li>
               <% } %>
             <% } %>
@@ -22,10 +22,4 @@
   <% } %>
 <% } %>
 </ol>
-</div>
-
-<div class = "criar/eliminar_dividas">
-
-  <h4>Alguem te deve dinheiro ? Pede-o <a href="/dividas/create">aqui</a></h4>
-
 </div>

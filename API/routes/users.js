@@ -21,8 +21,8 @@ router.get('/signup',(req,res,next)=>{
 
 router.get('/logout',(req,res,next)=>{
     req.logout;
-    req.flash('sucess_msg','Foste desconectado!');
-    res.redirect('login')
+    res.flash('sucess_msg','Foste desconectado!');
+    res.redirect('login');
 })
 
 
