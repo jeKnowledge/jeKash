@@ -1,4 +1,4 @@
-<h3>Dividas Jeknowledge</h3>
+<h3>As Minhas Dividas</h3>
 
 <div class="result">
 <ol>
@@ -9,7 +9,8 @@
         <% if(divida.quantia !== null) { %>
           <% if(divida.descricao !== null) { %>
             <% if(divida.date !== null) { %>
-                  <li class="string">
+                <% if(divida.paga === "true"){%>
+                    <li class="string">
                     <strong>Id:</strong> <%= divida.id%>,<strong>Credor: </strong> <%= divida.credor%>,<strong>Devedor: </strong><%= divida.devedor%>,
                         <strong>Quantia:</strong><%= divida.quantia%> €,<strong>Descricao: </strong><%= divida.descricao%>
                         
@@ -22,9 +23,9 @@
                             </dd>
                           </form>
                         </div>
-
-
                   </li>
+                
+                <% } %>
               <% } %>
             <% } %>
           <% } %>
@@ -35,17 +36,3 @@
 </ol>
 </div>
 
-<div class = "criar/eliminar_dividas">
-
-  <h4>Alguem te deve dinheiro ? Pede-o <a href="/dividas/create">aqui</a></h4>
-
-</div>
-
-<script>
-  function myFunction(){
-    $("#delete").click(function () {
-    $.delete('/dividas/dividaID')
-  });
-  }
-  
-</script>
