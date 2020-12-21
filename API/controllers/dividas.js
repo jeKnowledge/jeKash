@@ -30,8 +30,6 @@ exports.criar_divida_jeK = (req, res, next) => {
   // * finalmente com a authtoken decoded conseguimos ter o id do user:
   let userID = decoded.userId;
   //? console.log(userID);
-  
-  
   //constructor onde vou passar a data da divida.
   let divida = new Divida({
     _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
@@ -101,6 +99,11 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
   let time =
     ("0"+today.getHours()).slice(-2) + ":" +  ("0"+today.getMinutes()).slice(-2) + ":" +  ("0"+today.getSeconds()).slice(-2); //a string que diz o tempo atual
 
+
+  // Para ir buscar o id do user logado
+  const token = req.headers.authorization.split(" ")[1]; 
+  const decoded = jwt.verify(token,"secret");
+  const id = decoded.userId
 
   // Para ir buscar o id do user logado
   const token = req.headers.authorization.split(" ")[1]; 

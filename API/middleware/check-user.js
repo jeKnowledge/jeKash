@@ -6,19 +6,21 @@ const Divida = require('../models/divida');
 module.exports = (req,res,next) =>{
 
     try {
-    
         const token = req.headers.authorization.split(" ")[1]; 
         const decoded = jwt.verify(token,"secret");
         req.userData = decoded;
-        const id = decoded._id;    
-
+        const idUserLogado = decoded.userId;   
         const id_divida = req.params.dividaID
-        
         Divida.find({_id: id_divida}).exec()
         .then(result => {
-            if(id == result.userCriador){
+            // esta com index zero porque o json enviado no patch é enviado dentro de uma lista (?)
+            if(idUserLogado == result[0].userCriador){
+                console.log(result[0].userCriador)
+                console.log(idUserLogado)
                 next();
             } else {
+                console.log(result[0].userCriador)
+                console.log(idUserLogado)
                 return res.status(401).json({
                     message: 'Not Permitted'
                 });

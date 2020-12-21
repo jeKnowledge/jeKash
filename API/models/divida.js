@@ -5,6 +5,7 @@ const DividaTESScheme = mongoose.Schema(
   {
     _id: mongoose.Schema.Types.ObjectId, //objeto ID da divida
     //* Todos os campos como obrigatórios:
+
     credor: { type: mongoose.Schema.Types.ObjectID, ref: "User", required: true},  // Conectar o devedor e o credor a um user.
     devedor: {  type: mongoose.Schema.Types.ObjectID, ref: "User", required: true}, //ira sempre haver um user a dever neste scheme
     quantia: { type: Number, required: true }, //preciso de ter a certeza que a quantia é um numero
@@ -17,7 +18,6 @@ const DividaTESScheme = mongoose.Schema(
     //*timesemailsent:1 - ja passou 7 dias
     //*timesemailsent:2 - ja passou 14 dias
     //*timesemailsent:3 - ja passou 21 dias
-    
   },
   {
     versionKey: false, //para tirar a field que aparece sempre com a versão da chave, é desnecessário.
