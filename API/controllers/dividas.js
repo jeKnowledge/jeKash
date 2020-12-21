@@ -105,11 +105,6 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
   const decoded = jwt.verify(token,"secret");
   const id = decoded.userId
 
-  // Para ir buscar o id do user logado
-  const token = req.headers.authorization.split(" ")[1]; 
-  const decoded = jwt.verify(token,"secret");
-  const id = decoded.userId
-
   let divida = new Divida({
     _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
     credor: req.body.credor, //Vou buscar o user a que deve, O EMAIL!
