@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const uniqueValidator = require('mongoose-unique-validator');
 
 //esquema de como uma divida e guardada na DB
 const DividaTESScheme = mongoose.Schema(
@@ -23,5 +24,10 @@ const DividaTESScheme = mongoose.Schema(
     versionKey: false, //para tirar a field que aparece sempre com a versão da chave, é desnecessário.
   }
 );
+
+DividaTESScheme.plugin(uniqueValidator, {
+  type: 'mongoose-unique-validator',
+  message: 'Error, expected {PATH} to be unique.'
+});
 
 module.exports = mongoose.model("DividaTES", DividaTESScheme); //exporto como DividaTES

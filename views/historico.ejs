@@ -1,0 +1,25 @@
+<h2>Historico Dividas Jeknowledge</h2>
+
+
+<div class="result">
+<ol>
+<% for( divida of dividas) {%>
+  <% if(divida.id !== null) { %>
+    <% if(divida.credor !== null) { %>
+      <% if(divida.devedor !== null) { %>
+        <% if(divida.quantia !== null) { %>
+          <% if(divida.descricao !== null) { %>
+            <% if(divida.date !== null) { %>
+                  <li class="string">
+                    <strong>Id:</strong> <%= divida.id%>,<strong>Credor: </strong> <%= divida.credor%>,<strong>Devedor: </strong><%= divida.devedor%>,
+                        <strong>Quantia:</strong><%= divida.quantia%> € ,<strong>Descricao: </strong><%= divida.descricao%>,<strong>Data:</strong><%= divida.date%>
+                  </li>
+              <% } %>
+            <% } %>
+          <% } %>
+        <% } %>
+      <% } %>
+  <% } %>
+<% } %>
+</ol>
+</div>

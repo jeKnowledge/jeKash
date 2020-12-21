@@ -5,14 +5,10 @@ const router = express.Router();
 //login page
 
 router.get('/',(req,res)=>{
-    res.render('welcome');
+    res.render('welcomelogin');
 })
 
 
-//register page
-router.get('/signup',(req,res)=>{
-    res.render('signup');
-})
 router.get('/home',(req,res)=>{
     res.render('home');
 })

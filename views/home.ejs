@@ -1,13 +1,14 @@
 <h1>Bem vindos</h1>
 
-<div class="encomendas">
-    <div class="titulo_encomendas">
-        <h1>Dividas jeKnowledge</h1>
-</div>
+<div class="dividas_buttons">
+    <div class="titulo_dividas_jek">
+        <h3>Dividas jeKnowledge</h3>
+    </div>
     <ul>
     <div class="dividas">
 
-      <form form action="/dividas/getall" method="GET">
+
+      <form form action="/dividas/ativas" method="GET">
         <dt>
        <li><button class="button_pag" onclick="myFunction('painel-0')">Dividas Totais</button></li>
         </dt>
@@ -15,50 +16,56 @@
         </dd>
       </form>
 
-
-      <from form action="/dividas/" method="GET">
+      <form form action="/dividas/Intern" method="GET">
         <dt>
-            <li><button class="button_pag" onclick="myFunction('painel-1')">Dividas Por Departamento</button></li>
-
-                  <from form action="/dividas/intern" method="GET">
-                      <dt>
-                          <li><button class="button_pag" onclick="myFunction('painel-1')">Dividas Interno</button></li>
-                      </dt>
-                          <dd id="painel-1.1" class="transicao"></dd>
-                  </from>
-
-                  <from form action="/dividas/innovation" method="GET">
-                      <dt>
-                          <li><button class="button_pag" onclick="myFunction('painel-1')">Dividas Inovação</button></li>
-                      </dt>
-                          <dd id="painel-1.2" class="transicao"></dd>
-                  </from> 
-
-                  <from form action="/dividas/tech" method="GET">
-                      <dt>
-                          <li><button class="button_pag" onclick="myFunction('painel-1')">Dividas Tech</button></li>
-                      </dt>
-                          <dd id="painel-1.3" class="transicao"></dd>
-                  </from> 
+       <li><button class="button_pag" onclick="myFunction('painel-1')">Dividas Intern</button></li>
         </dt>
-            <dd id="painel-1" class="transicao"></dd>
-      </from>      
+        <dd id="painel-1" class="transicao"> 
+        </dd>
+      </form>
+
+      <form form action="/dividas/Innovation" method="GET">
+        <dt>
+       <li><button class="button_pag" onclick="myFunction('painel-2')">Dividas Innovation</button></li>
+        </dt>
+        <dd id="painel-2" class="transicao"> 
+        </dd>
+      </form>
 
 
-      <from>
-            <dt>
-                <li><button class="button_pag" onclick="myFunction('painel-2')">As Tuas Dividas</button></li>
-            </dt>
-            <dd id="painel-2" class="transicao"></dd>
-      </from>      
-            
-    </div>
+      <form form action="/dividas/Tech" method="GET">
+        <dt>
+       <li><button class="button_pag" onclick="myFunction('painel-3')">Dividas Tech</button></li>
+        </dt>
+        <dd id="painel-3" class="transicao"> 
+        </dd>
+      </form>
+
+      <form form action="/dividas/user" method="GET">
+        <dt>
+       <li><button class="button_pag" onclick="myFunction('painel-4')">As Minhas Dividas</button></li>
+        </dt>
+        <dd id="painel-4" class="transicao"> 
+        </dd>
+      </form>
+
+      <form form action="/dividas/inativas" method="GET">
+        <dt>
+       <li><button class="button_pag" onclick="myFunction('painel-5')">Histórico</button></li>
+        </dt>
+        <dd id="painel-5" class="transicao"> 
+        </dd>
+      </form>
+
   </ul>
 </div>
 
-<a href="/users/logout">Logout</a>
+
+<a href="users/logout">Logout</a>
 
 
+
+<!-- 
   <script>
         function myFunction(id) {
           var x = document.getElementById(id);
@@ -70,4 +77,4 @@
             x.style.display = "none";
           }
         }a
-    </script>
+    </script> -->

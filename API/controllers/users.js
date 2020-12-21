@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/users')
-const express = require('express');
-const flash = require('connect-flash');
+const localStorage = require('local-storage');
 
 const admin_email = "goncalocorreia@jeknowledge.com" 
 
@@ -51,7 +50,7 @@ exports.signup =  (req,res,next) =>{ // criar um novo user no servidor
         console.log('Password 3'+req.body.password);
     }
 
-    if(errors.length >0){
+    if(errors.length){
         res.render('signup'),{
             errors:errors,
             name:req.body.name,
@@ -66,14 +65,14 @@ exports.signup =  (req,res,next) =>{ // criar um novo user no servidor
         .exec()
         .then( user =>{ // verifica se o email do novo usuario ja existe na base de dados
             if(user.length >0){   
-                errors.push({msg:'Email já existe!'});
-                render(res,errors,req.body.name.req.body.lastname,req.body.email,req.body.password,req.body.password2,req.body.department)
+                errors.push({msg: 'Email already registered'});
+                render(res,errors,user.name,user.lastname,user.email,user.password,user.password2,user.department);
+                
             } else { // se não cria um novo usario
                         bcrypt.hash(req.body.password,10,(err,hash) =>{ // encripta a password
                         if(err){
-                            return res.status(500).json({
-                                error:err
-                            });
+                            errors.push({msg: 'Erro'})
+                            res.redirect('signup');
                         }
                         else{
                             const user = new User({ //cria um usario com email e password (encriptada)
@@ -87,8 +86,8 @@ exports.signup =  (req,res,next) =>{ // criar um novo user no servidor
                             user.save()
                             .then( result =>{
                                 console.log(result);
-                                req.flash('sucess_msg','Já estás Registado!!');
-                                res.redirect('/users/login');
+                                req.flash('success_msg','You have now registered!')
+                                res.redirect('login');
                             })
                             .catch( err =>{
                                 console.log(err);
@@ -100,14 +99,14 @@ exports.signup =  (req,res,next) =>{ // criar um novo user no servidor
                 
                 });
             }
-
         }).catch( err =>{
-                console.log(err);
-                res.status(500).json({error:err});
+                req.flash("errors",err);
+                res.redirect("signup");
         });
     }
-    
 };
+
+
 
 exports.login = (req,res,next)=>{
 
@@ -119,7 +118,7 @@ exports.login = (req,res,next)=>{
     }
 
     if(errors.length >0){
-        res.render('login'),{
+        res.render('/'),{
             errors:errors,
             email:req.body.email,
             password:req.body.password
@@ -129,15 +128,15 @@ exports.login = (req,res,next)=>{
                 .exec()
                 .then( user =>{
                     if(user.length <1){ // user nao existe, email nao encontrado, login falhado
-                        return res.status(401).json({
-                            message: 'Email ou Password Invalidos'
-                        });
+                        errors.push("error", "Email nao existe");
+                        res.render('/',{errors:errors,email:req.body.email,
+                            password:req.body.password});
                     }
                     bcrypt.compare(req.body.password,user.password, (err,result) =>{
                     if(err){
-                        return res.send(401).json({
-                            message: 'Erro!'
-                        });
+                        errors.push({msg: 'email already registered'});
+                        res.render('login',{errors:errors,email:req.body.email,
+                            password:req.body.password});
                     }
                     if(result){
                         
@@ -155,22 +154,22 @@ exports.login = (req,res,next)=>{
                                 {
                                     expiresIn: "1h"
                                 },function(err,token){
+                                    localStorage('Authorization',token);
                                     console.log(user);
                                     console.log("Token:"+token);
                                 }
-
                             );
                         res.redirect('/home');
+                    }
+                    else{
+                        errors.push({msg: 'Password Incorreta'});
+                        res.redirect('/');
                     }  
                     
                     });
-                }).catch(err =>{
-                    console.log(err);
-                    res.status(500).json({
-                        error:err});
-                });
-        }
-    
+                }).catch(err =>{req.flash("error", "Erro")});
+        
+            }
 }; 
 
 exports.signout = (req,res,next) =>{
