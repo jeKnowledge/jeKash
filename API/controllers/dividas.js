@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const localStorage = require('local-storage');
 
 //! CRIAR NA DATABASE UMA CONTA JEK DEFAULT PARA DAR AS DIVIDAS CRIADAS POR UM JEKER
-const idcontaJEK = "5fdb9a550526f0142042c8f3"; //! ID DA CONTA PRINCIPAL DA JEK depois mudar para o defenitivo
+const idcontaJEK = "5fdeac8c53a6f54594acee7b"; //! ID DA CONTA PRINCIPAL DA JEK depois mudar para o defenitivo
 
 
 //controler para criar uma divida de um User daí o nome "criar_divida_jeK"
@@ -29,6 +29,7 @@ exports.criar_divida_jeK = (req,res,next)=>{
   const token = localStorage.get('Authorization'); 
   const decoded = jwt.verify(token,"secret");
   const id = decoded.userId;
+  console.log("a");
 
 
     User.findOne({email:req.body.credor}).exec().then(user_credor => {
@@ -39,12 +40,12 @@ exports.criar_divida_jeK = (req,res,next)=>{
                 _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
 
                 //Estamos no request de um User:
-                credor: idcontaJEK, //todo MUDAR PARA O ID DA CONTA DA JEKNOWLEDGE!
-                devedor: userID, // * ID do devedor acima referido
+                credor: user_credor._id, //todo MUDAR PARA O ID DA CONTA DA JEKNOWLEDGE!
+                devedor: user_devedor._id, // * ID do devedor acima referido
                 quantia: req.body.quantia, //vai buscar a quantia ao body do json
                 descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
                 paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
-                userCriador: userID, // Mudei isto, aqui o user que vai criar a divida vai corresponder ao userID
+                userCriador: id, // Mudei isto, aqui o user que vai criar a divida vai corresponder ao userID
                 date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
                 timesemailsent: 0 //para conseguir ver o limite da divida mandada e quanto ja passou o tempo
               });
@@ -64,11 +65,11 @@ exports.criar_divida_jeK = (req,res,next)=>{
         .catch(err =>{
         console.log(err);
         req.flash('error_msg','Divida Invalida');
-        res.redirect('/create');
+        res.redirect('create');
         });
   }).catch(err =>{
     req.flash('error_msg','Divida Invalida');
-    res.redirect('/create');
+    res.redirect('create');
     console.log(err);
   });
 };
@@ -166,22 +167,27 @@ exports.get_all_dividas = (req, res, next) => {
 
 
 exports.get_all_dividas_user = (req, res, next) => {
- 
+  
   const token = localStorage.get('Authorization'); 
   const decoded = jwt.verify(token,"secret");
-  userId = decoded.userId;
+  const id = decoded.userId;
 
-  Divida.find({$or: [{credor: {$in: userId}},{devedor: {$in: userId}} ]})
+
+  Divida.find({$or: [{credor: {$in: id}},{devedor: {$in: id}} ]})
     .exec()
-    .then(dividas_user => {
-        return res.render('dividasuser',{dividas : dividas_user.map(divida =>{
-          return divida;
-        })});
-      })
+    .then((dividas) => {
+      return res.render('dividasuser',{dividas : dividas.map(divida =>{
+        return divida;
+      })});
+      
+    })
     .catch((err) => {
+
       console.log(err);
     });
+
 };
+
 
 
 
@@ -281,13 +287,11 @@ exports.dividas_departamento = (req, res, next) => {
 exports.altera_divida = (req, res, next) => {
 
   const id_divida = req.params.dividaID // id da divida introduizdo no url
-
+  
   // Isto é feito para se so quisermos mudar campos especificos e não ter de mudar tudo
-  const updateOps = {};
-  for( const ops of req.body){
-      updateOps[ops.propName] = ops.value;
-  }
+  const updateOps = {"paga":true};
 
+  
   /* JSON - tem de ser desta forma para podermos usar o que temos em cima
   [
     { "propName": "paga", "value": true}
@@ -297,16 +301,47 @@ exports.altera_divida = (req, res, next) => {
 // Vamos procurar a divida com o id dado no url, e atualizamos as informações que foram disponibilix«zadas no JSON
   Divida.update({_id: id_divida}, {$set: updateOps}).exec()
   .then(result => {
+    
+
     console.log({id: id_divida})
     req.flash('success_msg','Divida Apagada');
-    res.redirect('home');
+    res.redirect('/home');
   })
   .catch(err => {
       console.log(err);
     });
 };
 
-
+exports.get_all_dividasMail = (req, res, next) => {
+  // find() sem argumentos devolve todos as dívidas
+  Divida.find()
+    .exec()
+    .then((dividas) => {
+      // array dividas com todos os objetos
+      // OUTPUT
+      const response = {
+        count: dividas.length, // Numero total de dividas
+        Dividas: dividas.map((divida) => {
+          // map cria um array com as informações seguintes de cada divida
+          return {
+            // Return da informação das dividas
+            id: divida._id, //adicionei id porque ajuda a testar
+            paga: divida.paga,
+            credor: divida.credor,
+            devedor: divida.devedor,
+            quantia: divida.quantia,
+            descricao: divida.descricao,
+            userCriador: divida.userCriador,
+            date: divida.date,
+            timesemailsent: divida.timesemailsent
+          };
+        }),
+      };
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 
 
