@@ -27,7 +27,7 @@ router.post("/tesoureiro", checkAdmin, DividasController.criar_divida_Tesoureiro
 router.get("/all_dividas_para_o_email",checkServer, DividasController.get_all_dividasMail);
 
 
-router.get("/getall", checkLogin, DividasController.get_all_dividas);
+router.get("/getall", DividasController.get_all_dividas);
 
 // GET DIVIDAS ATIVAS E INATIVAS
 router.get(/^\/(in)?ativas/, checkLogin, DividasController.dividas_ativas_inativas);

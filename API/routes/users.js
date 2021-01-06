@@ -17,9 +17,11 @@ router.get('/signup',(req,res,next)=>{
 
 
 router.get('/logout',(req,res,next)=>{
-    req.logout;
-    res.flash('sucess_msg','Foste desconectado!');
-    res.redirect('login');
+    //const token = localStorage.get('Authorization');
+    //localStorage.removeItem(token);
+    req.session.destroy();
+    res.redirect('/');
+    
 })
 
 //* O server vai precisar desta para conseguir o email de um user!

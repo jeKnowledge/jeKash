@@ -242,7 +242,6 @@ exports.dividas_departamento = (req, res, next) => {
   const dep = req.params.departement;
   // find() devolve todos os users do departamento indicado na route
   User.find({department: dep})
-  .select("_id name department")
   .exec()
   .then((users) => {
     // users - array com todos os users do departamento
@@ -250,21 +249,31 @@ exports.dividas_departamento = (req, res, next) => {
                         {credor: {$in: users}},
                         {devedor: {$in: users}} 
                         ]}) // encontra todas as dividas com credores ou devedores que estão no array users
-      .select("quantia devedor credor descricao userCriador")
       .exec()
       .then((dividas) => {
-            if(dep === "Tech"){
-              return res.render('dividasTech',{dividas : dividas.map(divida =>{
+        var array = new Array();
+
+        for(var i = 0; i<dividas.length; i++){
+            if(!dividas[i].paga){
+              array[i]=dividas[i];
+            }
+        }
+        var array = array.filter(function (el) {
+          return el != null;
+        });
+
+          if(dep === "Tech"){
+              return res.render('dividasTech',{dividas : array.map(divida =>{
               return divida;
             })});
             }
-            if(dep === "Innovation"){
-              return res.render('dividasInnovation',{dividas : dividas.map(divida =>{
+          if(dep === "Innovation"){
+              return res.render('dividasInnovation',{dividas : array.map(divida =>{
             return divida;
           })});
           }
           if(dep === "Intern"){
-            return res.render('dividasIntern',{dividas : dividas.map(divida =>{
+            return res.render('dividasIntern',{dividas : array.map(divida =>{
           return divida;
           })});
           }
