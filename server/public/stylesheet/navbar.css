@@ -1,0 +1,65 @@
+body{
+    width: 100%;
+    height: 100%;
+    font-family: 'Courier New', Courier, monospace;
+    padding:0;
+    border:0;
+    margin:0;
+}
+
+.barra-logo{
+    width:100%;    
+    background-color: white;
+    height: 5vh;
+
+}
+
+.nav_button{
+    margin-top:0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.logo{
+    padding-right: 27vh;
+    text-align: center;
+    position: relative;
+}
+
+
+
+.navbar ul li {
+    display: inline-block;
+    color:#8b8b8b;
+    margin-left: 4vh;
+    height: 30px;
+    padding-top: 5vh;
+}
+
+.navbar ul{
+    padding:0;
+}
+
+.navbar ul li :hover{
+    border-bottom: 2px solid rgb(40, 105, 131);
+    color:rgb(40, 105, 131);
+    padding-bottom: 18px;
+    cursor: pointer;
+}
+
+
+.navbar ul li a{
+    color: black;
+    font-size: 17px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+.nav_button2{
+    margin-right: 6vh;
+}
