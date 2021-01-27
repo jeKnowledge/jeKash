@@ -4,7 +4,10 @@ const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const Divida = require("../models/divida");
 //? Se quiserem mudar para testar e recomendado mudar esta variavel
 const timer = 3000; //! MAS No final mudar para ser algo diario const timer = 86400;
+<<<<<<< Updated upstream:API/timer/SendingEmails.js
 
+=======
+>>>>>>> Stashed changes:server/API/timer/SendingEmails.js
 
 
 //*url para fazer o request de todas as dividas.

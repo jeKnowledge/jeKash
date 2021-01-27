@@ -7,11 +7,14 @@ const expressEjsLayout = require("express-ejs-layouts");
 const connectFlash = require('connect-flash');
 const session = require('express-session');
 const path = require('path');
+<<<<<<< Updated upstream:app.js
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
+=======
+>>>>>>> Stashed changes:server/app.js
 
-const emails = require("./API/timer/SendingEmails")
+const emails = require("./API/timer/SendingEmails"); //! apesar de não estar a ser usado, afirmar aqui para correr
 const dividasRoutes = require("./API/routes/dividas");
 const usersRoutes = require("./API/routes/users");
 const indexRoutes = require("./API/routes/index");
@@ -68,9 +71,12 @@ app.use(session({
 app.use("/", indexRoutes);
 app.use("/users", usersRoutes);
 app.use("/dividas", dividasRoutes);
+<<<<<<< Updated upstream:app.js
 
 
 
+=======
+>>>>>>> Stashed changes:server/app.js
 
 
 // ERROS

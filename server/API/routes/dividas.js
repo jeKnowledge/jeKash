@@ -6,8 +6,11 @@ const checkLogin = require("../middleware/check-login");
 const checkServer= require("../middleware/check-server")
 const checkUser = require("../middleware/check-user");
 const checkAdmin = require("../middleware/check-admin");
+<<<<<<< Updated upstream:API/routes/dividas.js
 
 const DividasController = require("../controllers/Dividas");
+=======
+>>>>>>> Stashed changes:server/API/routes/dividas.js
 
 //controller das dividas
 //const checkAuth = require("../middleware/check-auth")//a checkAuth é a middleware do log-in
