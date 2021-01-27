@@ -1,0 +1,152 @@
+.loginpage{
+    width: 100%;
+    height: 100%;
+}
+
+
+.titlesg,.titlesg2{
+    font-family: "Suisse Int'l Condensed";
+    text-align: center;
+  }
+
+  
+
+.titlesg{
+    width: 375 vh;
+    margin-top:7vh;
+    margin-bottom: 1vh;
+    letter-spacing: 0.01em;
+
+    color: #F08A6E;
+
+    /* sombra suave */
+
+    text-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.titlesg2{
+    width: 375 vh;
+    margin-bottom: 2vh;
+    letter-spacing: 0.01em;
+    margin-top: 0vh;
+    color: #3E3C39;
+
+    /* sombra base */
+
+    text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+}
+
+.name-lastname{
+    font-family: "Suisse Int'l Condensed Min";
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 4vh;
+}
+
+.input-name,.input-lastname{
+    width: 13vh;
+    height:  4vh;
+    padding-left: 1.4vh;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    left: calc(50% - 135px/2 - 77px);
+    top: 202px;
+    
+    
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
+    border: #ffffff;
+    
+    color: #AEADAA;
+}
+
+.input-name{
+    margin-left: 6vh;
+}
+
+.input-lastname{
+    margin-right: 4vh;
+}
+
+.labelname{
+    margin-left: 7.5vh;
+    letter-spacing: 0.01em;
+
+color: #3E3C39;
+
+/* sombra base */
+
+text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+}
+
+.labellastname{
+    margin-left: 1.5vh;
+    letter-spacing: 0.01em;
+
+color: #3E3C39;
+
+/* sombra base */
+
+text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1); 
+}
+
+.input-password{
+    position: absolute;
+    width: 30vh;
+    height: 4vh;
+    margin-left: 7vh;
+    padding-left: 1.4vh;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01em;
+    background: #FFFFFF;
+/* sombra suave */
+
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
+    border: #ffffff;
+    
+    color: #AEADAA;
+}
+
+.inputs1{
+    height: 68vh;
+}
+
+.password1{
+    margin-bottom: 8vh;
+}
+
+.password2{
+    margin-bottom: 8vh;
+}
+
+.input-department{
+    position: absolute;
+    width: 30vh;
+    height: 4vh;
+    margin-left: 7vh;
+    padding-left: 1.4vh;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01em;
+    background: #FFFFFF;
+/* sombra suave */
+
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
+    border: #ffffff;
+    
+    color: #AEADAA;
+}
+

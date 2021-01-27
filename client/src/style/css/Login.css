@@ -1,0 +1,148 @@
+.loginpage{
+    width: 100%;
+    height: 100%;
+}
+
+.title1,.title2{
+    font-family: "Suisse Int'l Condensed";
+    text-align: center;
+  }
+
+ @font-face { 
+    font-family: "Suisse Int'l Condensed";
+    src: url('./Font/SuisseIntlCond-Regular-WebS.ttf');
+ }
+ 
+ @font-face { 
+    font-family: "Suisse Int'l Condensed L";
+    src: url('./Font/SuisseIntlCond-Semibold-WebS.ttf');
+ }
+ 
+
+
+.title1{
+    width: 375 vh;
+    margin-top: 20vh;
+    margin-bottom: 0vh;
+    letter-spacing: 0.01em;
+
+    color: #F08A6E;
+
+    /* sombra suave */
+
+    text-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.title2{
+    width: 375 vh;
+    margin-top: 0vh;
+    margin-bottom: 10vh;
+    letter-spacing: 0.01em;
+
+    color: #3E3C39;
+
+    /* sombra base */
+
+    text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+}
+
+.inputs{
+    height: 25vh;
+    margin-bottom: 6vh;
+}
+.email{
+    margin-bottom: 8vh;
+}
+
+.label{
+    margin: .5vh;
+    padding-left: 8vh;
+    letter-spacing: 0.01em;
+
+color: #3E3C39;
+
+/* sombra base */
+
+text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+}
+
+
+.input-email,.input-password{
+
+    position: absolute;
+    width: 30vh;
+    height: 4vh;
+    margin-left: 7vh;
+    padding-left: 1.4vh;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01em;
+    background: #FFFFFF;
+/* sombra suave */
+
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
+    border: #ffffff;
+    
+    color: #AEADAA;
+}
+
+
+
+.button-login{
+    align-items: center;
+    text-align: center;
+    margin-left: 14vh;
+    width: 14vh;
+    height: 4.6vh;
+    background: #F08A6E;
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.18);
+    border-radius: 30px;
+}
+
+.button{
+    text-align: center;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.01em;
+    padding-top: 1vh;
+
+color: #FFFFFF;
+}
+
+.link2signup{
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.01em;
+
+    color: #3E3C39;
+
+    /* sombra base */
+
+    text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+}
+
+.link{
+    text-decoration: none;
+    color: #F08A6E;
+}
+
+p{
+    font-family: "Suisse Int'l Condensed";
+    height: 2vh;
+}
+
+.label{
+    font-family: "Suisse Int'l Condensed L";
+    line-height: 18,16;
+}
