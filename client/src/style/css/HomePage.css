@@ -1,0 +1,119 @@
+.App {
+  text-align: center;
+}
+
+@font-face {
+  font-family: "Suisse_Int_l";
+  src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
+}
+
+/* -------------- Front Page -------------------*/
+#Background {
+  /* background */
+
+  position: absolute;
+  width: 375px;
+  height: 812px;
+  left: 0px;
+  top: 0px;
+
+  background: radial-gradient(179.64% 179.64% at 50% 50%, #FCC582 0%, #F08A6E 100%);
+}
+
+.App-logo {
+  /* logo*/
+  position: relative;
+  width: 85%;
+  height: auto;
+  left: 43%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  top: 303px;
+  display: block;
+  margin: auto;
+  /* sombra base */
+
+  filter: drop-shadow(4px 4px 25px rgba(0, 0, 0, 0.1));
+}
+
+#Butoes {
+  position: absolute;
+  width: 223.31px;
+  height: 36px;
+  left: 76px;
+  top: 691px;
+}
+
+#logIn {
+  outline: none;
+  border: none;
+  position: absolute;
+  width: 102.31px;
+  height: 36px;
+  left: calc(50% - 102px/2 - 60.35px);
+  border-top: 691px;
+
+  background: #FFFFFF;
+  /* sombra base */
+
+  box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+}
+
+
+#Registar {
+  outline: none;
+  border: none;
+  position: absolute;
+  width: 102.31px;
+  height: 36px;
+  left: calc(50% - 102.31px/2 + 60.65px);
+  border-top: 691px;
+
+  background: #F08A6E;
+  box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  
+}
+
+#RegistarStr {
+  /* Registar */
+
+  opacity: 1;
+  position: absolute;
+  width: 102px;
+  height: 36px;
+  left: calc(50% - 102px/2);
+  top: 10px;
+
+  font-family: Suisse_Int_l;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 550;
+  line-height: 16px;
+  letter-spacing: 0.03em;
+  text-align: center;
+
+
+  color: #FFFFFF;
+}
+
+#LogInStr {
+  position: absolute;
+  width: 102px;
+  height: 36px;
+  left: calc(50% - 102.31px/2);
+  top: 10px;
+
+
+  font-family: Suisse_Int_l;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 550;
+  line-height: 16px;
+  letter-spacing: 0.03em;
+  text-align: center;
+
+  color: #F08A6E;
+}
