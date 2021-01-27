@@ -10,12 +10,12 @@
 
  @font-face { 
     font-family: "Suisse Int'l Condensed";
-    src: url('../font/SuisseIntlCond-Regular-WebS.ttf');
+    src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
  }
  
  @font-face { 
     font-family: "Suisse Int'l Condensed L";
-    src: url('../font/SuisseIntlCond-Semibold-WebS.ttf');
+    src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
  }
  
 

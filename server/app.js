@@ -8,6 +8,8 @@ const connectFlash = require('connect-flash');
 const session = require('express-session');
 const path = require('path');
 
+
+
 const emails = require("./API/timer/SendingEmails"); //! apesar de não estar a ser usado, afirmar aqui para correr
 const dividasRoutes = require("./API/routes/dividas");
 const usersRoutes = require("./API/routes/users");
@@ -30,8 +32,6 @@ mongoose.Promise = global.Promise;
 app.set("view engine", "ejs");
 app.set("views", "./views")
 
-app.use(cors());
-app.use(cookieParser('secret'));
 
 app.use(expressEjsLayout);
 app.use(morgan("dev"));
@@ -77,6 +77,31 @@ app.use((req, res, next) => {
 app.use("/", indexRoutes);
 app.use("/users", usersRoutes);
 app.use("/dividas", dividasRoutes);
+
+// ERROS
+//req = o que recebemos, res = resposta que damos
+app.use((req, res, next) => {
+  const err = new Error("Not found.");
+  err.status = 404;
+  next(err);
+});
+
+app.use((err, req, res, next) => {
+  const status = err.status || 500; //se nao existir o status do erro, envia 500
+
+  //se exitir erro (por exemplo 404 se nao exitir) envia isto:
+  res.status(status).json({
+    message: 'Error not found! Status: ' + status
+  });
+});
+
+module.exports = app;
+
+
+app.use("/", indexRoutes);
+app.use("/users", usersRoutes);
+app.use("/dividas", dividasRoutes);
+
 
 // ERROS
 //req = o que recebemos, res = resposta que damos
