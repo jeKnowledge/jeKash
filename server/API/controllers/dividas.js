@@ -29,7 +29,6 @@ exports.criar_divida_jeK = (req, res, next) => {
   const token = localStorage.get('Authorization');
   const decoded = jwt.verify(token, "secret");
   const id = decoded.userId;
-  console.log("a");
 
 
   User.findOne({
@@ -63,7 +62,6 @@ exports.criar_divida_jeK = (req, res, next) => {
           .then((result) => {
             console.log(result);
             //req.flash('success_msg','Divida Criada');
-            res.redirect('/home');
           })
           .catch((err) => {
             console.log(err);
@@ -72,11 +70,9 @@ exports.criar_divida_jeK = (req, res, next) => {
       .catch(err => {
         console.log(err);
         req.flash('error_msg', 'Divida Invalida');
-        res.redirect('create');
       });
   }).catch(err => {
     req.flash('error_msg', 'Divida Invalida');
-    res.redirect('create');
     console.log(err);
   });
 };
@@ -366,7 +362,6 @@ exports.altera_divida = (req, res, next) => {
         id: id_divida
       })
       req.flash('success_msg', 'Divida Apagada');
-      res.redirect('/home');
     })
     .catch(err => {
       console.log(err);

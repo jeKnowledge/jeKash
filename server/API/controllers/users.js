@@ -71,7 +71,6 @@ exports.signup = (req, res, next) => { // criar um novo user no servidor
         })
         .exec()
         .then(user => { // verifica se o email do novo usuario ja existe na base de dados
-            console.log("a");
             if (user.length > 0) {
                 errors.push({
                     msg: 'Email already registered'
@@ -84,7 +83,6 @@ exports.signup = (req, res, next) => { // criar um novo user no servidor
                         errors.push({
                             msg: 'Erro'
                         })
-                        res.redirect('signup');
                     } else {
                         const user = new User({ //cria um usario com email e password (encriptada)
                             _id: new mongoose.Types.ObjectId(),
@@ -98,7 +96,6 @@ exports.signup = (req, res, next) => { // criar um novo user no servidor
                             .then(result => {
                                 console.log(result);
                                 req.flash('success_msg', 'You have now registered!')
-                                res.redirect('login');
                             })
                             .catch(err => {
                                 console.log(err);
@@ -112,7 +109,6 @@ exports.signup = (req, res, next) => { // criar um novo user no servidor
             }
         }).catch(err => {
             req.flash("errors", err);
-            res.redirect("signup");
         });
 
 };
@@ -182,12 +178,11 @@ exports.login = (req, res, next) => {
                             console.log("Token:" + token);
                         }
                     );
-                    res.redirect('/home');
                 } else {
                     errors.push({
                         msg: 'Password Incorreta'
                     });
-                    res.redirect('/');
+            
                 }
 
             });

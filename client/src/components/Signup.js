@@ -78,7 +78,7 @@ const Signup = () => {
             </div>
             <div className="password2">
             <label className="label">Confirma a Password</label><br/><br/>
-            <input className="input-password" name="password2" type="passoword" placeholder="Password" onChange={handleInputChange} value={user.password2}></input>
+            <input className="input-password" name="password2" type="password" placeholder="Password" onChange={handleInputChange} value={user.password2}></input>
             </div>
             <div className="department">
             <label className="label">Departamento</label><br/><br/>
