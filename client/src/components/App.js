@@ -2,6 +2,7 @@ import { BrowserRouter as Router,Route,Switch} from 'react-router-dom';
 import HomePage from './HomePage';
 import Login from './Login';
 import Signup from './Signup';
+import CriarDivida from './CriarDivida'
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
             </Route>
             <Route exact path="/users/signup">
               <Signup />
+            </Route>
+            <Route exact path="/dividas/criar">
+              <CriarDivida />
             </Route>
       </Switch>
     </div>

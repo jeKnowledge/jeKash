@@ -1,0 +1,159 @@
+@font-face {
+    font-family: fonteTitulo;
+    src: url(../font/SuisseIntlCond-Medium-WebS.woff);
+  }
+
+@font-face {
+    font-family: fonteLabel;
+    src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
+}
+
+  /* estilos */
+
+.criar-divida-titulo {
+    position: absolute;
+    width: 300px;
+    height: 46px;
+    left: 49px;
+    top: 52px;
+    font-family: fonteTitulo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 42px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #3E3C39;
+    text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+
+}
+
+.criar-divida label{
+    font-family: fonteLabel;
+    font-style: normal;
+    font-weight: 550;
+    font-size: 16px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01em;
+    color: #3E3C39;
+    text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+
+    left: 60px;
+    height: 36px;
+    width: 60px;
+    position: absolute;
+}
+
+
+.input-credor, .input-devedor, .input-quantia{
+    position: absolute;
+    width: 30vh;
+    height: 4vh;
+    margin-left: 5vh;
+    padding-left: 2.5vh;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01em;
+    background: #FFFFFF;
+/* sombra suave */
+
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
+    border: #ffffff;
+    
+    color: #AEADAA;
+}
+
+.input-descricao {
+    position: absolute;
+    width: 30vh;
+    height: 25vh;
+    margin-left: 5vh;
+    padding-left: 2.5vh;
+    padding-top: 2vh;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01em;
+    resize: none;
+    background: #FFFFFF;
+    white-space: pre-wrap;
+
+
+/* sombra suave */
+
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
+    border: #ffffff;
+    
+    color: #AEADAA;
+}
+
+
+.button-criar-divida{
+    position: absolute;
+    width:135px;
+    height: 36px;
+    left: calc(50% - 135px/2);
+    top: 732px;
+
+    font-family: fonteLabel;
+    font-size: 14px;
+    line-height: 18px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.01em;
+
+    background: #F08A6E;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    color: #FFFFFF;
+
+}
+
+/* posições */
+.credor-css {
+    top: 140px;
+}
+
+.input-credor{
+    margin-top: 20.5vh;
+}
+
+.devedor-css {
+    top: 235px;
+}
+
+.input-devedor {
+    margin-top: 33vh;
+}
+
+.quantia-css {
+    margin-top: 330px;
+}
+
+.input-quantia {
+    margin-top: 45.5vh;
+}
+
+.descricao-css {
+    margin-top: 425px;
+}
+
+.input-descricao {
+    margin-top: 58vh;
+}
+
