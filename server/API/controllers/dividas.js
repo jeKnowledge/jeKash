@@ -38,8 +38,6 @@ exports.criar_divida_jeK = (req, res, next) => {
         email: req.body.divida.devedor
       }).select().exec().then(user_devedor => {
 
-        console.log(user_credor);
-
         let divida = new Divida({
           _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
 
