@@ -16,6 +16,7 @@ const DividasController = require("../controllers/Dividas");
 
 //post de uma divida da JEK e do Tesoureiro
 router.post("/", checkLogin, DividasController.criar_divida_jeK);
+//router.post("/", DividasController.criar_divida_jeK);
 router.post("/tesoureiro", checkAdmin, DividasController.criar_divida_Tesoureiro);
 
 //* Get Dividas somente para o server Se quiserem fazer um request desta route por favor adicionar ao Postman um header com a chave do server para "simular ser o server"

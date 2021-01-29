@@ -30,15 +30,15 @@ exports.criar_divida_jeK = (req, res, next) => {
   const decoded = jwt.verify(token, "secret");
   const id = decoded.userId;
 
-
   User.findOne({
-    email: req.body.credor
+    email: req.body.divida.credor
   }).exec().then(user_credor => {
 
     User.findOne({
-        email: req.body.devedor
+        email: req.body.divida.devedor
       }).select().exec().then(user_devedor => {
 
+        console.log(user_credor);
 
         let divida = new Divida({
           _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
@@ -48,8 +48,8 @@ exports.criar_divida_jeK = (req, res, next) => {
           devedor: user_devedor._id, // * ID do devedor acima referido
           credorS: user_credor.name.concat(user_credor.lastname),
           devedorS: user_devedor.name.concat(user_devedor.lastname),
-          quantia: req.body.quantia, //vai buscar a quantia ao body do json
-          descricao: req.body.descricao, //se existir a descrição vou buscar tambem.
+          quantia: req.body.divida.quantia, //vai buscar a quantia ao body do json
+          descricao: req.body.divida.descricao, //se existir a descrição vou buscar tambem.
           paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
           userCriador: id, // Mudei isto, aqui o user que vai criar a divida vai corresponder ao userID
           date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
