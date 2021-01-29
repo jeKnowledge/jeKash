@@ -8,10 +8,6 @@ const initialState = {
     devedor: "",
     quantia: "",
     descricao: "",
-    paga: false,
-    userCriador: "",
-    date: "",
-    timesemailsent: 0
 };
 
 
@@ -20,7 +16,6 @@ const dividaReducer = (divida, action) => {
         case "CHANGE":
             const {name,value} = action;
             return {...divida, [name]:value};
-
         default:
             return divida;
     }
@@ -38,6 +33,7 @@ const CriarDivida = () => {
     const handleSubmit = (e) => {
         // impede que a pagina seja reloadada apos o clique no botao
         e.preventDefault();
+        divida.quantia = parseFloat(divida.quantia)
         console.log(divida);
 
         axios.post("http://localhost:8000/dividas/", { divida })
@@ -45,7 +41,18 @@ const CriarDivida = () => {
           .catch(err => {
             console.error(err);
           });
-
+        
+        /*axios("http://localhost:8000/dividas/", {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json',
+            },
+            data: divida
+        })
+            .then(() => console.log('Divida Criada'))
+            .catch(err => {
+                console.error(err);
+        });*/
     }
 
     return ( 
@@ -78,7 +85,7 @@ const CriarDivida = () => {
                     <input
                         className="input-quantia"
                         name="quantia"
-                        type = "text"
+                        type = "number"
                         required
                         placeholder = "Quantia da dívida"
                         onChange = {handleInputChange}

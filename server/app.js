@@ -36,8 +36,8 @@ app.use(cookieParser('secret'));
 
 app.use(expressEjsLayout);
 app.use(morgan("dev"));
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 
 
