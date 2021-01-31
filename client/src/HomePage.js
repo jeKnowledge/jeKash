@@ -3,14 +3,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 //* styling the page
-import logo from './style/logo/logo.svg';
+import logo from './style/logo/logoJek.svg';
 import './style/css/HomePage.css';
 
 const HomePage = () => {
   return (
     <div className="App">
         <div id="Background">  
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo} className="App-logo-mainmenu" alt="logo" />
           <div id = "Butoes">
               <Link to="users/login">
                 <button id = "logIn" >

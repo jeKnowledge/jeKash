@@ -67,7 +67,9 @@ const handleSubmit = e => {
       </div>
 
       <div className="button-login">
-        <button className="button" type="submit">Login</button>
+        <Link to="/home"> {/* Não tenho a certeza se devemos fazer isto mas fica para teste de modo a verem a homepage*/}
+          <button className="button" type="submit">Login</button>
+        </Link>
       </div>
 
       <div className="link2signup">
