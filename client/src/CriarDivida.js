@@ -1,8 +1,8 @@
 import { useReducer } from "react";
 //import { DividaContext } from "../contexts/DividaContext";
 import axios from 'axios';
-import '../style/css/CriarDivida.css';
-import LabelsInputs from "./LabelsInputs";
+import './style/css/CriarDivida.css';
+import LabelsInputs from "./components/LabelsInputs";
 
 const initialState = {
     credor: "",
@@ -46,7 +46,7 @@ const CriarDivida = () => {
     }
 
     return ( 
-        <div className="criar-divida" onSubmit={handleSubmit}>
+        <form className="criar-divida" onSubmit={handleSubmit}>
             <div className="criar-divida-titulo">
                 <h1>Cria uma nova dívida</h1>
             </div>
@@ -92,7 +92,7 @@ const CriarDivida = () => {
                     ></textarea>
                 <button className="button-criar-divida" type="submit">Criar dívida</button>
             </div>
-        </div>
+        </form>
      );
 }
  

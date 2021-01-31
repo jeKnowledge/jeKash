@@ -1,6 +1,6 @@
-import React, { Component, useReducer, useState } from 'react';
+import React, { useReducer } from 'react';
 import { Link } from 'react-router-dom';
-import '../style/css/Signup.css'
+import './style/css/Signup.css'
 import axios from 'axios';
 
  const initialState = {

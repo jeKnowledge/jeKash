@@ -3,8 +3,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 //* styling the page
-import logo from '../style/logo/logo.svg';
-import '../style/css/HomePage.css';
+import logo from './style/logo/logo.svg';
+import './style/css/HomePage.css';
 
 const HomePage = () => {
   return (
