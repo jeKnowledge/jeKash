@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 //* styling the page
 import logo from './style/logo/logo.svg';
 import './style/css/HomePage.css';
+import Buttons from './components/Buttons'
 
 const HomePage = () => {
   return (
@@ -13,15 +14,17 @@ const HomePage = () => {
           <img src={logo} className="App-logo" alt="logo" />
           <div id = "Butoes">
               <Link to="users/login">
-                <button id = "logIn" >
-                  <span id="LogInStr">Log in</span>
-                </button>
+                <Buttons 
+                  name="Log in"
+                  title="LoginStr"
+                />
               </Link>
               
               <Link to="users/signup">
-                <button id= "Registar">
-                  <span id="RegistarStr">Registar</span>
-                </button>
+              <Buttons 
+                  name="Registar"
+                  title="RegistarStr"
+                />
               </Link>
           </div>
         </div>

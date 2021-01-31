@@ -2,6 +2,8 @@ import React, { useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import './style/css/Login.css';
 import axios from 'axios';
+import LabelsInputs from "./components/LabelsInputs";
+import Buttons from "./components/Buttons";
 
 
 const initialState = {
@@ -57,17 +59,36 @@ const handleSubmit = e => {
       <h1 className="title2">Efetua o teu Login</h1>
       <div className="inputs">
         <div className="email">
-          <label className="label">Email</label><br/><br/>
-        <input className="input-email" name="email" placeholder="exemplo@jeknowledge.pt" onChange={handleInputChange} value={user.email} required></input>
+          {/* <label className="label">Email</label><br/><br/>
+        <input className="input-email" name="email" placeholder="exemplo@jeknowledge.pt" onChange={handleInputChange} value={user.email} required></input> */}
+          <LabelsInputs
+            title="Email" 
+            name="email"
+            type = "text" 
+            placeholder="exemplo@jeknowledge.pt" 
+            onChange={handleInputChange} 
+            value={user.email}
+          />
         </div>
         <div className="password">
-        <label className="label">Password</label><br/><br/>
-        <input className="input-password" name="password" type="password" placeholder="Password" onChange={handleInputChange} value={user.password} required></input>
+          <LabelsInputs
+            title="Password" 
+            name="password"
+            type="password"
+            placeholder="Password" 
+            onChange={handleInputChange} 
+            value={user.password}
+          />
+
         </div>
       </div>
 
       <div className="button-login">
-        <button className="button" type="submit">Login</button>
+        <Buttons 
+            name="Log in"
+            type="submit"
+            title="button"
+        />
       </div>
 
       <div className="link2signup">
