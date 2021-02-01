@@ -43,28 +43,28 @@ export const SideBAR = (props) => {
                     <Link to="dividas/criar">
                         <div id = "criardivida">
                             <img src={logomais} className="App-logo-plus" alt="logoplus"/>
-                        <span id= "criardividaSTR">Criar dívida</span>
+                        <span id= "primbotSTR">Criar dívida</span>
                         </div>
                     </Link>
             
             <div id = "mydividasdiv">
                 <div id="mydividas" onClick={toggleNav}>
                     <img src={logopessoa} className="App-logo-pessoa" alt="logopess" />
-                    <span id ="mydividasSTR">Minhas dívidas</span>
+                    <span id ="primbotSTR">Minhas dívidas</span>
 
                     <img src={logoarrowUP} className="App-logo-UP" id="logoUP1" style={{transform: "rotate(180deg)"}}/>
                 </div>
 
                 <div id= "transdivsMINHASDIVIDAS" style={{top: "-200%"}}>
                     <Link to="dividas/minhasdividas">
-                        <div id ="oqdevo" >
-                            <span id ="oqdevoSTR">O que devo</span>  
+                        <div id ="primbot" >
+                            <span id ="subbotSTR">O que devo</span>  
                         </div>
                     </Link>
 
                     <Link to="dividas/adever">
-                        <div id = "oqdevem">
-                            <span id = "oqdevemSTR">O que me devem</span>
+                        <div id = "primbot">
+                            <span id = "subbotSTR">O que me devem</span>
                         </div>
                     </Link>
                 </div>
@@ -73,27 +73,27 @@ export const SideBAR = (props) => {
             <div id="dividastotaisdiv" style={{top: "8%"}}>
                 <div id= "dividastotais" onClick={toggleNavTOT}>
                     <img src={logoMoney} className="App-logo-Money" alt="logomoney"/>
-                    <span id ="dividastotaisSTR">Dívidas Totais</span>
+                    <span id ="primbotSTR">Dívidas Totais</span>
 
                     <img src={logoarrowUP} className="App-logo-UP" id="logoUP" style={{transform: "rotate(180deg)"}}/>
                 </div>
 
                <div id="menu" className="menu-hidden" style={{top: "-200%"}}>
                     <Link to="dividas/Interno">
-                        <div id = "Interno"> 
-                            <span id ="InternoSTR">Interno</span>
+                        <div id = "botao"> 
+                            <span id ="subbotSTR">Interno</span>
                         </div>
                     </Link>
                     
                     <Link to="dividas/Inovacao">
-                        <div id = "Inovacao">
-                            <span id = "InovacaoSTR">Inovação</span>
+                        <div id = "botao">
+                            <span id = "subbotSTR">Inovação</span>
                         </div>
                     </Link>
 
                     <Link to="dividas/Tech">
-                        <div id = "Tech">
-                            <span id = "TechSTR">Tech</span>
+                        <div id = "botao">
+                            <span id = "subbotSTR">Tech</span>
                         </div>
                     </Link>
                 </div>
