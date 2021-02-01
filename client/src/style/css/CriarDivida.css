@@ -11,45 +11,44 @@
 .criar-divida{
     width: 100%;
     height: 100%;
+    overflow: hidden;
 }
 
   /* estilos */
 
 .criar-divida-titulo {
-    position: absolute;
-    width: 300px;
-    height: 46px;
-    left: 49px;
-    top: 52px;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 4vh;
     font-family: fonteTitulo;
     font-style: normal;
     font-weight: bold;
     font-size: 16px;
     line-height: 42px;
-    display: flex;
-    align-items: center;
     text-align: center;
     letter-spacing: 0.01em;
     color: #3E3C39;
-    text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
 }
 
 
 .descricao-label{
+    position: relative;
     font-family: fonteLabel;
     font-weight: 550;
     font-size: 16px;
     display: flex;
     color: #3E3C39;
 
-    margin-left: 7vh;
+    left: 16%;
     height: 3.5vh;
 }
 
 .input-descricao {
-    width: 30vh;
+    position: relative;
+    width: 67%;
     height: 25vh;
-    margin-left: 12.5%;
+    left: 12.5%;
     padding-left: 2.5vh;
     padding-top: 2vh;
     font-size: 12px;
@@ -58,6 +57,7 @@
     resize: none;
     background: #FFFFFF;
     white-space: pre-wrap;
+    outline: none;
 
     box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
     border-radius: 30px;
@@ -68,10 +68,11 @@
 
 
 .button-criar-divida{
-    width: 135px;
-    height: 36px;
-    margin-left: 30%;
-    margin-top: 7vh;
+    position: relative;
+    width: 35%;
+    height: 5vh;
+    left: 32.5%;
+    margin-top: 5vh;
 
     font-family: fonteLabel;
     font-size: 14px;
@@ -98,7 +99,7 @@ input[type="number"] {
 
 /* posições */
 .credor-css {
-    margin-top: 17.5vh;
+    margin-top: 15%;
     height: 11.5vh;
 }
 
@@ -110,7 +111,4 @@ input[type="number"] {
     height: 11.5vh;
 }
 
-.descricao-css {
-    height: 11.5vh;
-}
 
