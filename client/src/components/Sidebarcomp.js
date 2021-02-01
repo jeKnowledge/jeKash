@@ -78,7 +78,7 @@ export const SideBAR = (props) => {
                     <img src={logoarrowUP} className="App-logo-UP" id="logoUP" style={{transform: "rotate(180deg)"}}/>
                 </div>
 
-               <div id="menu" class="menu-hidden" style={{top: "-200%"}}>
+               <div id="menu" className="menu-hidden" style={{top: "-200%"}}>
                     <Link to="dividas/Interno">
                         <div id = "Interno"> 
                             <span id ="InternoSTR">Interno</span>
