@@ -7,7 +7,7 @@
     position: relative;
     font-family: fonteLabel;
     font-weight: 550;
-    font-size: 16px;
+    font-size: 4.5vw;
     display: flex;
     outline: none;
     color: #3E3C39;
@@ -23,7 +23,7 @@
     height: 4vh;
     left: 12.5%;
     padding-left: 2.5vh;
-    font-size: 12px;
+    font-size: 3.5vw;
     letter-spacing: 0.01em;
     background: #FFFFFF;
     outline: none;

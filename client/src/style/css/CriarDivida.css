@@ -24,8 +24,7 @@
     font-family: fonteTitulo;
     font-style: normal;
     font-weight: bold;
-    font-size: 16px;
-    line-height: 42px;
+    font-size: 4vw;
     text-align: center;
     letter-spacing: 0.01em;
     color: #3E3C39;
@@ -36,7 +35,7 @@
     position: relative;
     font-family: fonteLabel;
     font-weight: 550;
-    font-size: 16px;
+    font-size: 4.5vw;
     display: flex;
     color: #3E3C39;
 
@@ -51,7 +50,7 @@
     left: 12.5%;
     padding-left: 2.5vh;
     padding-top: 2vh;
-    font-size: 12px;
+    font-size: 3.5vw;
     display: flex;
     letter-spacing: 0.01em;
     resize: none;
