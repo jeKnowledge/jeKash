@@ -3,8 +3,7 @@
     src: url(../font/SuisseIntlCond-Semibold-WebS.ttf);
 }
 
-.labelInput label{
-
+.labelInput label {
     position: relative;
     font-family: fonteLabel;
     font-weight: 550;
@@ -12,31 +11,28 @@
     display: flex;
     outline: none;
     color: #3E3C39;
+
     left: 16%;
     height: 3.5vh;
-    
+    width: 70%;
+
 }
 
-
-
-.labelInput input{
+.labelInput input {
     position: relative;
     width: 67%;
     height: 4vh;
     left: 12.5%;
     padding-left: 2.5vh;
-    font-size: 12px;
-    display: flex;
-    justify-content: space-around;
+    font-size: 3.5vw;
     letter-spacing: 0.01em;
     background: #FFFFFF;
+    outline: none;
 
     box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
     border-radius: 30px;
-    border: #ffffff;
-    
+    border: #FFFFFF;
     color: #AEADAA;
-
 }
 
 .labelInput .nameinput{

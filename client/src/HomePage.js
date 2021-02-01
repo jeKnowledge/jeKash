@@ -12,19 +12,18 @@ const HomePage = () => {
     <div className="App">
         <div id="Background">  
           <img src={logo} className="App-logo-mainmenu" alt="logo" />
-          <div id = "Butoes">
+          <div id="btns">
               <Link to="users/login">
                 <Buttons 
                   name="Log in"
-                  title="LoginStr"
+                  title="LoginStr button"
                 />
               </Link>
-              
               <Link to="users/signup">
-              <Buttons 
-                  name="Registar"
-                  title="RegistarStr"
-                />
+                <Buttons 
+                    name="Registar"
+                    title="RegistarStr button"
+                  />
               </Link>
           </div>
         </div>

@@ -182,7 +182,7 @@ exports.login = (req, res, next) => {
                     errors.push({
                         msg: 'Password Incorreta'
                     });
-            
+
                 }
 
             });

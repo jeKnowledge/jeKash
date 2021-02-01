@@ -36,9 +36,17 @@
 
   filter: drop-shadow(4px 4px 25px rgba(0, 0, 0, 0.1));
 }
-
-#Butoes {
-  position: absolute; 
-  margin-top: 70vh;
+.buttons {
+  margin: 0;
+}
+#btns {
+  position: relative;
+  top: 65vh;
   display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+#btns a {
+  width: 100%;
+  /*importante*/
 }

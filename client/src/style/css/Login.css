@@ -1,5 +1,5 @@
 .loginpage{
-    width: 100%;
+    width: 10%;
     height: 100%;
 }
 
@@ -21,7 +21,7 @@
 
 
 .title1{
-    width: 375 vh;
+    width: 375;
     margin-top: 20vh;
     margin-bottom: 0vh;
     letter-spacing: 0.01em;
