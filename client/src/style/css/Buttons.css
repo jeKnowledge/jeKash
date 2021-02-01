@@ -1,0 +1,63 @@
+
+ @font-face { 
+    font-family: "Suisse Int'l Condensed";
+    src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
+ }
+
+
+
+.button{
+    position: relative;
+    width: 14vh;
+    height: 4.6vh;
+    font-family: "Suisse Int'l Condensed";
+    text-align: center;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.01em;
+    padding-top: .2vh;
+    margin-left: 14vh;
+    background: #F08A6E;
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.18);
+    border-radius: 30px;
+
+    color: #FFFFFF;
+}
+
+
+.LoginStr,.RegistarStr {
+  width: 14vh;
+  height: 4.6vh;
+  font-family: "Suisse Int'l Condensed";
+  text-align: center;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+  padding-top: .2vh;
+  box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.18);
+  border-radius: 30px;
+
+}
+
+.LoginStr{
+  margin-left: 8vh;
+  background: #ffffff;
+  color:  #F08A6E;
+}
+.RegistarStr{
+  margin-left: 2vh;
+  background: #F08A6E;
+  color: #FFFFFF;
+}
