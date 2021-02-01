@@ -1,9 +1,9 @@
 @font-face {
-    font-family: fonteLabel;
-    src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
+    font-family: "fonteLabel";
+    src: url(../font/SuisseIntlCond-Semibold-WebS.ttf);
 }
 
-.labelInput label{
+.labelInput label {
     position: relative;
     font-family: fonteLabel;
     font-weight: 550;
@@ -14,10 +14,11 @@
 
     left: 16%;
     height: 3.5vh;
-    
+    width: 70%;
+
 }
 
-.labelInput input{
+.labelInput input {
     position: relative;
     width: 67%;
     height: 4vh;
@@ -30,9 +31,50 @@
 
     box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
     border-radius: 30px;
+    border: #FFFFFF;
+    color: #AEADAA;
+}
+
+.labelInput .nameinput{
+    width: 12vh;
+    height: 4vh;
+    margin-left: 5vh;
+    padding-left: 2.5vh;
+    font-size: 12px;
+    display: flex;
+    letter-spacing: 0.01em;
+    background: #FFFFFF;
+
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
     border: #ffffff;
     
     color: #AEADAA;
-
 }
+
+
+.labelInput .lastnameinput{
+    width: 12vh;
+    height: 4vh;
+    padding-left: 2.5vh;
+    font-size: 12px;
+    display: flex;
+    font-size: 3.5vw;
+    letter-spacing: 0.01em;
+    background: #FFFFFF;
+    outline: none;
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
+    border: #ffffff;
+    color: #AEADAA;
+}
+
+.labelInput .name{
+    margin-left: 8vh;
+}
+
+.labelInput .lastname{
+    margin-left: 4vh;
+}
+
 

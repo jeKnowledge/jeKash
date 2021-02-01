@@ -7,7 +7,25 @@ const LabelsInputs = (props) => {
     const placeHolder = props.placeholder;
     const onChangeFunc = props.onChange;
     const valor = props.value;
+    const size = props.size;
+    const name_input = name.concat("input"); 
 
+    if(size === "true"){
+        return ( 
+        <div className="labelInput">
+            <label className={name}>{ title }</label>
+            <input
+                className={name_input}
+                name={name}
+                type = {type}
+                required
+                placeholder = {placeHolder}
+                onChange = {onChangeFunc}
+                value = {valor}
+            />
+        </div>
+     );
+    }
     return ( 
         <div className="labelInput">
             <label>{ title }</label>
@@ -20,7 +38,9 @@ const LabelsInputs = (props) => {
                 value = {valor}
             />
         </div>
-     );
+    );
+
+    
 }
  
 export default LabelsInputs;

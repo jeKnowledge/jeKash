@@ -5,23 +5,25 @@ import { Link } from 'react-router-dom';
 //* styling the page
 import logo from './style/logo/logoJek.svg';
 import './style/css/HomePage.css';
+import Buttons from './components/Buttons'
 
 const HomePage = () => {
   return (
     <div className="App">
         <div id="Background">  
           <img src={logo} className="App-logo-mainmenu" alt="logo" />
-          <div id = "Butoes">
+          <div id="btns">
               <Link to="users/login">
-                <button id = "logIn" >
-                  <span id="LogInStr">Log in</span>
-                </button>
+                <Buttons 
+                  name="Log in"
+                  title="LoginStr button"
+                />
               </Link>
-              
               <Link to="users/signup">
-                <button id= "Registar">
-                  <span id="RegistarStr">Registar</span>
-                </button>
+                <Buttons 
+                    name="Registar"
+                    title="RegistarStr button"
+                  />
               </Link>
           </div>
         </div>
