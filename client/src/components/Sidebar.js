@@ -58,13 +58,13 @@ export const SideBAR = (props) => {
                 <div id= "transdivsMINHASDIVIDAS" style={{top: "-200%"}}>
                     <Link to="dividas/minhasdividas">
                         <div id ="oqdevo" >
-                            <span id ="oqdevoSTR">O que devo</span>  
+                            <span id ="subbotSTR">O que devo</span>  
                         </div>
                     </Link>
 
                     <Link to="dividas/adever">
                         <div id = "oqdevem">
-                            <span id = "oqdevemSTR">O que me devem</span>
+                            <span id = "subbotSTR">O que me devem</span>
                         </div>
                     </Link>
                 </div>
@@ -81,20 +81,20 @@ export const SideBAR = (props) => {
 
                 <div id="menu" class="menu-hidden" style={{top: "-200%"}}>
                     <Link to="dividas/Interno">
-                        <div id = "Interno"> 
-                            <span id ="InternoSTR">Interno</span>
+                        <div id = "subbot"> 
+                            <span id ="subbotSTR">Interno</span>
                         </div>
                     </Link>
                     
                     <Link to="dividas/Inovacao">
-                        <div id = "Inovacao">
-                            <span id = "InovacaoSTR">Inovação</span>
+                        <div id = "subbot">
+                            <span id = "subbotSTR">Inovação</span>
                         </div>
                     </Link>
 
                     <Link to="dividas/Tech">
-                        <div id = "Tech">
-                            <span id = "TechSTR">Tech</span>
+                        <div id = "subbot">
+                            <span id = "subbotSTR">Tech</span>
                         </div>
                     </Link>
                 </div>
