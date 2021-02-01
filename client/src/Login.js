@@ -82,12 +82,13 @@ const handleSubmit = e => {
       </div>
 
       <div className="button-login">
+        <Link to="/home">
         <Buttons 
             name="Log in"
             type="submit"
             title="button"
         />
-
+      </Link>
       </div>
 
       <div className="link2signup">
