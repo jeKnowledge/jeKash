@@ -59,8 +59,6 @@ const handleSubmit = e => {
       <h1 className="title2">Efetua o teu Login</h1>
       <div className="inputs">
         <div className="email">
-          {/* <label className="label">Email</label><br/><br/>
-        <input className="input-email" name="email" placeholder="exemplo@jeknowledge.pt" onChange={handleInputChange} value={user.email} required></input> */}
           <LabelsInputs
             title="Email" 
             name="email"
