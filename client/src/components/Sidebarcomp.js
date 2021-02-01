@@ -32,7 +32,7 @@ function toggleNav(x){
     else{
         document.getElementById("logoUP1").style.transform = "rotate(180deg)";
         document.getElementById("dividastotaisdiv").style.top= "8%";
-        document.getElementById("transdivsMINHASDIVIDAS").style.top ="";
+        document.getElementById("transdivsMINHASDIVIDAS").style.top ="-200%";
     }
 }
 
@@ -58,17 +58,16 @@ export const SideBAR = (props) => {
                 <div id= "transdivsMINHASDIVIDAS" style={{top: "-200%"}}>
                     <Link to="dividas/minhasdividas">
                         <div id ="oqdevo" >
-                            <span id ="subbotSTR">O que devo</span>  
+                            <span id ="oqdevoSTR">O que devo</span>  
                         </div>
                     </Link>
 
                     <Link to="dividas/adever">
                         <div id = "oqdevem">
-                            <span id = "subbotSTR">O que me devem</span>
+                            <span id = "oqdevemSTR">O que me devem</span>
                         </div>
                     </Link>
                 </div>
-                
             </div>
 
             <div id="dividastotaisdiv" style={{top: "8%"}}>
@@ -79,22 +78,22 @@ export const SideBAR = (props) => {
                     <img src={logoarrowUP} className="App-logo-UP" id="logoUP" style={{transform: "rotate(180deg)"}}/>
                 </div>
 
-                <div id="menu" class="menu-hidden" style={{top: "-200%"}}>
+               <div id="menu" className="menu-hidden" style={{top: "-200%"}}>
                     <Link to="dividas/Interno">
-                        <div id = "subbot"> 
-                            <span id ="subbotSTR">Interno</span>
+                        <div id = "Interno"> 
+                            <span id ="InternoSTR">Interno</span>
                         </div>
                     </Link>
                     
                     <Link to="dividas/Inovacao">
-                        <div id = "subbot">
-                            <span id = "subbotSTR">Inovação</span>
+                        <div id = "Inovacao">
+                            <span id = "InovacaoSTR">Inovação</span>
                         </div>
                     </Link>
 
                     <Link to="dividas/Tech">
-                        <div id = "subbot">
-                            <span id = "subbotSTR">Tech</span>
+                        <div id = "Tech">
+                            <span id = "TechSTR">Tech</span>
                         </div>
                     </Link>
                 </div>

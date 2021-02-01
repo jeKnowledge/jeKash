@@ -1,6 +1,6 @@
-.App {
+/*.App {
   text-align: center;
-}
+}*/
 
 @font-face {
   font-family: "Suisse_Int_l";
@@ -12,15 +12,15 @@
   /* background */
 
   position: absolute;
-  width: 375px;
-  height: 812px;
+  width: 100%;
+  height: 100%;
   left: 0px;
   top: 0px;
 
   background: radial-gradient(179.64% 179.64% at 50% 50%, #FCC582 0%, #F08A6E 100%);
 }
 
-.App-logo {
+.App-logo-mainmenu {
   /* logo*/
   position: relative;
   width: 85%;
@@ -29,7 +29,7 @@
   -webkit-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
-  top: 303px;
+  top: 40%;
   display: block;
   margin: auto;
   /* sombra base */
@@ -39,10 +39,9 @@
 
 #Butoes {
   position: absolute;
-  width: 223.31px;
-  height: 36px;
-  left: 76px;
-  top: 691px;
+  width: 63vw;
+  left: 20%;
+  top:85%;
 }
 
 #logIn {

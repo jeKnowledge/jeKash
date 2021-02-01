@@ -3,6 +3,19 @@
     src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
 }
 
+/* btn press magic */
+#mydividas:active {
+    background-color: #fdaa44;
+}
+
+#dividastotais:active {
+    background-color: #fdaa44;
+}
+
+#criardivida:active {
+    background-color: #fdaa44;
+}
+
 #sbbg {
 
     position: absolute;
@@ -49,7 +62,7 @@
     font-family: "Suisse Int'l Condensed L";
     font-style: normal;
     font-weight: 600;
-    font-size: 5.5vw;
+    font-size: 20px;
     line-height: 26px;
     display: flex;
     align-items: center;
@@ -88,12 +101,12 @@
 
     border-bottom: 1px solid #FFFFFF;
     box-sizing: border-box;
+    transition: 0.6s ease;
 }
 
 #mydividasSTR {
-    /* Criar de divida */
     position: relative;
-    width: 50%;
+    width: 40%;
     height: 50%;
     top: -28%;
     left: 20%;
@@ -101,7 +114,7 @@
     font-family: "Suisse Int'l Condensed L";
     font-style: normal;
     font-weight: 600;
-    font-size: 5.5vw;
+    font-size: 20px;
     line-height: 26px;
     display: flex;
     align-items: center;
@@ -130,6 +143,24 @@
     box-sizing: border-box;
 }
 
+#oqdevoSTR {
+    position: relative;
+    width: 40%;
+    height: 50%;
+    top: 24%;
+    left: 20%;
+
+    font-family: "Suisse Int'l Condensed L";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01em;
+
+    color: #FFFFFF;
+}
 
 #oqdevem {
     z-index: 1;
@@ -142,6 +173,25 @@
     background: #F08A6E;
     border-bottom: 1px solid #FFFFFF;
     box-sizing: border-box;
+}
+
+#oqdevemSTR {
+    position: relative;
+    width: 40%;
+    height: 50%;
+    top: 24%;
+    left: 20%;
+
+    font-family: "Suisse Int'l Condensed L";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01em;
+
+    color: #FFFFFF;
 }
 
 .App-logo-pessoa {
@@ -190,13 +240,8 @@
     top: 0%;
     border-bottom: 1px solid #FFFFFF;
     box-sizing: border-box;
-
+    transition: 0.6s ease;
 }
-
-#dividastotais:active {
-    background-color: #f8b563;
-}
-
 
 #dividastotaisSTR {
     position: relative;
@@ -208,7 +253,7 @@
     font-family: "Suisse Int'l Condensed L";
     font-style: normal;
     font-weight: 600;
-    font-size: 5.5vw;
+    font-size: 20px;
     line-height: 26px;
     display: flex;
     align-items: center;
@@ -226,7 +271,8 @@
     transition: 0.6s ease;
 }
 
-#subbot {
+
+#Interno {
     position: relative;
     width: 100%;
     height: 100%;
@@ -238,7 +284,7 @@
     box-sizing: border-box;
 }
 
-#subbotSTR {
+#InternoSTR {
     position: relative;
     width: 40%;
     height: 50%;
@@ -248,7 +294,69 @@
     font-family: "Suisse Int'l Condensed L";
     font-style: normal;
     font-weight: 600;
-    font-size: 5vw;
+    font-size: 20px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01em;
+
+    color: #FFFFFF;
+}
+
+#Inovacao {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0%;
+
+    background: #F08A6E;
+    border-bottom: 1px solid #FFFFFF;
+    box-sizing: border-box;
+}
+
+#InovacaoSTR {
+    position: relative;
+    width: 40%;
+    height: 50%;
+    top: 24%;
+    left: 20%;
+
+    font-family: "Suisse Int'l Condensed L";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.01em;
+
+    color: #FFFFFF;
+}
+
+#Tech {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0%;
+
+    background: #F08A6E;
+    border-bottom: 1px solid #FFFFFF;
+    box-sizing: border-box;
+}
+
+#TechSTR {
+    position: relative;
+    width: 40%;
+    height: 50%;
+    top: 24%;
+    left: 20%;
+
+    font-family: "Suisse Int'l Condensed L";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
     line-height: 26px;
     display: flex;
     align-items: center;
@@ -261,3 +369,5 @@
 a {
     text-decoration: none;
 }
+
+

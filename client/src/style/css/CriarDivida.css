@@ -1,0 +1,113 @@
+@font-face {
+    font-family: fonteTitulo;
+    src: url(../font/SuisseIntlCond-Medium-WebS.woff);
+  }
+
+@font-face {
+    font-family: fonteLabel;
+    src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
+}
+
+.criar-divida{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+  /* estilos */
+
+.criar-divida-titulo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    top: 4vh;
+    font-family: fonteTitulo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 4vw;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #3E3C39;
+}
+
+
+.descricao-label{
+    position: relative;
+    font-family: fonteLabel;
+    font-weight: 550;
+    font-size: 4.5vw;
+    display: flex;
+    color: #3E3C39;
+
+    left: 16%;
+    height: 3.5vh;
+}
+
+.input-descricao {
+    position: relative;
+    width: 67%;
+    height: 25vh;
+    left: 12.5%;
+    padding-left: 2.5vh;
+    padding-top: 2vh;
+    font-size: 3.5vw;
+    display: flex;
+    letter-spacing: 0.01em;
+    resize: none;
+    background: #FFFFFF;
+    white-space: pre-wrap;
+    outline: none;
+
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
+    border: #ffffff;
+    
+    color: #AEADAA;
+}
+
+
+.button-criar-divida{
+    position: relative;
+    width: 35%;
+    height: 5vh;
+    left: 32.5%;
+    margin-top: 5vh;
+
+    font-family: fonteLabel;
+    font-size: 14px;
+    letter-spacing: 0.01em;
+
+    background: #F08A6E;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    color: #FFFFFF;
+
+}
+
+/* remove spin wheel input numbers */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}
+input[type="number"] {
+   -moz-appearance: textfield;
+}
+
+/* posições */
+.credor-css {
+    margin-top: 15%;
+    height: 11.5vh;
+}
+
+.devedor-css {
+    height: 11.5vh;
+}
+
+.quantia-css {
+    height: 11.5vh;
+}
+
+

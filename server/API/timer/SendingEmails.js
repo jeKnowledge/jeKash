@@ -3,60 +3,56 @@ const express = require("express");
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const Divida = require("../models/divida");
 //? Se quiserem mudar para testar e recomendado mudar esta variavel
-const timer = 3000; //! MAS No final mudar para ser algo diario const timer = 86400;
-<<<<<<< Updated upstream:API/timer/SendingEmails.js
-
-=======
->>>>>>> Stashed changes:server/API/timer/SendingEmails.js
+const timer = 86400; //! MAS No final mudar para ser algo diario const timer = 86400;
 
 
 //*url para fazer o request de todas as dividas.
 //! No final mudar para os defenitivos!!
-const GETdividasServerURL = "http://localhost:8000/dividas/all_dividas_para_o_email"; 
+const GETdividasServerURL = "http://localhost:8000/dividas/all_dividas_para_o_email";
 const GETuserServerURL = "http://localhost:8000/users/getall";
 
 //Função client que me dá o GET request
-var HttpClient = function() {
-    this.get = function(aUrl, aCallback) {
-        var anHttpRequest = new XMLHttpRequest(); //crio uma nova instancia da class para fazer um request 
-        anHttpRequest.onreadystatechange = function() {  //quando a API estiver pronta
-          if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200) //e se estiver tudo bem
-              aCallback(anHttpRequest.responseText); //* é como se fosse um return ao minha resposta atraves do callBack
-        }
-
-        anHttpRequest.open("GET", aUrl, true );//faço um GET request ao Url
-        //mando um post com um header a dizer server e com esta server key
-
-        //* para provar que sou o server vou as headers e se o header server tiver a localserverkey e porque sou eu.
-        anHttpRequest.setRequestHeader("Server",process.env.LOCAL_SERVERKEY);
-        anHttpRequest.send( null ); //Como e um GET não mando nada
+var HttpClient = function () {
+  this.get = function (aUrl, aCallback) {
+    var anHttpRequest = new XMLHttpRequest(); //crio uma nova instancia da class para fazer um request 
+    anHttpRequest.onreadystatechange = function () { //quando a API estiver pronta
+      if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200) //e se estiver tudo bem
+        aCallback(anHttpRequest.responseText); //* é como se fosse um return ao minha resposta atraves do callBack
     }
+
+    anHttpRequest.open("GET", aUrl, true); //faço um GET request ao Url
+    //mando um post com um header a dizer server e com esta server key
+
+    //* para provar que sou o server vou as headers e se o header server tiver a localserverkey e porque sou eu.
+    anHttpRequest.setRequestHeader("Server", process.env.LOCAL_SERVERKEY);
+    anHttpRequest.send(null); //Como e um GET não mando nada
+  }
 }
 
-function timepassed(date){
+function timepassed(date) {
   //! em dias
   let dataDivida = new Date(date);
   //console.log(dataDivida);
 
   let today = new Date();
   let dateNOW =
-    today.getFullYear() + "-" + ("0"+(today.getMonth() + 1)).slice(-2) + "-" + ("0"+today.getDate()).slice(-2); //formating Date to a recognizable format, adiciono um zero antes para se no caso do mes for 1 ficar 01 e depois dar slice às ultimas duas chars
-    //se for por exemplo 12 ele vai adicionar um zero - 012 mas corto depois as ultimas chars e fica outra vez 12
+    today.getFullYear() + "-" + ("0" + (today.getMonth() + 1)).slice(-2) + "-" + ("0" + today.getDate()).slice(-2); //formating Date to a recognizable format, adiciono um zero antes para se no caso do mes for 1 ficar 01 e depois dar slice às ultimas duas chars
+  //se for por exemplo 12 ele vai adicionar um zero - 012 mas corto depois as ultimas chars e fica outra vez 12
   let dateNOWCorrectformat = new Date(dateNOW);
 
   //conta para a diferença:
-  let diferencadias =  (dateNOWCorrectformat.getTime()- dataDivida.getTime())/(1000 * 3600 * 24); //faço a conta para me dar a diferença em dias
+  let diferencadias = (dateNOWCorrectformat.getTime() - dataDivida.getTime()) / (1000 * 3600 * 24); //faço a conta para me dar a diferença em dias
 
   return diferencadias;
 }
 
-function checkDates(){ //função que recebe as datas
+function checkDates() { //função que recebe as datas
   var client = new HttpClient(); //crio uma nova instancia da função acima
-  
+
   //*preciso de me autenticar se nao não me deixa fazer o GET request as dividas
-  client.get(GETdividasServerURL,function(responseDivida){ //e simplesmente faço um get que vai fazer uma função que vai ter como parametro a resposta da API
+  client.get(GETdividasServerURL, function (responseDivida) { //e simplesmente faço um get que vai fazer uma função que vai ter como parametro a resposta da API
     //*preciso de me autenticar se nao não me deixa fazer o GET request aos users!
-    client.get(GETuserServerURL,function(responseUser){
+    client.get(GETuserServerURL, function (responseUser) {
       //passo para JSON visto que a resposta veio em pleno texto
       var responseJSONDIVIDAS = JSON.parse(responseDivida);
       var responseJSONUSER = JSON.parse(responseUser);
@@ -65,7 +61,7 @@ function checkDates(){ //função que recebe as datas
       //console.log(responseJSONUSER);
 
 
-      for(let dividaskeys in Object.keys(responseJSONDIVIDAS.Dividas)){
+      for (let dividaskeys in Object.keys(responseJSONDIVIDAS.Dividas)) {
         //dou assign a values que sa calhar tenho de trabalhar com
         let dividaID = responseJSONDIVIDAS.Dividas[dividaskeys].id; //Id da divida
         let paga = responseJSONDIVIDAS.Dividas[dividaskeys].paga; //situação de pagamento
@@ -74,12 +70,12 @@ function checkDates(){ //função que recebe as datas
         let datadivida = responseJSONDIVIDAS.Dividas[dividaskeys].date; //importante para calcular o levelwarning
         let emailmandado = responseJSONDIVIDAS.Dividas[dividaskeys].timesemailsent;
         let tempopassadodias = timepassed(datadivida); //função que calcula qual e o tipo de warning que devo tomar consoante o tempo passado.
-        
+
         //looping through all users to find the respective one
-        for (let userinDB in Object.keys(responseJSONUSER.list)){
-          if(responseJSONUSER.list[userinDB]._id=== userdivida){ //encontrei o user que corresponde à divida
+        for (let userinDB in Object.keys(responseJSONUSER.list)) {
+          if (responseJSONUSER.list[userinDB]._id === userdivida) { //encontrei o user que corresponde à divida
             var useremail = responseJSONUSER.list[userinDB].email; //guardo numa variavel o email dela.
-          } 
+          }
         }
         //*   dividaupdatestatus = 0  --> Não estão a ser mandados warnings
         //*   dividaupdatestatus = 1  --> Ao 7º dia foi mandado um warning
@@ -91,60 +87,62 @@ function checkDates(){ //função que recebe as datas
         // Não estou nada contente com esta solução porque tem mais ifs do que linhas de codigo
 
         //default msg depois podemos mudar:
-        let msg = "Hey, deves " + quantiadivida+ "€ há mais de "+ Math.floor(tempopassadodias) +" dias!";
-        if (paga===false){
-          console.log(tempopassadodias, emailmandado)
-          if (tempopassadodias>=21 && emailmandado ===3){
+        let msg = "Hey, deves " + quantiadivida + "€ há mais de " + Math.floor(tempopassadodias) + " dias!";
+        if (paga === false) {
+          //  ? console.log(tempopassadodias, emailmandado)
+          if (tempopassadodias >= 21 && emailmandado === 3) {
             //* Vai correr diariamente porque a função corrediaramente
-            sendEmail(msg,useremail);
+            sendEmail(msg, useremail);
             return;
-          }
-          else if(tempopassadodias>=18 && emailmandado ===2)
-          {
-            sendEmail(msg,useremail);
-            dividaupdatestatus(dividaID,3);//para dizer que agora vai ser de 3 em 3 dias e ja estamos no nivel 4
+          } else if (tempopassadodias >= 18 && emailmandado === 2) {
+            sendEmail(msg, useremail);
+            dividaupdatestatus(dividaID, 3); //para dizer que agora vai ser de 3 em 3 dias e ja estamos no nivel 4
             return;
-          }
-          else if(tempopassadodias>=14 && emailmandado ===1){
-            
-            sendEmail(msg,useremail);
-            dividaupdatestatus(dividaID,2);//para dizer que agora vai ser de 3 em 3 dias e ja estamos no nivel 2
+          } else if (tempopassadodias >= 14 && emailmandado === 1) {
+
+            sendEmail(msg, useremail);
+            dividaupdatestatus(dividaID, 2); //para dizer que agora vai ser de 3 em 3 dias e ja estamos no nivel 2
             return;
-          }
-          else if(tempopassadodias>=7 && emailmandado ===0){
-            
-            sendEmail(msg,useremail); 
-            dividaupdatestatus(dividaID,1); //para dizer que ja foi mandado um email e ja estamos no nivel 1
+          } else if (tempopassadodias >= 7 && emailmandado === 0) {
+
+            sendEmail(msg, useremail);
+            dividaupdatestatus(dividaID, 1); //para dizer que ja foi mandado um email e ja estamos no nivel 1
             return;
           }
         }
       };
     });
-  }); 
+  });
 }
 
-function dividaupdatestatus(id_divida,emailstatus,){
+function dividaupdatestatus(id_divida, emailstatus, ) {
   const updateOps = {};
   updateOps["timesemailsent"] = emailstatus;
-  Divida.update({_id: id_divida}, {$set: updateOps}).exec()
-  .then(result => {
-    console.log({id: id_divida}); //? debug purposes
-  })
-  .catch(err => {
+  Divida.update({
+      _id: id_divida
+    }, {
+      $set: updateOps
+    }).exec()
+    .then(result => {
+      console.log({
+        id: id_divida
+      }); //? debug purposes
+    })
+    .catch(err => {
       console.log(err); //? debug purposes
     });
 }
 
-async function sendEmail(message,user){
+async function sendEmail(message, user) {
   //esta função pede um "levelofwaning" para indicar o quanto a divida já passou de ser paga.
-  
+
   // * Ethereal e uma coisa que me vai ajudar a simular mandar emails:
   const transporter = nodemailer.createTransport({
     // host do ethreal que e quem me esta a mandar fake emails
     service: 'gmail',
     // ? host: "smtp.ethereal.email", //! substituir depois pelo host do email que vamos usar
     // true for 465, false for other ports
-    
+
     //port: 587,
     //secure: false,
     auth: {
@@ -161,26 +159,26 @@ async function sendEmail(message,user){
     //html: "<b>Hello world?</b>", // html body para depois fazer isto bonito
   }
 
-  await transporter.sendMail(mailOptions, function(error,info){
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Email sent: ' + info.response);
-      }
+  await transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
   });
-  
+
   // ? DEBUGGING EMAILS:
   // ? console.log("Message sent: %s", info.messageId); 
   // ? console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-  
+
 }
 
 setInterval(() => {
   //codigo que vai correr de X em X tempo (X=timer)
-    (function(){
+  (function () {
 
-      //funcao que vai correr e ver se as datas ja passaram ou nao
-      checkDates()  
+    //funcao que vai correr e ver se as datas ja passaram ou nao
+    checkDates()
   })();
 
 }, timer); //? um dia

@@ -7,18 +7,14 @@ const expressEjsLayout = require("express-ejs-layouts");
 const connectFlash = require('connect-flash');
 const session = require('express-session');
 const path = require('path');
-
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 
 
-const emails = require("./API/timer/SendingEmails"); //! apesar de não estar a ser usado, afirmar aqui para correr
+const emails = require("./API/timer/SendingEmails")
 const dividasRoutes = require("./API/routes/dividas");
 const usersRoutes = require("./API/routes/users");
 const indexRoutes = require("./API/routes/index");
-const {
-  Authenticator
-} = require("passport");
 
 mongoose.connect(
   "mongodb+srv://exp-node:givemmb@givemmb.aqww5.mongodb.net/exp-node?retryWrites=true&w=majority", {
@@ -39,10 +35,10 @@ app.use(cookieParser('secret'));
 
 app.use(expressEjsLayout);
 app.use(morgan("dev"));
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
-app.use(bodyParser.json());
 app.use(express.json());
 
 
@@ -69,14 +65,6 @@ app.use((req, res, next) => {
   res.locals.error = req.flash('error');
   next();
 })
-
-// app.use((req,res,next) =>{
-//   res.header("Acess-Control-Allow-Origin","*");
-//   res.header("Acess-Control-Allow-Headers","Origin, X-Requested-With","Content-Type","Authentization");
-// });
-
-
-
 
 
 
