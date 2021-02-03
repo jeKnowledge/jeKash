@@ -9,10 +9,6 @@ const Selects = (props) => {
     const option1 = props.option1;
     const option2 = props.option2; 
     const option3 = props.option3;  
-    
-
-
-
 
     return (
         <div className="SelectDepartments">
