@@ -55,8 +55,9 @@ function toggleNavBOT(x) {
 export const SideBAR = (props) => {
     return(
         <div id ="sbbg">
-            <TopBar/>
-
+            <TopBar
+            color ="sidebarTopBar"
+            />
             <Link to="dividas/criar">
                 <div id = "criardivida">
                     <img src={logomais} className="App-logo-plus" alt="logoplus"/>

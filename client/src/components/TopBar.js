@@ -8,7 +8,7 @@ export const TopBar = (props) => {
     const color = props.color;
 
     return(
-        <div id ="bg">
+        <div id ="bg" className="sidebarTopBar">
 
             <Link to="dividas/criar">
                 <img src={logoHamburguer} className="Hamburguer" alt="logoHamburguer" />
