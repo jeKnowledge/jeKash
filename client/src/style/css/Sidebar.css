@@ -44,31 +44,11 @@
     width: 100%;
     height: 8%;
     left: 0px;
-    top: 8%;
+    top: 0%;
     background-color: #FCC17A;
     border-top: 1px solid #FFFFFF;
     border-bottom: 1px solid #FFFFFF;
     box-sizing: border-box;
-}
-
-#criardividaSTR {
-    /* Criar dívida */
-    position: relative;
-    width: 40%;
-    height: 50%;
-    top: -30%;
-    left: 20%;
-
-    font-family: "Suisse Int'l Condensed L";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 26px;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.01em;
-
-    color: #FFFFFF;
 }
 
 .App-logo-plus {
@@ -86,7 +66,7 @@
     width: 100%;
     height: 8%;
     left: 0px;
-    top: 8%;
+    top: 0%;
     transform-origin: top;
 }
 
@@ -104,7 +84,7 @@
     transition: 0.6s ease;
 }
 
-#mydividasSTR {
+#primbotSTR {
     position: relative;
     width: 40%;
     height: 50%;
@@ -114,7 +94,7 @@
     font-family: "Suisse Int'l Condensed L";
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 5.7vw;
     line-height: 26px;
     display: flex;
     align-items: center;
@@ -130,7 +110,8 @@
     transition: 0.6s ease;
 }
 
-#oqdevo {
+
+#primbot {
     z-index: 1;
     position: relative;
     width: 100%;
@@ -141,57 +122,6 @@
     background: #F08A6E;
     border-bottom: 1px solid #FFFFFF;
     box-sizing: border-box;
-}
-
-#oqdevoSTR {
-    position: relative;
-    width: 40%;
-    height: 50%;
-    top: 24%;
-    left: 20%;
-
-    font-family: "Suisse Int'l Condensed L";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 26px;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.01em;
-
-    color: #FFFFFF;
-}
-
-#oqdevem {
-    z-index: 1;
-    position: relative;
-    width: 100%;
-    height: 50%;
-    left: 0px;
-    top: 0%;
-
-    background: #F08A6E;
-    border-bottom: 1px solid #FFFFFF;
-    box-sizing: border-box;
-}
-
-#oqdevemSTR {
-    position: relative;
-    width: 40%;
-    height: 50%;
-    top: 24%;
-    left: 20%;
-
-    font-family: "Suisse Int'l Condensed L";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 26px;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.01em;
-
-    color: #FFFFFF;
 }
 
 .App-logo-pessoa {
@@ -237,29 +167,10 @@
     width: 100%;
     height: 100%;
     left: 0px;
-    top: 0%;
+    top: -100%;
     border-bottom: 1px solid #FFFFFF;
     box-sizing: border-box;
     transition: 0.6s ease;
-}
-
-#dividastotaisSTR {
-    position: relative;
-    width: 40%;
-    height: 50%;
-    top: -28%;
-    left: 20%;
-
-    font-family: "Suisse Int'l Condensed L";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 26px;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.01em;
-
-    color: #FFFFFF;
 }
 
 /*anim*/
@@ -272,19 +183,26 @@
 }
 
 
-#Interno {
+#botao {
     position: relative;
     width: 100%;
     height: 100%;
     left: 0px;
-    top: 0%;
+    top: -100%;
 
     background: #F08A6E;
     border-bottom: 1px solid #FFFFFF;
     box-sizing: border-box;
 }
 
-#InternoSTR {
+.App-logo-UPBottom {
+    position: relative;
+    left: 88%;
+    top: -17%;
+    transition: 0.6s ease;
+}
+
+#subbotSTR {
     position: relative;
     width: 40%;
     height: 50%;
@@ -294,7 +212,7 @@
     font-family: "Suisse Int'l Condensed L";
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 5.2vw;
     line-height: 26px;
     display: flex;
     align-items: center;
@@ -303,19 +221,29 @@
     color: #FFFFFF;
 }
 
-#Inovacao {
-    position: relative;
+#bottomBar {
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top: 92%;
+    height: 8%;
+    transition: 0.6s ease;
+}
+
+#BottomPrimary {
+    z-index: 2;
+    position: absolute;
     width: 100%;
     height: 100%;
     left: 0px;
     top: 0%;
-
-    background: #F08A6E;
-    border-bottom: 1px solid #FFFFFF;
+    background-color: #FCC17A;
+    border-top: 1px solid #FFFFFF;
     box-sizing: border-box;
 }
 
-#InovacaoSTR {
+
+#bottomBarSTR {
     position: relative;
     width: 40%;
     height: 50%;
@@ -325,7 +253,7 @@
     font-family: "Suisse Int'l Condensed L";
     font-style: normal;
     font-weight: 600;
-    font-size: 20px;
+    font-size: 5.7vw;
     line-height: 26px;
     display: flex;
     align-items: center;
@@ -334,7 +262,7 @@
     color: #FFFFFF;
 }
 
-#Tech {
+#BottomSec {
     position: relative;
     width: 100%;
     height: 100%;
@@ -342,32 +270,12 @@
     top: 0%;
 
     background: #F08A6E;
-    border-bottom: 1px solid #FFFFFF;
+    border-top: 1px solid #FFFFFF;
     box-sizing: border-box;
-}
-
-#TechSTR {
-    position: relative;
-    width: 40%;
-    height: 50%;
-    top: 24%;
-    left: 20%;
-
-    font-family: "Suisse Int'l Condensed L";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 26px;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.01em;
-
-    color: #FFFFFF;
+    transition: 0.6s;
 }
 
 /* para remover de todos os Links*/
 a {
     text-decoration: none;
 }
-
-

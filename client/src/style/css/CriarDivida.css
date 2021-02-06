@@ -66,26 +66,6 @@
 }
 
 
-.button-criar-divida{
-    position: relative;
-    width: 35%;
-    height: 5vh;
-    left: 32.5%;
-    margin-top: 5vh;
-
-    font-family: fonteLabel;
-    font-size: 14px;
-    letter-spacing: 0.01em;
-
-    background: #F08A6E;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    color: #FFFFFF;
-
-}
-
 /* remove spin wheel input numbers */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

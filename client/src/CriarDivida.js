@@ -3,6 +3,7 @@ import { useReducer } from "react";
 import axios from 'axios';
 import './style/css/CriarDivida.css';
 import LabelsInputs from "./components/LabelsInputs";
+import Buttons from "./components/Buttons";
 
 const initialState = {
     credor: "",
@@ -90,7 +91,13 @@ const CriarDivida = () => {
                         onChange = {handleInputChange}
                         value = {divida.descricao}
                     ></textarea>
-                <button className="button-criar-divida" type="submit">Criar dívida</button>
+            </div>
+            <div className="button-criar-divida">
+                <Buttons 
+                    name = "Criar Dívida"
+                    type = "submit"
+                    title = "button"
+                />
             </div>
         </form>
      );

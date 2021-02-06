@@ -36,83 +36,17 @@
 
   filter: drop-shadow(4px 4px 25px rgba(0, 0, 0, 0.1));
 }
-
-#Butoes {
-  position: absolute;
-  width: 63vw;
-  left: 20%;
-  top:85%;
+.buttons {
+  margin: 0;
 }
-
-#logIn {
-  outline: none;
-  border: none;
-  position: absolute;
-  width: 102.31px;
-  height: 36px;
-  left: calc(50% - 102px/2 - 60.35px);
-  border-top: 691px;
-
-  background: #FFFFFF;
-  /* sombra base */
-
-  box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
-  border-radius: 30px;
+#btns {
+  position: relative;
+  top: 65vh;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
-
-
-#Registar {
-  outline: none;
-  border: none;
-  position: absolute;
-  width: 102.31px;
-  height: 36px;
-  left: calc(50% - 102.31px/2 + 60.65px);
-  border-top: 691px;
-
-  background: #F08A6E;
-  box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
-  border-radius: 30px;
-  
-}
-
-#RegistarStr {
-  /* Registar */
-
-  opacity: 1;
-  position: absolute;
-  width: 102px;
-  height: 36px;
-  left: calc(50% - 102px/2);
-  top: 10px;
-
-  font-family: Suisse_Int_l;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 550;
-  line-height: 16px;
-  letter-spacing: 0.03em;
-  text-align: center;
-
-
-  color: #FFFFFF;
-}
-
-#LogInStr {
-  position: absolute;
-  width: 102px;
-  height: 36px;
-  left: calc(50% - 102.31px/2);
-  top: 10px;
-
-
-  font-family: Suisse_Int_l;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 550;
-  line-height: 16px;
-  letter-spacing: 0.03em;
-  text-align: center;
-
-  color: #F08A6E;
+#btns a {
+  width: 100%;
+  /*importante*/
 }
