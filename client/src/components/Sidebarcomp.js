@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 
 import '../style/css/Sidebar.css';
-import logo from '../style/logo/logoJek.svg';
 import logomais from "../style/logo/logoplus.svg";
 import logopessoa from '../style/logo/logoman.svg';
 import logoarrowUP from '../style/logo/logoarrowUP.svg';
 import logoMoney from '../style/logo/logomoney.svg';
+
 import TopBar from './TopBar'
 
 function toggleNavTOP(x) {
@@ -51,12 +51,14 @@ function toggleNavBOT(x) {
 }
 
 
-
 export const SideBAR = (props) => {
     return(
         <div id ="sbbg">
             <TopBar
-            color ="sidebarTopBar"
+            color ="sidebarTopBarCOLOR "
+            height = "18%" //parece ser 18 na sidebar (10% é o normal)
+            linkto = "dividas/criar"
+            logo = "whitebg"
             />
             <Link to="dividas/criar">
                 <div id = "criardivida">
