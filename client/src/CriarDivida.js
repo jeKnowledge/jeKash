@@ -3,6 +3,7 @@ import { useReducer } from "react";
 import axios from 'axios';
 import './style/css/CriarDivida.css';
 import LabelsInputs from "./components/LabelsInputs";
+import TopBar from './components/TopBar'
 
 const initialState = {
     credor: "",
@@ -45,8 +46,16 @@ const CriarDivida = () => {
     
     }
 
-    return ( 
-        <form className="criar-divida" onSubmit={handleSubmit}>
+    return (
+        <div>
+            <TopBar
+            color ="normalTopBarCOLOR"
+            height = "11vh" //parece ser 18 na sidebar (13% é o normal)
+            linkto="/home"
+            logo = "normal"
+            />
+
+            <form className="criar-divida" onSubmit={handleSubmit}>
             <div className="criar-divida-titulo">
                 <h1>Cria uma nova dívida</h1>
             </div>
@@ -93,6 +102,9 @@ const CriarDivida = () => {
                 <button className="button-criar-divida" type="submit">Criar dívida</button>
             </div>
         </form>
+
+        </div>
+        
      );
 }
  
