@@ -10,7 +10,7 @@
 
 .criar-divida{
     width: 100%;
-    height: 100%;
+    height: 60%;
     overflow: hidden;
 }
 
@@ -20,7 +20,7 @@
     position: relative;
     width: 100%;
     height: 100%;
-    top: 4vh;
+    top: 10%;
     font-family: fonteTitulo;
     font-style: normal;
     font-weight: bold;
@@ -35,7 +35,7 @@
     position: relative;
     font-family: fonteLabel;
     font-weight: 550;
-    font-size: 4.5vw;
+    font-size: 2.5vh;
     display: flex;
     color: #3E3C39;
 
@@ -97,11 +97,12 @@ input[type="number"] {
 
 /* posições */
 .credor-css {
-    margin-top: 15%;
+    margin-top: 7%;
     height: 11.5vh;
 }
 
 .devedor-css {
+    top: 0;
     height: 11.5vh;
 }
 
