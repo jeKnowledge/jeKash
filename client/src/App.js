@@ -4,6 +4,9 @@ import Login from './Login';
 import Signup from './Signup';
 import CriarDivida from './CriarDivida'
 import SideBar from './Sidebar';
+import DividasShowInterno from './DividasShowINT';
+import DividasShowInovacao from './DividasShowINO';
+import DividasShowTech from './DividasShowTEC';
 
 function App() {
   return (
@@ -22,9 +25,18 @@ function App() {
               <Route exact path="/dividas/criar">
                 <CriarDivida />
               </Route>
+              <Route exact path="/dividas/Interno">
+                <DividasShowInterno />
+              </Route>
+              <Route exact path="/dividas/Inovacao">
+                <DividasShowInovacao />
+              </Route>
+              <Route exact path="/dividas/Tech">
+                <DividasShowTech />
+              </Route>
               <Route exact path="/home">
-              <SideBar />
-            </Route>
+                <SideBar />
+              </Route>
         </Switch>
       </div>
     </Router>
