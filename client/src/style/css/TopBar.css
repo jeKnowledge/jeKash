@@ -1,27 +1,26 @@
 #bg {
-    position: relative;
-    top: 0;
-    width: 100%;
+  position: relative;
+  top: 0;
+  width: 100%;
+  box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .Hamburguer {
-    position: relative;
-    left: 6.5%;
-    top: 20%;
-    z-index: 2;
+  position: relative;
+  left: 6.5%;
+  top: 20%;
+  z-index: 2;
 }
 .AppLogo {
-    position: relative;
-    left: 15%;
-    top: 30%;
-    height: 50%;
-    width: 50%;
+  position: relative;
+  left: 15%;
+  top: 30%;
+  height: 50%;
+  width: 50%;
 }
 .normalTopBarCOLOR {
-    background-color: #FFFFFF;
-    
+  background-color: #ffffff;
 }
 .sidebarTopBarCOLOR {
-    background-color: #FCC17A;
+  background-color: #fcc17a;
 }
-

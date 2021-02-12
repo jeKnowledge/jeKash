@@ -155,12 +155,27 @@ exports.get_all_dividas = (req, res, next) => {
   // find() sem argumentos devolve todos as dívidas
   Divida.find()
     .exec()
-    .then((dividas) => {
-      return res.render('dividastotais', {
-        dividas: dividas.map(divida => {
-          return divida;
+    .then(dividas => {
+      const response = {
+        count: dividas.length, // Numero total de dividas
+        Dividas: dividas.map((divida) => {
+          // map cria um array com as informações seguintes de cada divida
+          return {
+            // Return da informação das dividas
+            id: divida._id, //adicionei id porque ajuda a testar
+            paga: divida.paga,
+            credor: divida.credor,
+            devedor: divida.devedor,
+            quantia: divida.quantia,
+            descricao: divida.descricao,
+            userCriador: divida.userCriador,
+            date: divida.date,
+            timesemailsent: divida.timesemailsent
+          };
         })
-      });
+      };
+      res.status(200).json(response);
+      return response
     })
     .catch((err) => {
       console.log(err);
@@ -190,11 +205,9 @@ exports.get_all_dividas_user = (req, res, next) => {
     })
     .exec()
     .then((dividas) => {
-      return res.render('dividasUsers', {
-        dividas: dividas.map(divida => {
+      return dividas.map(divida => {
           return divida;
         })
-      });
     })
     .catch((err) => {
       console.log(err);
@@ -297,33 +310,31 @@ exports.dividas_departamento = (req, res, next) => {
           });
 
           if (dep === "Tech") {
-            return res.render('dividasTech', {
-              dividas: array.map(divida => {
+            return array.map(divida => {
                 return divida;
               })
-            });
           }
           if (dep === "Innovation") {
-            return res.render('dividasInnovation', {
-              dividas: array.map(divida => {
+            
+            return array.map(divida => {
                 return divida;
               })
-            });
           }
           if (dep === "Intern") {
-            return res.render('dividasIntern', {
-              dividas: array.map(divida => {
+            
+            return array.map(divida => {
                 return divida;
               })
-            });
           }
         })
         .catch((err) => {
+          
           console.log(err);
         });
 
     })
     .catch((err) => {
+      
       console.log(err);
     });
 };
@@ -389,9 +400,9 @@ exports.get_all_dividasMail = (req, res, next) => {
             date: divida.date,
             timesemailsent: divida.timesemailsent
           };
-        }),
+        })
       };
-      res.status(200).json(response);
+      //res.status(200).json(response);
     })
     .catch((err) => {
       // se a promise der erro
