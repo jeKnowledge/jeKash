@@ -23,12 +23,6 @@ const DividasShow = () => {
             {/* Usar o dividas Component para mudar a estetica de como as dividas aparecem
             Por outras palavras, não mexer neste HTML para mudar algo nesta pagina. Mexer no componente.
             */}
-
-            {/* Os três pontinhos é uma libraria */}
-
-            {/*fazer um get das dividas inátivas (Pago) e mandar como parametro o departamento
-               fazer um get das dividas ativas (Por pagar) e mandar como parametro o departamento
-            */}
         </div>
     )
 }

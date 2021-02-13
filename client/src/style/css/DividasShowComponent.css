@@ -51,16 +51,25 @@
 
 #text2 {
   position: relative;
-
+  right: 2%;
+  font-family: fonteLabel;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  align-items: center;
+  letter-spacing: 0.01em;
 }
 
+
 #dividaspresent {
+  position: relative;
   font-family: fonteLabel;
   align-items: center;
-  width: 80%;
-  height: fit-content;
-  transform: translate(15%, 0%);
-  margin-top: 2vh;
+  width: 80vw;
+  height: 28vh;
+  transform: translate(0%, 0%);
+  margin-top: 2.5vh;
 
   display: block;
   justify-content: center;
@@ -88,7 +97,7 @@
 
 
   margin: auto;
-  margin-top: 5%;
+  margin-top: 12%;
   justify-content: center;
   text-align: center;
   align-items: center;
@@ -97,13 +106,30 @@
 #titlepresent {
   text-align: center;
   margin: auto;
+  margin-top: 1%;
   width: 80%;
+  transform: translate(0%, 100%);
 
   justify-content: center;
   text-align: center;
   align-items: center;
 
+  font-family: fonteLabel;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+  letter-spacing: 0.01em;
+
+  /* sombra base */
+
   text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
-  transform: translate(0, 50%);
 }
 
+#descricaodiv {
+  position: relative;
+  height: 15.5vh;
+}
+#descricaodiv p {
+  color: #000000;
+}

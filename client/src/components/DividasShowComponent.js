@@ -1,9 +1,11 @@
 import '../style/css/DividasShowComponent.css';
-import React, {useState,useCallback,useEffect } from 'react';
+import React, {useState,useCallback,useEffect, } from 'react';
+import Carousel from 'react-elastic-carousel';
 import axios from "axios";
 
 const url = "http://localhost:8000/dividas/getall";
-let credor,devedor,quantia;
+const dividasPagas =[];
+const dividasNaoPagas = [];
 
 const DividasComponent = (props) => {
 
@@ -19,71 +21,94 @@ const DividasComponent = (props) => {
     const loadDividas = useCallback(async() => { 
         const res = await axios.get(url, config);
         const dividas =res.data;
-        console.log(res.data)
         setdividas(dividas);
     },[]) 
     
+    const [dividas, setdividas] = useState([]);
+
     //Dividas são carregadas incialmente
     useEffect(() =>{
+        
+        const nrdividas = dividas.count;
+        //! Esta algo de mal porque quando atualizo a pagina GET deixa de funcionar
+        
+        for(let i =0; i <nrdividas; i++){
+            console.log(i);
+            if(dividas.Dividas[i].paga === false){
+                console.log("paga")
+                dividasNaoPagas.push(dividas.Dividas[i]);
+            }
+            else {
+                console.log("npaga")
+                dividasPagas.push(dividas.Dividas[i]);
+            }
+        }
+        
+        //console.log(dividas)
+        console.log(dividasNaoPagas);    
+        //console.log(dividasPagas);
+
+
         loadDividas();
     }, [loadDividas]);
 
-    const [dividas, setdividas] = useState([]);
-    const nrdividas = dividas.count;
-    //! Esta algo de mal porque quando atualizo a pagina GET deixa de funcionar
-
-    
-    for(const i in nrdividas){
-        if(dividas.Dividas[0].paga === false){
-            
-        }
-    }
-    
-    credor = dividas.Dividas[0].credor;
-    devedor = dividas.Dividas[0].devedor;
-    quantia = dividas.Dividas[0].quantia;
-    
-
-
-    console.log(dividas);    
+        
 
     return (
-        <div className="dividasshow">
-            <div className="Ppagar" style={{background: color}}>
-                <span id="text1">Por Pagar</span>
-            </div>
+        <div id="bg">
+            <div className="dividasshow">
+                <div className="Ppagar" style={{background: color}}>
+                    <span id="text1">Por Pagar</span>
+                </div>
+                <Carousel
+                    itemsToShow={1}>
+                            {dividasNaoPagas.map(dividadiv =>{
+                                return(
+                                    <div id="dividaspresent">
+                
+                                        <p id="titlepresent" style={{color: color}}>Descrição da divida</p>
+                                        <span id="line" style={{borderColor: color}}></span>
+                                        <div id="descricaodiv">
+                                            <p><span id="text2" style={{color: color}}>Credor</span>{dividadiv.credor}</p>
+                                            <p><span id="text2" style={{color: color}}>Devedor</span>{dividadiv.devedor}</p>
+                                            <p><span id="text2" style={{color: color}}>Valor a pagar</span>{dividadiv.quantia}</p>
+                                        </div>
+
+                                    </div>
+                                );
+                            })}
+                    </Carousel>
+                        
+
+                    
+
+                <div className="Ppagar" style={{background: color}} >
+                    <span id="text1">Pago</span>
+                </div>
+
+                {/*desenhar aqueles 3 pontos*/}
 
                 <div id="dividaspresent">
                     <p id="titlepresent" style={{color: color}}>Descrição da divida</p>
 
                     <span id="line" style={{borderColor: color}}></span>
-                    <div id="descricaodiv">
-                        <p><span id="text2" style={{color: color}}>Credor</span> {credor}</p>
-                        <p><span id="text2" style={{color: color}}>Devedor</span> {devedor}</p>
-                        <p><span id="text2" style={{color: color}}>Valor a pagar</span> {quantia}</p>
-                    </div>
+                    <Carousel>
+                            {dividasPagas.map(dividadiv =>{
+                                return(
+                                    <div id="descricaodiv">
+                                        <p><span id="text2" style={{color: color}}>Credor</span>{dividadiv.credor}</p>
+                                        <p><span id="text2" style={{color: color}}>Devedor</span>{dividadiv.devedor}</p>
+                                        <p><span id="text2" style={{color: color}}>Valor a pagar</span>{dividadiv.quantia}</p>
+                                    </div> 
+                                );
+                            })}
+                    </Carousel>
                 </div>
 
-            <div className="Ppagar" style={{background: color}} >
-                <span id="text1">Pago</span>
+                {/*desenhar aqueles 3 pontos*/}
             </div>
-
-            {/*desenhar aqueles 3 pontos*/}
-
-            <div id="dividaspresent">
-                <p id="titlepresent" style={{color: color}}>Descrição da divida</p>
-
-                <span id="line" style={{borderColor: color}}></span>
-                <div id="descricaodiv">
-                    <p> <span id="text2" style={{color: color}}>Credor</span> {credor}</p>
-                    <p> <span id="text2" style={{color: color}}>Devedor</span> {devedor}</p>
-                    <p> <span id="text2" style={{color: color}}>Valor a pagar</span> {quantia}</p>
-                </div>
-            </div>
-
-            {/*desenhar aqueles 3 pontos*/}
         </div>
-     );
+    );
 }
 
 export default DividasComponent;
