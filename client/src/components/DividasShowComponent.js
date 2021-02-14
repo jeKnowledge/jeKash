@@ -3,56 +3,54 @@ import React, {useState,useCallback,useEffect, } from 'react';
 import Carousel from 'react-elastic-carousel';
 import axios from "axios";
 
-const url = "http://localhost:8000/dividas/getall";
+
 const dividasPagas =[];
 const dividasNaoPagas = [];
 
+
+
 const DividasComponent = (props) => {
-
     const color = props.color;
-    const config = {
-        params: {
-            department: props.page
-        }
-    };
-    
-
-    //* The useCallback React hook is used here as we want to memoize the loadDividas function and not recreate it with every render.
-    const loadDividas = useCallback(async() => { 
-        const res = await axios.get(url, config);
-        const dividas =res.data;
-        setdividas(dividas);
-    },[]) 
-    
+    const url = "http://localhost:8000/dividas/" + props.page;
     const [dividas, setdividas] = useState([]);
 
-    //Dividas são carregadas incialmente
-    useEffect(() =>{
-        
-        const nrdividas = dividas.count;
+    function DividasPagaNaoPaga() {
+        const nrdividas = dividas.length;
         //! Esta algo de mal porque quando atualizo a pagina GET deixa de funcionar
-        
+            
         for(let i =0; i <nrdividas; i++){
-            console.log(i);
-            if(dividas.Dividas[i].paga === false){
-                console.log("paga")
-                dividasNaoPagas.push(dividas.Dividas[i]);
+            // ? console.log(i);
+            if(dividas[i].paga === false){
+                //console.log("paga")
+                dividasNaoPagas.push(dividas[i]);
             }
             else {
-                console.log("npaga")
-                dividasPagas.push(dividas.Dividas[i]);
+                //console.log("npaga")
+                dividasPagas.push(dividas[i]);
             }
         }
         
         //console.log(dividas)
-        console.log(dividasNaoPagas);    
+        console.log(dividasPagas);    
         //console.log(dividasPagas);
+    }
 
+    function GetRequest(url)
+    {
+        axios.get(url).then((res)=>{
+            setdividas(res.data);
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+        DividasPagaNaoPaga();
+    }
 
-        loadDividas();
-    }, [loadDividas]);
+    //Dividas são carregadas incialmente
+    useEffect(() =>{
+        GetRequest(url)
+    }, []);
 
-        
 
     return (
         <div id="bg">
@@ -60,8 +58,10 @@ const DividasComponent = (props) => {
                 <div className="Ppagar" style={{background: color}}>
                     <span id="text1">Por Pagar</span>
                 </div>
+
                 <Carousel
-                    itemsToShow={1}>
+                    enableSwipe="true"
+                    itemsToShow="1">
                             {dividasNaoPagas.map(dividadiv =>{
                                 return(
                                     <div id="dividaspresent">
@@ -77,9 +77,7 @@ const DividasComponent = (props) => {
                                     </div>
                                 );
                             })}
-                    </Carousel>
-                        
-
+                </Carousel>
                     
 
                 <div className="Ppagar" style={{background: color}} >
@@ -87,12 +85,12 @@ const DividasComponent = (props) => {
                 </div>
 
                 {/*desenhar aqueles 3 pontos*/}
-
+                <Carousel>
                 <div id="dividaspresent">
                     <p id="titlepresent" style={{color: color}}>Descrição da divida</p>
 
                     <span id="line" style={{borderColor: color}}></span>
-                    <Carousel>
+                    
                             {dividasPagas.map(dividadiv =>{
                                 return(
                                     <div id="descricaodiv">
@@ -102,10 +100,8 @@ const DividasComponent = (props) => {
                                     </div> 
                                 );
                             })}
-                    </Carousel>
-                </div>
-
-                {/*desenhar aqueles 3 pontos*/}
+                    </div>
+                </Carousel>
             </div>
         </div>
     );

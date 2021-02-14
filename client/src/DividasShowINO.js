@@ -11,11 +11,11 @@ const DividasShow = () => {
                 linkto="/home"
                 logo = "normal"
             />
-            
 
             <div className="criar-divida-titulo">
                 <h1>Dívidas Inovação</h1>
             </div>
+            
             <DividasComponent
                 color = "#FCC17A"
                 page = "Innovation"

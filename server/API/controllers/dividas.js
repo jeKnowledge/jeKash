@@ -275,6 +275,7 @@ exports.dividas_ativas_inativas = (req, res, next) => {
 
 exports.dividas_departamento = (req, res, next) => {
   const dep = req.params.departement;
+ 
   // find() devolve todos os users do departamento indicado na route
   User.find({
       department: dep
@@ -282,6 +283,7 @@ exports.dividas_departamento = (req, res, next) => {
     .exec()
     .then((users) => {
       // users - array com todos os users do departamento
+      
       Divida.find({
           $or: [ // or para considerar os dois "pedidos"
             {
@@ -298,6 +300,7 @@ exports.dividas_departamento = (req, res, next) => {
         }) // encontra todas as dividas com credores ou devedores que estão no array users
         .exec()
         .then((dividas) => {
+          
           var array = new Array();
 
           for (var i = 0; i < dividas.length; i++) {
@@ -308,27 +311,15 @@ exports.dividas_departamento = (req, res, next) => {
           var array = array.filter(function (el) {
             return el != null;
           });
-
-          if (dep === "Tech") {
-            return array.map(divida => {
-                return divida;
-              })
-          }
-          if (dep === "Innovation") {
-            
-            return array.map(divida => {
-                return divida;
-              })
-          }
-          if (dep === "Intern") {
-            
-            return array.map(divida => {
-                return divida;
-              })
-          }
+          
+          let TotalRet = array.map(divida => {
+              return divida;
+            })
+            res.status(200).json(TotalRet);
+            return TotalRet;
+          
         })
         .catch((err) => {
-          
           console.log(err);
         });
 

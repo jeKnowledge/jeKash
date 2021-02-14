@@ -35,7 +35,8 @@ router.get("/user", checkLogin, DividasController.get_all_dividas_user);
 
 
 // GET DIVIDAS POR DEPARTAMENTO
-router.get("/:departement", checkLogin, DividasController.dividas_departamento);
+//! Depois voltar a adicionar checkLogin. Tirei para testar, quando voltarmos a ter algo que consiga passar a header do login voltar a meter.
+router.get("/:departement", DividasController.dividas_departamento);
 
 
 router.post("/:dividaID", checkLogin, DividasController.altera_divida);
