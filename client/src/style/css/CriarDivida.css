@@ -89,3 +89,136 @@ input[type="number"] {
 .quantia-css {
     height: 11.5vh;
 }
+
+
+.popup .popupzito {
+  visibility: hidden;
+  z-index: 1;
+  position: absolute;
+  width: 311px;
+  height: 270px;
+  left: calc(50% - 311px/2 + 1px);
+  top: 290px;
+
+  background: #FFFFFF;
+  box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+}
+
+.popuptext{
+  visibility: hidden;
+  color: #F08A6E;
+  z-index: 2;
+  position: absolute;
+  font-family: fonteLabel;
+  font-size: 7vw;
+  line-height: 26px;
+  width: 311px;
+  height: 43px;
+  top: 336px;
+  margin-left: 11.2%;
+}
+
+.circle {
+  visibility: hidden;
+  position: absolute;
+  z-index: 2;
+  width: 85px;
+  height: 85px;
+  left: 150px;
+  top: 410px;
+  border-radius: 50%;
+
+  background-color: #F08A6E;
+}
+
+.check {
+  visibility: hidden;
+  position: absolute;
+  z-index: 3;
+  width: 15.56px;
+  height: 34.18px;
+  transform: rotate(45deg);
+  border-bottom: 7px solid #FFFFFF;
+  border-right: 7px solid #FFFFFF;
+  left: 48.5%;
+  bottom: 42%;
+}
+
+.circle:hover{
+  cursor:pointer;
+}
+.check:hover{
+  cursor:pointer;
+}
+
+
+/* hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+.popuptext .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+.circle .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+.check .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* hide and show the popup */
+.popup .hide {
+  visibility: hidden;
+  -webkit-animation: fadeOut 1s;
+  animation: fadeOut 1s;
+}
+
+.popuptext .hide {
+  visibility: hidden;
+  -webkit-animation: fadeOut 1s;
+  animation: fadeOut 1s;
+}
+
+.circle .hide {
+  visibility: hidden;
+  -webkit-animation: fadeOut 1s;
+  animation: fadeOut 1s;
+}
+
+.check .hide {
+  visibility: hidden;
+  -webkit-animation: fadeOut 1s;
+  animation: fadeOut 1s;
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+@-webkit-keyframes fadeOut {
+  from {opacity: 1;} 
+  to {opacity: 0;}
+}
+
+@keyframes fadeOut {
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
