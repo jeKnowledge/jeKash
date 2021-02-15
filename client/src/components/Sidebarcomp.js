@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom';
 
 import '../style/css/Sidebar.css';
-import logo from '../style/logo/logoJek.svg';
 import logomais from "../style/logo/logoplus.svg";
 import logopessoa from '../style/logo/logoman.svg';
 import logoarrowUP from '../style/logo/logoarrowUP.svg';
 import logoMoney from '../style/logo/logomoney.svg';
+
 import TopBar from './TopBar'
 
 function toggleNavTOP(x) {
@@ -51,12 +51,14 @@ function toggleNavBOT(x) {
 }
 
 
-
 export const SideBAR = (props) => {
     return(
         <div id ="sbbg">
             <TopBar
-            color ="sidebarTopBar"
+            color ="sidebarTopBarCOLOR "
+            height = "18%" //parece ser 18 na sidebar (10% é o normal)
+            linkto = "dividas/criar"
+            logo = "whitebg"
             />
             <Link to="dividas/criar">
                 <div id = "criardivida">
@@ -70,7 +72,7 @@ export const SideBAR = (props) => {
                     <img src={logopessoa} className="App-logo-pessoa" alt="logopess" />
                     <span id ="primbotSTR">Minhas dívidas</span>
 
-                    <img src={logoarrowUP} className="App-logo-UP" id="logoUP1" style={{transform: "rotate(0deg)"}}/>
+                    <img src={logoarrowUP} className="App-logo-UP" id="logoUP1" alt= "arrowup" style={{transform: "rotate(0deg)"}}/>
                 </div>
 
                 <div id= "transdivsMINHASDIVIDAS" style={{top: "-200%"}}>
@@ -93,7 +95,7 @@ export const SideBAR = (props) => {
                     <img src={logoMoney} className="App-logo-Money" alt="logomoney"/>
                     <span id ="primbotSTR">Dívidas Totais</span>
 
-                    <img src={logoarrowUP} className="App-logo-UP" id="logoUP" style={{transform: "rotate(0deg)"}}/>
+                    <img src={logoarrowUP} className="App-logo-UP" id="logoUP" alt="arrouup" style={{transform: "rotate(0deg)"}}/>
                 </div>
 
                <div id="menu" className="menu-hidden" style={{top: "-200%"}}>
@@ -121,7 +123,7 @@ export const SideBAR = (props) => {
             <div id="bottomBar">
                 <div id="BottomPrimary" onClick={toggleNavBOT}>
                     <span id ="bottomBarSTR">Nome de Usuário</span>
-                    <img src={logoarrowUP} className="App-logo-UPBottom" id="logoUPBOT" style={{transform: "rotate(180deg)"}}/>
+                    <img src={logoarrowUP} className="App-logo-UPBottom" id="logoUPBOT" alt= "arrowup" style={{transform: "rotate(180deg)"}}/>
                 </div>
 
                 <div id="BottomSec" style={{top: "0%"}}>

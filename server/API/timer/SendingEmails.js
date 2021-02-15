@@ -82,10 +82,6 @@ function checkDates() { //função que recebe as datas
         //*   dividaupdatestatus = 2  --> Ao 14º dia foi mandado outro warning (+7)
         //*   dividaupdatestatus = 3  --> Ao 18º dia foi mandado outro warning (+3) e apartir de agora e diariamente ate cancelar o job.
 
-
-        // Tentei fazer com jobs, provou-se muito unrealiable (os jobs não paravam mesmo com dividas ja pagas)
-        // Não estou nada contente com esta solução porque tem mais ifs do que linhas de codigo
-
         //default msg depois podemos mudar:
         let msg = "Hey, deves " + quantiadivida + "€ há mais de " + Math.floor(tempopassadodias) + " dias!";
         if (paga === false) {

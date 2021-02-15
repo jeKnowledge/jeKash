@@ -21,11 +21,6 @@ router.post("/tesoureiro", checkAdmin, DividasController.criar_divida_Tesoureiro
 
 //* Get Dividas somente para o server Se quiserem fazer um request desta route por favor adicionar ao Postman um header com a chave do server para "simular ser o server"
 router.get("/all_dividas_para_o_email", checkServer, DividasController.get_all_dividasMail);
-router.post("/", checkLogin, DividasController.criar_divida_jeK);
-router.post("/tesoureiro", checkAdmin, DividasController.criar_divida_Tesoureiro);
-
-//* Get Dividas somente para o server Se quiserem fazer um request desta route por favor adicionar ao Postman um header com a chave do server para "simular ser o server"
-router.get("/all_dividas_para_o_email", checkServer, DividasController.get_all_dividasMail);
 
 
 router.get("/getall", DividasController.get_all_dividas);
@@ -42,9 +37,7 @@ router.get("/user", checkLogin, DividasController.get_all_dividas_user);
 // GET DIVIDAS POR DEPARTAMENTO
 router.get("/:departement", checkLogin, DividasController.dividas_departamento);
 
-module.exports = router;
+
 router.post("/:dividaID", checkLogin, DividasController.altera_divida);
-
-
 
 module.exports = router;

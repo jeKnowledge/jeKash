@@ -4,6 +4,7 @@ import axios from 'axios';
 import './style/css/CriarDivida.css';
 import LabelsInputs from "./components/LabelsInputs";
 import Buttons from "./components/Buttons";
+import TopBar from './components/TopBar'
 
 const initialState = {
     credor: "",
@@ -73,61 +74,69 @@ const CriarDivida = () => {
         check.classList.toggle("show");
     }
 
-    return ( 
-        <form className="criar-divida" onSubmit={handleSubmit}>
-            <div className="campos" id="myCampos">
-                <div className="criar-divida-titulo">
-                    <h1>Cria uma nova dívida</h1>
-                </div>
-                <div className="credor-css">
-                    <LabelsInputs 
-                        title = "Credor"
-                        name="credor"
-                        type = "text"
-                        placeholder = "exemplo@jeknowledge.pt"
-                        onChange = {handleInputChange}
-                        value = {divida.credor}
-                    />
-                </div>
-                <div className="devedor-css">
-                    <LabelsInputs 
-                        title = "Devedor"
-                        name="devedor"
-                        type = "text"
-                        placeholder = "exemplo@jeknowledge.pt"
-                        onChange = {handleInputChange}
-                        value = {divida.devedor}
-                    />
-                </div>
-                <div className="quantia-css">
-                    <LabelsInputs 
-                        title = "Quantia"
-                        name="quantia"
-                        type = "number"
-                        placeholder = "Quantia da dívida"
-                        onChange = {handleInputChange}
-                        value = {divida.quantia}
-                    />
-                </div>
-                <div className="descricao-css">
-                    <label className="descricao-label">Descrição</label>
-                        <textarea
-                            className="input-descricao"
-                            name="descricao"
+    return (
+        <div>
+            <TopBar
+            color ="normalTopBarCOLOR"
+            height = "11vh" //parece ser 18 na sidebar (13% é o normal)
+            linkto="/home"
+            logo = "normal"
+            />
+
+            <form className="criar-divida" onSubmit={handleSubmit}>
+                <div className="campos" id="myCampos">
+                    <div className="criar-divida-titulo">
+                        <h1>Cria uma nova dívida</h1>
+                    </div>
+                    <div className="credor-css">
+                        <LabelsInputs 
+                            title = "Credor"
+                            name="credor"
                             type = "text"
-                            placeholder = "Descrição da dívida"
+                            placeholder = "exemplo@jeknowledge.pt"
                             onChange = {handleInputChange}
-                            value = {divida.descricao}
-                        ></textarea>
+                            value = {divida.credor}
+                        />
+                    </div>
+                    <div className="devedor-css">
+                        <LabelsInputs 
+                            title = "Devedor"
+                            name="devedor"
+                            type = "text"
+                            placeholder = "exemplo@jeknowledge.pt"
+                            onChange = {handleInputChange}
+                            value = {divida.devedor}
+                        />
+                    </div>
+                    <div className="quantia-css">
+                        <LabelsInputs 
+                            title = "Quantia"
+                            name="quantia"
+                            type = "number"
+                            placeholder = "Quantia da dívida"
+                            onChange = {handleInputChange}
+                            value = {divida.quantia}
+                        />
+                    </div>
+                    <div className="descricao-css">
+                        <label className="descricao-label">Descrição</label>
+                            <textarea
+                                className="input-descricao"
+                                name="descricao"
+                                type = "text"
+                                placeholder = "Descrição da dívida"
+                                onChange = {handleInputChange}
+                                value = {divida.descricao}
+                            ></textarea>
+                    </div>
+                    <div className="button-criar-divida">
+                        <Buttons 
+                            name = "Criar Dívida"
+                            type = "submit"
+                            title = "button"
+                        />
+                    </div>
                 </div>
-                <div className="button-criar-divida">
-                    <Buttons 
-                        name = "Criar Dívida"
-                        type = "submit"
-                        title = "button"
-                    />
-                </div>
-            </div>
             <div className="popup">
                 <span className = "popupzito" id="myPopup"></span>
                 <span className="popuptext" id="myPopupText">Dívida criada com sucesso!</span>
@@ -135,6 +144,7 @@ const CriarDivida = () => {
                 <span className = "check" id ="myCheck" onClick={clearState}></span>
             </div>
         </form>
+    </div>
         
      );
 }
