@@ -1,18 +1,37 @@
 import '../style/css/DividasShowComponent.css';
-import React, {useState,useCallback,useEffect, } from 'react';
-import Carousel from 'react-elastic-carousel';
+import React, {useState,useEffect } from 'react';
 import axios from "axios";
-
+import Slider from "react-slick";
 
 const dividasPagas =[];
 const dividasNaoPagas = [];
+let lastget = [];
 
+function PagoColorselect(color){
+    switch(color){
+        case "#F05B78":
+            return "#F391A4";
+        case "#FCC17A":
+            return "#FFD8AB";
+        case "#51A450":
+            return "#9FCA9E";
+    }
+}
 
 
 const DividasComponent = (props) => {
     const color = props.color;
+    let Pagocolor = PagoColorselect(color);
+
     const url = "http://localhost:8000/dividas/" + props.page;
     const [dividas, setdividas] = useState([]);
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
 
     function DividasPagaNaoPaga() {
         const nrdividas = dividas.length;
@@ -31,14 +50,17 @@ const DividasComponent = (props) => {
         }
         
         //console.log(dividas)
-        console.log(dividasPagas);    
+        //console.log(dividasNaoPagas);    
         //console.log(dividasPagas);
     }
 
     function GetRequest(url)
     {
+        setdividas(lastget);
         axios.get(url).then((res)=>{
-            setdividas(res.data);
+            lastget = res.data;
+            setdividas(lastget);
+            
         })
         .catch((err)=>{
             console.log(err);
@@ -46,64 +68,90 @@ const DividasComponent = (props) => {
         DividasPagaNaoPaga();
     }
 
+    
     //Dividas são carregadas incialmente
     useEffect(() =>{
+        
         GetRequest(url)
+        console.log("dividas:" + dividas);
+
     }, []);
 
-
+    
     return (
-        <div id="bg">
+
             <div className="dividasshow">
                 <div className="Ppagar" style={{background: color}}>
                     <span id="text1">Por Pagar</span>
                 </div>
 
-                <Carousel
-                    enableSwipe="true"
-                    itemsToShow="1">
-                            {dividasNaoPagas.map(dividadiv =>{
-                                return(
-                                    <div id="dividaspresent">
-                
-                                        <p id="titlepresent" style={{color: color}}>Descrição da divida</p>
-                                        <span id="line" style={{borderColor: color}}></span>
-                                        <div id="descricaodiv">
-                                            <p><span id="text2" style={{color: color}}>Credor</span>{dividadiv.credor}</p>
-                                            <p><span id="text2" style={{color: color}}>Devedor</span>{dividadiv.devedor}</p>
-                                            <p><span id="text2" style={{color: color}}>Valor a pagar</span>{dividadiv.quantia}</p>
-                                        </div>
+                <Slider {...settings}>
+                    <div id="slider">
+                        <div id="dividaspresent">
+                            <p id="titlepresent" style={{color: color}}>Descrição da divida</p>
 
-                                    </div>
-                                );
-                            })}
-                </Carousel>
-                    
+                            <span id="line" style={{borderColor: color}}></span>
+                                
+                                    {
+                                    dividasNaoPagas.map(dividadiv =>{
+                                        if(dividasNaoPagas.length ===0 ){
+                                            return(
+                                                <div id="descricaodiv">
+                                                    <p id="titlepresent" style={{color: color}}>Não existem dividas!</p>
+                                                </div> 
+                                            );
+                                        }
+                                        else{
+                                            return(
+                                                <div id="descricaodiv">
+                                                    <p><span id="text2" style={{color: color}}>Credor</span>{dividadiv.credorS}23</p>
+                                                    <p><span id="text2" style={{color: color}}>Devedor</span>{dividadiv.devedorS}</p>
+                                                    <p><span id="text2" style={{color: color}}>Valor a pagar</span>{dividadiv.quantia+"€"}</p>
+                                                </div>
+                                            );
+                                        }
+                                        
+                                    })}
+                                    
+                            </div>
+                        </div>
+                    </Slider>
 
-                <div className="Ppagar" style={{background: color}} >
+                <div className="Ppagar" style={{background: Pagocolor}} >
                     <span id="text1">Pago</span>
                 </div>
 
                 {/*desenhar aqueles 3 pontos*/}
-                <Carousel>
-                <div id="dividaspresent">
-                    <p id="titlepresent" style={{color: color}}>Descrição da divida</p>
+                <Slider {...settings}>
+                    <div id="slider">
+                        <div id="dividaspresent">
+                            <p id="titlepresent" style={{color: color}}>Descrição da divida</p>
 
-                    <span id="line" style={{borderColor: color}}></span>
-                    
-                            {dividasPagas.map(dividadiv =>{
-                                return(
-                                    <div id="descricaodiv">
-                                        <p><span id="text2" style={{color: color}}>Credor</span>{dividadiv.credor}</p>
-                                        <p><span id="text2" style={{color: color}}>Devedor</span>{dividadiv.devedor}</p>
-                                        <p><span id="text2" style={{color: color}}>Valor a pagar</span>{dividadiv.quantia}</p>
-                                    </div> 
-                                );
-                            })}
+                            <span id="line" style={{borderColor: color}}></span>
+                                
+                                    {
+                                    dividasPagas.map(dividadiv =>{
+                                        if(dividasPagas.length ===0 ){
+                                            return(
+                                                <p id="titlepresent" style={{color: color}}>Não existem dividas!</p>
+                                            );
+                                        }
+                                        else{
+                                            return(
+                                                    <div id="descricaodiv">
+                                                        <p><span id="text2" style={{color: color}}>Credor</span>{dividadiv.credorS}</p>
+                                                        <p><span id="text2" style={{color: color}}>Devedor</span>{dividadiv.devedorS}</p>
+                                                        <p><span id="text2" style={{color: color}}>Valor a pagar</span>{dividadiv.quantia+"€"}</p>
+                                                    </div>
+                                            );
+                                        }
+                                        
+                                    })}
+                                    
+                            </div>
                     </div>
-                </Carousel>
+                    </Slider>
             </div>
-        </div>
     );
 }
 

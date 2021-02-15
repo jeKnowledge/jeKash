@@ -4,6 +4,7 @@ import TopBar from './components/TopBar'
 
 const DividasShow = () => {
     return (
+
         <div id="bg">
             <TopBar
                 color ="normalTopBarCOLOR"
