@@ -10,7 +10,7 @@
 
 .criar-divida{
     width: 100%;
-    height: 60%;
+    height: 100%;
     overflow: hidden;
 }
 
@@ -20,7 +20,7 @@
     position: relative;
     width: 100%;
     height: 100%;
-    top: 10%;
+    top: 4vh;
     font-family: fonteTitulo;
     font-style: normal;
     font-weight: bold;
@@ -35,7 +35,7 @@
     position: relative;
     font-family: fonteLabel;
     font-weight: 550;
-    font-size: 2.5vh;
+    font-size: 4.5vw;
     display: flex;
     color: #3E3C39;
 
@@ -66,25 +66,6 @@
 }
 
 
-.button-criar-divida{
-    position: relative;
-    width: 35%;
-    height: 5vh;
-    left: 32.5%;
-    margin-top: 5vh;
-
-    font-family: fonteLabel;
-    font-size: 3.5vw;
-    letter-spacing: 0.01em;
-
-    background: #F08A6E;
-    border-radius: 30px;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    color: #FFFFFF;
-}
-
 /* remove spin wheel input numbers */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -97,12 +78,11 @@ input[type="number"] {
 
 /* posições */
 .credor-css {
-    margin-top: 7%;
+    margin-top: 15%;
     height: 11.5vh;
 }
 
 .devedor-css {
-    top: 0;
     height: 11.5vh;
 }
 
@@ -111,3 +91,99 @@ input[type="number"] {
 }
 
 
+.popup .popupzito {
+  visibility: hidden;
+  z-index: 1;
+  position: absolute;
+  width: 83%;
+  height: 31%;
+  left: calc(50% - 83%/2);
+  top: 36%;
+
+  background: #FFFFFF;
+  box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+}
+
+.popuptext{
+  visibility: hidden;
+  color: #F08A6E;
+  z-index: 2;
+  position: absolute;
+  font-family: fonteLabel;
+  font-size: 7vw;
+  line-height: 3.2%;
+  width: 83%;
+  height: 5.3%;
+  top: 41.4%;
+  margin-left: 11.2%;
+}
+
+.circle {
+  visibility: hidden;
+  position: absolute;
+  z-index: 2;
+  width: 22.7%;
+  height: 10.5%;
+  left: 40%;
+  top: 50.5%;
+  border-radius: 50%;
+
+  background-color: #F08A6E;
+}
+
+.check {
+  visibility: hidden;
+  position: absolute;
+  z-index: 3;
+  width: 4.15%;
+  height: 4.2%;
+  transform: rotate(45deg);
+  border-bottom: 7px solid #FFFFFF;
+  border-right: 7px solid #FFFFFF;
+  left: 48.5%;
+  bottom: 42%;
+}
+
+.circle:hover{
+  cursor:pointer;
+}
+.check:hover{
+  cursor:pointer;
+}
+
+
+/* hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+.popuptext .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+.circle .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+.check .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
