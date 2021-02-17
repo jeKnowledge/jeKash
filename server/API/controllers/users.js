@@ -119,20 +119,11 @@ exports.login = (req, res, next) => {
 
     let errors = []
 
-
     if (!req.body.user.email || !req.body.user.password) {
         errors.push({
             msg: 'Preencha todos os campos'
         });
     }
-
-    // if(errors.length >0){
-    //     res.render('/'),{
-    //         errors:errors,
-    //         email:req.body.email,
-    //         password:req.body.password
-    //     }
-    // } else{
     User.findOne({
             email: req.body.user.email
         })
@@ -140,22 +131,13 @@ exports.login = (req, res, next) => {
         .then(user => {
             if (user.length < 1) { // user nao existe, email nao encontrado, login falhado
                 errors.push("error", "Email nao existe");
-                res.render('/', {
-                    errors: errors,
-                    email: req.body.user.email,
-                    password: req.body.user.password
-                });
             }
             bcrypt.compare(req.body.user.password, user.password, (err, result) => {
                 if (err) {
                     errors.push({
                         msg: 'email already registered'
                     });
-                    res.render('login', {
-                        errors: errors,
-                        email: req.body.user.email,
-                        password: req.body.user.password
-                    });
+                    //! fazer exceçãio de erro.
                 }
                 if (result) {
 
@@ -163,7 +145,7 @@ exports.login = (req, res, next) => {
                         user.admin = true; //se o login for feito pelo admin, admin do user passa para true
                     }
 
-                    const token = jwt.sign( //payload,privateKey, [options,callback]
+                    const response = jwt.sign( //payload,privateKey, [options,callback]
                         {
                             email: user.email,
                             userId: user._id,
@@ -173,16 +155,20 @@ exports.login = (req, res, next) => {
                             expiresIn: "1h"
                         },
                         function (err, token) {
-                            localStorage('Authorization', token);
-                            console.log(user);
+                            //? testing purposes callback.
                             console.log("Token:" + token);
+
+                            //* a resposta de um user validado vai ser um token que e guardado na storage no react client sided.
+                            res.status(200).json({Authorization: token});
                         }
                     );
+                
+
                 } else {
                     errors.push({
                         msg: 'Password Incorreta'
                     });
-
+                    res.status(401).json(user);
                 }
 
             });

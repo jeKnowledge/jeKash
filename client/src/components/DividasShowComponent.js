@@ -24,6 +24,13 @@ const DividasComponent = (props) => {
     let Pagocolor = PagoColorselect(color);
 
     const url = "http://localhost:8000/dividas/" + props.page;
+
+    /* ?
+    const Token = localStorage.getItem('Authorization')
+
+    console.log("Token localstorage: " + Token)
+    */      
+
     const [dividas, setdividas] = useState([]);
     const settings = {
       dots: true,
@@ -56,6 +63,9 @@ const DividasComponent = (props) => {
 
     function GetRequest(url)
     {
+        let token = localStorage.getItem('Authorization');
+        console.log(token);
+        
         setdividas(lastget);
         axios.get(url).then((res)=>{
             lastget = res.data;

@@ -55,6 +55,10 @@ export const SideBAR = (props) => {
 
     const history = useHistory();
 
+
+    //? é preciso de fazer algo para ver se estou logged in aqui? Nos gets das paginas é mas para chegar a esta pagina é?
+
+
     return(
         <div id ="sbbg">
             <TopBar
@@ -130,9 +134,12 @@ export const SideBAR = (props) => {
                 </div>
 
                 <div id="BottomSec" style={{top: "0%"}} onClick={() =>{ 
-                    localStorage.removeItem('token')
-                    sessionStorage.removeItem('token')
+                    localStorage.removeItem('Authorization');
+
+                    console.log("Logged Out! Redirecting...");
+                    
                     history.push('/');
+                    
                 }}>
                     <span id = "subbotSTR">Log Out</span>
                 </div>
