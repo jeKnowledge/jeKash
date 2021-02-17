@@ -150,8 +150,8 @@ const DividasComponent = (props) => {
                                     
                             </div>
                     </div>
-                    </Slider>
-            </div>
+                </Slider>
+        </div>
     );
 }
 

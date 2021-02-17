@@ -7,6 +7,7 @@ import logoarrowUP from '../style/logo/logoarrowUP.svg';
 import logoMoney from '../style/logo/logomoney.svg';
 
 import TopBar from './TopBar'
+import { useHistory } from "react-router-dom";
 
 function toggleNavTOP(x) {
     let top = document.getElementById("menu").style.top;
@@ -50,8 +51,10 @@ function toggleNavBOT(x) {
     }
 }
 
-
 export const SideBAR = (props) => {
+
+    const history = useHistory();
+
     return(
         <div id ="sbbg">
             <TopBar
@@ -126,7 +129,11 @@ export const SideBAR = (props) => {
                     <img src={logoarrowUP} className="App-logo-UPBottom" id="logoUPBOT" alt= "arrowup" style={{transform: "rotate(180deg)"}}/>
                 </div>
 
-                <div id="BottomSec" style={{top: "0%"}}>
+                <div id="BottomSec" style={{top: "0%"}} onClick={() =>{ 
+                    localStorage.removeItem('token')
+                    sessionStorage.removeItem('token')
+                    history.push('/');
+                }}>
                     <span id = "subbotSTR">Log Out</span>
                 </div>
             </div>  
