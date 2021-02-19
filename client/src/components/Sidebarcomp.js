@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import '../style/css/Sidebar.css';
 import logomais from "../style/logo/logoplus.svg";
@@ -7,7 +8,7 @@ import logoarrowUP from '../style/logo/logoarrowUP.svg';
 import logoMoney from '../style/logo/logomoney.svg';
 
 import TopBar from './TopBar'
-import { useHistory } from "react-router-dom";
+const MINUTOCHECK = 1000;
 
 function toggleNavTOP(x) {
     let top = document.getElementById("menu").style.top;
@@ -51,13 +52,58 @@ function toggleNavBOT(x) {
     }
 }
 
-export const SideBAR = (props) => {
+function TokenNotFoundSideBar(){
+    throw {
+    name: 'Token Not Found Or Inexistent',
+    message: 'Redirecting to Home Page...'
+  };
+}
 
+function TokenNotValid(){
+    throw {
+    name: 'Invalid Token...',
+    message: 'Whoops Looks like something is wrong with your key. Redirecting to Home Page...'
+  };
+}
+
+
+
+export const SideBAR = (props) => {
     const history = useHistory();
 
+    useEffect(() => {
+        //* De minuto a minuto vai checkar se ainda tem o token.
 
-    //? é preciso de fazer algo para ver se estou logged in aqui? Nos gets das paginas é mas para chegar a esta pagina é?
+        const interval = setInterval(()=> {
+            //for login verification, vejo se ainda está lá, se não estiver ou estiver mexido (unreadable) dou redirect para a home page.
+            try{
+                const token = localStorage.getItem("Authorization");
+                if(token=== null || token===undefined){
+                    history.push("/");
+                    clearInterval(interval);
+                    throw new TokenNotFoundSideBar();
+                }
+                // ?console.log("Validado com sucesso!")
+            }
+            catch(e){
+                if(e instanceof TypeError){
+                    TokenNotValid();
+                }
+                else{
+                    console.log(e)
+                }
+                clearInterval(interval);
+                history.push("/")
+            }
+        },MINUTOCHECK);
 
+        //* Isto representa a "UNMOUNT"
+        // function que basicamente diz
+        // quando fizermos return fazer algo e neste caso para parar de contar 
+        // o tempo quando vou para outra pagina normalmente, vou dar clear ao 
+        // intervalo para ver se ainda é valido.
+        return () => clearInterval(interval);
+    }, []);
 
     return(
         <div id ="sbbg">
@@ -134,7 +180,7 @@ export const SideBAR = (props) => {
                 </div>
 
                 <div id="BottomSec" style={{top: "0%"}} onClick={() =>{ 
-                    localStorage.removeItem('Authorization');
+                    localStorage.clear();
 
                     console.log("Logged Out! Redirecting...");
                     

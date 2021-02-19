@@ -39,16 +39,25 @@ const handleInputChange = e => {
 const handleSubmit = e => {
     e.preventDefault();
     console.log(user);
-
+    
 
     axios.post("http://localhost:8000/users/login", { user })
       .then(res => {
         console.log('Logging in...')
+        const token = 'Bearer '+ res.data.Authorization;  
+
+
+        if (token) {
+         axios.defaults.headers.common['Authorization'] = token;
+        } else {
+            delete axios.defaults.headers.common['Authorization'];
+        }
 
         //? console.log('Token: ' + res.data.Authorization);
 
-        localStorage.setItem('Authorization', res.data.Authorization);
-        
+        localStorage.setItem('Authorization', token);
+        axios.defaults.headers.common['Authorization'] =token;
+
         console.log("Logged in! Redirecting...");
 
         history.push('/home');

@@ -3,6 +3,8 @@ import React, {useState,useEffect } from 'react';
 import axios from "axios";
 import Slider from "react-slick";
 
+// https://github.com/g787543/infinite-react-carousel
+
 const dividasPagas =[];
 const dividasNaoPagas = [];
 let lastget = [];
@@ -24,13 +26,6 @@ const DividasComponent = (props) => {
     let Pagocolor = PagoColorselect(color);
 
     const url = "http://localhost:8000/dividas/" + props.page;
-
-    /* ?
-    const Token = localStorage.getItem('Authorization')
-
-    console.log("Token localstorage: " + Token)
-    */      
-
     const [dividas, setdividas] = useState([]);
     const settings = {
       dots: true,
@@ -63,10 +58,9 @@ const DividasComponent = (props) => {
 
     function GetRequest(url)
     {
-        let token = localStorage.getItem('Authorization');
-        console.log(token);
-        
         setdividas(lastget);
+
+
         axios.get(url).then((res)=>{
             lastget = res.data;
             setdividas(lastget);

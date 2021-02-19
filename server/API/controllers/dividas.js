@@ -275,7 +275,7 @@ exports.dividas_ativas_inativas = (req, res, next) => {
 
 exports.dividas_departamento = (req, res, next) => {
   const dep = req.params.departement;
-  console.log("Hello?")
+  //? console.log("Reached GET REQ");
   // find() devolve todos os users do departamento indicado na route
   User.find({
       department: dep
@@ -315,8 +315,9 @@ exports.dividas_departamento = (req, res, next) => {
           let TotalRet = array.map(divida => {
               return divida;
             });
+          console.log(TotalRet);
           res.status(200).json(TotalRet);
-          
+          return TotalRet;
         })
         .catch((err) => {
           console.log(err);

@@ -156,7 +156,7 @@ exports.login = (req, res, next) => {
                         },
                         function (err, token) {
                             //? testing purposes callback.
-                            console.log("Token:" + token);
+                            //? console.log("Token:" + token);
 
                             //* a resposta de um user validado vai ser um token que e guardado na storage no react client sided.
                             res.status(200).json({Authorization: token});
