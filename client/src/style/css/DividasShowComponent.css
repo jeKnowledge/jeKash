@@ -136,7 +136,7 @@ html {
   text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
 }
 
-.descricaodiv {
+#descricaodiv {
   position: relative;
   height: 15.5vh;
   left: 13%;

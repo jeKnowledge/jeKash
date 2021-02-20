@@ -18,104 +18,106 @@ function PagoColorselect(color) {
     case "#51A450":
       return "#9FCA9E";
   }
+}
 
-  const reducer = (state, action) => {
-    switch (action.type) {
-      case "dividas":
-        return {
-          ...state,
-          dividasPagas: action.auxPagas,
-          dividasNPagas: action.auxNPagas,
-          loading: false,
-        };
-      default:
-        return state;
-    }
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "dividas":
+      return {
+        ...state,
+        dividasPagas: action.auxPagas,
+        dividasNPagas: action.auxNPagas,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+};
+
+const DividasComponent = (props) => {
+  const color = props.color;
+  let Pagocolor = PagoColorselect(color);
+
+  let url = "http://localhost:8000/dividas/" + props.page;
+
+  const [state, dispatch] = useReducer(reducer, inicialstate);
+
+  if (props.user) {
+    let url = "http://localhost:8000/dividas/user";
+  }
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 300,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
   };
 
-  const DividasComponent = (props) => {
-    const color = props.color;
-    let Pagocolor = PagoColorselect(color);
+  const DividasPagaNaoPaga = (dividas) => {
+    console.log(dividas);
+    const nrdividas = dividas.length;
+    const auxNPagas = [];
+    const auxPagas = [];
 
-    let url = "http://localhost:8000/dividas/" + props.page;
-
-    const [state, dispatch] = useReducer(reducer, inicialstate);
-
-    if (props.user) {
-      let url = "http://localhost:8000/dividas/user";
-    }
-
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 300,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      arrows: false,
-    };
-
-    const DividasPagaNaoPaga = (dividas) => {
-      console.log(dividas);
-      const nrdividas = dividas.length;
-      const auxNPagas = [];
-      const auxPagas = [];
-
-      console.log(dividas);
-      for (let i = 0; i < nrdividas; i++) {
-        // ? console.log(i);
-        if (dividas[i].paga === false) {
-          //console.log("paga")
-          auxNPagas.push(dividas[i]);
-        } else {
-          auxPagas.push(dividas[i]);
-        }
+    console.log(dividas);
+    for (let i = 0; i < nrdividas; i++) {
+      // ? console.log(i);
+      if (dividas[i].paga === false) {
+        //console.log("paga")
+        auxNPagas.push(dividas[i]);
+      } else {
+        auxPagas.push(dividas[i]);
       }
-      dispatch({ type: "dividas", auxNPagas, auxPagas });
-    };
-
-    const slider = (dividas) => {
-      return (
-        <Slider {...settings}>
-          {dividas.map((dividadiv, i) => {
-            return (
-              <div className="descricaodiv" key={i}>
-                <p>
-                  <span id="text2" style={{ color: color }}>
-                    Credor:{" "}
-                  </span>
-                  {dividadiv.credorS}
-                </p>
-                <p>
-                  <span id="text2" style={{ color: color }}>
-                    Devedor:{" "}
-                  </span>
-                  {dividadiv.devedorS}
-                </p>
-                <p>
-                  <span id="text2" style={{ color: color }}>
-                    Valor a pagar:{" "}
-                  </span>
-                  {dividadiv.quantia + "€"}
-                </p>
-              </div>
-            );
-          })}
-        </Slider>
-      );
-    };
-    //Dividas são carregadas inicialmente
-    useEffect(() => {
-      axios
-        .get(url)
-        .then((res) => {
-          const lastget = res.data;
-          DividasPagaNaoPaga(lastget);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }, []);
+    }
+    dispatch({ type: "dividas", auxNPagas, auxPagas });
   };
+
+  const slider = (dividas) => {
+    return (
+      <Slider {...settings}>
+        {dividas.map((dividadiv, i) => {
+          console.log(dividadiv);
+          return (
+            <div id="descricaodiv" key={i}>
+              <p>
+                <span id="text2" style={{ color: color }}>
+                  Credor:{" "}
+                </span>
+                {dividadiv.credorS}
+              </p>
+              <p>
+                <span id="text2" style={{ color: color }}>
+                  Devedor:{" "}
+                </span>
+                {dividadiv.devedorS}
+              </p>
+              <p>
+                <span id="text2" style={{ color: color }}>
+                  Valor a pagar:{" "}
+                </span>
+                {dividadiv.quantia + "€"}
+              </p>
+            </div>
+          );
+        })}
+      </Slider>
+    );
+  };
+
+  //Dividas são carregadas inicialmente
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((res) => {
+        const lastget = res.data;
+        DividasPagaNaoPaga(lastget);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className="dividasshow">
@@ -156,6 +158,6 @@ function PagoColorselect(color) {
       </div>
     </div>
   );
-}
+};
 
 export default DividasComponent;
