@@ -8,7 +8,7 @@ import logoarrowUP from '../style/logo/logoarrowUP.svg';
 import logoMoney from '../style/logo/logomoney.svg';
 
 import TopBar from './TopBar'
-const MINUTOCHECK = 1000;
+
 
 function toggleNavTOP(x) {
     let top = document.getElementById("menu").style.top;
@@ -22,6 +22,7 @@ function toggleNavTOP(x) {
         document.getElementById("logoUP").style.transform = "rotate(0deg)";
     }
     //alert(document.getElementById("menu").style.top);
+    
 };
 
 function toggleNav(x){
@@ -52,59 +53,10 @@ function toggleNavBOT(x) {
     }
 }
 
-function TokenNotFoundSideBar(){
-    throw {
-    name: 'Token Not Found Or Inexistent',
-    message: 'Redirecting to Home Page...'
-  };
-}
-
-function TokenNotValid(){
-    throw {
-    name: 'Invalid Token...',
-    message: 'Whoops Looks like something is wrong with your key. Redirecting to Home Page...'
-  };
-}
-
 
 
 export const SideBAR = (props) => {
     const history = useHistory();
-
-    useEffect(() => {
-        //* De minuto a minuto vai checkar se ainda tem o token.
-
-        const interval = setInterval(()=> {
-            //for login verification, vejo se ainda está lá, se não estiver ou estiver mexido (unreadable) dou redirect para a home page.
-            try{
-                const token = localStorage.getItem("Authorization");
-                if(token=== null || token===undefined){
-                    history.push("/");
-                    clearInterval(interval);
-                    throw new TokenNotFoundSideBar();
-                }
-                // ?console.log("Validado com sucesso!")
-            }
-            catch(e){
-                if(e instanceof TypeError){
-                    throw new TokenNotValid();
-                }
-                else{
-                    console.log(e)
-                }
-                clearInterval(interval);
-                history.push("/")
-            }
-        },MINUTOCHECK);
-
-        //* Isto representa a "UNMOUNT"
-        // function que basicamente diz
-        // quando fizermos return fazer algo e neste caso para parar de contar 
-        // o tempo quando vou para outra pagina normalmente, vou dar clear ao 
-        // intervalo para ver se ainda é valido.
-        return () => clearInterval(interval);
-    }, []);
-
     return(
         <div id ="sbbg">
             <TopBar
@@ -152,23 +104,25 @@ export const SideBAR = (props) => {
                 </div>
 
                <div id="menu" className="menu-hidden" style={{top: "-200%"}}>
-                    <Link to="dividas/Interno">
-                        <div id = "botao"> 
-                            <span id ="subbotSTR">Interno</span>
-                        </div>
-                    </Link>
                     
-                    <Link to="dividas/Inovacao">
                         <div id = "botao">
-                            <span id = "subbotSTR">Inovação</span>
+                            <Link to="dividas/Interno" style={{ marginTop: "-100%" }}>
+                                    <span id ="subbotSTR">Interno</span>
+                            </Link>
                         </div>
-                    </Link>
-
-                    <Link to="dividas/Tech">
+    
                         <div id = "botao">
-                            <span id = "subbotSTR">Tech</span>
+                            <Link to="dividas/Inovacao">
+                                <span id = "subbotSTR">Inovação</span>
+                            </Link>
                         </div>
-                    </Link>
+                    
+                        <div id = "botao">
+                            <Link to="dividas/Tech">
+                                <span id = "subbotSTR">Tech</span>
+                            </Link>
+                        </div>
+                    
                 </div>
             </div>
 
