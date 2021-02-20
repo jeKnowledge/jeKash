@@ -87,7 +87,7 @@ export const SideBAR = (props) => {
             }
             catch(e){
                 if(e instanceof TypeError){
-                    TokenNotValid();
+                    throw new TokenNotValid();
                 }
                 else{
                     console.log(e)
