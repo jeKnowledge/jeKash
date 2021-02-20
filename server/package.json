@@ -36,6 +36,7 @@
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.10.0",
     "node-cron": "^2.0.3",
+    "node-localstorage": "^2.1.6",
     "nodemailer": "^6.4.17",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",

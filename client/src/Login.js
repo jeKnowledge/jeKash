@@ -4,6 +4,7 @@ import "./style/css/Login.css";
 import axios from "axios";
 import LabelsInputs from "./components/LabelsInputs";
 import Buttons from "./components/Buttons";
+import { useHistory } from "react-router-dom";
 
 const initialState = {
   email: "",
@@ -29,6 +30,7 @@ const reducer = (user, action) => {
 const Login = () => {
   const [user, dispatch] = useReducer(reducer, initialState);
   const [errors, setErrors] = useState([]);
+  const history = useHistory();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -41,13 +43,27 @@ const Login = () => {
 
     axios
       .post("http://localhost:8000/users/login", { user })
-      .then(() => {
-        console.log("User sended");
-        //browserHistory.push('/home');
+      .then((res) => {
+        console.log("Logging in...");
+        const token = "Bearer " + res.data.Authorization;
+
+        if (token) {
+          axios.defaults.headers.common["Authorization"] = token;
+        } else {
+          delete axios.defaults.headers.common["Authorization"];
+        }
+
+        //? console.log('Token: ' + res.data.Authorization);
+
+        localStorage.setItem("Authorization", token);
+        axios.defaults.headers.common["Authorization"] = token;
+
+        console.log("Logged in! Redirecting...");
+
+        history.push("/home");
       })
       .catch((err) => {
-        setErrors(errors);
-        console.error(err);
+        console.log(err);
       });
   };
 

@@ -26,19 +26,19 @@ router.get("/all_dividas_para_o_email", checkServer, DividasController.get_all_d
 router.get("/getall", DividasController.get_all_dividas);
 
 // GET DIVIDAS ATIVAS E INATIVAS
-router.get(/^\/(in)?ativas/, checkLogin, DividasController.dividas_ativas_inativas);
+router.get(/^\/(in)?ativas/,checkLogin, DividasController.dividas_ativas_inativas);
 
 // Opção para dar uma divida como paga
 
 // GET DIVIDAS POR USER
-router.get("/user", checkLogin, DividasController.get_all_dividas_user);
+router.get("/user",checkLogin, DividasController.get_all_dividas_user);
 
 
 // GET DIVIDAS POR DEPARTAMENTO
 //! Depois voltar a adicionar checkLogin. Tirei para testar, quando voltarmos a ter algo que consiga passar a header do login voltar a meter.
-router.get("/:departement", DividasController.dividas_departamento);
+router.get("/:departement",checkLogin, DividasController.dividas_departamento);
 
 
-router.post("/:dividaID", checkLogin, DividasController.altera_divida);
+router.post("/:dividaID",checkLogin, DividasController.altera_divida);
 
 module.exports = router;
