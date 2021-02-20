@@ -7,6 +7,8 @@ import SideBar from './Sidebar';
 import DividasShowInterno from './DividasShowINT';
 import DividasShowInovacao from './DividasShowINO';
 import DividasShowTech from './DividasShowTEC';
+import DividasShowaDever from './DividasShowaDever';
+import DividasShowDevo from './DividasShowDevo';
 
 function App() {
   return (
@@ -24,6 +26,12 @@ function App() {
               </Route>
               <Route exact path="/dividas/criar">
                 <CriarDivida />
+              </Route>
+              <Route exact path="/dividas/minhasdividas">
+                <DividasShowDevo />
+              </Route>
+              <Route exact path="/dividas/adever">
+                <DividasShowaDever />
               </Route>
               <Route exact path="/dividas/Interno">
                 <DividasShowInterno />

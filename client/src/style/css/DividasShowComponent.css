@@ -7,11 +7,11 @@
   font-family: fonteLabel;
   src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
 }
-@font-face{
+@font-face {
   font-family: fontenormal;
-  src: url(../font/SuisseIntlCond-Regular-WebS.woff)
+  src: url(../font/SuisseIntlCond-Regular-WebS.woff);
 }
-html{
+html {
   width: 100%;
   height: 100%;
 }
@@ -25,7 +25,6 @@ html{
   position: absolute;
   width: 100%;
   height: 200%;
-
 }
 
 .Ppagar {
@@ -51,8 +50,7 @@ html{
   font-size: 5vw;
   line-height: 110%;
   display: flex;
-  
-  
+
   letter-spacing: 0.01em;
 
   position: relative;
@@ -61,7 +59,7 @@ html{
   justify-content: center;
   text-align: center;
   align-items: center;
-  transform: translate(0,30%);
+  transform: translate(0, 30%);
 }
 
 #text2 {
@@ -76,7 +74,6 @@ html{
   align-items: center;
   letter-spacing: 0.01em;
 }
-
 
 #dividaspresent {
   position: relative;
@@ -98,7 +95,7 @@ html{
   cursor: pointer;
   outline: none;
 
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 #line {
@@ -107,7 +104,6 @@ html{
   border-bottom: 1px solid currentColor;
   transform: matrix(1, 0, 0, 1, 0, 0);
   width: 80%;
-
 
   margin: auto;
   margin-top: 12%;
@@ -140,7 +136,7 @@ html{
   text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
 }
 
-#descricaodiv {
+.descricaodiv {
   position: relative;
   height: 15.5vh;
   left: 13%;
