@@ -45,6 +45,9 @@ exports.signup = (req, res, next) => { // criar um novo user no servidor
         errors.push({
             msg: 'Passwords não coincidem'
         });
+        res.status(401).json({
+            msg: 'Passwords não coincidem'
+        });
     }
 
 
@@ -54,35 +57,23 @@ exports.signup = (req, res, next) => { // criar um novo user no servidor
         });
         console.log('Password 3' + req.body.user.password);
     }
-
-    // if(errors.user.length){
-    //     res.render('signup'),{
-    //         errors:errors,
-    //         name:req.body.user.name,
-    //         lastname:req.body.user.lastname,
-    //         email:req.body.user.email,
-    //         password:req.body.user.password,
-    //         password2:req.body.user.password2,
-    //         department:req.body.user.department
-    //     }
-    // } else{
     User.find({
             email: req.body.user.email
         })
         .exec()
         .then(user => { // verifica se o email do novo usuario ja existe na base de dados
             if (user.length > 0) {
-                errors.push({
-                    msg: 'Email already registered'
-                });
-                render(res, errors, user.name, user.lastname, user.email, user.password, user.password2, user.department);
-
+                res.status(409).json({
+                    msg: "Already Registed!"
+                })
+                
             } else { // se não cria um novo usario
                 bcrypt.hash(req.body.user.password, 10, (err, hash) => { // encripta a password
                     if (err) {
                         errors.push({
                             msg: 'Erro'
                         })
+                        console.log(err)
                     } else {
                         const user = new User({ //cria um usario com email e password (encriptada)
                             _id: new mongoose.Types.ObjectId(),
@@ -95,7 +86,7 @@ exports.signup = (req, res, next) => { // criar um novo user no servidor
                         user.save()
                             .then(result => {
                                 console.log(result);
-                                req.flash('success_msg', 'You have now registered!')
+                                res.status(200).json(result);
                             })
                             .catch(err => {
                                 console.log(err);
@@ -108,7 +99,7 @@ exports.signup = (req, res, next) => { // criar um novo user no servidor
                 });
             }
         }).catch(err => {
-            req.flash("errors", err);
+            console.log(err)
         });
 
 };
@@ -162,7 +153,6 @@ exports.login = (req, res, next) => {
                             res.status(200).json({Authorization: token});
                         }
                     );
-                
 
                 } else {
                     errors.push({

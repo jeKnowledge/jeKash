@@ -5,7 +5,7 @@ import axios from 'axios';
 import LabelsInputs from "./components/LabelsInputs";
 import SelectDepartments from "./components/Selects";
 import Buttons from "./components/Buttons";
-
+import { useHistory } from "react-router-dom";
 
  const initialState = {
     name:"",
@@ -30,7 +30,7 @@ const reducer = (user,action) => {
 
 
 const Signup = () => {
-
+  const history = useHistory();
   const [user,dispatch] = useReducer(reducer,initialState);
   
 
@@ -45,8 +45,12 @@ const Signup = () => {
       
 
         axios.post("http://localhost:8000/users/signup", { user })
-          .then(() => console.log('User Created'))
+          .then(() => {
+            console.log('User Created')
+            history.push("/users/login");
+          })
           .catch(err => {
+            //algo correu mal
             console.error(err);
           });
       };

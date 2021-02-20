@@ -2,7 +2,7 @@ import "../style/css/DividasShowComponent.css";
 import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import Slider from "infinite-react-carousel";
-
+import { useHistory } from "react-router-dom";
 const inicialstate = {
   dividasPagas: [],
   dividasNPagas: [],
