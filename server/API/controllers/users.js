@@ -32,31 +32,7 @@ exports.get_all_users = (req, res, next) => {
 };
 
 exports.signup = (req, res, next) => { // criar um novo user no servidor
-
-    let errors = []
-
-    if (!req.body.user.name || !req.body.user.lastname || !req.body.user.email || !req.body.user.password || !req.body.user.password2 || !req.body.user.department) {
-        errors.push({
-            msg: 'Preencha todos os campos'
-        });
-    }
-
-    if (req.body.user.password !== req.body.user.password2) {
-        errors.push({
-            msg: 'Passwords não coincidem'
-        });
-        res.status(401).json({
-            msg: 'Passwords não coincidem'
-        });
-    }
-
-
-    if (req.body.user.password.lenght > 6) {
-        errors.push({
-            msg: 'Tem de ter pelo menos 6 caracteres'
-        });
-        console.log('Password 3' + req.body.user.password);
-    }
+    let errors = [];
     User.find({
             email: req.body.user.email
         })

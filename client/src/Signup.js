@@ -42,7 +42,19 @@ const Signup = () => {
     const handleSubmit = e => {
         e.preventDefault();
         console.log(user);
-      
+        //! substituir o console log por depois returns diferentes.
+        if (!user.name || !user.lastname || !user.email || !user.password || !user.password2 || !user.department) {
+          console.log("Preencha todos os campos.");
+          return;
+        }
+        else if (user.password !== user.password2) {
+          console.log("Passwords não coincidem.");
+          return;
+        }
+        else if (user.password > 6) {
+          console.log('A Password Tem de ter pelo menos 6 caracteres.');
+          return;
+        }
 
         axios.post("http://localhost:8000/users/signup", { user })
           .then(() => {
