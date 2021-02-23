@@ -13,7 +13,7 @@ const DividasController = require("../controllers/Dividas");
 //const checkAuth = require("../middleware/check-auth")//a checkAuth é a middleware do log-in
 
 //post de uma divida da JEK e do Tesoureiro
-router.post("/", checkLogin, DividasController.criar_divida_jeK);
+router.post("/", DividasController.criar_divida_jeK);
 //router.post("/", DividasController.criar_divida_jeK);
 router.post(
   "/tesoureiro",
@@ -41,6 +41,8 @@ router.get(
 
 // GET DIVIDAS POR USER
 router.get("/user", checkLogin, DividasController.get_all_dividas_user);
+
+router.get("/alldep", checkLogin, DividasController.dividas_pordepartamento);
 
 // GET DIVIDAS POR DEPARTAMENTO
 //! Depois voltar a adicionar checkLogin. Tirei para testar, quando voltarmos a ter algo que consiga passar a header do login voltar a meter.

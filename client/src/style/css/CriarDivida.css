@@ -1,95 +1,82 @@
-@font-face {
-    font-family: fonteTitulo;
-    src: url(../font/SuisseIntlCond-Medium-WebS.woff);
-  }
-
-@font-face {
-    font-family: fonteLabel;
-    src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
+.criar-divida {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-.criar-divida{
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-  /* estilos */
+/* estilos */
 
 .criar-divida-titulo {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    top: 4vh;
-    font-family: fonteTitulo;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 4vw;
-    text-align: center;
-    letter-spacing: 0.01em;
-    color: #3E3C39;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: 4vh;
+  font-family: fonteTitulo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 4vw;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #3e3c39;
 }
 
+.descricao-label {
+  position: relative;
+  font-family: fonteLabel;
+  font-weight: 550;
+  font-size: 4.5vw;
+  display: flex;
+  color: #3e3c39;
 
-.descricao-label{
-    position: relative;
-    font-family: fonteLabel;
-    font-weight: 550;
-    font-size: 4.5vw;
-    display: flex;
-    color: #3E3C39;
-
-    left: 16%;
-    height: 3.5vh;
+  left: 16%;
+  height: 3.5vh;
 }
 
 .input-descricao {
-    position: relative;
-    width: 67%;
-    height: 25vh;
-    left: 12.5%;
-    padding-left: 2.5vh;
-    padding-top: 2vh;
-    font-size: 3.5vw;
-    display: flex;
-    letter-spacing: 0.01em;
-    resize: none;
-    background: #FFFFFF;
-    white-space: pre-wrap;
-    outline: none;
+  position: relative;
+  width: 67%;
+  height: 25vh;
+  left: 12.5%;
+  padding-left: 2.5vh;
+  padding-top: 2vh;
+  font-size: 3.5vw;
+  display: flex;
+  letter-spacing: 0.01em;
+  resize: none;
+  background: #ffffff;
+  white-space: pre-wrap;
+  outline: none;
 
-    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
-    border-radius: 30px;
-    border: #ffffff;
-    
-    color: #AEADAA;
+  box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+  border: #ffffff;
+
+  color: #aeadaa;
 }
-
 
 /* remove spin wheel input numbers */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-   -webkit-appearance: none;
-   margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 input[type="number"] {
-   -moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 /* posições */
 .credor-css {
-    margin-top: 15%;
-    height: 11.5vh;
+  margin-top: 15%;
+  height: 11.5vh;
 }
 
 .devedor-css {
-    height: 11.5vh;
+  height: 11.5vh;
 }
 
 .quantia-css {
-    height: 11.5vh;
+  height: 11.5vh;
 }
-
 
 .popup .popupzito {
   visibility: hidden;
@@ -97,17 +84,17 @@ input[type="number"] {
   position: absolute;
   width: 83%;
   height: 31%;
-  left: calc(50% - 83%/2);
+  left: calc(50% - 83% / 2);
   top: 36%;
 
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
 }
 
-.popuptext{
+.popuptext {
   visibility: hidden;
-  color: #F08A6E;
+  color: #f08a6e;
   z-index: 2;
   position: absolute;
   font-family: fonteLabel;
@@ -129,7 +116,7 @@ input[type="number"] {
   top: 50.5%;
   border-radius: 50%;
 
-  background-color: #F08A6E;
+  background-color: #f08a6e;
 }
 
 .check {
@@ -139,19 +126,18 @@ input[type="number"] {
   width: 4.15%;
   height: 4.2%;
   transform: rotate(45deg);
-  border-bottom: 7px solid #FFFFFF;
-  border-right: 7px solid #FFFFFF;
+  border-bottom: 7px solid #ffffff;
+  border-right: 7px solid #ffffff;
   left: 48.5%;
   bottom: 42%;
 }
 
-.circle:hover{
-  cursor:pointer;
+.circle:hover {
+  cursor: pointer;
 }
-.check:hover{
-  cursor:pointer;
+.check:hover {
+  cursor: pointer;
 }
-
 
 /* hide and show the popup */
 .popup .show {
@@ -179,11 +165,19 @@ input[type="number"] {
 }
 
 @-webkit-keyframes fadeIn {
-  from {opacity: 0;} 
-  to {opacity: 1;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

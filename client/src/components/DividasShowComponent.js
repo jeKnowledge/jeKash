@@ -43,7 +43,7 @@ const DividasComponent = (props) => {
   const [state, dispatch] = useReducer(reducer, inicialstate);
 
   if (props.user) {
-    let url = "http://localhost:8000/dividas/user";
+    url = "http://localhost:8000/dividas/user";
   }
 
   const settings = {
@@ -83,19 +83,19 @@ const DividasComponent = (props) => {
             <div id="descricaodiv" key={i}>
               <p>
                 <span id="text2" style={{ color: color }}>
-                  Credor:{" "}
+                  <strong>Credor:</strong>{" "}
                 </span>
                 {dividadiv.credorS}
               </p>
               <p>
                 <span id="text2" style={{ color: color }}>
-                  Devedor:{" "}
+                  <strong>Devedor:</strong>{" "}
                 </span>
                 {dividadiv.devedorS}
               </p>
               <p>
                 <span id="text2" style={{ color: color }}>
-                  Valor a pagar:{" "}
+                  <strong>Valor a pagar:</strong>{" "}
                 </span>
                 {dividadiv.quantia + "€"}
               </p>
@@ -125,7 +125,7 @@ const DividasComponent = (props) => {
         <span id="text1">Por Pagar</span>
       </div>
 
-      <div id="slider">
+      <div cal="slider">
         <div id="dividaspresent">
           <p id="titlepresent" style={{ color: color }}>
             Descrição da divida
@@ -144,7 +144,7 @@ const DividasComponent = (props) => {
 
       {/*desenhar aqueles 3 pontos*/}
 
-      <div id="slider">
+      <div className="slider2">
         <div id="dividaspresent">
           <p id="titlepresent" style={{ color: color }}>
             Descrição da divida

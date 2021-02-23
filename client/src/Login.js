@@ -9,11 +9,8 @@ import { useHistory } from "react-router-dom";
 const initialState = {
   email: "",
   password: "",
-};
-
-const errors = {
   error: "Oops! Email ou Passoword incorretos!",
-  hidden: false,
+  hidden: true,
 };
 
 const reducer = (user, action) => {
@@ -21,7 +18,11 @@ const reducer = (user, action) => {
     case "change":
       const { name, value } = action;
       return { ...user, [name]: value };
-
+    case "error":
+      return {
+        ...user,
+        hidden: false,
+      };
     default:
       return { ...user };
   }
@@ -29,7 +30,6 @@ const reducer = (user, action) => {
 
 const Login = () => {
   const [user, dispatch] = useReducer(reducer, initialState);
-  const [errors, setErrors] = useState([]);
   const history = useHistory();
 
   const handleInputChange = (e) => {
@@ -44,6 +44,7 @@ const Login = () => {
     axios
       .post("http://localhost:8000/users/login", { user })
       .then((res) => {
+        console.log(res.data);
         console.log("Logging in...");
         const token = "Bearer " + res.data.Authorization;
 
@@ -63,16 +64,8 @@ const Login = () => {
         history.push("/home");
       })
       .catch((err) => {
-        console.log(err);
+        dispatch({ type: "error" });
       });
-  };
-
-  const handleErros = (e) => {
-    e.preventDefault();
-
-    if (!errors.hidden) {
-      return <p>Oops! Email ou Password incorretos</p>;
-    }
   };
 
   return (
@@ -106,7 +99,9 @@ const Login = () => {
               />
             </div>
           </div>
-          <div className="error_login">{handleErros}</div>
+          <div className="error_login">
+            {!user.hidden && <p>{user.error}</p>}
+          </div>
           <div className="button-login">
             <Buttons name="Log in" type="submit" title="button" />
           </div>
