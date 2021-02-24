@@ -32,3 +32,29 @@ html {
   background-color: #fcc17a;
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
 }
+/*
+.App-logo-mainmenu {
+  visibility: hidden;
+  position: relative;
+  height: 10vh;
+  width: 50%;
+  margin-top: -5vh;
+  margin-left: -59vh;
+  z-index: 1;
+}*/
+
+@media (min-width: 961px){
+  .Hamburguer {
+    visibility: hidden;
+  }
+
+  .AppLogo {
+    visibility: hidden;
+  }
+
+  /*
+  .App-logo-mainmenu {
+    visibility: visible;
+  }*/
+
+}

@@ -31,22 +31,22 @@
   width: 67%;
   height: 4vh;
   left: 12.5%;
-  padding-left: 2.5vh;
-  font-size: 3.5vw;
+  padding-left: 4vw;
+  font-size: 2vh;
   letter-spacing: 0.01em;
   background: #ffffff;
   outline: none;
-
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
   border: #ffffff;
   color: #aeadaa;
 }
 
-.labelInput .nameinput {
+.labelInput .nameinput,
+.lastnameinput {
   width: 12vh;
   height: 4vh;
-  margin-left: 5vh;
+  margin-left: 3.5vh;
   padding-left: 2.5vh;
   font-size: 12px;
   display: flex;
@@ -60,20 +60,8 @@
   color: #aeadaa;
 }
 
-.labelInput .lastnameinput {
-  width: 12vh;
-  height: 4vh;
-  padding-left: 2.5vh;
-  font-size: 12px;
-  display: flex;
-  font-size: 3.5vw;
-  letter-spacing: 0.01em;
-  background: #ffffff;
-  outline: none;
-  box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
-  border-radius: 30px;
-  border: #ffffff;
-  color: #aeadaa;
+.labelInput .name {
+  margin-left: 4.5vh;
 }
 
 .labelInput .name {
