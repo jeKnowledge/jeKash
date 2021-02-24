@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, } from 'react-router-dom';
+import logo from '../style/logo/logoJek.svg';
 import logoHamburguerSB from '../style/logo/logohamburguer.svg';
 import logoHamburguerN from '../style/logo/logoHamburguer2.svg'
 import logoJekL from '../style/logo/logoJekLetras.svg';
@@ -30,6 +31,7 @@ export const TopBar = (props) => {
             </Link>
             
             <img src={logoApp} className="AppLogo" alt="logoJek" />
+            <img src={logo} className="App-logo-mainmenu" alt="logo" />
 
         </div>
     );
