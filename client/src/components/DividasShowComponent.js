@@ -39,6 +39,7 @@ const DividasComponent = (props) => {
   const authcontext = React.useContext(AuthContext);
   
   const color = props.color;
+  const button = props.button;
   let Pagocolor = PagoColorselect(color);
 
   let url = "http://localhost:8000/dividas/" + props.page;
@@ -141,6 +142,13 @@ const DividasComponent = (props) => {
           {!state.loading &&
             state.dividasNPagas.length &&
             slider(state.dividasNPagas)}
+          <div className="div-button">
+            {button && (
+              <button type="submit" className="pay-button">
+                Pago
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
