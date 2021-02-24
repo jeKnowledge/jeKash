@@ -128,7 +128,7 @@ export const SideBAR = (props) => {
           </div>
           <div id="botao">
             <Link to="dividas/all">
-              <span id="subbotSTR">Tech</span>
+              <span id="subbotSTR">Totais</span>
             </Link>
           </div>
         </div>

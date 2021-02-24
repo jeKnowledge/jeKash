@@ -1,11 +1,19 @@
-@font-face { 
-    font-family: "Suisse Int'l Condensed";
-    src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
+@font-face {
+  font-family: fonteTitulo;
+  src: url(../font/SuisseIntlCond-Medium-WebS.woff);
 }
 
+@font-face {
+  font-family: fonteLabel;
+  src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
+}
+@font-face {
+  font-family: fontenormal;
+  src: url(../font/SuisseIntlCond-Thin-WebS.woff);
+}
 
-.button{
-  font-family: "Suisse Int'l Condensed";
+.button {
+  font-family: fonteLabel;
   position: relative;
   width: 35%;
   height: 5vh;
@@ -14,23 +22,23 @@
   font-size: 3.5vw;
   letter-spacing: 0.01em;
 
-  background: #F08A6E;
+  background: #f08a6e;
   border-radius: 30px;
   border: none;
   cursor: pointer;
   outline: none;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .LoginStr {
   right: 12.5%;
   width: 60%; /* 35*2 */
   background: #ffffff;
-  color:  #F08A6E;
+  color: #f08a6e;
 }
-.RegistarStr{
+.RegistarStr {
   left: 12.5%;
   width: 60%;
-  background: #F08A6E;
-  color: #FFFFFF;
+  background: #f08a6e;
+  color: #ffffff;
 }

@@ -1,3 +1,16 @@
+@font-face {
+  font-family: fonteTitulo;
+  src: url(../font/SuisseIntlCond-Medium-WebS.woff);
+}
+
+@font-face {
+  font-family: fonteLabel;
+  src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
+}
+@font-face {
+  font-family: fontenormal;
+  src: url(../font/SuisseIntlCond-Thin-WebS.woff);
+}
 .loginpage {
   width: 10%;
   height: 100%;
@@ -5,18 +18,8 @@
 
 .title1,
 .title2 {
-  font-family: "Suisse Int'l Condensed";
+  font-family: fonteTitulo;
   text-align: center;
-}
-
-@font-face {
-  font-family: "Suisse Int'l Condensed";
-  src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
-}
-
-@font-face {
-  font-family: "Suisse Int'l Condensed L";
-  src: url(../font/SuisseIntlCond-Thin-WebS.woff);
 }
 
 .title1 {
@@ -67,7 +70,7 @@
 }
 
 p {
-  font-family: "Suisse Int'l Condensed L";
+  font-family: fonteLabel;
   height: 2vh;
 }
 
