@@ -84,6 +84,8 @@
     border-bottom: 1px solid #FFFFFF;
     box-sizing: border-box;
     transition: 0.6s ease;
+
+    cursor: pointer;
 }
 
 #primbotSTR {
@@ -142,8 +144,6 @@
     left: 88%;
     top: -70%;
     transition: 0.6s ease;
-
-    cursor: pointer;
 }
 
 /* ----money button ---- */
@@ -175,6 +175,8 @@
     border-bottom: 1px solid #FFFFFF;
     box-sizing: border-box;
     transition: 0.6s ease;
+
+    cursor: pointer;
 }
 /*anim*/
 #menu {
@@ -208,8 +210,6 @@
     left: 88%;
     top: -17%;
     transition: 0.6s ease;
-
-    cursor: pointer;
 
 }
 
@@ -251,6 +251,8 @@
     background-color: #FCC17A;
     border-top: 1px solid #FFFFFF;
     box-sizing: border-box;
+
+    cursor: pointer;
 }
 
 

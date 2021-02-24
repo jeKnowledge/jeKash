@@ -76,7 +76,7 @@ const CriarDivida = () => {
 
   return (
     <div>
-      <div className="topbar-criar-divida">
+      <div className="topbar-mobile">
           <TopBar
           color ="normalTopBarCOLOR"
           height = "11vh" //parece ser 18 na sidebar (13% é o normal)
@@ -84,8 +84,8 @@ const CriarDivida = () => {
           logo = "normal"
           />
       </div>
-      <div className="sidebar-criar-divida">
-          <SideBar/>
+      <div className="sidebar-mobile">
+        <SideBar/>
       </div>
         <form className="criar-divida" onSubmit={handleSubmit}>
             <div className="campos" id="myCampos">

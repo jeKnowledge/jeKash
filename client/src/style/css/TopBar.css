@@ -32,24 +32,27 @@ html {
   background-color: #fcc17a;
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
 }
-/*
-.App-logo-mainmenu {
-  visibility: hidden;
-  position: relative;
-  height: 10vh;
-  width: 50%;
-  margin-top: -5vh;
-  margin-left: -59vh;
-  z-index: 1;
-}*/
+
+.logoMain {
+  display: none;
+}
 
 @media (min-width: 961px){
   .Hamburguer {
-    visibility: hidden;
+    display: none;
   }
 
   .AppLogo {
-    visibility: hidden;
+    display: none;
+  }
+
+  .logoMain {
+    position: relative;
+    display: block;
+    height: 12vh;
+    width: 100%;
+    z-index: 1;
+    top: 4vh;
   }
 
   /*

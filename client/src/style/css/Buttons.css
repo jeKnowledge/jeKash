@@ -23,14 +23,14 @@
 }
 
 .LoginStr {
-  right: 12.5%;
+  right: 7vh;
   width: 60%; /* 35*2 */
   background: #ffffff;
   color:  #F08A6E;
 }
 .RegistarStr{
-  left: 12.5%;
-  width: 60%;
+  right: 13.5vh;
+  width: 57%;
   background: #F08A6E;
   color: #FFFFFF;
 }

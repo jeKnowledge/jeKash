@@ -31,6 +31,7 @@ export const TopBar = (props) => {
             </Link>
             
             <img src={logoApp} className="AppLogo" alt="logoJek" />
+            <img src={logo} className="logoMain" alt="logoJek" />
 
         </div>
     );
