@@ -27,6 +27,7 @@
     background: #FCC17A;
 }
 
+
 .App-logo {
     position: relative;
     width: 70%;
@@ -51,12 +52,13 @@
     box-sizing: border-box;
 }
 
+
 .App-logo-plus {
     /* Criar Dívida Icone */
     position: relative;
     left: 7%;
     top: 23%;
-
+    
     transform: matrix(1, 0, 0, -1, 0, 0);
 }
 
@@ -78,7 +80,7 @@
     height: 100%;
     left: 0px;
     top: 0%;
-
+    
     border-bottom: 1px solid #FFFFFF;
     box-sizing: border-box;
     transition: 0.6s ease;
@@ -90,7 +92,7 @@
     height: 50%;
     top: -28%;
     left: 20%;
-
+    
     font-family: "Suisse Int'l Condensed L";
     font-style: normal;
     font-weight: 600;
@@ -99,9 +101,10 @@
     display: flex;
     align-items: center;
     letter-spacing: 0.01em;
-
+    
     color: #FFFFFF;
 }
+
 
 #transdivsMINHASDIVIDAS {
     position: relative;
@@ -139,6 +142,8 @@
     left: 88%;
     top: -70%;
     transition: 0.6s ease;
+
+    cursor: pointer;
 }
 
 /* ----money button ---- */
@@ -194,6 +199,8 @@
     background: #F08A6E;
     border-bottom: 1px solid #FFFFFF;
     box-sizing: border-box;
+
+    cursor: pointer;
 }
 
 .App-logo-UPBottom {
@@ -201,6 +208,9 @@
     left: 88%;
     top: -17%;
     transition: 0.6s ease;
+
+    cursor: pointer;
+
 }
 
 #subbotSTR {
@@ -274,6 +284,7 @@
     border-top: 1px solid #FFFFFF;
     box-sizing: border-box;
     transition: 0.6s;
+
 }
 
 
@@ -282,4 +293,44 @@ a {
     position: relative;
     text-decoration: none;
     margin-top: 0%;
+}
+
+@media (min-width: 961px){
+    #sbbg {
+
+        position: absolute;
+        width: 20%;
+        height: 100%;
+    }
+
+    #primbotSTR {
+        position: relative;
+        width: 100%;
+        height: 50%;
+        top: -23%;
+        left: 20%;
+
+        font-size: 2.5vh;
+    }
+
+    #subbotSTR {
+        position: relative;
+        width: 100%;
+        height: 50%;
+        top: 24%;
+        left: 20%;
+    
+        font-size: 2.5vh;
+    }
+
+    #bottomBarSTR {
+        position: relative;
+        width: 100%;
+        height: 50%;
+        top: 24%;
+        left: 20%;
+    
+        font-size: 2.5vh;
+    }
+
 }

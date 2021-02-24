@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, } from 'react-router-dom';
+import logo from '../style/logo/logoJek.svg';
 import logoHamburguerSB from '../style/logo/logohamburguer.svg';
 import logoHamburguerN from '../style/logo/logoHamburguer2.svg'
 import logoJekL from '../style/logo/logoJekLetras.svg';
