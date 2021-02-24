@@ -1,10 +1,10 @@
 import React, { useReducer, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import "./style/css/Login.css";
 import axios from "axios";
 import LabelsInputs from "./components/LabelsInputs";
 import Buttons from "./components/Buttons";
-import { useHistory } from "react-router-dom";
+import {AuthContext } from './components/GlobalComponent';
 
 const initialState = {
   email: "",
@@ -29,7 +29,9 @@ const reducer = (user, action) => {
 };
 
 const Login = () => {
+  const authcontext = React.useContext(AuthContext);
   const [user, dispatch] = useReducer(reducer, initialState);
+  const [errors, setErrors] = useState([]);
   const history = useHistory();
 
   const handleInputChange = (e) => {
@@ -37,35 +39,33 @@ const Login = () => {
     dispatch({ type: "change", name, value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => {    
     e.preventDefault();
     console.log(user);
-
-    axios
-      .post("http://localhost:8000/users/login", { user })
+    axios.post("http://localhost:8000/users/login", { user })
       .then((res) => {
-        console.log(res.data);
-        console.log("Logging in...");
-        const token = "Bearer " + res.data.Authorization;
+          console.log("Logging in...");
+          const token = "Bearer " + res.data.Authorization;
+          //? console.log('Token: ' + res.data.Authorization);
 
-        if (token) {
-          axios.defaults.headers.common["Authorization"] = token;
-        } else {
-          delete axios.defaults.headers.common["Authorization"];
-        }
+          localStorage.setItem("Authorization", token);
 
-        //? console.log('Token: ' + res.data.Authorization);
-
-        localStorage.setItem("Authorization", token);
-        axios.defaults.headers.common["Authorization"] = token;
-
-        console.log("Logged in! Redirecting...");
-
-        history.push("/home");
+          console.log("Logged in! Redirecting...");
+          authcontext.dispatch({type:"LOGIN"});
+          
+          history.push("/home");
+          
       })
       .catch((err) => {
-        dispatch({ type: "error" });
+          console.log(err);
       });
+  }
+
+  const handleErros = (e) => {
+    e.preventDefault();
+    if (!errors.hidden) {
+      return <p>Oops! Email ou Password incorretos</p>;
+    }
   };
 
   return (

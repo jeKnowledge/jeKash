@@ -1,7 +1,7 @@
-import { useReducer } from "react";
-//import { DividaContext } from "../contexts/DividaContext";
-import axios from "axios";
-import "./style/css/CriarDivida.css";
+import React, { useReducer } from "react";
+import { AuthContext } from './components/GlobalComponent';
+import axios from 'axios';
+import './style/css/CriarDivida.css';
 import LabelsInputs from "./components/LabelsInputs";
 import Buttons from "./components/Buttons";
 import TopBar from './components/TopBar'
@@ -29,19 +29,22 @@ const dividaReducer = (divida, action) => {
 };
 
 // Stateless Functional COmponent
-const CriarDivida = () => {
-  const [divida, dispatch] = useReducer(dividaReducer, initialState);
+const CriarDivida = () => {  
+    const authcontext = React.useContext(AuthContext);
+    
+    const [divida, dispatch] = useReducer(dividaReducer, initialState);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    dispatch({ type: "CHANGE", name, value });
-  };
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        dispatch({ type: "CHANGE", name, value });
+    };
 
   const handleSubmit = (e) => {
     // impede que a pagina seja reloadada apos o clique no botao
     e.preventDefault();
     divida.quantia = parseFloat(divida.quantia);
     console.log(divida);
+    authcontext.dispatch({type:"CHECKAUTHSTATE"});
 
     let popup = document.getElementById("myPopup");
     let popuptext = document.getElementById("myPopupText");
@@ -53,26 +56,26 @@ const CriarDivida = () => {
     check.classList.toggle("show");
     document.getElementById("myCampos").style.filter = "blur(2px)";
 
-    axios
-      .post("http://localhost:8000/dividas/", { divida })
-      .then(() => console.log("Divida Criada"))
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+    axios.post("http://localhost:8000/dividas/", { divida })
+        .then(() => console.log('Divida Criada'))
+        .catch(err => {
+        console.log(err);
+        });
+    
+    }
 
-  const clearState = () => {
-    dispatch({ type: "RESET" });
-    document.getElementById("myCampos").style.filter = "blur(0)";
-    let popup = document.getElementById("myPopup");
-    let popuptext = document.getElementById("myPopupText");
-    let circle = document.getElementById("myCircle");
-    let check = document.getElementById("myCheck");
-    popup.classList.toggle("show");
-    popuptext.classList.toggle("show");
-    circle.classList.toggle("show");
-    check.classList.toggle("show");
-  };
+    const clearState = () => {
+        dispatch({ type: "RESET" });
+        document.getElementById("myCampos").style.filter = "blur(0)";
+        let popup = document.getElementById("myPopup");
+        let popuptext = document.getElementById("myPopupText");
+        let circle = document.getElementById("myCircle");
+        let check = document.getElementById("myCheck");
+        popup.classList.toggle("show");
+        popuptext.classList.toggle("show");
+        circle.classList.toggle("show");
+        check.classList.toggle("show");
+    };
 
   return (
     <div>

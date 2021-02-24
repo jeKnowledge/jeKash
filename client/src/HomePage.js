@@ -1,6 +1,7 @@
 //* usual stuff
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from './components/GlobalComponent';
 
 //* styling the page
 import logo from './style/logo/logoJek.svg';
@@ -8,8 +9,8 @@ import './style/css/HomePage.css';
 import Buttons from './components/Buttons'
 
 const HomePage = () => {
-  //* Se estamos na homepage nao estamos logged in.
-  localStorage.removeItem("Authorization");
+  localStorage.clear();
+
   return (
     <div className="App">
         <div id="Background">  

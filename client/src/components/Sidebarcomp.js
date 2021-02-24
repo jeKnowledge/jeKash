@@ -1,55 +1,61 @@
 import { Link, useHistory } from "react-router-dom";
-import { useEffect } from "react";
-
 import "../style/css/Sidebar.css";
-import logomais from "../style/logo/logoplus.svg";
-import logopessoa from "../style/logo/logoman.svg";
-import logoarrowUP from "../style/logo/logoarrowUP.svg";
-import logoMoney from "../style/logo/logomoney.svg";
+import { AuthContext } from './GlobalComponent';
+import React from 'react';
+import '../style/css/Sidebar.css';
+import logomais from '../style/logo/logoplus.svg';
+import logopessoa from '../style/logo/logoman.svg';
+import logoarrowUP from '../style/logo/logoarrowUP.svg';
+import logoMoney from '../style/logo/logomoney.svg';
 
 import TopBar from "./TopBar";
 
 function toggleNavTOP(x) {
-  let top = document.getElementById("menu").style.top;
+    let top = document.getElementById("menu").style.top;
 
-  if (top === "-200%") {
-    document.getElementById("menu").style.top = "100%";
-    document.getElementById("logoUP").style.transform = "rotate(180deg)";
-  } else {
-    document.getElementById("menu").style.top = "-200%";
-    document.getElementById("logoUP").style.transform = "rotate(0deg)";
-  }
-  //alert(document.getElementById("menu").style.top);
-}
+    if (top === "-200%"){
+        document.getElementById("menu").style.top = "100%";
+        document.getElementById("logoUP").style.transform = "rotate(180deg)";
+    }
+    else{
+        document.getElementById("menu").style.top = "-200%";
+        document.getElementById("logoUP").style.transform = "rotate(0deg)";
+    }
+    //alert(document.getElementById("menu").style.top);
+    
+};
 
-function toggleNav(x) {
-  let top = document.getElementById("transdivsMINHASDIVIDAS").style.top;
+function toggleNav(x){
+    let top = document.getElementById("transdivsMINHASDIVIDAS").style.top;
 
-  if (top === "-200%") {
-    document.getElementById("logoUP1").style.transform = "rotate(180deg)";
-    document.getElementById("dividastotaisdiv").style.top = "24%";
-    document.getElementById("transdivsMINHASDIVIDAS").style.top = "0%";
-  } else {
-    document.getElementById("logoUP1").style.transform = "rotate(0deg)";
-    document.getElementById("dividastotaisdiv").style.top = "8%";
-    document.getElementById("transdivsMINHASDIVIDAS").style.top = "-200%";
-  }
-}
+    if (top === "-200%"){
+        document.getElementById("logoUP1").style.transform = "rotate(180deg)";
+        document.getElementById("dividastotaisdiv").style.top= "24%";
+        document.getElementById("transdivsMINHASDIVIDAS").style.top = "0%";
+    }
+    else{
+        document.getElementById("logoUP1").style.transform = "rotate(0deg)";
+        document.getElementById("dividastotaisdiv").style.top= "8%";
+        document.getElementById("transdivsMINHASDIVIDAS").style.top ="-200%";
+    }
+};
 
 function toggleNavBOT(x) {
-  let top = document.getElementById("BottomSec").style.top;
+    let top = document.getElementById("BottomSec").style.top;
 
-  if (top === "-100%") {
-    document.getElementById("BottomSec").style.top = "0%";
-    document.getElementById("logoUPBOT").style.transform = "rotate(180deg)";
-  } else {
-    document.getElementById("BottomSec").style.top = "-100%";
-    document.getElementById("logoUPBOT").style.transform = "rotate(0deg)";
-  }
-}
+    if (top === "-100%"){
+        document.getElementById("BottomSec").style.top = "0%";
+        document.getElementById("logoUPBOT").style.transform = "rotate(180deg)";
+    }
+    else{
+        document.getElementById("BottomSec").style.top = "-100%";
+        document.getElementById("logoUPBOT").style.transform = "rotate(0deg)";
+    }
+};
 
 export const SideBAR = (props) => {
-  const history = useHistory();
+    const authcontext = React.useContext(AuthContext);
+    const history = useHistory();
   return (
     <div id="sbbg">
       <TopBar
@@ -58,12 +64,12 @@ export const SideBAR = (props) => {
         linkto="dividas/criar"
         logo="whitebg"
       />
-      <Link to="dividas/criar">
-        <div id="criardivida">
-          <img src={logomais} className="App-logo-plus" alt="logoplus" />
-          <span id="primbotSTR">Criar dívida</span>
+        <div id = "criardivida">
+            <Link to="dividas/criar">
+                <img src={logomais} className="App-logo-plus" alt="logoplus"/>
+                <span id= "primbotSTR">Criar dívida</span>
+            </Link>
         </div>
-      </Link>
 
       <div id="mydividasdiv">
         <div id="mydividas" onClick={toggleNav}>
@@ -80,17 +86,17 @@ export const SideBAR = (props) => {
         </div>
 
         <div id="transdivsMINHASDIVIDAS" style={{ top: "-200%" }}>
-          <Link to="dividas/minhasdividas">
-            <div id="primbot">
-              <span id="subbotSTR">O que devo</span>
+            <div id ="primbot" >
+                <Link to="dividas/minhasdividas">
+                    <span id ="subbotSTR">O que devo</span>  
+                </Link>
             </div>
-          </Link>
 
-          <Link to="dividas/adever">
-            <div id="primbot">
-              <span id="subbotSTR">O que me devem</span>
+            <div id = "primbot">
+                <Link to="dividas/adever">
+                    <span id = "subbotSTR">O que me devem</span>
+                </Link>
             </div>
-          </Link>
         </div>
       </div>
 
@@ -126,6 +132,7 @@ export const SideBAR = (props) => {
               <span id="subbotSTR">Tech</span>
             </Link>
           </div>
+          
           <div id="botao">
             <Link to="dividas/all">
               <span id="subbotSTR">Totais</span>
@@ -146,17 +153,11 @@ export const SideBAR = (props) => {
           />
         </div>
 
-        <div
-          id="BottomSec"
-          style={{ top: "0%" }}
-          onClick={() => {
-            localStorage.clear();
-
+        <div id="BottomSec" style={{top: "0%"}} onClick={() =>{
+            authcontext.dispatch({type:"LOGOUT"});
             console.log("Logged Out! Redirecting...");
-
             history.push("/");
-          }}
-        >
+        }}>
           <span id="subbotSTR">Log Out</span>
         </div>
       </div>
