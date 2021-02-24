@@ -1,13 +1,13 @@
-body, html {
-  margin:0;
-  padding:0;
+body,
+html {
+  margin: 0;
+  padding: 0;
 }
 
 #bg {
   position: relative;
   top: 0;
   margin-top: 0;
-  
   width: 100%;
 }
 
@@ -32,7 +32,7 @@ body, html {
   background-color: #fcc17a;
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
 }
-
+/*
 .App-logo-mainmenu {
   visibility: hidden;
   position: relative;
@@ -41,7 +41,7 @@ body, html {
   margin-top: -5vh;
   margin-left: -59vh;
   z-index: 1;
-}
+}*/
 
 @media (min-width: 961px){
   .Hamburguer {
@@ -52,8 +52,9 @@ body, html {
     visibility: hidden;
   }
 
+  /*
   .App-logo-mainmenu {
     visibility: visible;
-  }
+  }*/
 
 }

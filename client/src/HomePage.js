@@ -8,6 +8,8 @@ import './style/css/HomePage.css';
 import Buttons from './components/Buttons'
 
 const HomePage = () => {
+  //* Se estamos na homepage nao estamos logged in.
+  localStorage.removeItem("Authorization");
   return (
     <div className="App">
         <div id="Background">  

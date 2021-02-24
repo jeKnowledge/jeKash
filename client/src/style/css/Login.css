@@ -1,79 +1,82 @@
-.loginpage{
-    width: 10%;
-    height: 100%;
+.loginpage {
+  width: 10%;
+  height: 100%;
 }
 
-.title1,.title2{
-    font-family: "Suisse Int'l Condensed";
-    text-align: center;
-  }
-
- @font-face { 
-    font-family: "Suisse Int'l Condensed";
-    src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
- }
- 
- @font-face { 
-    font-family: "Suisse Int'l Condensed L";
-    src: url(../font/SuisseIntlCond-Thin-WebS.woff);
- }
- 
-
-
-.title1{
-    width: 375;
-    margin-top: 20vh;
-    margin-bottom: 0vh;
-    letter-spacing: 0.01em;
-
-    color: #F08A6E;
-
-    /* sombra suave */
-
-    text-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+.title1,
+.title2 {
+  font-family: "Suisse Int'l Condensed";
+  text-align: center;
 }
 
-.title2{
-    width: 375 vh;
-    margin-top: 0vh;
-    margin-bottom: 10vh;
-    letter-spacing: 0.01em;
-
-    color: #3E3C39;
-
-    /* sombra base */
-
-    text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+@font-face {
+  font-family: "Suisse Int'l Condensed";
+  src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
 }
 
-.name-lastname{
-    width: 38vh;
+@font-face {
+  font-family: "Suisse Int'l Condensed L";
+  src: url(../font/SuisseIntlCond-Thin-WebS.woff);
 }
 
+.title1 {
+  width: 375;
+  margin-top: 20vh;
+  margin-bottom: 0vh;
+  letter-spacing: 0.01em;
 
+  color: #f08a6e;
 
-.link2signup{
-    align-items: center;
-    text-align: center;
-    letter-spacing: 0.01em;
+  /* sombra suave */
 
-    color: #3E3C39;
-
-    /* sombra base */
-
-    text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-.link{
-    text-decoration: none;
-    color: #F08A6E;
+.title2 {
+  width: 375 vh;
+  margin-top: 0vh;
+  margin-bottom: 10vh;
+  letter-spacing: 0.01em;
+
+  color: #3e3c39;
+
+  /* sombra base */
+
+  text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
 }
 
-p{
-    font-family: "Suisse Int'l Condensed L";
-    height: 2vh;
+.name-lastname {
+  width: 38vh;
 }
 
-.inputs{
-    margin-bottom: 10vh;
+.link2signup {
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.01em;
+
+  color: #3e3c39;
+
+  /* sombra base */
+
+  text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+}
+
+.link {
+  text-decoration: none;
+  color: #f08a6e;
+}
+
+p {
+  font-family: "Suisse Int'l Condensed L";
+  height: 2vh;
+}
+
+.inputs {
+  margin-bottom: 2vh;
+}
+
+.error_login {
+  color: #f08a6e;
+  margin-left: 18%;
+  margin-bottom: 20%;
 }

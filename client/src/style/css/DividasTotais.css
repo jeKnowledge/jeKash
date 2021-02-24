@@ -1,0 +1,101 @@
+@font-face {
+  font-family: fonteTitulo;
+  src: url(../font/SuisseIntlCond-Medium-WebS.woff);
+}
+
+@font-face {
+  font-family: fonteLabel;
+  src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
+}
+@font-face {
+  font-family: fontenormal;
+  src: url(../font/SuisseIntlCond-Thin-WebS.woff);
+}
+.dividasshow {
+  position: absolute;
+  width: 100%;
+  height: 200%;
+}
+.caixa {
+  position: relative;
+  font-family: fontenormal;
+  width: 80%;
+
+  height: 29vh;
+  margin-top: 2.5vh;
+  left: 11.5%;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 3.5vw;
+  letter-spacing: 0.01em;
+
+  box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+
+  color: #ffffff;
+}
+
+.Ino,
+.textoIno {
+  color: #fcc17a;
+}
+
+.Int,
+.textoInt {
+  color: #f05b78;
+}
+
+.Tech,
+.textoTech {
+  color: #51a450;
+}
+
+.titulo {
+  position: relative;
+  text-align: center;
+  margin: auto;
+  margin-top: 1%;
+  width: 80%;
+  transform: translate(0%, 100%);
+
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+
+  font-family: fontenormal;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 175%;
+  line-height: 23px;
+  letter-spacing: 0.01em;
+
+  /* sombra base */
+
+  text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+}
+
+.textoIno,
+.textoInt,
+.textoTech {
+  margin-top: 10%;
+  margin-left: 25%;
+  position: relative;
+  right: 3%;
+  display: inline-block;
+  font-family: fonteTitulo;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 5.5vw;
+  line-height: 100%;
+  align-items: center;
+  letter-spacing: 0.01em;
+}
+
+p {
+  margin-bottom: 40%;
+}

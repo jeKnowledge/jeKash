@@ -113,7 +113,6 @@
     transition: 0.6s ease;
 }
 
-
 #primbot {
     z-index: 1;
     position: relative;
@@ -177,7 +176,6 @@
     box-sizing: border-box;
     transition: 0.6s ease;
 }
-
 /*anim*/
 #menu {
     position: absolute;
@@ -186,7 +184,10 @@
     left: 0px;
     transition: 0.6s ease;
 }
-
+#menu-hidden {
+    top:0%;
+    margin-top: 0%;
+}
 
 #botao {
     position: relative;
@@ -286,9 +287,12 @@
 
 }
 
+
 /* para remover de todos os Links*/
 a {
+    position: relative;
     text-decoration: none;
+    margin-top: 0%;
 }
 
 @media (min-width: 961px){

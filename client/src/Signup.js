@@ -5,7 +5,7 @@ import axios from 'axios';
 import LabelsInputs from "./components/LabelsInputs";
 import SelectDepartments from "./components/Selects";
 import Buttons from "./components/Buttons";
-
+import { useHistory } from "react-router-dom";
 
  const initialState = {
     name:"",
@@ -30,7 +30,7 @@ const reducer = (user,action) => {
 
 
 const Signup = () => {
-
+  const history = useHistory();
   const [user,dispatch] = useReducer(reducer,initialState);
   
 
@@ -42,11 +42,27 @@ const Signup = () => {
     const handleSubmit = e => {
         e.preventDefault();
         console.log(user);
-      
+        //! substituir o console log por depois returns diferentes.
+        if (!user.name || !user.lastname || !user.email || !user.password || !user.password2 || !user.department) {
+          console.log("Preencha todos os campos.");
+          return;
+        }
+        else if (user.password !== user.password2) {
+          console.log("Passwords não coincidem.");
+          return;
+        }
+        else if (user.password > 6) {
+          console.log('A Password Tem de ter pelo menos 6 caracteres.');
+          return;
+        }
 
         axios.post("http://localhost:8000/users/signup", { user })
-          .then(() => console.log('User Created'))
+          .then(() => {
+            console.log('User Created')
+            history.push("/users/login");
+          })
           .catch(err => {
+            //algo correu mal
             console.error(err);
           });
       };
