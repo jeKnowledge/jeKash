@@ -79,17 +79,19 @@
 }
 
 #mydividas {
-  background-color: #fcc17a;
-  z-index: 2;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  left: 0px;
-  top: 0%;
+    background-color: #FCC17A;
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0%;
+    
+    border-bottom: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    transition: 0.6s ease;
 
-  border-bottom: 1px solid #ffffff;
-  box-sizing: border-box;
-  transition: 0.6s ease;
+    cursor: pointer;
 }
 
 #primbotSTR {
@@ -140,13 +142,12 @@
 }
 
 .App-logo-UP {
-  /* Seta Baixo */
+    /* Seta Baixo */
 
-  position: relative;
-  left: 88%;
-  top: -70%;
-  transition: 0.6s ease;
-  cursor: pointer;
+    position: relative;
+    left: 88%;
+    top: -70%;
+    transition: 0.6s ease;
 }
 
 /* ----money button ---- */
@@ -166,16 +167,18 @@
 }
 
 #dividastotais {
-  background-color: #fcc17a;
-  z-index: 2;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  left: 0px;
-  top: -100%;
-  border-bottom: 1px solid #ffffff;
-  box-sizing: border-box;
-  transition: 0.6s ease;
+    background-color: #FCC17A;
+    z-index: 2;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: -100%;
+    border-bottom: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    transition: 0.6s ease;
+
+    cursor: pointer;
 }
 /*anim*/
 #menu {
@@ -203,11 +206,11 @@
 }
 
 .App-logo-UPBottom {
-  position: relative;
-  left: 88%;
-  top: -17%;
-  transition: 0.6s ease;
-  cursor: pointer;
+    position: relative;
+    left: 88%;
+    top: -17%;
+    transition: 0.6s ease;
+
 }
 
 #subbotSTR {
@@ -239,15 +242,17 @@
 }
 
 #BottomPrimary {
-  z-index: 2;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0px;
-  top: 0%;
-  background-color: #fcc17a;
-  border-top: 1px solid #ffffff;
-  box-sizing: border-box;
+    z-index: 2;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0%;
+    background-color: #FCC17A;
+    border-top: 1px solid #FFFFFF;
+    box-sizing: border-box;
+
+    cursor: pointer;
 }
 
 #bottomBarSTR {

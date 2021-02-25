@@ -4,15 +4,6 @@
   overflow: hidden;
 }
 
-.criar-divida{
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
- .sidebar-criar-divida {
-   visibility: hidden;
- }
 
 .criar-divida-titulo {
     position: relative;
@@ -93,16 +84,20 @@ input[type="number"] {
   height: 28vh;
 }
 
+.sidebar-mobile {
+  display: none;
+}
+
 
 @media (min-width: 961px){
 
-  .topbar-criar-divida {
-    visibility: hidden;
+  .sidebar-mobile {
+    display: block;
+    width: 20%;
   }
 
-  .sidebar-criar-divida {
-    visibility: visible;
-    width: 20%;
+  .topbar-mobile {
+    display: none;
   }
 
   .criar-divida-titulo {
@@ -169,6 +164,7 @@ input[type="number"] {
     width: 27%;
     margin-left: 22vw;
   }
+
 }
 
 .popup .popupzito {

@@ -13,31 +13,34 @@
 }
 
 .SelectDepartments label {
+  position: relative;
   font-family: fonteLabel;
   font-weight: 550;
-  font-size: 14px;
+  font-size: 2.1vh;
   display: flex;
-  color: #3e3c39;
+  outline: none;
+  color: #3E3C39;
 
-  margin-left: 8vh;
+  left: 16%;
   height: 3.5vh;
+  width: 70%;
 }
 
 .SelectDepartments select {
-  width: 70vw;
+  position: relative;
+  width: 72%;
   height: 4vh;
-  margin-left: 12.5%;
-  padding-left: 2.5vh;
-  font-size: 12px;
-  display: flex;
+  left: 12.5%;
+  padding-left: 4vw;
+  font-size: 2vh;
   letter-spacing: 0.01em;
-  background: #ffffff;
+  background: #FFFFFF;
+  outline: none;
 
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
-  border: #ffffff;
-
-  color: #aeadaa;
+  border: #FFFFFF;
+  color: #AEADAA;
 }
 
 .SelectDepartments select option {
