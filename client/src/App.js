@@ -22,7 +22,19 @@ const App = () => {
 
   return (
     <Router>
-      <div className="App">       
+      <div className="App">
+        <Route exact path="/">
+            <HomePage/>
+          </Route>     
+        <Route exact path="/users/login">
+            <Login/>
+          </Route>
+
+          <Route exact path="/users/signup">
+            <Signup/>
+          </Route>
+
+                 
               {userToken ? (
                 <Switch>
                 <Route exact path="/dividas/criar">
@@ -55,19 +67,9 @@ const App = () => {
               </Switch> 
               ) : (
                 //* Não consegui identificar o usertoken portanto vou dar redirect para o /users/login.
-              <Route render={() => (<Redirect to="/users/login" />)}/> 
+              <Route render={() => (<Redirect to="/" />)}/> 
               )}
-              <Route exact path="/users/login">
-                  <Login/>
-                </Route>
-
-                <Route exact path="/users/signup">
-                  <Signup/>
-                </Route>
-
-                <Route exact path="/">
-                  <HomePage/>
-                </Route>    
+              
       </div>
     </Router>
   );
