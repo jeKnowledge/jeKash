@@ -3,8 +3,17 @@
 }*/
 
 @font-face {
-  font-family: "Suisse_Int_l";
+  font-family: fonteTitulo;
+  src: url(../font/SuisseIntlCond-Medium-WebS.woff);
+}
+
+@font-face {
+  font-family: fonteLabel;
   src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
+}
+@font-face {
+  font-family: fontenormal;
+  src: url(../font/SuisseIntlCond-Thin-WebS.woff);
 }
 
 
@@ -17,7 +26,11 @@
   height: 100%;
   overflow: hidden;
 
-  background: radial-gradient(179.64% 179.64% at 50% 50%, #FCC582 0%, #F08A6E 100%);
+  background: radial-gradient(
+    179.64% 179.64% at 50% 50%,
+    #fcc582 0%,
+    #f08a6e 100%
+  );
 }
 
 .App-logo-mainmenu {

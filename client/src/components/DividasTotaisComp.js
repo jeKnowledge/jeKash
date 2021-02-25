@@ -81,18 +81,16 @@ const DividasTotaisComp = (props) => {
     <div className="dividasshow">
       <div className="caixa">
         <div className="Ino">
-          <p className="titulo">
-            <strong>Departamento Inovação</strong>
-          </p>
+          <p className="titulo">Departamento Inovação</p>
           <span id="line"></span>
         </div>
         <div className="textoIno">
           <p>
-            <strong>Divida Total </strong>
+            Divida Total
             {}
           </p>
           <p>
-            <strong>Total Pago </strong>
+            Total Pago
             {}
           </p>
         </div>
@@ -100,20 +98,16 @@ const DividasTotaisComp = (props) => {
 
       <div className="caixa">
         <div className="Int">
-          <p className="titulo">
-            <strong>
-              <strong>Departamento Interno</strong>
-            </strong>
-          </p>
+          <p className="titulo">Departamento Interno</p>
           <span id="line"></span>
         </div>
         <div className="textoInt">
-          <p>
-            <strong>Divida Total </strong>
+          <p className>
+            Divida Total
             {}
           </p>
           <p>
-            <strong>Total Pago </strong>
+            Total Pago
             {}
           </p>
         </div>
@@ -126,15 +120,16 @@ const DividasTotaisComp = (props) => {
         </div>
         <div className="textoTech">
           <p>
-            <strong>Divida Total </strong>
+            Divida Total
             {}
           </p>
           <p>
-            <strong>Total Pago </strong>
+            Total Pago
             {}
           </p>
         </div>
       </div>
+      <br />
       <br />
     </div>
   );

@@ -51,14 +51,15 @@ const Signup = () => {
           console.log("Passwords não coincidem.");
           return;
         }
-        else if (user.password > 6) {
+        else if (user.password < 6) {
           console.log('A Password Tem de ter pelo menos 6 caracteres.');
           return;
         }
-
         axios.post("http://localhost:8000/users/signup", { user })
           .then(() => {
             console.log('User Created')
+            //redirect to login
+
             history.push("/users/login");
           })
           .catch(err => {

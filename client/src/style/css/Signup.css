@@ -1,52 +1,69 @@
-.loginpage{
-    width: 100%;
-    height: 100%;
+@font-face {
+  font-family: fonteTitulo;
+  src: url(../font/SuisseIntlCond-Medium-WebS.woff);
 }
 
-
-.titlesg,.titlesg2{
-    font-family: "Suisse Int'l Condensed";
-    text-align: center;
-  }
-
-  
-
-.titlesg{
-    width: 375 vh;
-    margin-top:7vh;
-    margin-bottom: 1vh;
-    letter-spacing: 0.01em;
-
-    color: #F08A6E;
-
-    /* sombra suave */
-
-    text-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+@font-face {
+  font-family: fonteLabel;
+  src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
+}
+@font-face {
+  font-family: fontenormal;
+  src: url(../font/SuisseIntlCond-Thin-WebS.woff);
 }
 
-.titlesg2{
-    width: 375 vh;
-    margin-bottom: 2vh;
-    letter-spacing: 0.01em;
-    margin-top: 0vh;
-    color: #3E3C39;
-
-    /* sombra base */
-
-    text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+.loginpage {
+  width: 100%;
+  height: 100%;
 }
 
-.name-lastname{
-    font-family: "Suisse Int'l Condensed Min";
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 4vh;
+.titlesg,
+.titlesg2 {
+  font-family: fonteTitulo;
+  text-align: center;
 }
 
-.email,.password1,.password2,.department{
-    margin-bottom: 4vh;
+.titlesg {
+  margin-top: 7vh;
+  margin-bottom: 1vh;
+  letter-spacing: 0.01em;
+
+  color: #f08a6e;
+
+  /* sombra suave */
+
+  text-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-.inputs1{
-    margin-bottom: 5vh;
+.titlesg2 {
+  margin-bottom: 2vh;
+  letter-spacing: 0.01em;
+  margin-top: 0vh;
+  color: #3e3c39;
+
+  /* sombra base */
+
+  text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+}
+
+.name-lastname {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 4vh;
+}
+
+.name {
+  flex: 1;
+}
+
+.email,
+.password1,
+.password2,
+.department {
+  width: 100%;
+  margin-bottom: 4vh;
+}
+
+.inputs1 {
+  margin-bottom: 5vh;
 }

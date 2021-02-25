@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-
+import {AuthContextProvider} from './components/GlobalComponent';
+//component global aqui
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <AuthContextProvider>
+      <App/>
+    </AuthContextProvider>,
   document.getElementById('root')
 );
-

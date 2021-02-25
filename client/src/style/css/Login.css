@@ -1,26 +1,26 @@
+@font-face {
+  font-family: fonteTitulo;
+  src: url(../font/SuisseIntlCond-Medium-WebS.woff);
+}
+
+@font-face {
+  font-family: fonteLabel;
+  src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
+}
+
 .loginpage {
-  width: 10%;
+  width: 100%;
   height: 100%;
 }
 
 .title1,
 .title2 {
-  font-family: "Suisse Int'l Condensed";
+  font-family: fonteTitulo;
   text-align: center;
 }
 
-@font-face {
-  font-family: "Suisse Int'l Condensed";
-  src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
-}
-
-@font-face {
-  font-family: "Suisse Int'l Condensed L";
-  src: url(../font/SuisseIntlCond-Thin-WebS.woff);
-}
-
 .title1 {
-  width: 375;
+  width: 100%;
   margin-top: 20vh;
   margin-bottom: 0vh;
   letter-spacing: 0.01em;
@@ -33,7 +33,7 @@
 }
 
 .title2 {
-  width: 375 vh;
+  width: 100%;
   margin-top: 0vh;
   margin-bottom: 10vh;
   letter-spacing: 0.01em;
@@ -45,9 +45,6 @@
   text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
 }
 
-.name-lastname {
-  width: 38vh;
-}
 
 .link2signup {
   align-items: center;
@@ -67,13 +64,10 @@
 }
 
 p {
-  font-family: "Suisse Int'l Condensed L";
+  font-family: fonteLabel;
   height: 2vh;
 }
 
-.inputs {
-  margin-bottom: 2vh;
-}
 
 .error_login {
   color: #f08a6e;

@@ -2,9 +2,6 @@ const mongoose = require("mongoose");
 const Divida = require("../models/divida");
 const User = require("../models/users");
 const jwt = require("jsonwebtoken");
-
-const localStorage = require("local-storage");
-
 //! CRIAR NA DATABASE UMA CONTA JEK DEFAULT PARA DAR AS DIVIDAS CRIADAS POR UM JEKER
 const idcontaJEK = "5fdeac8c53a6f54594acee7b"; //! ID DA CONTA PRINCIPAL DA JEK depois mudar para o defenitivo
 
@@ -25,56 +22,64 @@ exports.criar_divida_jeK = (req, res, next) => {
 
   let time =
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(); //a string que diz o tempo atual
+  
 
-  // Para ir buscar o id do user logado
+  devedores = [];
+
+  devedores = req.body.devedor.split(",");
+  console.log(devedores);
 
   User.findOne({
-    email: req.body.divida.credor,
-  })
-    .exec()
-    .then((user_credor) => {
-      User.findOne({
-        email: req.body.divida.devedor,
-      })
-        .select()
-        .exec()
-        .then((user_devedor) => {
-          let divida = new Divida({
-            _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
+    email: req.body.divida.credor
+  }).exec().then(user_credor => {
+    User.findOne({
+        email: req.body.divida.devedor
+      }).select().exec().then(user_devedor => {
+        if(user_devedor===null){
+          console.log("Não consegui dar assign a essa divida a um user talvez porque ele não exista ou escreveste mal!")
+          res.status(500).json(res);
+        }
+        //* ver isto
+        const tokenheader = req.headers.authorization;
+        console.log( req.headers.authorization)
+        const token = tokenheader.split(" ")[1];
+        const decoded = jwt.verify(token,"secret");
+        const id = decoded.userId;
 
-            //Estamos no request de um User:
-            credor: user_credor._id, //todo MUDAR PARA O ID DA CONTA DA JEKNOWLEDGE!
-            devedor: user_devedor._id, // * ID do devedor acima referido
-            credorS: user_credor.name.concat("").concat(user_credor.lastname),
-            devedorS: user_devedor.name
-              .concat("")
-              .concat(user_devedor.lastname),
-            quantia: req.body.divida.quantia, //vai buscar a quantia ao body do json
-            descricao: req.body.divida.descricao, //se existir a descrição vou buscar tambem.
-            paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
-            userCriador: id, // Mudei isto, aqui o user que vai criar a divida vai corresponder ao userID
-            date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
-            timesemailsent: 0, //para conseguir ver o limite da divida mandada e quanto ja passou o tempo
-          });
+        let divida = new Divida({
+          _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
 
-          //salvo a divida
-          divida
-            .save()
-            .then((result) => {
-              console.log(result);
-              //req.flash('success_msg','Divida Criada');
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        })
-        .catch((err) => {
-          console.log(err);
+          //Estamos no request de um User:
+          credor: user_credor._id, 
+          devedor: user_devedor._id, // * ID do devedor acima referido
+          credorS: user_credor.name.concat(user_credor.lastname),
+          devedorS: user_devedor.name.concat(user_devedor.lastname),
+          quantia: req.body.divida.quantia, //vai buscar a quantia ao body do json
+          descricao: req.body.divida.descricao, //se existir a descrição vou buscar tambem.
+          paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
+          userCriador: id, // Mudei isto, aqui o user que vai criar a divida vai corresponder ao userID
+          date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
+          timesemailsent: 0 //para conseguir ver o limite da divida mandada e quanto ja passou o tempo
         });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+
+        //salvo a divida
+        divida
+          .save()
+          .then((result) => {
+            //console.log(result);
+            res.status(200).json(result);
+            //req.flash('success_msg','Divida Criada');
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }).catch(err => {
+    console.log(err);
+  });
 };
 
 //chamei à logica deste controller "criar_divida_Tesoureiro" visto que
@@ -188,7 +193,7 @@ exports.get_all_dividas = (req, res, next) => {
 };
 
 exports.get_all_dividas_user = (req, res, next) => {
-  const token = localStorage.get("Authorization");
+  const token = req.headers.authorization;
   const decoded = jwt.verify(token, "secret");
   const id = decoded.userId;
 
@@ -271,7 +276,6 @@ exports.dividas_ativas_inativas = (req, res, next) => {
 
 exports.dividas_departamento = (req, res, next) => {
   const dep = req.params.departement;
-  //? console.log("Reached GET REQ");
   // find() devolve todos os users do departamento indicado na route
   User.find({
     department: dep,
@@ -279,7 +283,7 @@ exports.dividas_departamento = (req, res, next) => {
     .exec()
     .then((users) => {
       // users - array com todos os users do departamento
-
+      console.log(users)
       Divida.find({
         $or: [
           // or para considerar os dois "pedidos"
@@ -297,6 +301,7 @@ exports.dividas_departamento = (req, res, next) => {
       }) // encontra todas as dividas com credores ou devedores que estão no array users
         .exec()
         .then((dividas) => {
+          //? console.log(dividas)
           var array = new Array();
 
           for (var i = 0; i < dividas.length; i++) {

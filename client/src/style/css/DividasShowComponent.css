@@ -155,3 +155,18 @@ h1 {
   font-family: fontenormal;
   font-weight: 400;
 }
+
+.div-button {
+  margin-top: 40%;
+  margin-left: 35%;
+}
+
+.pay-button {
+  width: 40%;
+  height: 3.5vh;
+  background: #f08a6e;
+  /* sombra base */
+  border: none;
+  box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+}

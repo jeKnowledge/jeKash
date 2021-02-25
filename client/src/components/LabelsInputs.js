@@ -13,16 +13,20 @@ const LabelsInputs = (props) => {
     if(size === "true"){
         return ( 
         <div className="labelInput">
-            <label className={name}>{ title }</label>
-            <input
-                className={name_input}
-                name={name}
-                type = {type}
-                required
-                placeholder = {placeHolder}
-                onChange = {onChangeFunc}
-                value = {valor}
-            />
+            <div className="nome-apelido-label">
+                <label className={name}>{ title }</label>
+            </div>
+            <div className="nome-apelido-input">
+                <input
+                    className={name_input}
+                    name={name}
+                    type = {type}
+                    required
+                    placeholder = {placeHolder}
+                    onChange = {onChangeFunc}
+                    value = {valor}
+                />
+            </div>
         </div>
      );
     }
