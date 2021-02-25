@@ -30,7 +30,6 @@ exports.criar_divida_jeK = (req, res, next) => {
   console.log(devedores);
 
   User.findOne({
-<<<<<<< Updated upstream
     email: req.body.divida.credor
   }).exec().then(user_credor => {
     User.findOne({
@@ -70,54 +69,10 @@ exports.criar_divida_jeK = (req, res, next) => {
             //console.log(result);
             res.status(200).json(result);
             //req.flash('success_msg','Divida Criada');
-=======
-    email: req.body.divida.credor,
-  })
-    .exec()
-    .then((user_credor) => {
-      for (let i = 0; i < devedores.length; i++) {
-        User.findOne({
-          email: devedores[i],
-        })
-          .select()
-          .exec()
-          .then((user_devedor) => {
-            let divida = new Divida({
-              _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
-
-              //Estamos no request de um User:
-              credor: user_credor._id, //todo MUDAR PARA O ID DA CONTA DA JEKNOWLEDGE!
-              devedor: user_devedor._id, // * ID do devedor acima referido
-              credorS: user_credor.name
-                .concat(" ")
-                .concat(user_credor.lastname),
-              devedorS: user_devedor.name
-                .concat(" ")
-                .concat(user_devedor.lastname),
-              quantia: req.body.divida.quantia, //vai buscar a quantia ao body do json
-              descricao: req.body.divida.descricao, //se existir a descrição vou buscar tambem.
-              paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
-              userCriador: id, // Mudei isto, aqui o user que vai criar a divida vai corresponder ao userID
-              date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
-              timesemailsent: 0, //para conseguir ver o limite da divida mandada e quanto ja passou o tempo
-            });
-
-            //salvo a divida
-            divida
-              .save()
-              .then((result) => {
-                console.log(result);
-                //req.flash('success_msg','Divida Criada');
-              })
-              .catch((err) => {
-                console.log(err);
-              });
->>>>>>> Stashed changes
           })
           .catch((err) => {
             console.log(err);
           });
-<<<<<<< Updated upstream
       })
       .catch(err => {
         console.log(err);
@@ -125,13 +80,6 @@ exports.criar_divida_jeK = (req, res, next) => {
   }).catch(err => {
     console.log(err);
   });
-=======
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
->>>>>>> Stashed changes
 };
 
 //chamei à logica deste controller "criar_divida_Tesoureiro" visto que
