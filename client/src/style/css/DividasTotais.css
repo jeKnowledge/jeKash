@@ -39,18 +39,15 @@
   color: #ffffff;
 }
 
-.Ino,
-.textoIno {
+.Ino {
   color: #fcc17a;
 }
 
-.Int,
-.textoInt {
+.Int {
   color: #f05b78;
 }
 
-.Tech,
-.textoTech {
+.Tech {
   color: #51a450;
 }
 
@@ -78,9 +75,9 @@
   text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
 }
 
-.textoIno,
-.textoInt,
-.textoTech {
+.textIno,
+.textInt,
+.textTech {
   margin-top: 10%;
   margin-left: 25%;
   position: relative;
@@ -97,4 +94,20 @@
 
 .p {
   margin-bottom: 40%;
+}
+
+.color1 {
+  color: #fcc17a;
+}
+.color2 {
+  color: #f05b78;
+}
+.color3 {
+  color: #51a450;
+}
+
+.textTech,
+.textIno,
+.textoInt {
+  color: black;
 }

@@ -3,7 +3,7 @@ import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import Slider from "infinite-react-carousel";
 import { useHistory } from "react-router-dom";
-import { AuthContext } from './GlobalComponent';
+import { AuthContext } from "./GlobalComponent";
 const inicialstate = {
   dividasPagas: [],
   dividasNPagas: [],
@@ -37,17 +37,20 @@ const reducer = (state, action) => {
 
 const DividasComponent = (props) => {
   const authcontext = React.useContext(AuthContext);
-  
+
   const color = props.color;
   const button = props.button;
+  const user = props.user;
   let Pagocolor = PagoColorselect(color);
 
   let url = "http://localhost:8000/dividas/" + props.page;
 
   const [state, dispatch] = useReducer(reducer, inicialstate);
 
-  if (props.user) {
-    url = "http://localhost:8000/dividas/user";
+  if (user === "usertoo") {
+    url = "http://localhost:8000/dividas/usertoo";
+  } else if (user === "toouser") {
+    url = "http://localhost:8000/dividas/toouser";
   }
 
   const settings = {
@@ -60,7 +63,6 @@ const DividasComponent = (props) => {
   };
 
   const DividasPagaNaoPaga = (dividas) => {
-    
     console.log(dividas);
     const nrdividas = dividas.length;
     const auxNPagas = [];
@@ -113,12 +115,13 @@ const DividasComponent = (props) => {
 
   //Dividas são carregadas inicialmente
   useEffect(() => {
-    authcontext.dispatch({type:"CHECKAUTHSTATE"});
+    authcontext.dispatch({ type: "CHECKAUTHSTATE" });
+    console.log(url);
     axios
       .get(url)
       .then((res) => {
         const lastget = res.data;
-        
+        console.log(res.data);
         DividasPagaNaoPaga(lastget);
       })
       .catch((err) => {

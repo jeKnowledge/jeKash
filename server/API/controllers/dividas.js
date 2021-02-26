@@ -22,64 +22,66 @@ exports.criar_divida_jeK = (req, res, next) => {
 
   let time =
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(); //a string que diz o tempo atual
-  
 
   devedores = [];
+  devedores = req.body.divida.devedor.split(",");
 
-  devedores = req.body.devedor.split(",");
-  console.log(devedores);
+  const tokenheader = req.headers.authorization;
+  const token = tokenheader.split(" ")[1];
+  const decoded = jwt.verify(token, "secret");
+  const id = decoded.userId;
 
   User.findOne({
-    email: req.body.divida.credor
-  }).exec().then(user_credor => {
-    User.findOne({
-        email: req.body.divida.devedor
-      }).select().exec().then(user_devedor => {
-        if(user_devedor===null){
-          console.log("Não consegui dar assign a essa divida a um user talvez porque ele não exista ou escreveste mal!")
-          res.status(500).json(res);
-        }
-        //* ver isto
-        const tokenheader = req.headers.authorization;
-        console.log( req.headers.authorization)
-        const token = tokenheader.split(" ")[1];
-        const decoded = jwt.verify(token,"secret");
-        const id = decoded.userId;
+    email: req.body.divida.credor,
+  })
+    .exec()
+    .then((user_credor) => {
+      for (let i = 0; i < devedores.length; i++) {
+        User.findOne({
+          email: devedores[i],
+        })
+          .select()
+          .exec()
+          .then((user_devedor) => {
+            let divida = new Divida({
+              _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
 
-        let divida = new Divida({
-          _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
+              //Estamos no request de um User:
+              credor: user_credor._id, //todo MUDAR PARA O ID DA CONTA DA JEKNOWLEDGE!
+              devedor: user_devedor._id, // * ID do devedor acima referido
+              credorS: user_credor.name
+                .concat(" ")
+                .concat(user_credor.lastname),
+              devedorS: user_devedor.name
+                .concat(" ")
+                .concat(user_devedor.lastname),
+              quantia: req.body.divida.quantia, //vai buscar a quantia ao body do json
+              descricao: req.body.divida.descricao, //se existir a descrição vou buscar tambem.
+              paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
+              userCriador: id, // Mudei isto, aqui o user que vai criar a divida vai corresponder ao userID
+              date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
+              timesemailsent: 0, //para conseguir ver o limite da divida mandada e quanto ja passou o tempo
+            });
 
-          //Estamos no request de um User:
-          credor: user_credor._id, 
-          devedor: user_devedor._id, // * ID do devedor acima referido
-          credorS: user_credor.name.concat(user_credor.lastname),
-          devedorS: user_devedor.name.concat(user_devedor.lastname),
-          quantia: req.body.divida.quantia, //vai buscar a quantia ao body do json
-          descricao: req.body.divida.descricao, //se existir a descrição vou buscar tambem.
-          paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
-          userCriador: id, // Mudei isto, aqui o user que vai criar a divida vai corresponder ao userID
-          date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
-          timesemailsent: 0 //para conseguir ver o limite da divida mandada e quanto ja passou o tempo
-        });
-
-        //salvo a divida
-        divida
-          .save()
-          .then((result) => {
-            //console.log(result);
-            res.status(200).json(result);
-            //req.flash('success_msg','Divida Criada');
+            //salvo a divida
+            divida
+              .save()
+              .then((result) => {
+                console.log(result);
+                //req.flash('success_msg','Divida Criada');
+              })
+              .catch((err) => {
+                console.log(err);
+              });
           })
           .catch((err) => {
             console.log(err);
           });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }).catch(err => {
-    console.log(err);
-  });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 //chamei à logica deste controller "criar_divida_Tesoureiro" visto que
@@ -193,29 +195,45 @@ exports.get_all_dividas = (req, res, next) => {
 };
 
 exports.get_all_dividas_user = (req, res, next) => {
-  const token = req.headers.authorization;
+  const tokenheader = req.headers.authorization;
+  const token = tokenheader.split(" ")[1];
   const decoded = jwt.verify(token, "secret");
   const id = decoded.userId;
 
   Divida.find({
-    $or: [
-      {
-        credor: {
-          $in: id,
-        },
-      },
-      {
-        devedor: {
-          $in: id,
-        },
-      },
-    ],
+    devedor: id,
   })
     .exec()
     .then((dividas) => {
-      return dividas.map((divida) => {
+      console.log(dividas);
+      let TotalRet = dividas.map((divida) => {
         return divida;
       });
+      console.log(TotalRet);
+      res.status(200).json(TotalRet);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+exports.get_all_dividas_to_me = (req, res, next) => {
+  const tokenheader = req.headers.authorization;
+  const token = tokenheader.split(" ")[1];
+  const decoded = jwt.verify(token, "secret");
+  const id = decoded.userId;
+
+  Divida.find({
+    credor: id,
+  })
+    .exec()
+    .then((dividas) => {
+      console.log("a");
+      let TotalRet = dividas.map((divida) => {
+        return divida;
+      });
+      console.log(TotalRet);
+      res.status(200).json(TotalRet);
     })
     .catch((err) => {
       console.log(err);
@@ -273,7 +291,6 @@ exports.dividas_ativas_inativas = (req, res, next) => {
 };
 
 // GET DIVIDAS POR DEPARTAMENTO
-
 exports.dividas_departamento = (req, res, next) => {
   const dep = req.params.departement;
   // find() devolve todos os users do departamento indicado na route
@@ -283,7 +300,7 @@ exports.dividas_departamento = (req, res, next) => {
     .exec()
     .then((users) => {
       // users - array com todos os users do departamento
-      console.log(users)
+      console.log(users);
       Divida.find({
         $or: [
           // or para considerar os dois "pedidos"
@@ -330,17 +347,21 @@ exports.dividas_departamento = (req, res, next) => {
 
 exports.dividas_pordepartamento = (req, res, next) => {
   const dep = ["Ino", "Int", "Tech"];
-  const pag = [];
-  //? console.log("Reached GET REQ");
-  // find() devolve todos os users do departamento indicado na route
-  for (let i = 0; i < dep.length; i++) {
+  let tech = 0;
+  let ino = 0;
+  let int = 0;
+  let tech_pay = 0;
+  let ino_pay = 0;
+  let int_pay = 0;
+  let count = -1;
+
+  dep.forEach((d, i) => {
     User.find({
       department: dep[i],
     })
       .exec()
       .then((users) => {
         // users - array com todos os users do departamento
-
         Divida.find({
           $or: [
             // or para considerar os dois "pedidos"
@@ -359,13 +380,28 @@ exports.dividas_pordepartamento = (req, res, next) => {
           .exec()
           .then((dividas) => {
             for (let j = 0; j < dividas.length; j++) {
-              if (i == 0) {
-                pag[0] += dividas[j].quantia;
-              } else if (i == 1) {
-                pag[1] += dividas[j].quantia;
-              } else if (i == 2) {
-                pag[2] += dividas[j].quantia;
+              if (i === 0) {
+                if (!dividas[j].paga) ino += dividas[j].quantia;
+                else ino_pay += dividas[j].quantia;
+              } else if (i === 1) {
+                if (!dividas[j].paga) int += dividas[j].quantia;
+                else int_pay += dividas[j].quantia;
+              } else if (i === 2) {
+                if (!dividas[j].paga) tech += dividas[j].quantia;
+                else tech_pay += dividas[j].quantia;
               }
+            }
+
+            count++;
+            if (count === 2) {
+              res.status(200).json({
+                ino: ino,
+                int: int,
+                tech: tech,
+                ino_pay: ino_pay,
+                int_pay: int_pay,
+                tech_pay: tech_pay,
+              });
             }
           })
           .catch((err) => {
@@ -375,9 +411,7 @@ exports.dividas_pordepartamento = (req, res, next) => {
       .catch((err) => {
         console.log(err);
       });
-  }
-  console.log(pag);
-  res.status(200).json(pag);
+  });
 };
 
 // Opção para dar uma divida como paga
