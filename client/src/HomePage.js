@@ -16,13 +16,13 @@ const HomePage = () => {
         <div id="Background">  
           <img src={logo} className="App-logo-mainmenu" alt="logo" />
           <div id="btns">
-              <Link to="/users/login">
+              <Link to="users/login">
                 <Buttons 
                   name="Log in"
                   title="LoginStr button"
                 />
               </Link>
-              <Link to="/users/signup">
+              <Link to="users/signup">
                 <Buttons 
                     name="Registar"
                     title="RegistarStr button"

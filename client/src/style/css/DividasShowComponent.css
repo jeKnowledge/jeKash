@@ -20,18 +20,17 @@ html {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
-  width: 70%;
 }
 
-.criar-divida-titulo h1 {
+h1 {
   margin-top: 0;
-  left: 50%;
+  margin-bottom: 10%;
 }
 
 .dividasshow {
   position: absolute;
   width: 100%;
-  height: fit-content + 50%;
+  height: 200%;
 }
 
 .Ppagar {
@@ -39,7 +38,7 @@ html {
   width: 70%;
   height: 4vh;
   left: 16.25%;
-  margin-top: 5vh;
+  margin-top: 2.5vh;
 
   font-family: fonteLabel;
   font-size: 3.5vw;
@@ -170,11 +169,4 @@ html {
   border: none;
   box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
-}
-
-@media (min-width: 961px) {
-  .sidebar-mobile {
-    display: block;
-    width: 20%;
-  }
 }

@@ -5,7 +5,6 @@ import axios from "axios";
 import LabelsInputs from "./components/LabelsInputs";
 import Buttons from "./components/Buttons";
 import {AuthContext } from './components/GlobalComponent';
-import {isMobile} from 'react-device-detect';
 
 const initialState = {
   email: "",
@@ -54,13 +53,7 @@ const Login = () => {
           console.log("Logged in! Redirecting...");
           authcontext.dispatch({type:"LOGIN"});
           
-          if (isMobile){
-            history.push("/home");
-          }
-          else {
-            history.push("/dividas/criar")
-          }
-          
+          history.push("/home");
           
       })
       .catch((err) => {
