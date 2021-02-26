@@ -37,27 +37,15 @@ html {
   display: none;
 }
 
-@media (min-width: 961px){
-  .Hamburguer {
-    display: none;
+@media (min-width: 961px) {
+  .normalTopBarCOLOR {
+    display: none; /*desparece logo tudo  da top view. */
   }
-
   .AppLogo {
-    display: none;
-  }
-
-  .logoMain {
     position: relative;
-    display: block;
-    height: 12vh;
-    width: 100%;
-    z-index: 1;
-    top: 4vh;
+    left: 13%;
+    top: 35%;
+    height: 50%;
+    width: 60%;
   }
-
-  /*
-  .App-logo-mainmenu {
-    visibility: visible;
-  }*/
-
 }

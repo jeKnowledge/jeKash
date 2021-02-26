@@ -4,57 +4,54 @@
   overflow: hidden;
 }
 
-
 .criar-divida-titulo {
-    position: relative;
-    height: 5vh;
-    top: 4vh;
-    font-family: fonteTitulo;
-    font-weight: bold;
-    font-size: 2vh;
-    text-align: center;
-    letter-spacing: 0.01em;
-    color: #3E3C39;
+  position: relative;
+  height: 5vh;
+  top: 4vh;
+  font-family: fonteTitulo;
+  font-weight: bold;
+  font-size: 2vh;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #3e3c39;
 }
 
-
-.descricao-label{
+.descricao-label {
   position: relative;
   font-family: fonteLabel;
   font-weight: 550;
   font-size: 2.1vh;
   display: flex;
-  color: #3E3C39;
+  color: #3e3c39;
 
   left: 16%;
   height: 3.5vh;
 }
 
 .input-descricao {
-    position: relative;
-    width: 67%;
-    height: 25vh;
-    left: 12.5%;
-    padding-left: 4vw;
-    padding-top: 2vh;
-    font-size: 2vh;
-    letter-spacing: 0.01em;
-    resize: none;
-    background: #FFFFFF;
-    white-space: pre-wrap;
-    outline: none;
+  position: relative;
+  width: 67%;
+  height: 25vh;
+  left: 12.5%;
+  padding-left: 4vw;
+  padding-top: 2vh;
+  font-size: 2vh;
+  letter-spacing: 0.01em;
+  resize: none;
+  background: #ffffff;
+  white-space: pre-wrap;
+  outline: none;
 
-    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
-    border-radius: 30px;
-    border: #ffffff;
-    
-    color: #AEADAA;
+  box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+  border: #ffffff;
+
+  color: #aeadaa;
 }
 
 .button-criar-divida {
   margin-bottom: 4vh;
 }
-
 
 /* remove spin wheel input numbers */
 input::-webkit-outer-spin-button,
@@ -68,8 +65,8 @@ input[type="number"] {
 
 /* posições */
 .credor-css {
-    margin-top: 7vh;
-    height: 11.5vh;
+  margin-top: 7vh;
+  height: 11.5vh;
 }
 
 .devedor-css {
@@ -88,9 +85,7 @@ input[type="number"] {
   display: none;
 }
 
-
-@media (min-width: 961px){
-
+@media (min-width: 961px) {
   .sidebar-mobile {
     display: block;
     width: 20%;
@@ -110,10 +105,9 @@ input[type="number"] {
   }
   .labelInput label {
     height: 3.5vh;
-
   }
 
-  .inputs{
+  .inputs {
     display: flex;
     margin-bottom: 1vh;
   }
@@ -123,7 +117,7 @@ input[type="number"] {
     width: 27vw;
     padding-left: 1.5vw;
   }
-  
+
   .credor-css {
     margin-top: 18vh;
     margin-left: 22.5vw;
@@ -149,22 +143,21 @@ input[type="number"] {
     width: 27vw;
   }
 
-  .descricao-label{
+  .descricao-label {
     height: 3.5vh;
   }
 
   .input-descricao {
-      width: 100%;
-      height: 32vh;
-      padding-left: 1vw;
-      padding-top: 2vh;
+    width: 100%;
+    height: 32vh;
+    padding-left: 1vw;
+    padding-top: 2vh;
   }
 
   .button-criar-divida {
     width: 27%;
     margin-left: 22vw;
   }
-
 }
 
 .popup .popupzito {
@@ -205,9 +198,8 @@ input[type="number"] {
   top: 50.5%;
   border-radius: 50%;
 
-  background-color: #F08A6E;
+  background-color: #f08a6e;
   cursor: pointer;
-
 }
 
 .check {

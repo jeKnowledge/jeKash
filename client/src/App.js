@@ -10,19 +10,19 @@ import DividasShowInovacao from "./DividasShowINO";
 import DividasShowTech from "./DividasShowTEC";
 import DividasShowaDever from "./DividasShowaDever";
 import DividasShowDevo from "./DividasShowDevo";
-import DividasTotais from "./DividasTotais";
 import { AuthContext } from './components/GlobalComponent';
+import {BrowserView, MobileView} from 'react-device-detect';
 
 const App = () => {
-
   const useAuth = React.useContext(AuthContext);
+  const MediaQuery = require('react-responsive');
+
   console.log(useAuth)
   const userToken = useAuth.state.userToken;
   console.log(userToken);
 
   return (
     <Router>
-      <div className="App">
         <Route exact path="/">
             <HomePage/>
           </Route>     
@@ -33,8 +33,6 @@ const App = () => {
           <Route exact path="/users/signup">
             <Signup/>
           </Route>
-
-                 
               {userToken ? (
                 <Switch>
                 <Route exact path="/dividas/criar">
@@ -60,17 +58,23 @@ const App = () => {
                 <Route exact path="/dividas/Tech">
                   <DividasShowTech />
                 </Route>
-
+                
                 <Route exact path="/home">
-                  <SideBar />
+
+                  <BrowserView>
+                     <Route render={() => (<Redirect to="/dividas/criar" />)}/> 
+                  </BrowserView>
+
+                    <MobileView>
+                        <Route render={() => (<SideBar />)}/> 
+                    </MobileView>
+                  
                 </Route>
               </Switch> 
               ) : (
                 //* Não consegui identificar o usertoken portanto vou dar redirect para o /users/login.
-              <Route render={() => (<Redirect to="/" />)}/> 
+                <Route render={() => (<Redirect to="/" />)}/> 
               )}
-              
-      </div>
     </Router>
   );
 };

@@ -4,6 +4,8 @@ import axios from "axios";
 import Slider from "infinite-react-carousel";
 import { useHistory } from "react-router-dom";
 import { AuthContext } from './GlobalComponent';
+import SideBar from './Sidebarcomp';
+
 const inicialstate = {
   dividasPagas: [],
   dividasNPagas: [],
@@ -81,33 +83,39 @@ const DividasComponent = (props) => {
 
   const slider = (dividas) => {
     return (
-      <Slider {...settings}>
-        {dividas.map((dividadiv, i) => {
-          console.log(dividadiv);
-          return (
-            <div id="descricaodiv" key={i}>
-              <p>
-                <span id="text2" style={{ color: color }}>
-                  <strong>Credor:</strong>{" "}
-                </span>
-                {dividadiv.credorS}
-              </p>
-              <p>
-                <span id="text2" style={{ color: color }}>
-                  <strong>Devedor:</strong>{" "}
-                </span>
-                {dividadiv.devedorS}
-              </p>
-              <p>
-                <span id="text2" style={{ color: color }}>
-                  <strong>Valor a pagar:</strong>{" "}
-                </span>
-                {dividadiv.quantia + "€"}
-              </p>
-            </div>
-          );
-        })}
-      </Slider>
+      <div>
+        <div className="sidebar-mobile">
+          <SideBar/>
+        </div>
+        <Slider {...settings}>
+          {dividas.map((dividadiv, i) => {
+            console.log(dividadiv);
+            return (
+              <div id="descricaodiv" key={i}>
+                <p>
+                  <span id="text2" style={{ color: color }}>
+                    <strong>Credor:</strong>{" "}
+                  </span>
+                  {dividadiv.credorS}
+                </p>
+                <p>
+                  <span id="text2" style={{ color: color }}>
+                    <strong>Devedor:</strong>{" "}
+                  </span>
+                  {dividadiv.devedorS}
+                </p>
+                <p>
+                  <span id="text2" style={{ color: color }}>
+                    <strong>Valor a pagar:</strong>{" "}
+                  </span>
+                  {dividadiv.quantia + "€"}
+                </p>
+              </div>
+            );
+          })}
+        </Slider>
+      </div>
+      
     );
   };
 

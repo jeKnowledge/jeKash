@@ -31,7 +31,6 @@ const dividaReducer = (divida, action) => {
 // Stateless Functional COmponent
 const CriarDivida = () => {  
     const authcontext = React.useContext(AuthContext);
-    
     const [divida, dispatch] = useReducer(dividaReducer, initialState);
 
     const handleInputChange = (e) => {
