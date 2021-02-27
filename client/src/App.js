@@ -34,31 +34,30 @@ const App = () => {
         {userToken ? (
           <Switch>
                 <Route exact path="/dividas/criar">
-                  {!userToken ? (<Redirect to="/users/login" />) : (<CriarDivida/>)}
+                  <CriarDivida/>
                 </Route>
 
                 <Route exact path="/dividas/minhasdividas">
-                  {!userToken ? (<Redirect to="/users/login" />) : (<DividasShowDevo/>)}
+                  <DividasShowDevo/>
                 </Route>
 
                 <Route exact path="/dividas/adever">
-                  {!userToken ? (<Redirect to="/users/login" />) : (<DividasShowaDever/>)}
+                  <DividasShowaDever/>
                 </Route>
 
                 <Route exact path="/dividas/Interno">
-                  {!userToken ? (<Redirect to="/users/login" />) : (<DividasShowInterno/>)}
+                  <DividasShowInterno/>
                 </Route>
 
                 <Route exact path="/dividas/Inovacao">
-                  {!userToken ? (<Redirect to="/users/login" />) : (<DividasShowInovacao/>)}
+                  <DividasShowInovacao/>
                 </Route>
 
                 <Route exact path="/dividas/Tech">
-                  {!userToken ? (<Redirect to="/users/login" />) : (<DividasShowTech/>)}
+                  <DividasShowTech/>
                 </Route>
 
                 <Route exact path="/home">
-                  {!userToken ? (<Redirect to="/users/login" />) : (
                     <Switch>
                       <BrowserView>
                         <Route render={() => (<Redirect to="/dividas/criar" />)}/> 
@@ -68,12 +67,10 @@ const App = () => {
                           <Route render={() => (<SideBar />)}/> 
                       </MobileView>
                     </Switch>
-                  )}
-                  
                 </Route>
 
                 <Route exact path="/dividas/all">
-                  {!userToken ? (<Redirect to="/users/login" />) : (<DividasTotais/>)}
+                  <DividasTotais/>
                 </Route>
 
         </Switch>
@@ -81,11 +78,11 @@ const App = () => {
           //* Não consegui identificar o usertoken portanto vou dar redirect para o /users/login.
            <Switch>
             <Route exact path="/users/login">
-              {userToken ? (<Redirect to="/home" />) : (<Login/>)}
+              <Login/>
             </Route>
 
             <Route exact path="/users/signup">
-              {userToken ? (<Redirect to="/home" />) : (<Signup/>)}
+              <Signup/>
             </Route>
           </Switch>
         )}
