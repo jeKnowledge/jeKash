@@ -15,7 +15,7 @@ const DividasShowaDever = () => {
       <div className="criar-divida-titulo">
         <h1>O que me devem</h1>
       </div>
-      <DividasComponent param="user" color="#F08A6E" button="true" />
+      <DividasComponent user="toouser" color="#F08A6E" button="true" />
       {/* Usar o dividas Component para mudar a estetica de como as dividas aparecem
             Por outras palavras, não mexer neste HTML para mudar algo nesta pagina. Mexer no componente.
             */}
