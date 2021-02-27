@@ -1,8 +1,8 @@
 import React from "react";
-import SideBar from "./components/Sidebarcomp";
+import SideBarCOMP from "./components/Sidebarcomp";
 
 const Sidebar = () => {
-  return <SideBar />;
+  return <SideBarCOMP />;
 };
 
 export default Sidebar;

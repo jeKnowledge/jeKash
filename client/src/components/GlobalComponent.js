@@ -10,7 +10,7 @@ let AuthContext  = createContext();
 
 
 //O context só dá render da App quando tiver guardado o token no State
-const AuthReducer = (state, action) => {
+const AuthReducer = (state = {}, action) => {
     const token = localStorage.getItem("Authorization");
     switch(action.type) {
         case "LOGIN":
@@ -25,6 +25,7 @@ const AuthReducer = (state, action) => {
             }
             return {
                 ...state,
+                status:"CHECKINGAUTHSTATE",
                 userToken: token
             };
         case "LOGOUT":
@@ -38,20 +39,20 @@ const AuthReducer = (state, action) => {
         default:
             return{
                 ...state,
-                status:"defaulting...",
+                status:"default",
                 userToken: token,
             }
 
     }   
 }
+const Initialstate = {
+    //* Initialstate: 
+        status: "InitalState",
+        userToken: null
+}
 
 const AuthContextProvider = (props) => {
-    const[state,dispatch] = useReducer(AuthReducer, {
-    //* Initialstate: 
-        status: "idle",
-        userToken: null,
-
-    });
+    const[state,dispatch] = useReducer(AuthReducer,Initialstate);
     let value = {state,dispatch};
     useEffect(() => {
         dispatch({type: "CHECKAUTHSTATE"});

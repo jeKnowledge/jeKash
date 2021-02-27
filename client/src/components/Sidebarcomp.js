@@ -13,12 +13,12 @@ import TopBar from "./TopBar";
 function toggleNavTOP(x) {
     let top = document.getElementById("menu").style.top;
 
-    if (top === "-200%"){
-        document.getElementById("menu").style.top = "100%";
+    if (top === "100%"){
+        document.getElementById("menu").style.top = "-300%";
         document.getElementById("logoUP").style.transform = "rotate(180deg)";
     }
     else{
-        document.getElementById("menu").style.top = "-200%";
+        document.getElementById("menu").style.top = "100%";
         document.getElementById("logoUP").style.transform = "rotate(0deg)";
     }
     //alert(document.getElementById("menu").style.top);
@@ -53,9 +53,10 @@ function toggleNavBOT(x) {
     }
 };
 
-export const SideBAR = (props) => {
-    const authcontext = React.useContext(AuthContext);
-    const history = useHistory();
+const SideBAR = () => {
+  const history = useHistory();
+  const authcontext = React.useContext(AuthContext);
+  
   return (
     <div id="sbbg">
       <TopBar
@@ -114,7 +115,7 @@ export const SideBAR = (props) => {
           />
         </div>
 
-        <div id="menu" className="menu-hidden" style={{ top: "-200%" }}>
+        <div id="menu" className="menu-hidden" style={{ top: "-300%" }}>
           <div id="botao">
             <Link to="/dividas/Interno" style={{ marginTop: "-100%" }}>
               <span id="subbotSTR">Interno</span>
@@ -134,7 +135,7 @@ export const SideBAR = (props) => {
           </div>
           
           <div id="botao">
-            <Link to="dividas/all">
+            <Link to="/dividas/all">
               <span id="subbotSTR">Totais</span>
             </Link>
           </div>

@@ -30,7 +30,7 @@ const App = () => {
         <Route exact path="/">
           <HomePage />
         </Route>
-      
+       
         {userToken ? (
           <Switch>
                 <Route exact path="/dividas/criar">
@@ -57,16 +57,14 @@ const App = () => {
                   <DividasShowTech/>
                 </Route>
 
-                <Route exact path="/home">
-                    <Switch>
-                      <BrowserView>
-                        <Route render={() => (<Redirect to="/dividas/criar" />)}/> 
-                      </BrowserView>
+                <Route path="/home">
+                    <BrowserView>
+                      <Route render={() => (<Redirect to="/dividas/criar" />)}/> 
+                    </BrowserView>
 
-                      <MobileView>
-                          <Route render={() => (<SideBar />)}/> 
-                      </MobileView>
-                    </Switch>
+                    <MobileView>
+                        <Route render={() => (<SideBar />)}/> 
+                    </MobileView>
                 </Route>
 
                 <Route exact path="/dividas/all">
@@ -75,7 +73,7 @@ const App = () => {
 
         </Switch>
         ) : (
-          //* Não consegui identificar o usertoken portanto vou dar redirect para o /users/login.
+          //* Rotas que não precisam de token.
            <Switch>
             <Route exact path="/users/login">
               <Login/>
