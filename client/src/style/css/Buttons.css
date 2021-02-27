@@ -1,4 +1,3 @@
-
 @font-face {
   font-family: fonteLabel;
   src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
@@ -29,11 +28,11 @@
   color: #f08a6e;
 }
 
-.RegistarStr{
+.RegistarStr {
   right: 13.5vh;
   width: 57%;
-  background: #F08A6E;
-  color: #FFFFFF;
+  background: #f08a6e;
+  color: #ffffff;
 }
 
 @media (min-width: 500px) and (max-width: 650px) {

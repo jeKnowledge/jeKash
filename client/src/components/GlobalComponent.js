@@ -38,7 +38,7 @@ const AuthReducer = (state, action) => {
         default:
             return{
                 ...state,
-                status:"idle",
+                status:"defaulting...",
                 userToken: token,
             }
 

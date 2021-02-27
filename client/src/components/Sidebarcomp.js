@@ -65,7 +65,7 @@ export const SideBAR = (props) => {
         logo="whitebg"
       />
         <div id = "criardivida">
-            <Link to="dividas/criar">
+            <Link to="/dividas/criar">
                 <img src={logomais} className="App-logo-plus" alt="logoplus"/>
                 <span id= "primbotSTR">Criar dívida</span>
             </Link>
@@ -87,13 +87,13 @@ export const SideBAR = (props) => {
 
         <div id="transdivsMINHASDIVIDAS" style={{ top: "-200%" }}>
             <div id ="primbot" >
-                <Link to="dividas/minhasdividas">
+                <Link to="/dividas/minhasdividas">
                     <span id ="subbotSTR">O que devo</span>  
                 </Link>
             </div>
 
             <div id = "primbot">
-                <Link to="dividas/adever">
+                <Link to="/dividas/adever">
                     <span id = "subbotSTR">O que me devem</span>
                 </Link>
             </div>
@@ -116,19 +116,19 @@ export const SideBAR = (props) => {
 
         <div id="menu" className="menu-hidden" style={{ top: "-200%" }}>
           <div id="botao">
-            <Link to="dividas/Interno" style={{ marginTop: "-100%" }}>
+            <Link to="/dividas/Interno" style={{ marginTop: "-100%" }}>
               <span id="subbotSTR">Interno</span>
             </Link>
           </div>
 
           <div id="botao">
-            <Link to="dividas/Inovacao">
+            <Link to="/dividas/Inovacao">
               <span id="subbotSTR">Inovação</span>
             </Link>
           </div>
 
           <div id="botao">
-            <Link to="dividas/Tech">
+            <Link to="/dividas/Tech">
               <span id="subbotSTR">Tech</span>
             </Link>
           </div>
