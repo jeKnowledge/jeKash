@@ -2,7 +2,7 @@ import "../style/css/DividasShowComponent.css";
 import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import Slider from "infinite-react-carousel";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { AuthContext } from "./GlobalComponent";
 const inicialstate = {
   dividasPagas: [],
@@ -37,6 +37,7 @@ const reducer = (state, action) => {
 
 const DividasComponent = (props) => {
   const authcontext = React.useContext(AuthContext);
+  const history = useHistory();
 
   const color = props.color;
   const button = props.button;
@@ -46,6 +47,7 @@ const DividasComponent = (props) => {
   let url = "http://localhost:8000/dividas/" + props.page;
 
   const [state, dispatch] = useReducer(reducer, inicialstate);
+  const [count, setCount] = useState(0);
 
   if (user === "usertoo") {
     url = "http://localhost:8000/dividas/usertoo";
@@ -81,11 +83,22 @@ const DividasComponent = (props) => {
     dispatch({ type: "dividas", auxNPagas, auxPagas });
   };
 
-  const slider = (dividas) => {
+  const handlePay = () => {
+    console.log(count);
+    const url_div =
+      "http://localhost:8000/dividas/" + state.dividasNPagas[count]._id;
+    console.log(url_div);
+    axios.post(url_div).then((res) => {
+      console.log("Divida Paga");
+    });
+
+    // window.location.reload();
+  };
+
+  const slider = (dividas, isPay = false) => {
     return (
-      <Slider {...settings}>
+      <Slider {...settings} afterChange={(i) => isPay && setCount(i)}>
         {dividas.map((dividadiv, i) => {
-          console.log(dividadiv);
           return (
             <div id="descricaodiv" key={i}>
               <p>
@@ -144,10 +157,10 @@ const DividasComponent = (props) => {
           <span id="line" style={{ borderColor: color }}></span>
           {!state.loading &&
             state.dividasNPagas.length &&
-            slider(state.dividasNPagas)}
+            slider(state.dividasNPagas, true)}
           <div className="div-button">
             {button && (
-              <button type="submit" className="pay-button">
+              <button type="submit" className="pay-button" onClick={handlePay}>
                 Pago
               </button>
             )}

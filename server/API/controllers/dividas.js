@@ -318,19 +318,7 @@ exports.dividas_departamento = (req, res, next) => {
       }) // encontra todas as dividas com credores ou devedores que estão no array users
         .exec()
         .then((dividas) => {
-          //? console.log(dividas)
-          var array = new Array();
-
-          for (var i = 0; i < dividas.length; i++) {
-            if (!dividas[i].paga) {
-              array[i] = dividas[i];
-            }
-          }
-          var array = array.filter(function (el) {
-            return el != null;
-          });
-
-          let TotalRet = array.map((divida) => {
+          let TotalRet = dividas.map((divida) => {
             return divida;
           });
           console.log(TotalRet);
@@ -416,6 +404,7 @@ exports.dividas_pordepartamento = (req, res, next) => {
 
 // Opção para dar uma divida como paga
 exports.altera_divida = (req, res, next) => {
+  console.log("a");
   const id_divida = req.params.dividaID; // id da divida introduizdo no url
 
   // Isto é feito para se so quisermos mudar campos especificos e não ter de mudar tudo
@@ -443,7 +432,6 @@ exports.altera_divida = (req, res, next) => {
       console.log({
         id: id_divida,
       });
-      req.flash("success_msg", "Divida Apagada");
     })
     .catch((err) => {
       console.log(err);
