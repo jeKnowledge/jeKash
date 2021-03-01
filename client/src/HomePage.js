@@ -19,13 +19,13 @@ const HomePage = () => {
               <Link to="users/login">
                 <Buttons 
                   name="Log in"
-                  title="LoginStr button"
+                  title="LoginStr buttonsHomePage"
                 />
               </Link>
               <Link to="users/signup">
                 <Buttons 
                     name="Registar"
-                    title="RegistarStr button"
+                    title="RegistarStr buttonsHomePage"
                   />
               </Link>
           </div>

@@ -12,26 +12,11 @@
   margin-top: 5vh;
   font-size: 2vh;
   letter-spacing: 0.01em;
-
   background: #f08a6e;
   border-radius: 30px;
   border: none;
   cursor: pointer;
   outline: none;
-  color: #ffffff;
-}
-
-.LoginStr {
-  right: 7vh;
-  width: 60%; /* 35*2 */
-  background: #ffffff;
-  color: #f08a6e;
-}
-
-.RegistarStr {
-  right: 13.5vh;
-  width: 57%;
-  background: #f08a6e;
   color: #ffffff;
 }
 

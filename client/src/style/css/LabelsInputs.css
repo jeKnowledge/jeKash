@@ -12,7 +12,7 @@
   outline: none;
   color: #3E3C39;
 
-  left: 16%;
+  margin-left: 17%;
   height: 3.5vh;
   width: 70%;
 
@@ -22,7 +22,7 @@
   position: relative;
   width: 67%;
   height: 4vh;
-  left: 12.5%;
+  margin-left: 14%;
   padding-left: 4vw;
   font-size: 2vh;
   letter-spacing: 0.01em;

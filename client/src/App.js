@@ -33,44 +33,43 @@ const App = () => {
        
         {userToken ? (
           <Switch>
-                <Route exact path="/dividas/criar">
-                  <CriarDivida/>
-                </Route>
+            <Route exact path="/dividas/criar">
+              <CriarDivida/>
+            </Route>
 
-                <Route exact path="/dividas/minhasdividas">
-                  <DividasShowDevo/>
-                </Route>
+            <Route exact path="/dividas/minhasdividas">
+              <DividasShowDevo/>
+            </Route>
 
-                <Route exact path="/dividas/adever">
-                  <DividasShowaDever/>
-                </Route>
+            <Route exact path="/dividas/adever">
+              <DividasShowaDever/>
+            </Route>
 
-                <Route exact path="/dividas/Interno">
-                  <DividasShowInterno/>
-                </Route>
+            <Route exact path="/dividas/Interno">
+              <DividasShowInterno/>
+            </Route>
 
-                <Route exact path="/dividas/Inovacao">
-                  <DividasShowInovacao/>
-                </Route>
+            <Route exact path="/dividas/Inovacao">
+              <DividasShowInovacao/>
+            </Route>
 
-                <Route exact path="/dividas/Tech">
-                  <DividasShowTech/>
-                </Route>
+            <Route exact path="/dividas/Tech">
+              <DividasShowTech/>
+            </Route>
 
-                <Route path="/home">
-                    <BrowserView>
-                      <Route render={() => (<Redirect to="/dividas/criar" />)}/> 
-                    </BrowserView>
+            <Route path="/home">
+                <BrowserView>
+                  <Route render={() => (<Redirect to="/dividas/criar" />)}/> 
+                </BrowserView>
 
-                    <MobileView>
-                        <Route render={() => (<SideBar />)}/> 
-                    </MobileView>
-                </Route>
+                <MobileView>
+                    <Route render={() => (<SideBar />)}/> 
+                </MobileView>
+            </Route>
 
-                <Route exact path="/dividas/all">
-                  <DividasTotais/>
-                </Route>
-
+            <Route exact path="/dividas/all">
+              <DividasTotais/>
+            </Route>
         </Switch>
         ) : (
           //* Rotas que não precisam de token.

@@ -1,6 +1,7 @@
 import React, { useReducer, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./style/css/Login.css";
+import logo from './style/logo/logoJek.svg';
 import axios from "axios";
 import LabelsInputs from "./components/LabelsInputs";
 import Buttons from "./components/Buttons";
@@ -64,13 +65,15 @@ const Login = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="loginpage">
-        {/* <div className="jekash-logo">
-      <img  className="img-logo" alt="logo"></img>
-    </div> */}
+        <div className="jeKash-side">  
+          <img src={logo} className="App-logo-mainmenu" alt="logo" />
+        </div>
         <div className="loginside">
-          <h3 className="title1">Bem vindo/a ao jeKash!</h3>
-          <h1 className="title2">Efetua o teu Login</h1>
-          <div className="inputs">
+          <div className="titles-login">
+            <h3 className="title1">Bem vindo/a ao jeKash!</h3>
+            <h1 className="title2">Efetua o teu Login</h1>
+          </div>
+          <div className="inputs-login">
             <div className="email">
               <LabelsInputs
                 title="Email"
