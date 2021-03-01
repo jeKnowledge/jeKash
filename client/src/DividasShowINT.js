@@ -12,7 +12,7 @@ const DividasShow = () => {
         logo="normal"
       />
 
-      <div className="criar-divida-titulo">
+      <div className="criar-divida-tituloDSC">
         <h1>Dívidas Interno</h1>
       </div>
       <DividasComponent color="#F05B78" page="Int" />

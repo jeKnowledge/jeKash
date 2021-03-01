@@ -12,7 +12,7 @@ const DividasShow = () => {
         logo="normal"
       />
 
-      <div className="criar-divida-titulo">
+      <div className="criar-divida-tituloDSC">
         <h1>Dívidas Inovação</h1>
       </div>
 

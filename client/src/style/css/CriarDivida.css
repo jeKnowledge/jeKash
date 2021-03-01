@@ -6,7 +6,7 @@
 .criar-divida-titulo {
   position: relative;
   height: 5vh;
-  top: 4vh;
+  top: 1vh;
   font-family: fonteTitulo;
   font-weight: bold;
   font-size: 2vh;
@@ -71,6 +71,20 @@ input[type="number"] {
 .sidebar-mobile {
   display: none;
 }
+.devedoresWatermark {
+  font-family: fontenormal;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 2%;
+  margin-left: 18%;
+  display: inline;
+  letter-spacing: 0.02em;
+
+  color: #cecdcc;
+}
+
 @media (min-width: 961px) {
   .sidebar-mobile {
     display: block;
