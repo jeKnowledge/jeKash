@@ -18,7 +18,7 @@
   position: relative;
   width: 100%;
   height: 5vh;
-  left: 30%;
+  left: 0%;
   font-size: 2vh;
   letter-spacing: 0.02em;
   border-radius: 30px;
@@ -72,18 +72,19 @@
   #btns a {
     width: 10%; /* mudar a width aqui */
     height: 100%;
-    left: 38%; /*mudar o left aqui */
+    left: 39%; /*mudar o left aqui */
+    margin-right: 2.5%;
   }
 
   .LoginStr {
-    width: 110%; /* 35*2 */
+    width: 100%; /* 35*2 */
     background: #ffffff;
     color: #f08a6e;
   }
 
   .RegistarStr {
-    left: 40%;
-    width: 110%;
+    left: 0%;
+    width: 100%;
     background: #f08a6e;
     color: #ffffff;
   }
@@ -121,31 +122,31 @@
 
   #btns {
     position: relative;
-    top: 60%;
+    top: 50%;
     display: inline-flex;
     width: 100%;
   }
 
   .buttonsHomePage {
-    margin-left: 0vw;
-    left: 39.5%;
+    left: 0%;
     width: 100%;
   }
 
   #btns a {
-    width: 28%; /* mudar a width aqui */
+    width: 18%; /* mudar a width aqui */
     height: 100%;
-    left: 13%;
+    left: 33.5%; /*mudar o left aqui */
+    margin-right: 4%;
   }
   .LoginStr {
-    width: 80%; /* 35*2 */
+    width: 100%; /* 35*2 */
     background: #ffffff;
     color: #f08a6e;
   }
 
   .RegistarStr {
-    left: 45%;
-    width: 80%;
+    left: 0%;
+    width: 100%;
     background: #f08a6e;
     color: #ffffff;
   }
@@ -196,19 +197,20 @@
   }
 
   #btns a {
-    width: 30%; /* mudar a width aqui */
+    width: 25%; /* mudar a width aqui */
     height: 100%;
-    left: 10%;
+    left: 14%; /*mudar o left aqui */
+    margin-right: 15%;
   }
   .LoginStr {
-    width: 90%; /* 35*2 */
+    width: 100%; /* 35*2 */
     background: #ffffff;
     color: #f08a6e;
   }
 
   .RegistarStr {
-    left: 45%;
-    width: 90%;
+    left: 0%;
+    width: 100%;
     background: #f08a6e;
     color: #ffffff;
   }
