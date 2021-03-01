@@ -48,12 +48,77 @@
 
 .name-lastname {
   display: flex;
-  justify-content: space-around;
   margin-bottom: 4vh;
 }
 
-.name {
-  flex: 1;
+.name-lastname-name {
+  width: 100%;
+}
+
+.name-lastname-name label {
+  position: relative;
+  font-family: fonteLabel;
+  font-weight: 550;
+  font-size: 2.1vh;
+  display: flex;
+  outline: none;
+  color: #3E3C39;
+
+  margin-left: 35%;
+  height: 3.5vh;
+  width: 70%;
+}
+
+.name-lastname-name input {
+  position: relative;
+  width: 60%;
+  height: 4vh;
+  margin-left: 30%;
+  padding-left: 4vw;
+  font-size: 2vh;
+  letter-spacing: 0.01em;
+  background: #FFFFFF;
+  outline: none;
+
+  box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+  border: #FFFFFF;
+  color: #AEADAA;
+}
+
+.name-lastname-lastname {
+  margin-left: 4vw;
+  width: 100%;
+}
+
+.name-lastname-lastname label {
+  position: relative;
+  font-family: fonteLabel;
+  font-weight: 550;
+  font-size: 2.1vh;
+  display: flex;
+  outline: none;
+  color: #3E3C39;
+
+  margin-left: 3vw;
+  height: 3.5vh;
+  width: 70%;
+}
+
+.name-lastname-lastname input {
+  position: relative;
+  width: 60%;
+  height: 4vh;
+  padding-left: 4vw;
+  font-size: 2vh;
+  letter-spacing: 0.01em;
+  background: #FFFFFF;
+  outline: none;
+
+  box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+  border: #FFFFFF;
+  color: #AEADAA;
 }
 
 .email,
@@ -64,6 +129,6 @@
   margin-bottom: 4vh;
 }
 
-.inputs1 {
+.inputs-signup {
   margin-bottom: 5vh;
 }
