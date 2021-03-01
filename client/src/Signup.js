@@ -77,31 +77,30 @@ const Signup = () => {
         <div className="signupside">
           <h2 className="titlesg">Bem vindo/a ao jeKash!</h2>
           <h1 className="titlesg2">Efetua o teu Registo</h1>
-          <div className="inputs1">
+          <div className="inputs-signup">
             <div className="name-lastname">
-                <div className="name">
-                <LabelsInputs
-                  title="Nome" 
-                  name="name"
-                  type = "text" 
-                  placeholder="Nome"
-                  size = "true" 
-                  onChange={handleInputChange} 
-                  value={user.name}
+              <div className="name-lastname-name">
+                  <label>Nome</label>
+                  <input
+                      name="name"
+                      type = "text"
+                      required
+                      placeholder = "Nome"
+                      onChange = {handleInputChange} 
+                      value = {user.name}
+                  />
+              </div>
+              <div className="name-lastname-lastname">
+                <label>Apelido</label>
+                <input
+                    name="lastname"
+                    type = "text" 
+                    required
+                    placeholder = "Apelido" 
+                    onChange = {handleInputChange} 
+                    value = {user.lastname}
                 />
-                </div>
-                <div className="lastname">
-                <LabelsInputs
-                  title="Apelido" 
-                  name="lastname"
-                  type = "text" 
-                  placeholder="Apelido" 
-                  size = "true" 
-                  onChange={handleInputChange} 
-                  value={user.lastname}
-                />
-
-                </div>
+              </div>
             </div>
             <div className="email">
               <LabelsInputs
@@ -145,7 +144,7 @@ const Signup = () => {
               option3="Departamento de Tecnologia"
              />        
             </div>
-            </div>
+          </div>
 
           <div className="button-login">
             <Buttons 

@@ -28,7 +28,7 @@ const dividaReducer = (divida, action) => {
   }
 };
 
-// Stateless Functional COmponent
+// Stateless Functional Component
 const CriarDivida = () => {  
     const authcontext = React.useContext(AuthContext);
     
@@ -95,7 +95,7 @@ const CriarDivida = () => {
                 <div className="criar-divida-titulo">
                     <h1>Cria uma nova dívida</h1>
                 </div>
-                <div className="inputs">
+                <div className="inputs-criar-divida">
                     <div className="credor-devedor-quantia-css">
                         <div className="credor-css">
                             <LabelsInputs 

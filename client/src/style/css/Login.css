@@ -11,6 +11,7 @@
 .loginpage {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .title1,
@@ -69,8 +70,55 @@ p {
 }
 
 
+
 .error_login {
   color: #f08a6e;
   margin-left: 18%;
   margin-bottom: 20%;
+}
+
+.jeKash-side {
+  display: none;
+}
+
+
+@media (min-width: 961px){
+
+  .loginside {
+    width: 50%;
+    margin-left: 50vw;
+  }
+
+  .jeKash-side {
+    display: block;
+    width: 50%;
+
+    position: absolute;
+    height: 100%;
+    overflow: hidden;
+
+    background: radial-gradient(
+      179.64% 179.64% at 50% 50%,
+      #fcc582 0%,
+      #f08a6e 100%
+    );
+  }
+  
+  
+
+  .titles-login {
+    font-size: 2.5vh;
+  } 
+
+  .inputs-login {
+    margin-left: 4vw;
+  }
+
+  .button-login {
+    width: 40%;
+    margin-top: -12vh;
+    margin-left: -11vw;
+  }
+
+
 }
