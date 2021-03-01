@@ -1,6 +1,6 @@
 import "../style/css/CriarDivida.css";
 
-const Popup = ({ title, name1, name2, id1, id2, button }) => {
+const Popup = ({ title, name1, name2, id1, id2, id3, button, func }) => {
   if (button) {
     return (
       <div className="popup">
@@ -9,10 +9,14 @@ const Popup = ({ title, name1, name2, id1, id2, button }) => {
           <span className={name2} id={id2}>
             {title}
           </span>
-        </div>
-        <div className="buttons-popup">
-          <button>Sim</button>
-          <button>Não</button>
+          <div className="div-buttons-popup" id={id3}>
+            <button className="button-yes" onClick={() => func("sim")}>
+              Sim
+            </button>
+            <button className="button-no" onClick={() => func("nao")}>
+              Não
+            </button>
+          </div>
         </div>
       </div>
     );

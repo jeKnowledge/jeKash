@@ -4,6 +4,8 @@ import axios from "axios";
 import Slider from "infinite-react-carousel";
 import { Redirect, useHistory } from "react-router-dom";
 import { AuthContext } from "./GlobalComponent";
+import Popup from "./Popup";
+import "../style/css/PopUp.css";
 const inicialstate = {
   dividasPagas: [],
   dividasNPagas: [],
@@ -84,49 +86,47 @@ const DividasComponent = (props) => {
   };
 
   const handlePay = () => {
-    console.log(count);
-    const url_div =
-      "http://localhost:8000/dividas/" + state.dividasNPagas[count]._id;
-    console.log(url_div);
-    axios.post(url_div).then((res) => {
-      console.log("Divida Paga");
-    });
+    // document.getElementById("dividasshowid").style.filter = "blur(2px)";
+    let popup = document.getElementById("myPopup");
+    let popuptext = document.getElementById("myPopupText");
+    let buttons = document.getElementById("buttonsPopUp");
 
+    popup.classList.toggle("show");
+    popuptext.classList.toggle("show");
+    buttons.classList.toggle("show");
     // window.location.reload();
   };
 
-  const slider = (dividas, isPay = false) => {
-    return (
-      <Slider {...settings} afterChange={(i) => isPay && setCount(i)}>
-        {dividas.map((dividadiv, i) => {
-          return (
-            <div id="descricaodiv" key={i}>
-              <p>
-                <span id="text2" style={{ color: color }}>
-                  <strong>Credor:</strong>{" "}
-                </span>
-                {dividadiv.credorS}
-              </p>
-              <p>
-                <span id="text2" style={{ color: color }}>
-                  <strong>Devedor:</strong>{" "}
-                </span>
-                {dividadiv.devedorS}
-              </p>
-              <p>
-                <span id="text2" style={{ color: color }}>
-                  <strong>Valor a pagar:</strong>{" "}
-                </span>
-                {dividadiv.quantia + "€"}
-              </p>
-            </div>
-          );
-        })}
-      </Slider>
-    );
+  const handleResp = (resp) => {
+    console.log(count);
+    if (resp === "sim") {
+      if (state.dividasNPagas.length > 0) {
+        const url_div =
+          "http://localhost:8000/dividas/" + state.dividasNPagas[count]._id;
+        console.log(url_div);
+
+        axios.post(url_div).then((res) => {
+          window.location.reload();
+        });
+      } else {
+        console.log("Nao ha dividas");
+      }
+    } else {
+      clearState();
+    }
   };
 
-  //Dividas são carregadas inicialmente
+  const clearState = () => {
+    // document.getElementById("myCampos").style.filter = "blur(0)";
+    let popup = document.getElementById("myPopup");
+    let popuptext = document.getElementById("myPopupText");
+    let buttons = document.getElementById("buttonsPopUp");
+
+    popup.classList.toggle("show");
+    popuptext.classList.toggle("show");
+    buttons.classList.toggle("show");
+  };
+
   useEffect(() => {
     authcontext.dispatch({ type: "CHECKAUTHSTATE" });
     console.log(url);
@@ -142,49 +142,103 @@ const DividasComponent = (props) => {
       });
   }, []);
 
+  const slider = (dividas, isPay = false) => {
+    return (
+      <Slider {...settings} afterChange={(i) => isPay && setCount(i)}>
+        {dividas.map((dividadiv, i) => {
+          return (
+            <div id="descricaodiv" key={i}>
+              {!button && (
+                <p>
+                  <span id="text2" style={{ color: color }}>
+                    <strong>Credor:</strong>{" "}
+                  </span>
+                  {dividadiv.credorS}
+                </p>
+              )}
+              {!props.credor && (
+                <p>
+                  <span id="text2" style={{ color: color }}>
+                    <strong>Devedor:</strong>{" "}
+                  </span>
+                  {dividadiv.devedorS}
+                </p>
+              )}
+              <p>
+                <span id="text2" style={{ color: color }}>
+                  <strong>Valor a pagar:</strong>{" "}
+                </span>
+                {dividadiv.quantia + "€"}
+              </p>
+              <div className="div-button">
+                {button && isPay && (
+                  <button
+                    type="submit"
+                    className="pay-button"
+                    onClick={handlePay}
+                  >
+                    Pagar
+                  </button>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </Slider>
+    );
+  };
+
   return (
-    <div className="dividasshow">
-      <div className="Ppagar" style={{ background: color }}>
-        <span id="text1">Por Pagar</span>
-      </div>
+    <div className="dividasshow" id="dividasshowid">
+      <div id="dividasshowid">
+        <div className="Ppagar" style={{ background: color }}>
+          <span id="text1">Por Pagar</span>
+        </div>
 
-      <div cal="slider">
-        <div id="dividaspresent">
-          <p id="titlepresent" style={{ color: color }}>
-            Descrição da divida
-          </p>
+        <div cal="slider">
+          <div id="dividaspresent">
+            <p id="titlepresent" style={{ color: color }}>
+              Descrição da divida
+            </p>
 
-          <span id="line" style={{ borderColor: color }}></span>
-          {!state.loading &&
-            state.dividasNPagas.length &&
-            slider(state.dividasNPagas, true)}
-          <div className="div-button">
-            {button && (
-              <button type="submit" className="pay-button" onClick={handlePay}>
-                Pago
-              </button>
-            )}
+            <span id="line" style={{ borderColor: color }}></span>
+            {!state.loading &&
+              state.dividasNPagas.length &&
+              slider(state.dividasNPagas, true)}
+          </div>
+        </div>
+
+        <div className="Ppagar" style={{ background: Pagocolor }}>
+          <span id="text1">Pago</span>
+        </div>
+
+        {/*desenhar aqueles 3 pontos*/}
+
+        <div className="slider2">
+          <div id="dividaspresent">
+            <p id="titlepresent" style={{ color: color }}>
+              Descrição da divida
+            </p>
+
+            <span id="line" style={{ borderColor: color }}></span>
+            {!state.loading &&
+              state.dividasPagas.length &&
+              slider(state.dividasPagas)}
           </div>
         </div>
       </div>
-
-      <div className="Ppagar" style={{ background: Pagocolor }}>
-        <span id="text1">Pago</span>
-      </div>
-
-      {/*desenhar aqueles 3 pontos*/}
-
-      <div className="slider2">
-        <div id="dividaspresent">
-          <p id="titlepresent" style={{ color: color }}>
-            Descrição da divida
-          </p>
-
-          <span id="line" style={{ borderColor: color }}></span>
-          {!state.loading &&
-            state.dividasPagas.length &&
-            slider(state.dividasPagas)}
-        </div>
+      <div className="popup">
+        <Popup
+          title="Queres confirmar o pagamento desta divida?"
+          name1="popupzito1"
+          name2="buttontext"
+          id1="myPopup"
+          id2="myPopupText"
+          id3="buttonsPopUp"
+          button="true"
+          func={handleResp}
+        />
+        <span className="check" id="myCheck" onClick={clearState}></span>
       </div>
     </div>
   );

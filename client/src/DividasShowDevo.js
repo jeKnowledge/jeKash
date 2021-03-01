@@ -15,7 +15,7 @@ const DividasShowDevo = () => {
       <div className="criar-divida-titulo">
         <h1>O que eu devo</h1>
       </div>
-      <DividasComponent user="usertoo" color="#F08A6E" />
+      <DividasComponent user="usertoo" color="#F08A6E" credor="true" />
       {/* Usar o dividas Component para mudar a estetica de como as dividas aparecem
             Por outras palavras, não mexer neste HTML para mudar algo nesta pagina. Mexer no componente.
             */}

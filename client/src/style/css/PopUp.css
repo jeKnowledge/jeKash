@@ -1,0 +1,164 @@
+@font-face {
+  font-family: fonteTitulo;
+  src: url(../font/SuisseIntlCond-Medium-WebS.woff);
+}
+
+@font-face {
+  font-family: fonteLabel;
+  src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
+}
+@font-face {
+  font-family: fontenormal;
+  src: url(../font/SuisseIntlCond-Thin-WebS.woff);
+}
+
+.popup .popupzito {
+  visibility: hidden;
+  z-index: 1;
+  position: absolute;
+  width: 83%;
+  height: 31%;
+  left: calc(50% - 83% / 2);
+  top: 36%;
+  background: #ffffff;
+  box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+}
+.popup .popupzito1 {
+  visibility: hidden;
+  z-index: 1;
+  position: absolute;
+  width: 83%;
+  height: 81%;
+  left: calc(50% - 83% / 2);
+  top: 36%;
+  background: #ffffff;
+  box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+}
+
+.popuptext {
+  visibility: hidden;
+  color: #f08a6e;
+  z-index: 2;
+  position: absolute;
+  font-family: fonteLabel;
+  font-size: 7vw;
+  line-height: 3.2%;
+  width: 83%;
+  height: 5.3%;
+  top: 41.4%;
+  margin-left: 11.2%;
+}
+
+.buttontext {
+  visibility: hidden;
+  color: #f08a6e;
+  z-index: 2;
+  position: absolute;
+  font-family: fonteLabel;
+  font-size: 6vw;
+  text-align: center;
+  width: 55%;
+  height: 5.3%;
+  top: 45.4%;
+  margin-left: 22.2%;
+}
+
+.circle {
+  visibility: hidden;
+  position: absolute;
+  z-index: 2;
+  width: 22.7%;
+  height: 10.5%;
+  left: 40%;
+  top: 50.5%;
+  border-radius: 50%;
+  background-color: #f08a6e;
+  cursor: pointer;
+}
+.check {
+  visibility: hidden;
+  position: absolute;
+  z-index: 3;
+  width: 4.15%;
+  height: 4.2%;
+  transform: rotate(45deg);
+  border-bottom: 7px solid #ffffff;
+  border-right: 7px solid #ffffff;
+  left: 48.5%;
+  bottom: 42%;
+  cursor: pointer;
+}
+/* hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+.popuptext .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+.circle .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+.check .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.button-yes,
+.button-no {
+  color: #ffffff;
+  z-index: 2;
+  font-family: fontenormal;
+  font-size: 4.2vw;
+  line-height: 190.2%;
+  width: 20%;
+  height: 5.3%;
+  top: 41.4%;
+  margin-left: 26.2%;
+  background: #f08a6e;
+  /* sombra base */
+  box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  border: none;
+}
+
+.button-no {
+  margin-left: 8%;
+}
+
+.div-buttons-popup {
+  visibility: hidden;
+  display: flex;
+  text-align: center;
+  margin-top: -103%;
+}
+
+.div-buttons-popup .show {
+  visibility: visible;
+  /* -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s; */
+}
