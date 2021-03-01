@@ -301,7 +301,7 @@ a {
 @media (min-width: 961px) {
   #sbbg {
     position: absolute;
-    width: 22.5%;
+    width: 23.15%;
     height: 100%;
   }
 
@@ -317,12 +317,13 @@ a {
 
   #subbotSTR {
     position: relative;
-    width: 100%;
+    width: 74%;
     height: 50%;
     top: 24%;
     left: 23%;
 
     font-size: 2.5vh;
+    cursor: pointer;
   }
 
   #bottomBarSTR {
