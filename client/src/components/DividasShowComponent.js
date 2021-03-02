@@ -201,7 +201,7 @@ const DividasComponent = (props) => {
           </div>
         </div>
 
-        <div className="Ppagar" style={{ background: Pagocolor }}>
+        <div className="Ppagar">
           <span id="text1">Pago</span>
         </div>
         {/*desenhar aqueles 3 pontos*/}

@@ -1,8 +1,11 @@
 import React from "react";
 import DividasComponent from "./components/DividasShowComponent";
 import TopBar from "./components/TopBar";
+import { AuthContext } from "./components/GlobalComponent";
 
 const DividasShow = () => {
+  const authcontext = React.useContext(AuthContext);
+
   return (
     <div id="bg">
       <TopBar
@@ -16,10 +19,12 @@ const DividasShow = () => {
         <h1>Dívidas Inovação</h1>
       </div>
 
-      <DividasComponent color="#FCC17A" page="Ino" />
-      {/* Usar o dividas Component para mudar a estetica de como as dividas aparecem
-            Por outras palavras, não mexer neste HTML para mudar algo nesta pagina. Mexer no componente.
-            */}
+      {authcontext.state.isadmin && (
+        <DividasComponent color="#FCC17A" page="Ino" button="true" />
+      )}
+      {!authcontext.state.isadmin && (
+        <DividasComponent color="#FCC17A" page="Ino" />
+      )}
     </div>
   );
 };
