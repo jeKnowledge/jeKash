@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./style/css/Login.css";
 import logo from './style/logo/logoJek.svg';
