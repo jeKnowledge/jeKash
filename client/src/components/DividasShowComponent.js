@@ -86,7 +86,6 @@ const DividasComponent = (props) => {
   };
 
   const handlePay = () => {
-    // document.getElementById("dividasshowid").style.filter = "blur(2px)";
     let popup = document.getElementById("myPopup");
     let popuptext = document.getElementById("myPopupText");
     let buttons = document.getElementById("buttonsPopUp");
@@ -94,7 +93,6 @@ const DividasComponent = (props) => {
     popup.classList.toggle("show");
     popuptext.classList.toggle("show");
     buttons.classList.toggle("show");
-    // window.location.reload();
   };
 
   const handleResp = (resp) => {
@@ -205,6 +203,11 @@ const DividasComponent = (props) => {
             {!state.loading &&
               state.dividasNPagas.length &&
               slider(state.dividasNPagas, true)}
+            {!state.dividasNPagas.length && (
+              <p className="not-dividas-create">
+                Ainda não há dividas por pagar ...
+              </p>
+            )}
           </div>
         </div>
 
@@ -224,6 +227,12 @@ const DividasComponent = (props) => {
             {!state.loading &&
               state.dividasPagas.length &&
               slider(state.dividasPagas)}
+            {!state.dividasPagas.length && (
+              <p className="not-dividas-create">
+                Ainda não há dividas pagas ...
+              </p>
+            )}
+            {}
           </div>
         </div>
       </div>
