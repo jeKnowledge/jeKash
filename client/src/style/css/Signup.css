@@ -12,9 +12,10 @@
   src: url(../font/SuisseIntlCond-Thin-WebS.woff);
 }
 
-.loginpage {
+.signuppage {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .titlesg,
@@ -121,7 +122,7 @@
   color: #AEADAA;
 }
 
-.email,
+.email1,
 .password1,
 .password2,
 .department {
@@ -131,4 +132,53 @@
 
 .inputs-signup {
   margin-bottom: 5vh;
+}
+
+
+@media (min-width: 961px){
+
+  .signupside {
+    width: 50%;
+    margin-left: 50vw;
+  }
+
+  .name-lastname-name label {
+    margin-left: 7.8vw;
+  }
+
+  .name-lastname-name input {
+    width: 58%;
+    height: 6vh;
+    margin-left: 30%;
+    padding-left: 1.6vw;
+  }
+
+  .name-lastname-lastname label {
+    margin-left: -3vw;
+  }
+
+  .name-lastname-lastname input {
+    width: 58%;
+    height: 6vh;
+    margin-left: -4vw;
+    padding-left: 1.6vw;
+  }
+
+
+  .email1,
+  .password1,
+  .password2,
+  .department {
+    margin-bottom: 4vh;
+    align-items: center;
+  }
+
+  .inputs-signup {
+    margin-left: 4vw;
+  }
+
+  .department {
+    height: 15vh;
+  }
+
 }
