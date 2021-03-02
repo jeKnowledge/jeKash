@@ -70,16 +70,16 @@ exports.criar_divida_jeK = (req, res, next) => {
                 res.status(200).json(divida);
               })
               .catch((err) => {
-                console.log(err);
+                res.status(404).json(err);
               });
           })
           .catch((err) => {
-            console.log(err);
+            res.status(404).json(err);
           });
       }
     })
     .catch((err) => {
-      console.log(err);
+      res.status(404).json(err);
     });
 };
 

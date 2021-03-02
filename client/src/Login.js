@@ -1,7 +1,7 @@
 import React, { useReducer, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import "./style/css/Login.css";
-import logo from './style/logo/logoJek.svg';
+import logo from "./style/logo/logoJek.svg";
 import axios from "axios";
 import LabelsInputs from "./components/LabelsInputs";
 import Buttons from "./components/Buttons";
@@ -43,7 +43,7 @@ const Login = () => {
     e.preventDefault();
     console.log(user);
     axios
-      .post("http://localhost:8000/users/login", { user })
+      .post("users/login", { user })
       .then((res) => {
         console.log("Logging in...");
         const token = "Bearer " + res.data.Authorization;
@@ -65,7 +65,7 @@ const Login = () => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="loginpage">
-        <div className="jeKash-side">  
+        <div className="jeKash-side">
           <img src={logo} className="App-logo-mainmenu" alt="logo" />
         </div>
         <div className="loginside">

@@ -85,6 +85,11 @@ input[type="number"] {
   color: #cecdcc;
 }
 
+.error-create-div {
+  color: #f08a6e;
+  margin: 2% 0% 0% 18%;
+}
+
 @media (min-width: 961px) {
   .sidebar-mobile {
     display: block;
