@@ -14,6 +14,7 @@ const initialState = {
   quantia: "",
   descricao: "",
   pop: 0,
+  errors: false,
 };
 
 const dividaReducer = (divida, action) => {
@@ -27,6 +28,11 @@ const dividaReducer = (divida, action) => {
       return {
         ...divida,
         pop: action.pop,
+      };
+    case "errors":
+      return {
+        ...divida,
+        errors: action.errors,
       };
     default:
       return divida;
@@ -51,7 +57,7 @@ const CriarDivida = () => {
     authcontext.dispatch({ type: "CHECKAUTHSTATE" });
 
     axios
-      .post("http://localhost:8000/dividas/", { divida })
+      .post("/dividas/", { divida })
       .then(() => {
         dispatch({ type: "pop1", pop: 1 });
         setTimeout(() => {
@@ -59,10 +65,11 @@ const CriarDivida = () => {
         }, 2000);
       })
       .catch((err) => {
+        dispatch({ type: "errors", errors: true });
         console.log(err);
       });
   };
-
+  console.log(divida.errors);
   return (
     <div>
       <div className="topbar-mobile">
@@ -132,6 +139,13 @@ const CriarDivida = () => {
           </div>
           <div className="button-criar-divida">
             <Buttons name="Criar Dívida" type="submit" title="button" />
+            {divida.errors && (
+              <div className="Errors">
+                <p className="error-create-div">
+                  Erro ao criar a tua divida! Tenta novamente
+                </p>
+              </div>
+            )}
           </div>
         </div>
         {divida.pop == 1 && (

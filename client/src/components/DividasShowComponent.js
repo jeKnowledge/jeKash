@@ -52,15 +52,15 @@ const DividasComponent = (props) => {
   const user = props.user;
   let Pagocolor = PagoColorselect(color);
 
-  let url = "http://localhost:8000/dividas/" + props.page;
+  let url = "dividas/" + props.page;
 
   const [state, dispatch] = useReducer(reducer, inicialstate);
   const [count, setCount] = useState(0);
 
   if (user === "usertoo") {
-    url = "http://localhost:8000/dividas/usertoo";
+    url = "dividas/usertoo";
   } else if (user === "toouser") {
-    url = "http://localhost:8000/dividas/toouser";
+    url = "dividas/toouser";
   }
 
   const settings = {
@@ -99,8 +99,7 @@ const DividasComponent = (props) => {
     console.log(count);
     if (resp === "sim") {
       if (state.dividasNPagas.length > 0) {
-        const url_div =
-          "http://localhost:8000/dividas/" + state.dividasNPagas[count]._id;
+        const url_div = "dividas/" + state.dividasNPagas[count]._id;
 
         axios.post(url_div).then((res) => {
           dispatch({ type: "pop1", pop: 2 });

@@ -1,75 +1,78 @@
-import React, { useReducer } from 'react';
-import { Link } from 'react-router-dom';
-import './style/css/Signup.css'
-import axios from 'axios';
+import React, { useReducer } from "react";
+import { Link } from "react-router-dom";
+import "./style/css/Signup.css";
+import axios from "axios";
 import LabelsInputs from "./components/LabelsInputs";
 import SelectDepartments from "./components/Selects";
 import Buttons from "./components/Buttons";
 import { useHistory } from "react-router-dom";
 import logo from './style/logo/logoJek.svg';
 
- const initialState = {
-    name:"",
-    lastname:"",
-    email:"",
-    password:"",
-    password2:"",
-    department:""
+const initialState = {
+  name: "",
+  lastname: "",
+  email: "",
+  password: "",
+  password2: "",
+  department: "",
 };
 
-const reducer = (user,action) => {
-
-  switch(action.type){
+const reducer = (user, action) => {
+  switch (action.type) {
     case "change":
-      const {name,value} =action;
-      return {...user, [name]:value};
+      const { name, value } = action;
+      return { ...user, [name]: value };
 
     default:
-      return {...user};
+      return { ...user };
   }
-}
-
+};
 
 const Signup = () => {
   const history = useHistory();
-  const [user,dispatch] = useReducer(reducer,initialState);
-  
+  const [user, dispatch] = useReducer(reducer, initialState);
 
-    const handleInputChange = e => {
-      const {name,value} = e.target;
-      dispatch({type:"change",name,value});
-    };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    dispatch({ type: "change", name, value });
+  };
 
-    const handleSubmit = e => {
-        e.preventDefault();
-        console.log(user);
-        //! substituir o console log por depois returns diferentes.
-        if (!user.name || !user.lastname || !user.email || !user.password || !user.password2 || !user.department) {
-          console.log("Preencha todos os campos.");
-          return;
-        }
-        else if (user.password !== user.password2) {
-          console.log("Passwords não coincidem.");
-          return;
-        }
-        else if (user.password < 6) {
-          console.log('A Password Tem de ter pelo menos 6 caracteres.');
-          return;
-        }
-        axios.post("http://localhost:8000/users/signup", { user })
-          .then(() => {
-            console.log('User Created')
-            //redirect to login
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(user);
+    //! substituir o console log por depois returns diferentes.
+    if (
+      !user.name ||
+      !user.lastname ||
+      !user.email ||
+      !user.password ||
+      !user.password2 ||
+      !user.department
+    ) {
+      console.log("Preencha todos os campos.");
+      return;
+    } else if (user.password !== user.password2) {
+      console.log("Passwords não coincidem.");
+      return;
+    } else if (user.password < 6) {
+      console.log("A Password Tem de ter pelo menos 6 caracteres.");
+      return;
+    }
+    axios
+      .post("users/signup", { user })
+      .then(() => {
+        console.log("User Created");
+        //redirect to login
 
-            history.push("/users/login");
-          })
-          .catch(err => {
-            //algo correu mal
-            console.error(err);
-          });
-      };
+        history.push("/users/login");
+      })
+      .catch((err) => {
+        //algo correu mal
+        console.error(err);
+      });
+  };
 
-    return (
+  return (
     <form onSubmit={handleSubmit}>
           <div className="signuppage">
             <div className="jeKash-side">  
@@ -162,7 +165,7 @@ const Signup = () => {
 
             </div> 
     </form>
-      );
-}
- 
+  );
+};
+
 export default Signup;
