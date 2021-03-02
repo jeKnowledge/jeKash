@@ -6,6 +6,7 @@ import LabelsInputs from "./components/LabelsInputs";
 import SelectDepartments from "./components/Selects";
 import Buttons from "./components/Buttons";
 import { useHistory } from "react-router-dom";
+import logo from './style/logo/logoJek.svg';
 
 const initialState = {
   name: "",
@@ -73,97 +74,96 @@ const Signup = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="signuppage">
-        {/* <div className="jekash-logo">
-          <img  className="img-logo" alt="logo"></img>
-        </div> */}
-        <div className="signupside">
-          <h2 className="titlesg">Bem vindo/a ao jeKash!</h2>
-          <h1 className="titlesg2">Efetua o teu Registo</h1>
-          <div className="inputs-signup">
-            <div className="name-lastname">
-              <div className="name-lastname-name">
-                <label>Nome</label>
-                <input
-                  name="name"
-                  type="text"
-                  required
-                  placeholder="Nome"
+          <div className="signuppage">
+            <div className="jeKash-side">  
+              <img src={logo} className="App-logo-mainmenu" alt="logo" />
+            </div>
+            <div className="signupside">
+              <h2 className="titlesg">Bem vindo/a ao jeKash!</h2>
+              <h1 className="titlesg2">Efetua o teu Registo</h1>
+              <div className="inputs-signup">
+                <div className="name-lastname">
+                  <div className="name-lastname-name">
+                      <label>Nome</label>
+                      <input
+                          name="name"
+                          type = "text"
+                          required
+                          placeholder = "Nome"
+                          onChange = {handleInputChange} 
+                          value = {user.name}
+                      />
+                  </div>
+                  <div className="name-lastname-lastname">
+                    <label>Apelido</label>
+                    <input
+                        name="lastname"
+                        type = "text" 
+                        required
+                        placeholder = "Apelido" 
+                        onChange = {handleInputChange} 
+                        value = {user.lastname}
+                    />
+                  </div>
+                </div>
+                <div className="email1">
+                  <LabelsInputs
+                    title="Email" 
+                    name="email"
+                    type = "text" 
+                    placeholder="exemplo@jeknowledge.pt" 
+                    onChange={handleInputChange} 
+                    value={user.email}
+                  />
+                </div>
+                <div className="password1">
+                  <LabelsInputs
+                    title="Password" 
+                    name="password"
+                    type="password"
+                    placeholder="Password" 
+                    onChange={handleInputChange} 
+                    value={user.password}
+                  />
+                </div>
+                <div className="password2">
+                  <LabelsInputs
+                    title="Confirma a Password" 
+                    name="password2"
+                    type="password"
+                    placeholder="Password" 
+                    onChange={handleInputChange} 
+                    value={user.password2}
+                  />
+                </div>
+                <div className="department">
+                <SelectDepartments 
+                  title="Departamento"
+                  name = "department"
+                  placeholder = "Escolhe o teu departamento"
                   onChange={handleInputChange}
-                  value={user.name}
+                  value={user.department}
+                  option1="Departamento de Interno"
+                  option2="Departamento de Inovação"
+                  option3="Departamento de Tecnologia"
+                />        
+                </div>
+              </div>
+
+              <div className="button-login">
+                <Buttons 
+                  name="Registar"
+                  type="submit"
+                  title="button"
                 />
               </div>
-              <div className="name-lastname-lastname">
-                <label>Apelido</label>
-                <input
-                  name="lastname"
-                  type="text"
-                  required
-                  placeholder="Apelido"
-                  onChange={handleInputChange}
-                  value={user.lastname}
-                />
+
+              <div className="link2signup">
+                <p>Já tens conta? Faz login <Link className="link" to="/users/login">aqui</Link>.</p>
               </div>
-            </div>
-            <div className="email">
-              <LabelsInputs
-                title="Email"
-                name="email"
-                type="text"
-                placeholder="exemplo@jeknowledge.pt"
-                onChange={handleInputChange}
-                value={user.email}
-              />
-            </div>
-            <div className="password1">
-              <LabelsInputs
-                title="Password"
-                name="password"
-                type="password"
-                placeholder="Password"
-                onChange={handleInputChange}
-                value={user.password}
-              />
-            </div>
-            <div className="password2">
-              <LabelsInputs
-                title="Confirma a Password"
-                name="password2"
-                type="password"
-                placeholder="Password"
-                onChange={handleInputChange}
-                value={user.password2}
-              />
-            </div>
-            <div className="department">
-              <SelectDepartments
-                title="Departamento"
-                name="department"
-                placeholder="Escolhe o teu departamento"
-                onChange={handleInputChange}
-                value={user.department}
-                option1="Departamento de Interno"
-                option2="Departamento de Inovação"
-                option3="Departamento de Tecnologia"
-              />
-            </div>
-          </div>
+              </div>
 
-          <div className="button-login">
-            <Buttons name="Registar" type="submit" title="button" />
-          </div>
-
-          <div className="link2signup">
-            <p>
-              Já tens conta? Faz login{" "}
-              <Link className="link" to="/users/login">
-                aqui
-              </Link>
-              .
-            </p>
-          </div>
-        </div>
-      </div>
+            </div> 
     </form>
   );
 };

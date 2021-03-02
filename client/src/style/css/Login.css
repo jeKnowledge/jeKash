@@ -69,7 +69,9 @@ p {
   height: 2vh;
 }
 
-
+.email {
+  height: 11.5vh;
+}
 
 .error_login {
   color: #f08a6e;

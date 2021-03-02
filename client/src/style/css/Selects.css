@@ -28,9 +28,9 @@
 
 .SelectDepartments select {
   position: relative;
-  width: 72%;
+  width: 71.27%;
   height: 4vh;
-  left: 14%;
+  margin-left: 14%;
   padding-left: 4vw;
   font-size: 2vh;
   letter-spacing: 0.01em;
@@ -57,4 +57,19 @@
   border: #ffffff;
 
   color: #3e3c39;
+}
+
+
+@media (min-width: 961px){
+
+  .SelectDepartments {
+    width: 100%;
+  }
+
+  .SelectDepartments select {
+    width: 62.1%;
+    height: 6vh;
+    cursor: pointer;
+  }
+
 }
