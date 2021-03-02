@@ -43,7 +43,7 @@ const Login = () => {
     e.preventDefault();
     console.log(user);
     axios
-      .post("users/login", { user })
+      .post(" users/login", { user })
       .then((res) => {
         console.log("Logging in...");
         const token = "Bearer " + res.data.Authorization;
