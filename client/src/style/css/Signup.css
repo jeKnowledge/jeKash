@@ -50,54 +50,79 @@
 
 .name-lastname-name {
   width: 100%;
+  left: -0%;
 }
-
 .name-lastname-lastname {
   margin-left: 4vw;
   width: 100%;
 }
-
 .name-lastname-name label {
-  margin-left: 35%;
+  margin-left: 0%;
 }
 
 .name-lastname-lastname label {
-  margin-left: 3vw;
+  margin-left: 0%;
 }
 
-.name-lastname-name label, .name-lastname-lastname label {
+.name-lastname-name label {
   position: relative;
   font-family: fonteLabel;
   font-weight: 550;
   font-size: 2.1vh;
   display: flex;
   outline: none;
-  color: #3E3C39;
-
+  color: #3e3c39;
+  left: 2%;
   height: 3.5vh;
   width: 70%;
 }
-
+.name-lastname-lastname label {
+  position: relative;
+  font-family: fonteLabel;
+  font-weight: 550;
+  font-size: 2.1vh;
+  display: flex;
+  outline: none;
+  color: #3e3c39;
+  left: 8%;
+  height: 3.5vh;
+  width: 70%;
+}
 .name-lastname-name input {
   margin-left: 30%;
 }
 
-.name-lastname-name input, .name-lastname-lastname input {
+.name-lastname-name input {
   position: relative;
   width: 60%;
   height: 4vh;
   padding-left: 4vw;
   font-size: 2vh;
   letter-spacing: 0.01em;
-  background: #FFFFFF;
+  background: #ffffff;
   outline: none;
 
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
-  border: #FFFFFF;
-  color: #AEADAA;
+  border: #ffffff;
+  color: #aeadaa;
 }
 
+.name-lastname-lastname input {
+  position: relative;
+  width: 60%;
+  height: 4vh;
+  padding-left: 4vw;
+  font-size: 2vh;
+  letter-spacing: 0.01em;
+  background: #ffffff;
+  outline: none;
+  left: -45%;
+  box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+  border: #ffffff;
+  color: #aeadaa;
+}
 
 .email1,
 .password1,
@@ -111,9 +136,7 @@
   margin-bottom: 5vh;
 }
 
-
-@media (min-width: 961px){
-
+@media (min-width: 961px) {
   .signupside {
     width: 50%;
     margin-left: 50vw;
@@ -131,7 +154,8 @@
     margin-left: -4vw;
   }
 
-  .name-lastname-name input, .name-lastname-lastname input {
+  .name-lastname-name input,
+  .name-lastname-lastname input {
     width: 58%;
     height: 6vh;
     margin-left: 30%;
@@ -157,5 +181,4 @@
   .department {
     height: 15vh;
   }
-
 }

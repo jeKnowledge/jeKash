@@ -274,7 +274,7 @@ h1 {
     font-family: fonteLabel;
     font-style: normal;
     font-weight: 900;
-    font-size: 2vw;
+    font-size: 1.5vw;
     line-height: 90%;
     align-items: center;
     letter-spacing: 0.01em;
@@ -283,7 +283,7 @@ h1 {
   #descricaodiv {
     position: relative;
     height: 8vh;
-    left: 13%;
+    left: 15%;
     font-size: 2vw;
     width: 100%;
   }
@@ -291,7 +291,7 @@ h1 {
     color: #000000;
     font-family: fontenormal;
     font-weight: 400;
-    font-size: 1.7vw;
+    font-size: 1.4vw;
   }
 
   #titlepresent {
@@ -310,7 +310,7 @@ h1 {
     font-family: fonteLabel;
     font-style: normal;
     font-weight: 600;
-    font-size: 60%;
+    font-size: 50%;
     line-height: 23px;
     letter-spacing: 0.01em;
 
@@ -346,7 +346,7 @@ h1 {
     font-family: fonteLabel;
     font-style: normal;
     font-weight: 600;
-    font-size: 3vh;
+    font-size: 2.1vh;
     line-height: 100%;
     display: flex;
 
@@ -358,7 +358,7 @@ h1 {
     justify-content: center;
     text-align: center;
     align-items: center;
-    top: 10%;
+    top: 23%;
   }
 
   .criar-divida-tituloDEV {
@@ -390,7 +390,7 @@ h1 {
     position: relative;
     width: 40%;
     height: 5.5vh;
-    left: 19%;
+    left: 20%;
     margin-top: 25vh;
 
     font-family: fonteLabel;

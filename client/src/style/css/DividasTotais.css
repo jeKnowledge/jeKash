@@ -11,6 +11,9 @@
   font-family: fontenormal;
   src: url(../font/SuisseIntlCond-Thin-WebS.woff);
 }
+html {
+  overflow: hidden;
+}
 .dividasshow {
   position: absolute;
   width: 100%;
@@ -199,6 +202,6 @@
   }
   .box3 {
     left: 52.5%;
-    top: -40%;
+    top: -70%;
   }
 }
