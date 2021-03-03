@@ -95,7 +95,7 @@ h1 {
   font-family: fonteLabel;
   font-style: normal;
   font-weight: 900;
-  font-size: 6vw;
+  font-size: 3vh;
   line-height: 100%;
   align-items: center;
   letter-spacing: 0.01em;
@@ -114,7 +114,7 @@ h1 {
   justify-content: center;
   align-items: center;
 
-  font-size: 3.5vw;
+  font-size: 2.5vh;
   letter-spacing: 0.01em;
 
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
@@ -142,6 +142,7 @@ h1 {
 #titlepresent {
   position: relative;
   text-align: center;
+  white-space: nowrap;
   margin: auto;
   margin-top: 1%;
   width: 80%;
@@ -154,7 +155,7 @@ h1 {
   font-family: fonteLabel;
   font-style: normal;
   font-weight: 600;
-  font-size: 180%;
+  font-size: 110%;
   line-height: 23px;
   letter-spacing: 0.01em;
 
@@ -315,13 +316,16 @@ h1 {
     font-family: fonteLabel;
     font-style: normal;
     font-weight: 600;
-    font-size: 50%;
     line-height: 23px;
+    font-size: 2.5vh;
     letter-spacing: 0.01em;
 
     /* sombra base */
 
     text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+  }
+  .count-slider-pagas {
+    margin-left: 46%;
   }
   #dividaspresent {
     position: relative;
@@ -335,7 +339,7 @@ h1 {
     justify-content: center;
     align-items: center;
 
-    font-size: 3.5vw;
+    font-size: 3.5vh;
     letter-spacing: 0.01em;
 
     box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
@@ -350,7 +354,7 @@ h1 {
     font-family: fonteLabel;
     font-style: normal;
     font-weight: 600;
-    font-size: 2.1vh;
+    font-size: 2.1vw;
     line-height: 100%;
     display: flex;
 
