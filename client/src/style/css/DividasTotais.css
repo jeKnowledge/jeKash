@@ -33,7 +33,7 @@
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
   border: none;
-  cursor: pointer;
+  cursor: none;
   outline: none;
 
   color: #ffffff;
@@ -110,4 +110,95 @@
 .textIno,
 .textoInt {
   color: black;
+}
+@media (min-width: 961px) {
+  .criar-divida-titulo {
+    position: relative;
+    height: 5vh;
+    width: 30%;
+    top: 8vw;
+    font-family: fonteTitulo;
+    font-weight: bold;
+    font-size: 2vh;
+    left: 30.5%;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #3e3c39;
+  }
+  .partecima {
+    margin-top: 7%;
+  }
+  .caixa {
+    position: relative;
+    font-family: fontenormal;
+    width: 20%;
+
+    height: 15vw;
+    left: 0%;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 3.5vw;
+    letter-spacing: 0.01em;
+
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+
+    margin-top: 6%;
+  }
+  .textIno,
+  .textInt,
+  .textTech {
+    margin-top: 5%;
+    margin-left: 25%;
+    position: relative;
+    left: -5%;
+    display: inline-block;
+    font-family: fonteTitulo;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 1.5vw;
+    line-height: 100%;
+    align-items: center;
+    letter-spacing: 0.01em;
+  }
+  .titulo {
+    position: relative;
+    text-align: center;
+    margin: auto;
+    margin-top: 1%;
+    width: 80%;
+    transform: translate(0%, 125%);
+
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+    font-family: fonteTitulo;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 44%;
+    white-space: nowrap;
+    line-height: 23px;
+    letter-spacing: 0.01em;
+
+    /* sombra base */
+
+    text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+  }
+  .box1 {
+    position: relative;
+    left: 40%;
+  }
+  .box2 {
+    left: 45%;
+  }
+  .box3 {
+    left: 52.5%;
+    top: -40%;
+  }
 }

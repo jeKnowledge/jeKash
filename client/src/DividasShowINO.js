@@ -3,6 +3,7 @@ import DividasComponent from "./components/DividasShowComponent";
 import TopBar from "./components/TopBar";
 import { AuthContext } from "./components/GlobalComponent";
 import { AdminContext } from "./components/checkAdmin";
+import SideBar from "./components/Sidebarcomp";
 
 const DividasShow = () => {
   const authcontext = React.useContext(AuthContext);
@@ -13,7 +14,8 @@ const DividasShow = () => {
   };
 
   return (
-    <div id="bg">
+    <div>
+      <div id="bg">
       <TopBar
         color="normalTopBarCOLOR"
         height="11vh" //parece ser 18 na sidebar (13% é o normal)
@@ -27,6 +29,12 @@ const DividasShow = () => {
 
       <DividasComponent color="#FCC17A" page="Ino" />
     </div>
+      <div className="sidebar-mobile">
+        <SideBar />
+      </div>
+    </div>
+    
+    
   );
 };
 

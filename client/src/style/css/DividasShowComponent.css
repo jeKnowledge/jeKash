@@ -205,7 +205,7 @@ h1 {
   letter-spacing: 0.01em;
   font-size: 4.5vw;
   color: #3e3c39;
-  margin-top: 25%;
+  margin-top: 10%;
   /* sombra base */
 
   text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
@@ -215,6 +215,22 @@ h1 {
 }
 
 @media (min-width: 961px) {
+  .criar-divida-tituloDSC {
+    position: relative;
+    height: 5vh;
+    width: 30%;
+    top: 15vh;
+    font-family: fonteTitulo;
+    font-weight: bold;
+    font-size: 2vh;
+    left: 48%;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #3e3c39;
+  }
+  .normalTopBarCOLOR {
+    display: none;
+  }
   .square {
     float: left;
     width: 50%;
@@ -365,7 +381,7 @@ h1 {
     letter-spacing: 0.01em;
     font-size: 1.8vw;
     color: #3e3c39;
-    margin-top: 15%;
+    margin-top: 0%;
     /* sombra base */
 
     text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
