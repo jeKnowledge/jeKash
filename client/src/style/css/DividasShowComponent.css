@@ -16,6 +16,17 @@ html {
   width: 100%;
   height: 100%;
 }
+.criar-divida-tituloDEV {
+  position: relative;
+  height: 5vh;
+  top: 1vh;
+  font-family: fonteTitulo;
+  font-weight: bold;
+  font-size: 2vh;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #3e3c39;
+}
 
 .criar-divida-tituloDSC {
   -webkit-box-shadow: none;
@@ -45,10 +56,10 @@ h1 {
 
 .Ppagar {
   position: relative;
-  width: 70%;
-  height: 4vh;
+  width: 50%;
+  height: 3.5vh;
   left: 16.25%;
-  margin-top: 2.5vh;
+  margin-top: 4vh;
 
   font-family: fonteLabel;
   font-size: 3.5vw;
@@ -75,7 +86,7 @@ h1 {
   justify-content: center;
   text-align: center;
   align-items: center;
-  transform: translate(0, 30%);
+  transform: translate(0, 20%);
 }
 
 #text2 {
@@ -85,7 +96,7 @@ h1 {
   font-family: fonteLabel;
   font-style: normal;
   font-weight: 900;
-  font-size: 5.5vw;
+  font-size: 6vw;
   line-height: 100%;
   align-items: center;
   letter-spacing: 0.01em;
@@ -97,8 +108,9 @@ h1 {
   width: 80%;
 
   height: 29vh;
-  margin-top: 2.5vh;
-  left: 11.5%;
+  margin-top: 3vh;
+  left: 0%;
+
   display: inline-block;
   justify-content: center;
   align-items: center;
@@ -167,12 +179,17 @@ h1 {
 }
 
 .div-button {
+  height: 50%;
   margin-left: 22%;
+  margin-top: 10%;
+}
+.carousel-initialized {
+  height: 110%;
 }
 
 .pay-button {
   width: 35%;
-  height: 3.8vh;
+  height: 4vh;
   background: #f08a6e;
   /* sombra base */
   border: none;
@@ -186,10 +203,187 @@ h1 {
   align-items: center;
   text-align: center;
   letter-spacing: 0.01em;
-  font-size: 5vw;
+  font-size: 4.5vw;
   color: #3e3c39;
-  margin-top: 800px;
+  margin-top: 25%;
   /* sombra base */
 
   text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+}
+.slider {
+  margin-left: 17%;
+}
+
+@media (min-width: 961px) {
+  .square {
+    float: left;
+    width: 50%;
+    left: 10%;
+    height: 100%;
+  }
+  .pay-button {
+    width: 35%;
+    height: 4vh;
+    margin-left: 0%;
+    background: #f08a6e;
+    /* sombra base */
+    border: none;
+    box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+    border-radius: 30px;
+    color: #ffffff;
+  }
+
+  .slider {
+    width: 68%;
+    margin-left: 32%;
+  }
+  .slider2 {
+    margin-top: -55%;
+    width: 30%;
+    margin-left: 60%;
+  }
+
+  .dividasshow {
+    position: relative;
+    height: 100%;
+    top: 100%;
+  }
+  #dividasshowid {
+    height: 100%;
+  }
+  #text2 {
+    position: relative;
+    right: 3%;
+    display: inline-block;
+    font-family: fonteLabel;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 2vw;
+    line-height: 90%;
+    align-items: center;
+    letter-spacing: 0.01em;
+  }
+
+  #descricaodiv {
+    position: relative;
+    height: 8vh;
+    left: 13%;
+    font-size: 2vw;
+    width: 100%;
+  }
+  #descricaodiv p {
+    color: #000000;
+    font-family: fontenormal;
+    font-weight: 400;
+    font-size: 1.7vw;
+  }
+
+  #titlepresent {
+    position: relative;
+    text-align: center;
+    margin: auto;
+    margin-top: 1%;
+    width: 100%;
+    white-space: nowrap;
+    transform: translate(0%, 130%);
+
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+    font-family: fonteLabel;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 60%;
+    line-height: 23px;
+    letter-spacing: 0.01em;
+
+    /* sombra base */
+
+    text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+  }
+  #dividaspresent {
+    position: relative;
+    font-family: fontenormal;
+    width: 80%;
+
+    height: 21vw;
+    margin-top: 3vh;
+    left: 0%;
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 3.5vw;
+    letter-spacing: 0.01em;
+
+    box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+
+    color: #ffffff;
+  }
+  #text1 {
+    white-space: nowrap;
+    font-family: fonteLabel;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 3vh;
+    line-height: 100%;
+    display: flex;
+
+    letter-spacing: 0.01em;
+
+    position: relative;
+    color: #ffffff;
+
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    top: 10%;
+  }
+
+  .criar-divida-tituloDEV {
+    position: relative;
+    height: 5vh;
+    width: 30%;
+    top: 15vh;
+    font-family: fonteTitulo;
+    font-weight: bold;
+    font-size: 2vh;
+    left: 48%;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #3e3c39;
+  }
+  .not-dividas-create {
+    font-family: fonteLabel;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.01em;
+    font-size: 1.8vw;
+    color: #3e3c39;
+    margin-top: 15%;
+    /* sombra base */
+
+    text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+  }
+  .Ppagar {
+    position: relative;
+    width: 40%;
+    height: 5.5vh;
+    left: 19%;
+    margin-top: 25vh;
+
+    font-family: fonteLabel;
+    font-size: 3.5vw;
+    letter-spacing: 0.01em;
+
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+  }
 }
