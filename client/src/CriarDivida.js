@@ -82,7 +82,6 @@ const CriarDivida = () => {
     console.log(divida);
     authcontext.dispatch({ type: "CHECKAUTHSTATE" });
     admincontext.dispatch({ type: "CHECKADMINSTATE" });
-
     if (authcontext.state.isadmin) {
       console.log(divida);
       axios
@@ -186,7 +185,7 @@ const CriarDivida = () => {
             {divida.errors && (
               <div className="Errors">
                 <p className="error-create-div">
-                  Erro ao criar a tua divida! Tenta novamente
+                  Erro ao criar a tua divida! Tenta novamente.
                 </p>
               </div>
             )}
