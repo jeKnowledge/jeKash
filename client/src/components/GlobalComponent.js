@@ -1,7 +1,9 @@
 import React, { useReducer, useEffect, createContext } from "react";
 import axios from "axios";
 import jwt from "jsonwebtoken";
-
+import {
+  Redirect,
+} from "react-router-dom";
 //* um context e um componente que tem componentes filhos
 //* pode nao ser um context pode ser apenas um componente global
 
@@ -13,7 +15,7 @@ axios.defaults.baseURL = "http://localhost:8000/";
 //O context só dá render da App quando tiver guardado o token no State
 const AuthReducer = (state = {}, action) => {
   const token = localStorage.getItem("Authorization");
-
+  if(token===null) {return (<Redirect to="/" />)}
   switch (action.type) {
     case "LOGIN":
       return {
