@@ -38,7 +38,7 @@ exports.criar_divida_jeK = (req, res, next) => {
     .then((user_credor) => {
       for (let i = 0; i < devedores.length; i++) {
         User.findOne({
-          email: devedores[i],
+          email: devedores[i].trim(),
         })
           .select()
           .exec()
