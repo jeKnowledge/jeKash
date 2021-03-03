@@ -1,8 +1,17 @@
 import React from "react";
 import DividasComponent from "./components/DividasShowComponent";
 import TopBar from "./components/TopBar";
-import SideBar from './components/Sidebarcomp';
+import SideBar from "./components/Sidebarcomp";
+import { AuthContext } from "./components/GlobalComponent";
+import { AdminContext } from "./components/checkAdmin";
+
 const DividasShowaDever = () => {
+  const authcontext = React.useContext(AuthContext);
+  const admincontext = React.useContext(AdminContext);
+
+  const handleifAdmin = () => {
+    admincontext.dispatch({ type: "CHECKADMINSTATE" });
+  };
   return (
     <div>
       <div id="bg">
@@ -14,21 +23,16 @@ const DividasShowaDever = () => {
             logo="normal"
           />
         </div>
-      <div className="criar-divida-titulo">
-        <h1>O que me devem</h1>
-      </div>
+        <div className="criar-divida-titulo">
+          <h1>O que me devem</h1>
+        </div>
 
-      <DividasComponent user="toouser" color="#F08A6E" button="true" />
-      {/* Usar o dividas Component para mudar a estetica de como as dividas aparecem
-            Por outras palavras, não mexer neste HTML para mudar algo nesta pagina. Mexer no componente.
-            */}
+        <DividasComponent user="toouser" color="#F08A6E" button="true" />
       </div>
       <div className="sidebar-mobile">
-        <SideBar/>
+        <SideBar />
       </div>
     </div>
-    
-    
   );
 };
 

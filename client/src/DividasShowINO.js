@@ -2,9 +2,15 @@ import React from "react";
 import DividasComponent from "./components/DividasShowComponent";
 import TopBar from "./components/TopBar";
 import { AuthContext } from "./components/GlobalComponent";
+import { AdminContext } from "./components/checkAdmin";
 
 const DividasShow = () => {
   const authcontext = React.useContext(AuthContext);
+  const admincontext = React.useContext(AdminContext);
+
+  const handleifAdmin = () => {
+    admincontext.dispatch({ type: "CHECKADMINSTATE" });
+  };
 
   return (
     <div id="bg">
@@ -19,12 +25,7 @@ const DividasShow = () => {
         <h1>Dívidas Inovação</h1>
       </div>
 
-      {authcontext.state.isadmin && (
-        <DividasComponent color="#FCC17A" page="Ino" button="true" />
-      )}
-      {!authcontext.state.isadmin && (
-        <DividasComponent color="#FCC17A" page="Ino" />
-      )}
+      <DividasComponent color="#FCC17A" page="Ino" />
     </div>
   );
 };
