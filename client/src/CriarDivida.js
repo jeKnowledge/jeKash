@@ -7,6 +7,8 @@ import Buttons from "./components/Buttons";
 import TopBar from "./components/TopBar";
 import Popup from "./components/Popup";
 import SideBar from "./components/Sidebarcomp";
+import jwt from "jsonwebtoken";
+import { AdminContext } from "./components/checkAdmin";
 
 const initialState = {
   credor: "",
@@ -38,9 +40,11 @@ const dividaReducer = (divida, action) => {
       return divida;
   }
 };
+
 // Stateless Functional Component
 const CriarDivida = () => {
   const authcontext = React.useContext(AuthContext);
+  const admincontext = React.useContext(AdminContext);
 
   const [divida, dispatch] = useReducer(dividaReducer, initialState);
 
@@ -49,27 +53,67 @@ const CriarDivida = () => {
     dispatch({ type: "CHANGE", name, value });
   };
 
+  const analiseDivida = (divid) => {
+    const tok = authcontext.state.userToken.split(" ");
+    const decoded = jwt.decode(tok[1], "secret");
+    const email = decoded.email;
+    let check = false;
+
+    if (divid.credor === email) {
+      check = true;
+    } else {
+      const devedores = divid.devedor.split(",");
+      console.log(devedores);
+      for (let i = 0; i < devedores.length; i++) {
+        if (devedores[i] === email) {
+          check = true;
+        }
+      }
+    }
+
+    console.log(check);
+    return check;
+  };
+
   const handleSubmit = (e) => {
     // impede que a pagina seja reloadada apos o clique no botao
     e.preventDefault();
     divida.quantia = parseFloat(divida.quantia);
     console.log(divida);
     authcontext.dispatch({ type: "CHECKAUTHSTATE" });
+    admincontext.dispatch({ type: "CHECKADMINSTATE" });
 
-    axios
-      .post("/dividas/", { divida })
-      .then(() => {
-        dispatch({ type: "pop1", pop: 1 });
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-      })
-      .catch((err) => {
-        dispatch({ type: "errors", errors: true });
-        console.log(err);
-      });
+    if (authcontext.state.isadmin) {
+      console.log(divida);
+      axios
+        .post("/dividas/", { divida })
+        .then(() => {
+          dispatch({ type: "pop1", pop: 1 });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        })
+        .catch((err) => {
+          dispatch({ type: "errors", errors: true });
+        });
+    } else if (analiseDivida(divida)) {
+      axios
+        .post("/dividas/", { divida })
+        .then(() => {
+          dispatch({ type: "pop1", pop: 1 });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
+        })
+        .catch((err) => {
+          dispatch({ type: "errors", errors: true });
+          console.log(err);
+        });
+    } else {
+      dispatch({ type: "errors", errors: true });
+    }
   };
-  console.log(divida.errors);
+
   return (
     <div>
       <div className="topbar-mobile">

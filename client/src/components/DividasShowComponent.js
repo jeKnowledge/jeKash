@@ -6,6 +6,8 @@ import { Redirect, useHistory } from "react-router-dom";
 import { AuthContext } from "./GlobalComponent";
 import Popup from "./Popup";
 import "../style/css/PopUp.css";
+import { AdminContext } from "../components/checkAdmin.js";
+
 const inicialstate = {
   dividasPagas: [],
   dividasNPagas: [],
@@ -45,7 +47,7 @@ const reducer = (state, action) => {
 
 const DividasComponent = (props) => {
   const authcontext = React.useContext(AuthContext);
-  const history = useHistory();
+  const admincontext = React.useContext(AdminContext);
 
   const color = props.color;
   const button = props.button;
@@ -70,6 +72,7 @@ const DividasComponent = (props) => {
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
+    dots: false,
   };
 
   const DividasPagaNaoPaga = (dividas) => {
@@ -94,7 +97,7 @@ const DividasComponent = (props) => {
   const handlePay = () => {
     dispatch({ type: "pop1", pop: 1 });
   };
-  console.log(state.pop);
+
   const handleResp = (resp) => {
     console.log(count);
     if (resp === "sim") {
@@ -117,6 +120,7 @@ const DividasComponent = (props) => {
 
   useEffect(() => {
     authcontext.dispatch({ type: "CHECKAUTHSTATE" });
+    admincontext.dispatch({ type: "CHECKADMINSTATE" });
     console.log(url);
     axios
       .get(url)
@@ -136,7 +140,7 @@ const DividasComponent = (props) => {
         {dividas.map((dividadiv, i) => {
           return (
             <div id="descricaodiv" key={i}>
-              {!button && (
+              {props.user != "toouser" && (
                 <p>
                   <span id="text2" style={{ color: color }}>
                     <strong>Credor:</strong>{" "}
@@ -144,7 +148,7 @@ const DividasComponent = (props) => {
                   {dividadiv.credorS}
                 </p>
               )}
-              {!props.credor && (
+              {props.user != "usertoo" && (
                 <p>
                   <span id="text2" style={{ color: color }}>
                     <strong>Devedor:</strong>{" "}
@@ -160,6 +164,15 @@ const DividasComponent = (props) => {
               </p>
               <div className="div-button">
                 {button && isPay && (
+                  <button
+                    type="submit"
+                    className="pay-button"
+                    onClick={handlePay}
+                  >
+                    Pagar
+                  </button>
+                )}
+                {admincontext.state.isadmin && (
                   <button
                     type="submit"
                     className="pay-button"

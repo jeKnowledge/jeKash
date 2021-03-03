@@ -1,5 +1,6 @@
 import React, { useReducer, useEffect, createContext } from "react";
 import axios from "axios";
+import jwt from "jsonwebtoken";
 
 //* um context e um componente que tem componentes filhos
 //* pode nao ser um context pode ser apenas um componente global
@@ -7,12 +8,12 @@ import axios from "axios";
 //TODO tirar a porta do front end
 //TODO e defenir a porta como o base url aqui
 let AuthContext = createContext();
-const id_admin = "";
 axios.defaults.baseURL = "http://localhost:8000/";
 
 //O context só dá render da App quando tiver guardado o token no State
 const AuthReducer = (state = {}, action) => {
   const token = localStorage.getItem("Authorization");
+
   switch (action.type) {
     case "LOGIN":
       return {
@@ -29,6 +30,7 @@ const AuthReducer = (state = {}, action) => {
         status: "CHECKINGAUTHSTATE",
         userToken: token,
       };
+
     case "LOGOUT":
       localStorage.clear();
       return {
@@ -56,7 +58,6 @@ const AuthContextProvider = (props) => {
   useEffect(() => {
     dispatch({ type: "CHECKAUTHSTATE" });
   }, [state.token]);
-
   return (
     <AuthContext.Provider value={value}>
       {!state.loading && props.children}
