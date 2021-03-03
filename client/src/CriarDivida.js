@@ -71,7 +71,10 @@ const CriarDivida = () => {
       }
     }
 
-    console.log(check);
+    if (divid.descricao.length >= 10) {
+      check = false;
+    }
+
     return check;
   };
 
@@ -179,6 +182,9 @@ const CriarDivida = () => {
                 onChange={handleInputChange}
                 value={divida.descricao}
               ></textarea>
+              <span className="devedoresWatermark">
+                No máximo 10 caracteres!
+              </span>
             </div>
           </div>
           <div className="button-criar-divida">
