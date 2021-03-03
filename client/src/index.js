@@ -1,11 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import {AuthContextProvider} from './components/GlobalComponent';
+import axios from "axios";
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { AuthContextProvider } from "./components/GlobalComponent";
 //component global aqui
 ReactDOM.render(
-    <AuthContextProvider>
-      <App/>
-    </AuthContextProvider>,
-  document.getElementById('root')
+  <AuthContextProvider>
+    <App />
+  </AuthContextProvider>,
+  document.getElementById("root")
 );

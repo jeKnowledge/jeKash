@@ -10,6 +10,7 @@ const inicialstate = {
   dividasPagas: [],
   dividasNPagas: [],
   loading: true,
+  pop: 0,
 };
 
 function PagoColorselect(color) {
@@ -32,6 +33,11 @@ const reducer = (state, action) => {
         dividasNPagas: action.auxNPagas,
         loading: false,
       };
+    case "pop1":
+      return {
+        ...state,
+        pop: action.pop,
+      };
     default:
       return state;
   }
@@ -46,15 +52,15 @@ const DividasComponent = (props) => {
   const user = props.user;
   let Pagocolor = PagoColorselect(color);
 
-  let url = "http://localhost:8000/dividas/" + props.page;
+  let url = "dividas/" + props.page;
 
   const [state, dispatch] = useReducer(reducer, inicialstate);
   const [count, setCount] = useState(0);
 
   if (user === "usertoo") {
-    url = "http://localhost:8000/dividas/usertoo";
+    url = "dividas/usertoo";
   } else if (user === "toouser") {
-    url = "http://localhost:8000/dividas/toouser";
+    url = "dividas/toouser";
   }
 
   const settings = {
@@ -86,43 +92,27 @@ const DividasComponent = (props) => {
   };
 
   const handlePay = () => {
-    let popup = document.getElementById("myPopup");
-    let popuptext = document.getElementById("myPopupText");
-    let buttons = document.getElementById("buttonsPopUp");
-
-    popup.classList.toggle("show");
-    popuptext.classList.toggle("show");
-    buttons.classList.toggle("show");
+    dispatch({ type: "pop1", pop: 1 });
   };
-
+  console.log(state.pop);
   const handleResp = (resp) => {
     console.log(count);
     if (resp === "sim") {
       if (state.dividasNPagas.length > 0) {
-        const url_div =
-          "http://localhost:8000/dividas/" + state.dividasNPagas[count]._id;
-        console.log(url_div);
+        const url_div = "dividas/" + state.dividasNPagas[count]._id;
 
         axios.post(url_div).then((res) => {
-          window.location.reload();
+          dispatch({ type: "pop1", pop: 2 });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
         });
       } else {
         console.log("Nao ha dividas");
       }
     } else {
-      clearState();
+      dispatch({ type: "pop1", pop: 0 });
     }
-  };
-
-  const clearState = () => {
-    // document.getElementById("myCampos").style.filter = "blur(0)";
-    let popup = document.getElementById("myPopup");
-    let popuptext = document.getElementById("myPopupText");
-    let buttons = document.getElementById("buttonsPopUp");
-
-    popup.classList.toggle("show");
-    popuptext.classList.toggle("show");
-    buttons.classList.toggle("show");
   };
 
   useEffect(() => {
@@ -214,7 +204,6 @@ const DividasComponent = (props) => {
         <div className="Ppagar" style={{ background: Pagocolor }}>
           <span id="text1">Pago</span>
         </div>
-
         {/*desenhar aqueles 3 pontos*/}
 
         <div className="slider2">
@@ -236,19 +225,33 @@ const DividasComponent = (props) => {
           </div>
         </div>
       </div>
-      <div className="popup">
-        <Popup
-          title="Queres confirmar o pagamento desta divida?"
-          name1="popupzito1"
-          name2="buttontext"
-          id1="myPopup"
-          id2="myPopupText"
-          id3="buttonsPopUp"
-          button="true"
-          func={handleResp}
-        />
-        <span className="check" id="myCheck" onClick={clearState}></span>
-      </div>
+      {state.pop == 1 && (
+        <div className="popup">
+          <Popup
+            title="Queres confirmar o pagamento desta divida?"
+            name1="popupzito1"
+            name2="buttontext"
+            id1="myPopup"
+            id2="myPopupText"
+            id3="buttonsPopUp"
+            button="true"
+            func={handleResp}
+          />
+        </div>
+      )}
+      {state.pop == 2 && (
+        <div className="popup">
+          <Popup
+            title="Divida paga com sucesso!"
+            name1="popupzito1"
+            name2="popuptext"
+            id1="myPopup"
+            id2="myPopupText"
+          />
+          <span className="circle"></span>
+          <span className="check"></span>
+        </div>
+      )}
     </div>
   );
 };

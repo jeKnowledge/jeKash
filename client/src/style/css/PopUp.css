@@ -4,7 +4,6 @@
 }
 
 .popup .popupzito {
-  visibility: hidden;
   z-index: 1;
   position: absolute;
   width: 83%;
@@ -17,7 +16,6 @@
 }
 
 .popup .popupzito1 {
-  visibility: hidden;
   z-index: 1;
   position: absolute;
   width: 83%;
@@ -30,21 +28,20 @@
 }
 
 .popuptext {
-  visibility: hidden;
   color: #f08a6e;
   z-index: 2;
   position: absolute;
   font-family: fonteLabel;
-  font-size: 7vw;
-  line-height: 3.2%;
-  width: 83%;
-  height: 5.3%;
-  top: 41.4%;
-  margin-left: 11.2%;
+  font-size: 3.5vh;
+  height: 5vh;
+  top: 40%;
+  text-align: center;
+  margin-left: 16vw;
+  letter-spacing: 0.01em;
+  width: 70%;
 }
 
 .buttontext {
-  visibility: hidden;
   color: #f08a6e;
   z-index: 2;
   position: absolute;
@@ -58,8 +55,8 @@
 }
 
 .circle {
-  visibility: hidden;
   position: absolute;
+
   z-index: 2;
   width: 22.7%;
   height: 10.5%;
@@ -67,11 +64,9 @@
   top: 50.5%;
   border-radius: 50%;
   background-color: #f08a6e;
-  cursor: pointer;
 }
 
 .check {
-  visibility: hidden;
   position: absolute;
   z-index: 3;
   width: 4.15%;
@@ -81,10 +76,9 @@
   border-right: 7px solid #ffffff;
   left: 48.5%;
   bottom: 42%;
-  cursor: pointer;
 }
 
-/* hide and show the popup */
+/* hide and show the popup
 .popup .show {
   visibility: visible;
   -webkit-animation: fadeIn 1s;
@@ -107,8 +101,9 @@
   visibility: visible;
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
-}
+}*/
 
+/*
 @-webkit-keyframes fadeIn {
   from {
     opacity: 0;
@@ -125,7 +120,7 @@
   to {
     opacity: 1;
   }
-}
+}*/
 
 .button-yes,
 .button-no {
@@ -150,14 +145,7 @@
 }
 
 .div-buttons-popup {
-  visibility: hidden;
   display: flex;
   text-align: center;
   margin-top: -103%;
-}
-
-.div-buttons-popup .show {
-  visibility: visible;
-  /* -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s; */
 }

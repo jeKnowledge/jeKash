@@ -67,20 +67,19 @@ exports.criar_divida_jeK = (req, res, next) => {
             divida
               .save()
               .then((result) => {
-                console.log(result);
-                //req.flash('success_msg','Divida Criada');
+                res.status(200).json(divida);
               })
               .catch((err) => {
-                console.log(err);
+                res.status(404).json(err);
               });
           })
           .catch((err) => {
-            console.log(err);
+            res.status(404).json(err);
           });
       }
     })
     .catch((err) => {
-      console.log(err);
+      res.status(404).json(err);
     });
 };
 
@@ -429,9 +428,7 @@ exports.altera_divida = (req, res, next) => {
   )
     .exec()
     .then((result) => {
-      console.log({
-        id: id_divida,
-      });
+      res.status(200).json(result);
     })
     .catch((err) => {
       console.log(err);

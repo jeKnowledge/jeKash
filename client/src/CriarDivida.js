@@ -13,6 +13,8 @@ const initialState = {
   devedor: "",
   quantia: "",
   descricao: "",
+  pop: 0,
+  errors: false,
 };
 
 const dividaReducer = (divida, action) => {
@@ -22,11 +24,20 @@ const dividaReducer = (divida, action) => {
       return { ...divida, [name]: value };
     case "RESET":
       return { ...divida, ...initialState };
+    case "pop1":
+      return {
+        ...divida,
+        pop: action.pop,
+      };
+    case "errors":
+      return {
+        ...divida,
+        errors: action.errors,
+      };
     default:
       return divida;
   }
 };
-
 // Stateless Functional Component
 const CriarDivida = () => {
   const authcontext = React.useContext(AuthContext);
@@ -45,37 +56,20 @@ const CriarDivida = () => {
     console.log(divida);
     authcontext.dispatch({ type: "CHECKAUTHSTATE" });
 
-    let popup = document.getElementById("myPopup");
-    let popuptext = document.getElementById("myPopupText");
-    let circle = document.getElementById("myCircle");
-    let check = document.getElementById("myCheck");
-    popup.classList.toggle("show");
-    popuptext.classList.toggle("show");
-    circle.classList.toggle("show");
-    check.classList.toggle("show");
-    document.getElementById("myCampos").style.filter = "blur(2px)";
-
     axios
-      .post("http://localhost:8000/dividas/", { divida })
-      .then(() => console.log("Divida Criada"))
+      .post("/dividas/", { divida })
+      .then(() => {
+        dispatch({ type: "pop1", pop: 1 });
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000000);
+      })
       .catch((err) => {
+        dispatch({ type: "errors", errors: true });
         console.log(err);
       });
   };
-
-  const clearState = () => {
-    dispatch({ type: "RESET" });
-    document.getElementById("myCampos").style.filter = "blur(0)";
-    let popup = document.getElementById("myPopup");
-    let popuptext = document.getElementById("myPopupText");
-    let circle = document.getElementById("myCircle");
-    let check = document.getElementById("myCheck");
-    popup.classList.toggle("show");
-    popuptext.classList.toggle("show");
-    circle.classList.toggle("show");
-    check.classList.toggle("show");
-  };
-
+  console.log(divida.errors);
   return (
     <div>
       <div className="topbar-mobile">
@@ -145,19 +139,28 @@ const CriarDivida = () => {
           </div>
           <div className="button-criar-divida">
             <Buttons name="Criar Dívida" type="submit" title="button" />
+            {divida.errors && (
+              <div className="Errors">
+                <p className="error-create-div">
+                  Erro ao criar a tua divida! Tenta novamente.
+                </p>
+              </div>
+            )}
           </div>
         </div>
-        <div className="popup">
-          <Popup
-            title="Dívida criada com sucesso!"
-            name1="popupzito"
-            name2="popuptext"
-            id1="myPopup"
-            id2="myPopupText"
-          />
-          <span className="circle" id="myCircle" onClick={clearState}></span>
-          <span className="check" id="myCheck" onClick={clearState}></span>
-        </div>
+        {divida.pop == 1 && (
+          <div className="popup">
+            <Popup
+              title="Dívida criada com sucesso!"
+              name1="popupzito"
+              name2="popuptext"
+              id1="myPopup"
+              id2="myPopupText"
+            />
+            <span className="circle"></span>
+            <span className="check"></span>
+          </div>
+        )}
       </form>
     </div>
   );
