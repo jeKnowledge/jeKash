@@ -102,7 +102,7 @@ const CriarDivida = () => {
           dispatch({ type: "pop1", pop: 1 });
           setTimeout(() => {
             window.location.reload();
-          }, 2000);
+          }, 20000000);
         })
         .catch((err) => {
           dispatch({ type: "errors", errors: true });
@@ -192,7 +192,7 @@ const CriarDivida = () => {
           </div>
         </div>
         {divida.pop == 1 && (
-          <div className="popup">
+          <div className="popup-criar-divida">
             <Popup
               title="Dívida criada com sucesso!"
               name1="popupzito"
@@ -200,8 +200,10 @@ const CriarDivida = () => {
               id1="myPopup"
               id2="myPopupText"
             />
-            <span className="circle"></span>
-            <span className="check"></span>
+            <div className="circle-div">
+              <span className="circle"></span>
+              <span className="check"></span>
+            </div>
           </div>
         )}
       </form>

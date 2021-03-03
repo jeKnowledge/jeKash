@@ -3,25 +3,39 @@
   src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
 }
 
-.popup .popupzito {
+.popup, .popup-criar-divida, .popup-confirmar, .popup-divida-paga {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%);
+}
+
+.popupzito {
   z-index: 1;
   position: absolute;
   width: 83%;
   height: 31%;
-  left: calc(50% - 83% / 2);
-  top: 36%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #ffffff;
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
 }
 
-.popup .popupzito1 {
+.popupzito1 {
   z-index: 1;
   position: absolute;
   width: 83%;
   height: 81%;
-  left: calc(50% - 83% / 2);
-  top: 36%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #ffffff;
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
@@ -36,7 +50,9 @@
   height: 5vh;
   top: 40%;
   text-align: center;
-  margin-left: 16vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   letter-spacing: 0.01em;
   width: 70%;
 }
@@ -46,21 +62,36 @@
   z-index: 2;
   position: absolute;
   font-family: fonteLabel;
-  font-size: 6vw;
+  font-size: 3vh;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 55%;
-  height: 5.3%;
-  top: 45.4%;
-  margin-left: 22.2%;
+}
+
+.circle-div {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%);
 }
 
 .circle {
   position: absolute;
 
   z-index: 2;
-  width: 22.7%;
-  height: 10.5%;
-  left: 40%;
+  width: 85.2px;
+  height: 85.25px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 50.5%;
   border-radius: 50%;
   background-color: #f08a6e;
@@ -69,13 +100,31 @@
 .check {
   position: absolute;
   z-index: 3;
-  width: 4.15%;
-  height: 4.2%;
+  width: 16px;
+  height: 38px;
   transform: rotate(45deg);
   border-bottom: 7px solid #ffffff;
   border-right: 7px solid #ffffff;
-  left: 48.5%;
-  bottom: 42%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 42vh;
+}
+
+
+@media (min-width: 375px) and (min-height: 600px)
+{
+  .popupzito {
+    width: 311.517px;
+    height: 251.717px;
+  }
+
+  .popuptext {
+    width: 263.733px;
+    height: 40.6px;
+  }
+  
 }
 
 /* hide and show the popup
