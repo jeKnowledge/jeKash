@@ -17,7 +17,7 @@
 .criar-divida-titulo {
   position: relative;
   height: 5vh;
-  top: 4vh;
+  top: 1vh;
   font-family: fonteTitulo;
   font-weight: bold;
   font-size: 2vh;
@@ -149,7 +149,9 @@ input[type="number"] {
     margin-top: 18vh;
   }
 
-  .credor-css, .devedor-css, .quantia-css {
+  .credor-css,
+  .devedor-css,
+  .quantia-css {
     margin-left: 22.5vw;
     height: 14vh;
     width: 100%;
@@ -176,5 +178,4 @@ input[type="number"] {
     width: 27%;
     margin-left: 22vw;
   }
-
 }

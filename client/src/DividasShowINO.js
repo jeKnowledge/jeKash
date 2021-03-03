@@ -1,10 +1,21 @@
 import React from "react";
 import DividasComponent from "./components/DividasShowComponent";
 import TopBar from "./components/TopBar";
+import { AuthContext } from "./components/GlobalComponent";
+import { AdminContext } from "./components/checkAdmin";
+import SideBar from "./components/Sidebarcomp";
 
 const DividasShow = () => {
+  const authcontext = React.useContext(AuthContext);
+  const admincontext = React.useContext(AdminContext);
+
+  const handleifAdmin = () => {
+    admincontext.dispatch({ type: "CHECKADMINSTATE" });
+  };
+
   return (
-    <div id="bg">
+    <div>
+      <div id="bg">
       <TopBar
         color="normalTopBarCOLOR"
         height="11vh" //parece ser 18 na sidebar (13% é o normal)
@@ -17,10 +28,13 @@ const DividasShow = () => {
       </div>
 
       <DividasComponent color="#FCC17A" page="Ino" />
-      {/* Usar o dividas Component para mudar a estetica de como as dividas aparecem
-            Por outras palavras, não mexer neste HTML para mudar algo nesta pagina. Mexer no componente.
-            */}
     </div>
+      <div className="sidebar-mobile">
+        <SideBar />
+      </div>
+    </div>
+    
+    
   );
 };
 
