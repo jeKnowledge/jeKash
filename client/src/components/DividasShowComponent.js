@@ -16,7 +16,6 @@ const inicialstate = {
 };
 
 function PagoColorselect(color) {
-
   switch (color) {
     case "#F05B78":
       return "#F391A4";
@@ -24,8 +23,8 @@ function PagoColorselect(color) {
       return "#FFD8AB";
     case "#51A450":
       return "#9FCA9E";
-    case '#F08A6E':
-      return 'rgba(240, 138, 110, 0.68)'
+    case "#F08A6E":
+      return "rgba(240, 138, 110, 0.68)";
   }
 }
 
@@ -55,9 +54,9 @@ const DividasComponent = (props) => {
   const color = props.color;
   const button = props.button;
   const user = props.user;
-  
+
   let Pagocolor = PagoColorselect(color);
-  
+
   let url = "dividas/" + props.page;
 
   const [state, dispatch] = useReducer(reducer, inicialstate);
@@ -176,15 +175,17 @@ const DividasComponent = (props) => {
                     Pagar
                   </button>
                 )}
-                {admincontext.state.isadmin && (
-                  <button
-                    type="submit"
-                    className="pay-button"
-                    onClick={handlePay}
-                  >
-                    Pagar
-                  </button>
-                )}
+                {admincontext.state.isadmin &&
+                  isPay &&
+                  props.user == "usertoo" && (
+                    <button
+                      type="submit"
+                      className="pay-button"
+                      onClick={handlePay}
+                    >
+                      Pagar
+                    </button>
+                  )}
               </div>
             </div>
           );
@@ -202,7 +203,6 @@ const DividasComponent = (props) => {
               <span id="text1">Por Pagar</span>
             </div>
 
-          
             <div id="dividaspresent">
               <p id="titlepresent" style={{ color: color }}>
                 Descrição da divida
@@ -221,26 +221,26 @@ const DividasComponent = (props) => {
           </div>
 
           <div className="square">
-              <div className="Ppagar" style={{ background: Pagocolor }}>
-                <span id="text1">Pago</span>
-              </div> 
-              
-                <div id="dividaspresent">
-                  <p id="titlepresent" style={{ color: color }}>
-                    Descrição da divida
-                  </p>
+            <div className="Ppagar" style={{ background: Pagocolor }}>
+              <span id="text1">Pago</span>
+            </div>
 
-                  <span id="line" style={{ borderColor: color }}></span>
-                  {!state.loading &&
-                    state.dividasPagas.length &&
-                    slider(state.dividasPagas)}
-                  {!state.dividasPagas.length && (
-                    <p className="not-dividas-create">
-                      Ainda não há dividas pagas ...
-                    </p>
-                  )}
-                  {}
-              </div>
+            <div id="dividaspresent">
+              <p id="titlepresent" style={{ color: color }}>
+                Descrição da divida
+              </p>
+
+              <span id="line" style={{ borderColor: color }}></span>
+              {!state.loading &&
+                state.dividasPagas.length &&
+                slider(state.dividasPagas)}
+              {!state.dividasPagas.length && (
+                <p className="not-dividas-create">
+                  Ainda não há dividas pagas ...
+                </p>
+              )}
+              {}
+            </div>
           </div>
         </div>
       </div>
