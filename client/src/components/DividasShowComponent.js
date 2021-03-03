@@ -258,7 +258,7 @@ const DividasComponent = (props) => {
         </div>
       </div>
       {state.pop == 1 && (
-        <div className="popup">
+        <div className="popup-confirmar">
           <Popup
             title="Queres confirmar o pagamento desta divida?"
             name1="popupzito1"
@@ -272,7 +272,7 @@ const DividasComponent = (props) => {
         </div>
       )}
       {state.pop == 2 && (
-        <div className="popup">
+        <div className="popup-divida-paga">
           <Popup
             title="Divida paga com sucesso!"
             name1="popupzito1"
