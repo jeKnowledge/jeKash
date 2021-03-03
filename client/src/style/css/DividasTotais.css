@@ -23,8 +23,8 @@ html {
   position: relative;
   width: 80%;
 
-  height: 29vh;
-  margin-top: 2.5vh;
+  height: 25vh;
+  margin-top: 2vh;
   left: 11.5%;
   display: inline-block;
   justify-content: center;
@@ -38,8 +38,6 @@ html {
   border: none;
   cursor: none;
   outline: none;
-
-  color: #ffffff;
 }
 
 .Ino {
@@ -81,7 +79,7 @@ html {
 .textIno,
 .textInt,
 .textTech {
-  margin-top: 10%;
+  margin-top: 3%;
   margin-left: 25%;
   position: relative;
   right: 3%;
@@ -89,7 +87,7 @@ html {
   font-family: fonteTitulo;
   font-style: normal;
   font-weight: 900;
-  font-size: 5.5vw;
+  font-size: 2.5vh;
   line-height: 100%;
   align-items: center;
   letter-spacing: 0.01em;
@@ -114,7 +112,8 @@ html {
 .textoInt {
   color: black;
 }
-@media (min-width: 961px) {
+
+@media (min-width: 600px) {
   .criar-divida-titulo {
     position: relative;
     height: 5vh;
@@ -202,6 +201,6 @@ html {
   }
   .box3 {
     left: 52.5%;
-    top: -70%;
+    top: -65%;
   }
 }

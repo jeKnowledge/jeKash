@@ -140,7 +140,7 @@ const SideBAR = () => {
 
       <div id="bottomBar">
         <div id="BottomPrimary" onClick={toggleNavBOT}>
-          <span id="bottomBarSTR">Nome de Usuário</span>
+          <span id="bottomBarSTR">{localStorage.getItem("Name")}</span>
           <img
             src={logoarrowUP}
             className="App-logo-UPBottom"

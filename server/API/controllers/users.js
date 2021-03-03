@@ -122,6 +122,8 @@ exports.login = (req, res, next) => {
             //payload,privateKey, [options,callback]
             {
               email: user.email,
+              userNamefirst: user.name,
+              userNamelast: user.lastname,
               userId: user._id,
               admin: user.admin,
             },
@@ -129,12 +131,16 @@ exports.login = (req, res, next) => {
             {
               expiresIn: "1h",
             },
-            function (err, token) {
+            function (err, token,response) {
               //? testing purposes callback.
               //? console.log("Token:" + token);
 
               //* a resposta de um user validado vai ser um token que e guardado na storage no react client sided.
-              res.status(200).json({ Authorization: token });
+              
+              res.status(200).json({
+                userData: user.name + " " + user.lastname,
+                Authorization: token,
+              });
             }
           );
         } else {

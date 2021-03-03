@@ -61,6 +61,7 @@ const DividasComponent = (props) => {
 
   const [state, dispatch] = useReducer(reducer, inicialstate);
   const [count, setCount] = useState(0);
+  const [countPagas, setCountPagas] = useState(1);
 
   if (user === "usertoo") {
     url = "dividas/usertoo";
@@ -139,45 +140,48 @@ const DividasComponent = (props) => {
 
   const slider = (dividas, isPay = false) => {
     return (
-      <Slider {...settings} afterChange={(i) => isPay && setCount(i)}>
+      <Slider
+        {...settings}
+        afterChange={(i) => {
+          if (isPay) {
+            setCount(i);
+          } else {
+            setCountPagas(i);
+          }
+        }}
+      >
         {dividas.map((dividadiv, i) => {
           return (
-            <div id="descricaodiv" key={i}>
-              {props.user != "toouser" && (
-                <p>
-                  <span id="text2" style={{ color: color }}>
-                    <strong>Credor:</strong>{" "}
-                  </span>
-                  {dividadiv.credorS}
-                </p>
-              )}
-              {props.user != "usertoo" && (
-                <p>
-                  <span id="text2" style={{ color: color }}>
-                    <strong>Devedor:</strong>{" "}
-                  </span>
-                  {dividadiv.devedorS}
-                </p>
-              )}
-              <p>
-                <span id="text2" style={{ color: color }}>
-                  <strong>Valor a pagar:</strong>{" "}
-                </span>
-                {dividadiv.quantia + "€"}
+            <div>
+              <p id="titlepresent" style={{ color: color }}>
+                {dividadiv.descricao}
               </p>
-              <div className="div-button">
-                {button && isPay && (
-                  <button
-                    type="submit"
-                    className="pay-button"
-                    onClick={handlePay}
-                  >
-                    Pagar
-                  </button>
+              <span id="line" style={{ borderColor: color }}></span>
+              <div id="descricaodiv" key={i}>
+                {props.user != "toouser" && (
+                  <p>
+                    <span id="text2" style={{ color: color }}>
+                      <strong>Credor:</strong>{" "}
+                    </span>
+                    {dividadiv.credorS}
+                  </p>
                 )}
-                {admincontext.state.isadmin &&
-                  isPay &&
-                  props.user == "usertoo" && (
+                {props.user != "usertoo" && (
+                  <p>
+                    <span id="text2" style={{ color: color }}>
+                      <strong>Devedor:</strong>{" "}
+                    </span>
+                    {dividadiv.devedorS}
+                  </p>
+                )}
+                <p>
+                  <span id="text2" style={{ color: color }}>
+                    <strong>Valor a pagar:</strong>{" "}
+                  </span>
+                  {dividadiv.quantia + "€"}
+                </p>
+                <div className="div-button">
+                  {button && isPay && (
                     <button
                       type="submit"
                       className="pay-button"
@@ -186,6 +190,18 @@ const DividasComponent = (props) => {
                       Pagar
                     </button>
                   )}
+                  {admincontext.state.isadmin &&
+                    isPay &&
+                    props.user == "usertoo" && (
+                      <button
+                        type="submit"
+                        className="pay-button"
+                        onClick={handlePay}
+                      >
+                        Pagar
+                      </button>
+                    )}
+                </div>
               </div>
             </div>
           );
@@ -204,11 +220,6 @@ const DividasComponent = (props) => {
             </div>
 
             <div id="dividaspresent">
-              <p id="titlepresent" style={{ color: color }}>
-                Descrição da divida
-              </p>
-
-              <span id="line" style={{ borderColor: color }}></span>
               {!state.loading &&
                 state.dividasNPagas.length &&
                 slider(state.dividasNPagas, true)}
@@ -216,6 +227,11 @@ const DividasComponent = (props) => {
                 <p className="not-dividas-create">
                   Ainda não há dividas por pagar ...
                 </p>
+              )}
+              {state.dividasNPagas.length != 0 && (
+                <p className="count-slider-pagas">{`${count + 1}/${
+                  state.dividasNPagas.length
+                }`}</p>
               )}
             </div>
           </div>
@@ -226,11 +242,6 @@ const DividasComponent = (props) => {
             </div>
 
             <div id="dividaspresent">
-              <p id="titlepresent" style={{ color: color }}>
-                Descrição da divida
-              </p>
-
-              <span id="line" style={{ borderColor: color }}></span>
               {!state.loading &&
                 state.dividasPagas.length &&
                 slider(state.dividasPagas)}
@@ -239,7 +250,9 @@ const DividasComponent = (props) => {
                   Ainda não há dividas pagas ...
                 </p>
               )}
-              {}
+              {state.dividasPagas.length != 0 && (
+                <p className="count-slider-pagas">{`${countPagas}/${state.dividasPagas.length}`}</p>
+              )}
             </div>
           </div>
         </div>

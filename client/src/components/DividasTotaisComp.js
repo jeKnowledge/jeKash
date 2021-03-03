@@ -44,7 +44,7 @@ const DividasTotaisComp = (props) => {
     axios
       .get(url)
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         let ino = res.data.ino;
         let int = res.data.int;
         let tech = res.data.tech;
@@ -65,10 +65,13 @@ const DividasTotaisComp = (props) => {
         console.log(err);
       });
   }, []);
+  console.log(state)
+
 
   return (
     <div className="dividasshow">
       <div className="partecima">
+        
       <div className="caixa box1">
         <div className="Ino">
           <p className="titulo">Departamento Inovação</p>
@@ -110,6 +113,7 @@ const DividasTotaisComp = (props) => {
           </p>
         </div>
       </div>
+
       </div>
       <div className="caixa box3">
         <div className="Tech">
@@ -131,8 +135,6 @@ const DividasTotaisComp = (props) => {
           </p>
         </div>
       </div>
-      <br />
-      <br />
     </div>
   );
 };

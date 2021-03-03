@@ -47,10 +47,13 @@ const Login = () => {
       .then((res) => {
         console.log("Logging in...");
         const token = "Bearer " + res.data.Authorization;
+        //const name = res.data.userData.userNamefirst + " " +res.data.userData.userNamefirst;
         //? console.log('Token: ' + res.data.Authorization);
 
         localStorage.setItem("Authorization", token);
-
+        //console.log(res.data);
+        
+        localStorage.setItem("Name",res.data.userData);
         console.log("Logged in! Redirecting...");
         authcontext.dispatch({ type: "LOGIN" });
 

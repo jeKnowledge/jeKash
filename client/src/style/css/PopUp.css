@@ -3,9 +3,21 @@
   src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
 }
 
-.popup, .popup-criar-divida, .popup-confirmar, .popup-divida-paga {
+.popup, .popup-criar-divida, .popup-divida-paga {
   position: absolute;
   height: 100%;
+  width: 100%;
+  left: 50%;
+  top: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translate(-50%, -50%);
+}
+
+.popup-confirmar {
+  position: absolute;
+  height: 200%;
   width: 100%;
   left: 50%;
   top: 50%;

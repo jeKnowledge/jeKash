@@ -95,7 +95,7 @@ h1 {
   font-family: fonteLabel;
   font-style: normal;
   font-weight: 900;
-  font-size: 6vw;
+  font-size: 3vh;
   line-height: 100%;
   align-items: center;
   letter-spacing: 0.01em;
@@ -115,7 +115,7 @@ h1 {
   justify-content: center;
   align-items: center;
 
-  font-size: 3.5vw;
+  font-size: 2.5vh;
   letter-spacing: 0.01em;
 
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
@@ -143,6 +143,7 @@ h1 {
 #titlepresent {
   position: relative;
   text-align: center;
+  white-space: nowrap;
   margin: auto;
   margin-top: 1%;
   width: 80%;
@@ -155,7 +156,7 @@ h1 {
   font-family: fonteLabel;
   font-style: normal;
   font-weight: 600;
-  font-size: 180%;
+  font-size: 110%;
   line-height: 23px;
   letter-spacing: 0.01em;
 
@@ -198,12 +199,12 @@ h1 {
 }
 
 .not-dividas-create {
-  font-family: fonteLabel;
+  font-family: fontenormal;
   align-items: center;
   text-align: center;
   letter-spacing: 0.01em;
   font-size: 4.5vw;
-  color: #3e3c39;
+  color: #aeadaa;
   margin-top: 10%;
   /* sombra base */
 
@@ -211,6 +212,12 @@ h1 {
 }
 .slider {
   margin-left: 17%;
+}
+
+.count-slider-Npagas,
+.count-slider-pagas {
+  color: #000000;
+  margin-left: 30vw;
 }
 
 @media (min-width: 961px) {
@@ -237,6 +244,7 @@ h1 {
     height: 100%;
   }
   .pay-button {
+    z-index: 20;
     width: 35%;
     height: 4vh;
     margin-left: 0%;
@@ -309,13 +317,16 @@ h1 {
     font-family: fonteLabel;
     font-style: normal;
     font-weight: 600;
-    font-size: 50%;
     line-height: 23px;
+    font-size: 2.5vh;
     letter-spacing: 0.01em;
 
     /* sombra base */
 
     text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
+  }
+  .count-slider-pagas {
+    margin-left: 46%;
   }
   #dividaspresent {
     position: relative;
@@ -329,7 +340,7 @@ h1 {
     justify-content: center;
     align-items: center;
 
-    font-size: 3.5vw;
+    font-size: 3.5vh;
     letter-spacing: 0.01em;
 
     box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
@@ -344,7 +355,7 @@ h1 {
     font-family: fonteLabel;
     font-style: normal;
     font-weight: 600;
-    font-size: 2.1vh;
+    font-size: 2.1vw;
     line-height: 100%;
     display: flex;
 
@@ -373,12 +384,12 @@ h1 {
     color: #3e3c39;
   }
   .not-dividas-create {
-    font-family: fonteLabel;
+    font-family: fontenormal;
     align-items: center;
     text-align: center;
     letter-spacing: 0.01em;
     font-size: 1.8vw;
-    color: #3e3c39;
+    color: #aeadaa;
     margin-top: 0%;
     /* sombra base */
 
