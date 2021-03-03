@@ -23,8 +23,8 @@ html {
   position: relative;
   width: 80%;
 
-  height: 29vh;
-  margin-top: 2.5vh;
+  height: 25vh;
+  margin-top: 2vh;
   left: 11.5%;
   display: inline-block;
   justify-content: center;
@@ -38,8 +38,6 @@ html {
   border: none;
   cursor: none;
   outline: none;
-
-  color: #ffffff;
 }
 
 .Ino {
@@ -81,7 +79,7 @@ html {
 .textIno,
 .textInt,
 .textTech {
-  margin-top: 10%;
+  margin-top: 6%;
   margin-left: 25%;
   position: relative;
   right: 3%;
