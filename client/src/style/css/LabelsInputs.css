@@ -3,6 +3,11 @@
   src: url(../font/SuisseIntlCond-Semibold-WebS.ttf);
 }
 
+@font-face {
+  font-family: fontenormal;
+  src: url(../font/SuisseIntlCond-Thin-WebS.woff);
+}
+
 .labelInput label {
   position: relative;
   font-family: fonteLabel;
@@ -20,6 +25,7 @@
 
 .labelInput input {
   position: relative;
+  font-family: fontenormal;
   width: 67%;
   height: 4vh;
   margin-left: 14%;
@@ -32,7 +38,14 @@
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
   border: #FFFFFF;
+  color: #3A3B3C;
+}
+
+::placeholder {
   color: #AEADAA;
+  opacity: 1;
+  font-size: 2vh;
+  letter-spacing: 0.01em;
 }
 
 
