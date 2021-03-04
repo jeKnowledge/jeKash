@@ -39,6 +39,7 @@
 
 .input-descricao {
   position: relative;
+  font-family: fontenormal;
   width: 67%;
   height: 25vh;
   margin-left: 14%;
@@ -53,7 +54,7 @@
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
   border: #ffffff;
-  color: #aeadaa;
+  color: #3A3B3C;
 }
 
 .button-criar-divida {
