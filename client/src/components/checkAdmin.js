@@ -1,5 +1,4 @@
 import React, { useReducer, useEffect, createContext } from "react";
-import axios from "axios";
 import jwt from "jsonwebtoken";
 
 //* um context e um componente que tem componentes filhos
@@ -29,6 +28,7 @@ const AdminReducer = (state = {}, action) => {
           };
         }
       }
+      break;
     default:
       return {
         ...state,

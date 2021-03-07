@@ -1,7 +1,6 @@
 //* usual stuff
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from './components/GlobalComponent';
 
 //* styling the page
 import logo from './style/logo/logoJek.svg';

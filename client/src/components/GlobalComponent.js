@@ -1,6 +1,5 @@
 import React, { useReducer, useEffect, createContext } from "react";
 import axios from "axios";
-import jwt from "jsonwebtoken";
 import {
   Redirect,
 } from "react-router-dom";

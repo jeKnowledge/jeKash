@@ -198,7 +198,7 @@ const CriarDivida = () => {
             )}
           </div>
         </div>
-        {divida.pop == 1 && (
+        {divida.pop === 1 && (
           <div className="popup-criar-divida">
             <Popup
               title="Dívida criada com sucesso!"
