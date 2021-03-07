@@ -9,11 +9,11 @@ const DividasTotais = () => {
       <div id="bg">
         <TopBar
           color="normalTopBarCOLOR"
-          height="11vh" //parece ser 18 na sidebar (13% é o normal)
+          height="13vh" //parece ser 18 na sidebar (13% é o normal)
           linkto="/home"
           logo="normal"
         />
-        <div className="criar-divida-titulo">
+        <div className="dividas-globais-titulo">
           <h1>Dívidas Globais</h1>
         </div>
         <DividasTotaisComp />
