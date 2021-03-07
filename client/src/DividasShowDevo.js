@@ -10,7 +10,7 @@ const DividasShowDevo = () => {
         <div className="topbar-mobile">
           <TopBar
             color="normalTopBarCOLOR"
-            height="11vh" //parece ser 18 na sidebar (13% é o normal)
+            height="13vh" //parece ser 18 na sidebar (13% é o normal)
             linkto="/home"
             logo="normal"
           />
