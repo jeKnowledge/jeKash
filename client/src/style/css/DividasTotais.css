@@ -18,6 +18,7 @@ html {
   position: absolute;
   width: 100%;
   height: 200%;
+  top: 90%;
 }
 .caixa {
   position: relative;
@@ -42,17 +43,21 @@ html {
 
 .Ino {
   color: #fcc17a;
+  height: 30%;
 }
 
 .Int {
   color: #f05b78;
+  height: 30%;
 }
 
 .Tech {
   color: #51a450;
+  height: 30%;
 }
 
 .titulo {
+  white-space: nowrap;
   position: relative;
   text-align: center;
   margin: auto;
@@ -67,7 +72,7 @@ html {
   font-family: fonteTitulo;
   font-style: normal;
   font-weight: 600;
-  font-size: 175%;
+  font-size: 2.5vh;
   line-height: 23px;
   letter-spacing: 0.01em;
 
@@ -79,6 +84,8 @@ html {
 .textIno,
 .textInt,
 .textTech {
+  color: black;
+  white-space: nowrap;
   margin-top: 3%;
   margin-left: 25%;
   position: relative;
@@ -88,7 +95,7 @@ html {
   font-style: normal;
   font-weight: 900;
   font-size: 2.5vh;
-  line-height: 100%;
+  line-height: 50%;
   align-items: center;
   letter-spacing: 0.01em;
 }
@@ -107,22 +114,31 @@ html {
   color: #51a450;
 }
 
-.textTech,
-.textIno,
-.textoInt {
-  color: black;
+.dividas-globais-titulo {
+  position: relative;
+  height: 5vh;
+  width: 100%;
+  top: 0vh;
+  margin-top: -2%;
+  font-family: fonteTitulo;
+  font-weight: bold;
+  font-size: 2vh;
+  left: 0%;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #3e3c39;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 961px) {
   .dividas-globais-titulo {
     position: relative;
     height: 5vh;
-    width: 30%;
+    width: 70%;
     top: 8vw;
     font-family: fonteTitulo;
     font-weight: bold;
     font-size: 2vh;
-    left: 30.5%;
+    left: 27.5%;
     text-align: center;
     letter-spacing: 0.01em;
     color: #3e3c39;
