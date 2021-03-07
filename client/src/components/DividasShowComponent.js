@@ -2,7 +2,6 @@ import "../style/css/DividasShowComponent.css";
 import React, { useState, useEffect, useReducer } from "react";
 import axios from "axios";
 import Slider from "infinite-react-carousel";
-import { Redirect, useHistory } from "react-router-dom";
 import { AuthContext } from "./GlobalComponent";
 import Popup from "./Popup";
 import "../style/css/PopUp.css";
@@ -24,6 +23,8 @@ function PagoColorselect(color) {
     case "#51A450":
       return "#9FCA9E";
     case "#F08A6E":
+      return "rgba(240, 138, 110, 0.68)";
+    default:
       return "rgba(240, 138, 110, 0.68)";
   }
 }
@@ -70,7 +71,6 @@ const DividasComponent = (props) => {
   }
 
   const settings = {
-    dots: true,
     infinite: true,
     speed: 300,
     slidesToShow: 1,
@@ -158,7 +158,7 @@ const DividasComponent = (props) => {
               </p>
               <span id="line" style={{ borderColor: color }}></span>
               <div id="descricaodiv" key={i}>
-                {props.user != "toouser" && (
+                {props.user !== "toouser" && (
                   <p>
                     <span id="text2" style={{ color: color }}>
                       <strong>Credor:</strong>{" "}
@@ -166,7 +166,7 @@ const DividasComponent = (props) => {
                     {dividadiv.credorS}
                   </p>
                 )}
-                {props.user != "usertoo" && (
+                {props.user !== "usertoo" && (
                   <p>
                     <span id="text2" style={{ color: color }}>
                       <strong>Devedor:</strong>{" "}
@@ -192,7 +192,7 @@ const DividasComponent = (props) => {
                   )}
                   {admincontext.state.isadmin &&
                     isPay &&
-                    props.user == "usertoo" && (
+                    props.user === "usertoo" && (
                       <button
                         type="submit"
                         className="pay-button"
@@ -228,7 +228,7 @@ const DividasComponent = (props) => {
                   Ainda não há dividas por pagar ...
                 </p>
               )}
-              {state.dividasNPagas.length != 0 && (
+              {state.dividasNPagas.length !== 0 && (
                 <p className="count-slider-pagas">{`${count + 1}/${
                   state.dividasNPagas.length
                 }`}</p>
@@ -250,14 +250,14 @@ const DividasComponent = (props) => {
                   Ainda não há dividas pagas ...
                 </p>
               )}
-              {state.dividasPagas.length != 0 && (
+              {state.dividasPagas.length !== 0 && (
                 <p className="count-slider-pagas">{`${countPagas}/${state.dividasPagas.length}`}</p>
               )}
             </div>
           </div>
         </div>
       </div>
-      {state.pop == 1 && (
+      {state.pop ===1 && (
         <div className="popup-confirmar">
           <Popup
             title="Queres confirmar o pagamento desta divida?"
@@ -271,7 +271,7 @@ const DividasComponent = (props) => {
           />
         </div>
       )}
-      {state.pop == 2 && (
+      {state.pop === 2 && (
         <div className="popup-divida-paga">
           <Popup
             title="Divida paga com sucesso!"

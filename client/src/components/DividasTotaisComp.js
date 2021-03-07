@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import axios from "axios";
 import "../style/css/DividasTotais.css";
 import { AuthContext } from "./GlobalComponent";
@@ -65,7 +65,7 @@ const DividasTotaisComp = (props) => {
         console.log(err);
       });
   }, []);
-  console.log(state)
+  //console.log(state)
 
 
   return (
