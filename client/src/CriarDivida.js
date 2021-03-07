@@ -180,9 +180,10 @@ const CriarDivida = () => {
                 placeholder="Descrição da dívida"
                 onChange={handleInputChange}
                 value={divida.descricao}
+                maxLength = "16"
               ></textarea>
               <span className="devedoresWatermark">
-                No máximo 10 caracteres!
+                No máximo 16 caracteres!
               </span>
             </div>
           </div>

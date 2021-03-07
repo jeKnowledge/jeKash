@@ -41,7 +41,7 @@
   position: relative;
   font-family: fontenormal;
   width: 67%;
-  height: 25vh;
+  height: 15vh;
   margin-left: 14%;
   padding-left: 4vw;
   padding-top: 2vh;
@@ -86,7 +86,7 @@ input[type="number"] {
 }
 
 .descricao-css {
-  height: 29vh;
+  height: 24vh;
 }
 
 .sidebar-mobile {
