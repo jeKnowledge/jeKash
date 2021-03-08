@@ -93,7 +93,7 @@ const CriarDivida = () => {
           dispatch({ type: "pop1", pop: 1 });
           setTimeout(() => {
             window.location.reload();
-          }, 2000);
+          }, 1000);
         })
         .catch((err) => {
           dispatch({ type: "errors", errors: true });
@@ -179,7 +179,7 @@ const CriarDivida = () => {
                 placeholder="Descrição da dívida"
                 onChange={handleInputChange}
                 value={divida.descricao}
-                maxLength = "16"
+                maxLength="16"
               ></textarea>
               <span className="devedoresWatermark">
                 No máximo 16 caracteres!
