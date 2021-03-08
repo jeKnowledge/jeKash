@@ -95,14 +95,13 @@ input[type="number"] {
 
 .devedoresWatermark {
   font-family: fontenormal;
-  font-style: normal;
   font-weight: 300;
   font-size: 12px;
-  line-height: 16px;
   margin-top: 2%;
   margin-left: 18%;
   display: inline;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  width: 67%;
 
   color: #cecdcc;
 }

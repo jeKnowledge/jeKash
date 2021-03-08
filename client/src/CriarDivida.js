@@ -156,8 +156,7 @@ const CriarDivida = () => {
                   value={divida.devedor}
                 />
                 <span className="devedoresWatermark">
-                  No caso de serem vários devedores, efetua a divisão por
-                  virgulas.
+                  Para mais do que um devedor - divisão por vírgulas
                 </span>
               </div>
               <div className="quantia-css">
