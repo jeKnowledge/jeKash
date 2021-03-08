@@ -62,7 +62,7 @@ const DividasComponent = (props) => {
 
   const [state, dispatch] = useReducer(reducer, inicialstate);
   const [count, setCount] = useState(0);
-  const [countPagas, setCountPagas] = useState(1);
+  const [countPagas, setCountPagas] = useState(0);
 
   if (user === "usertoo") {
     url = "dividas/usertoo";
@@ -229,7 +229,7 @@ const DividasComponent = (props) => {
                 </p>
               )}
               {state.dividasNPagas.length !== 0 && (
-                <p className="count-slider-pagas">{`${count + 1}/${
+                <p className="count-slider-Npagas">{`${count + 1}/${
                   state.dividasNPagas.length
                 }`}</p>
               )}
@@ -251,13 +251,15 @@ const DividasComponent = (props) => {
                 </p>
               )}
               {state.dividasPagas.length !== 0 && (
-                <p className="count-slider-pagas">{`${countPagas}/${state.dividasPagas.length}`}</p>
+                <p className="count-slider-pagas">{`${countPagas + 1}/${
+                  state.dividasPagas.length
+                }`}</p>
               )}
             </div>
           </div>
         </div>
       </div>
-      {state.pop ===1 && (
+      {state.pop === 1 && (
         <div className="popup-confirmar">
           <Popup
             title="Queres confirmar o pagamento desta divida?"
