@@ -60,7 +60,7 @@ html {
 .Ppagar {
   position: relative;
   width: 50%;
-  height: 3.5vh;
+  height: 4vh;
   left: 16.25%;
   margin-top: 4vh;
 
@@ -185,7 +185,7 @@ html {
 .div-button {
   width: 90%;
   height: 50%;
-  margin-left: 34%;
+  margin-left: 32%;
   margin-top: 15%;
 }
 .carousel-initialized {
@@ -224,6 +224,7 @@ html {
   color: #000000;
   margin-left: 30vw;
   margin-top: -0%;
+  font-size: 1.5vh;
 }
 
 @media (min-width: 961px) {
@@ -420,7 +421,7 @@ html {
   .Ppagar {
     position: relative;
     width: 40%;
-    height: 5.5vh;
+    height: 6vh;
     left: 20%;
     margin-top: 25vh;
 
@@ -441,7 +442,7 @@ html {
   .Ppagar {
     position: relative;
     width: 60%;
-    height: 5.5vh;
+    height: 6vh;
     left: 9%;
     margin-top: 25vh;
 

@@ -77,6 +77,7 @@ const DividasComponent = (props) => {
     slidesToScroll: 1,
     arrows: false,
     dots: false,
+    duration: 100,
   };
 
   const DividasPagaNaoPaga = (dividas) => {
@@ -112,7 +113,7 @@ const DividasComponent = (props) => {
           dispatch({ type: "pop1", pop: 2 });
           setTimeout(() => {
             window.location.reload();
-          }, 2000);
+          }, 2000000000);
         });
       } else {
         console.log("Nao ha dividas");
@@ -265,9 +266,6 @@ const DividasComponent = (props) => {
             title="Queres confirmar o pagamento desta divida?"
             name1="popupzito1"
             name2="buttontext"
-            id1="myPopup"
-            id2="myPopupText"
-            id3="buttonsPopUp"
             button="true"
             func={handleResp}
           />
@@ -279,8 +277,6 @@ const DividasComponent = (props) => {
             title="Divida paga com sucesso!"
             name1="popupzito1"
             name2="popuptext"
-            id1="myPopup"
-            id2="myPopupText"
           />
           <span className="circle"></span>
           <span className="check"></span>

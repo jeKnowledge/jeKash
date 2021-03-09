@@ -3,7 +3,9 @@
   src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
 }
 
-.popup, .popup-criar-divida, .popup-divida-paga {
+.popup,
+.popup-criar-divida,
+.popup-divida-paga {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -43,14 +45,16 @@
 .popupzito1 {
   z-index: 1;
   position: absolute;
-  width: 83%;
-  height: 81%;
+  width: 80%;
+  height: 45%;
   display: flex;
   justify-content: center;
   align-items: center;
   background: #ffffff;
-  box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 1px 4px 15px rgb(0 0 0 / 8%);
   border-radius: 30px;
+  /* right: 17%; */
+  top: 50%;
 }
 
 .popuptext {
@@ -80,6 +84,7 @@
   justify-content: center;
   align-items: center;
   width: 55%;
+  margin-top: 50%;
 }
 
 .circle-div {
@@ -124,9 +129,7 @@
   bottom: 42vh;
 }
 
-
-@media (min-width: 375px) and (min-height: 600px)
-{
+@media (min-width: 375px) and (min-height: 600px) {
   .popupzito {
     width: 311.517px;
     height: 251.717px;
@@ -136,7 +139,6 @@
     width: 263.733px;
     height: 40.6px;
   }
-  
 }
 
 /* hide and show the popup
@@ -190,15 +192,14 @@
   font-family: fontenormal;
   font-size: 4.2vw;
   line-height: 190.2%;
-  width: 20%;
+  width: 100%;
   height: 5.3%;
-  top: 41.4%;
-  margin-left: 26.2%;
   background: #f08a6e;
   /* sombra base */
   box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
   border: none;
+  margin-top: 100%;
 }
 
 .button-no {
@@ -208,5 +209,6 @@
 .div-buttons-popup {
   display: flex;
   text-align: center;
-  margin-top: -103%;
+  width: 40%;
+  margin-top: 60%;
 }
