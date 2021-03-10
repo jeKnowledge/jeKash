@@ -126,7 +126,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 42vh;
+  top: 52.5%;
 }
 
 @media (min-width: 375px) {
@@ -151,6 +151,13 @@
   .popuptext {
     width: 263.733px;
     height: 40.6px;
+  }
+
+}
+
+@media (min-width: 961px) {
+  .popupzito, .popuptext, .circle, .check {
+    margin-left: 18vw;
   }
 }
 
