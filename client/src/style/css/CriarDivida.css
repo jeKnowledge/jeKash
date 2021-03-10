@@ -55,6 +55,7 @@
   border-radius: 30px;
   border: #ffffff;
   color: #3A3B3C;
+  -webkit-appearance: none;
 }
 
 .button-criar-divida {
