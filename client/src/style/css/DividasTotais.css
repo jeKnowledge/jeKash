@@ -118,8 +118,7 @@ html {
   position: relative;
   height: 5vh;
   width: 100%;
-  top: 0vh;
-  margin-top: -2%;
+  margin-top: 2vh;
   font-family: fonteTitulo;
   font-weight: bold;
   font-size: 2vh;

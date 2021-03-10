@@ -39,6 +39,7 @@
   border-radius: 30px;
   border: #FFFFFF;
   color: #3A3B3C;
+  -webkit-appearance: none;
 }
 
 ::placeholder {
