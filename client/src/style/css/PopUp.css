@@ -129,6 +129,18 @@
   bottom: 42vh;
 }
 
+@media (min-width: 375px) {
+  .popupzito {
+    width: 311.517px;
+    height: 251.717px;
+  }
+
+  .popuptext {
+    width: 263.733px;
+    height: 40.6px;
+  }
+}
+
 @media (min-width: 375px) and (min-height: 600px) {
   .popupzito {
     width: 311.517px;

@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const userControllers = require('../controllers/users');
 const User = require('../models/users');
-const messages = require('../middleware/connectFlash');
 const checkServer = require("../middleware/check-server");
 
 
@@ -18,9 +17,9 @@ router.get('/logout', (req, res, next) => {
 router.get("/getall", checkServer, userControllers.get_all_users);
 
 
-router.post("/signup", messages, userControllers.signup);
+router.post("/signup", userControllers.signup);
 
-router.post("/login", messages, userControllers.login);
+router.post("/login", userControllers.login);
 
 router.delete("/signout", userControllers.signout);
 
