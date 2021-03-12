@@ -63,14 +63,14 @@ const SideBAR = () => {
       />
       <div id="criardivida">
         <Link to="/dividas/criar">
-          <img src={logomais} className="App-logo-plus" alt="logoplus" />
+          <img src={logomais} className="App-logo-plus LogoScale" alt="logoplus" />
           <span id="primbotSTR">Criar dívida</span>
         </Link>
       </div>
 
       <div id="mydividasdiv">
         <div id="mydividas" onClick={toggleNav}>
-          <img src={logopessoa} className="App-logo-pessoa" alt="logopess" />
+          <img src={logopessoa} className="App-logo-pessoa LogoScale" alt="logopess" />
           <span id="primbotSTR">Minhas dívidas</span>
 
           <img
@@ -99,7 +99,7 @@ const SideBAR = () => {
 
       <div id="dividastotaisdiv" style={{ top: "8%" }}>
         <div id="dividastotais" onClick={toggleNavTOP}>
-          <img src={logoMoney} className="App-logo-Money" alt="logomoney" />
+          <img src={logoMoney} className="App-logo-Money LogoScale " alt="logomoney" />
           <span id="primbotSTR">Dívidas Totais</span>
 
           <img
