@@ -93,7 +93,6 @@ html {
   display: inline-block;
   font-family: fonteTitulo;
   font-style: normal;
-  font-weight: 900;
   font-size: 2.5vh;
   line-height: 50%;
   align-items: center;
@@ -177,7 +176,6 @@ html {
     display: inline-block;
     font-family: fonteTitulo;
     font-style: normal;
-    font-weight: 900;
     font-size: 1.5vw;
     line-height: 100%;
     align-items: center;
