@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import logo from './style/logo/logoJek.svg';
 import './style/css/HomePage.css';
 import Buttons from './components/Buttons'
+import "./style/css/font.css";
+
 
 const HomePage = () => {
   localStorage.clear();

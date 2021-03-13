@@ -1,4 +1,5 @@
 import '../style/css/LabelsInputs.css';
+import "../style/css/font.css";
 
 const LabelsInputs = (props) => {
     const title = props.title;

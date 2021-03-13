@@ -4,6 +4,8 @@ import TopBar from "./components/TopBar";
 import { AuthContext } from "./components/GlobalComponent";
 import { AdminContext } from "./components/checkAdmin";
 import SideBar from "./components/Sidebarcomp";
+import "./style/css/font.css";
+
 
 const DividasShow = () => {
   const authcontext = React.useContext(AuthContext);

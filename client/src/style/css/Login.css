@@ -1,13 +1,3 @@
-@font-face {
-  font-family: fonteTitulo;
-  src: url(../font/SuisseIntlCond-Medium-WebS.woff);
-}
-
-@font-face {
-  font-family: fonteLabel;
-  src: url(../font/SuisseIntlCond-Semibold-WebS.woff);
-}
-
 .loginpage {
   width: 100%;
   height: 100%;

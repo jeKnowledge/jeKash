@@ -28,6 +28,7 @@ const AdminReducer = (state = {}, action) => {
           };
         }
       }
+      break;
     default:
       return {
         ...state,

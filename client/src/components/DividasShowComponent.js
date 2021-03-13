@@ -6,6 +6,7 @@ import { AuthContext } from "./GlobalComponent";
 import Popup from "./Popup";
 import "../style/css/PopUp.css";
 import { AdminContext } from "../components/checkAdmin.js";
+import "../style/css/font.css";
 
 const inicialstate = {
   dividasPagas: [],
