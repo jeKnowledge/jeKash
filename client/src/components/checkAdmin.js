@@ -13,8 +13,7 @@ const id_admin = "60328f4b2ff1fe39404a88ef";
 const AdminReducer = (state = {}, action) => {
   const token = localStorage.getItem("Authorization");
 
-  switch (action.type) {
-    case "CHECKADMINSTATE":
+  if (action.type == "CHECKADMINSTATE") {
       if (token) {
         const tok = token.split(" ");
         const decoded = jwt.decode(tok[1], "secret");
@@ -28,13 +27,13 @@ const AdminReducer = (state = {}, action) => {
           };
         }
       }
-      break;
-    default:
-      return {
-        ...state,
-        status: "default",
-        isadmin: false,
-      };
+      else {
+        return {
+          ...state,
+          status: "default",
+          isadmin: false,
+        };
+      }
   }
 };
 const Initialstate = {
