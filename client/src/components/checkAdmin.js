@@ -40,13 +40,13 @@ const AdminReducer = (state = {}, action) => {
 const Initialstate = {
   //* Initialstate:
   status: "InitalState",
-  isadmin: false,
+  isadmin: false
 };
 
 const AdminContextProvider = (props) => {
   const [state, dispatch] = useReducer(AdminReducer, Initialstate);
   let value = { state, dispatch };
-  console.log(state.isadmin);
+  console.log(state);
   useEffect(() => {
     dispatch({ type: "CHECKADMINSTATE" });
   }, [state.isadmin]);

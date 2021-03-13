@@ -28,7 +28,6 @@ const DividasShowaDever = () => {
       <div className="criar-divida-tituloDEV">
         <h1>O que me devem</h1>
       </div>
-
         <DividasComponent user="toouser" color="#F08A6E" button="true" />
       </div>
       <div className="sidebar-mobile">

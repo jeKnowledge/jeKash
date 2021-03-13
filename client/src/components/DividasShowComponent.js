@@ -276,11 +276,9 @@ const DividasComponent = (props) => {
         <div className="popup-divida-paga">
           <Popup
             title="Divida paga com sucesso!"
-            name1="popupzito1"
+            name1="popupzito2"
             name2="popuptext"
           />
-          <span className="circle"></span>
-          <span className="check"></span>
         </div>
       )}
     </div>
