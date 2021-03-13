@@ -28,7 +28,6 @@ const AdminReducer = (state = {}, action) => {
           };
         }
       }
-      break;
     default:
       return {
         ...state,
@@ -46,7 +45,7 @@ const Initialstate = {
 const AdminContextProvider = (props) => {
   const [state, dispatch] = useReducer(AdminReducer, Initialstate);
   let value = { state, dispatch };
-  console.log(state);
+  //console.log(state);
   useEffect(() => {
     dispatch({ type: "CHECKADMINSTATE" });
   }, [state.isadmin]);
