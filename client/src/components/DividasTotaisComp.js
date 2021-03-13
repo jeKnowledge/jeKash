@@ -2,6 +2,7 @@ import React, { useEffect, useReducer } from "react";
 import axios from "axios";
 import "../style/css/DividasTotais.css";
 import { AuthContext } from "./GlobalComponent";
+import "../style/css/font.css";
 
 const inicialstate = {
   dividasIno: 0,

@@ -7,6 +7,7 @@ import logomais from "../style/logo/logoplus.svg";
 import logopessoa from "../style/logo/logoman.svg";
 import logoarrowUP from "../style/logo/logoarrowUP.svg";
 import logoMoney from "../style/logo/logomoney.svg";
+import "../style/css/font.css";
 
 import TopBar from "./TopBar";
 

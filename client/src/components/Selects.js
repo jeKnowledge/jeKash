@@ -1,4 +1,5 @@
 import "../style/css/Selects.css";
+import "../style/css/font.css";
 const Selects = ({
   title,
   name,

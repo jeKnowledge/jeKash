@@ -1,4 +1,5 @@
 import '../style/css/Buttons.css'
+import "../style/css/font.css";
 
 
 const Buttons = (props) => {

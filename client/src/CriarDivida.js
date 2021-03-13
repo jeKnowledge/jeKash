@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import { AuthContext } from "./components/GlobalComponent";
 import axios from "axios";
 import "./style/css/CriarDivida.css";
+import "./style/css/font.css";
 import LabelsInputs from "./components/LabelsInputs";
 import Buttons from "./components/Buttons";
 import TopBar from "./components/TopBar";
@@ -57,25 +58,20 @@ const CriarDivida = () => {
     const tok = authcontext.state.userToken.split(" ");
     const decoded = jwt.decode(tok[1], "secret");
     const email = decoded.email;
-    let check = false;
 
     if (divid.credor === email) {
-      check = true;
+      return true;
     } else {
       const devedores = divid.devedor.split(",");
       console.log(devedores);
       for (let i = 0; i < devedores.length; i++) {
         if (devedores[i] === email) {
-          check = true;
+          return true;
         }
       }
     }
 
-    if (divid.descricao.length >= 10) {
-      check = false;
-    }
-
-    return check;
+    return false;
   };
 
   const handleSubmit = (e) => {

@@ -2,6 +2,8 @@ import React from 'react';
 import DividasComponent from './components/DividasShowComponent';
 import TopBar from './components/TopBar'
 import SideBar from "./components/Sidebarcomp";
+import "./style/css/font.css";
+
 
 const DividasShow = () => {
     return (

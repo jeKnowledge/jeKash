@@ -1,4 +1,5 @@
 import "../style/css/CriarDivida.css";
+import "../style/css/font.css";
 
 const Popup = ({ title, name1, name2, button, func }) => {
   if (button) {

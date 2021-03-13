@@ -6,6 +6,8 @@ import axios from "axios";
 import LabelsInputs from "./components/LabelsInputs";
 import Buttons from "./components/Buttons";
 import { AuthContext } from "./components/GlobalComponent";
+import "./style/css/font.css";
+
 
 const initialState = {
   email: "",

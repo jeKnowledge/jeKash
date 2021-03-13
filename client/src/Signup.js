@@ -7,6 +7,8 @@ import SelectDepartments from "./components/Selects";
 import Buttons from "./components/Buttons";
 import { useHistory } from "react-router-dom";
 import logo from './style/logo/logoJek.svg';
+import "./style/css/font.css";
+
 
 const initialState = {
   name: "",

@@ -6,6 +6,8 @@ import logoHamburguerN from '../style/logo/logoHamburguer2.svg'
 import logoJekL from '../style/logo/logoJekLetras.svg';
 import logoJekO from '../style/logo/logoJekLetrasColor.svg';
 import "../style/css/TopBar.css";
+import "../style/css/font.css";
+
 let logoApp;
 let hamburguer;
 
