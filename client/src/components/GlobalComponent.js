@@ -1,20 +1,21 @@
 import React, { useReducer, useEffect, createContext } from "react";
 import axios from "axios";
-import {
-  Redirect,
-} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 //* um context e um componente que tem componentes filhos
 //* pode nao ser um context pode ser apenas um componente global
 
 //TODO tirar a porta do front end
 //TODO e defenir a porta como o base url aqui
 let AuthContext = createContext();
-axios.defaults.baseURL = "http://localhost:8000/";
+axios.defaults.baseURL = "http://localhost:61000/";
+// axios.defaults.baseURL = "www.api.jekash.jeknowledge.com";
 
 //O context só dá render da App quando tiver guardado o token no State
 const AuthReducer = (state = {}, action) => {
   const token = localStorage.getItem("Authorization");
-  if(token===null) {return (<Redirect to="/" />)}
+  if (token === null) {
+    return <Redirect to="/" />;
+  }
   switch (action.type) {
     case "LOGIN":
       return {
