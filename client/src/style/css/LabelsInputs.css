@@ -24,6 +24,7 @@
   letter-spacing: 0.01em;
   background: #FFFFFF;
   outline: none;
+  min-height: 29px;
 
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
