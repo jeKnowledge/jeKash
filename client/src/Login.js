@@ -8,7 +8,6 @@ import Buttons from "./components/Buttons";
 import { AuthContext } from "./components/GlobalComponent";
 import "./style/css/font.css";
 
-
 const initialState = {
   email: "",
   password: "",
@@ -43,20 +42,14 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(user);
     axios
       .post("users/login", { user })
       .then((res) => {
-        console.log("Logging in...");
         const token = "Bearer " + res.data.Authorization;
-        //const name = res.data.userData.userNamefirst + " " +res.data.userData.userNamefirst;
-        //? console.log('Token: ' + res.data.Authorization);
 
         localStorage.setItem("Authorization", token);
-        //console.log(res.data);
-        
-        localStorage.setItem("Name",res.data.userData);
-        console.log("Logged in! Redirecting...");
+
+        localStorage.setItem("Name", res.data.userData);
         authcontext.dispatch({ type: "LOGIN" });
 
         history.push("/home");

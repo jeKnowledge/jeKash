@@ -26,7 +26,6 @@ exports.get_all_users = (req, res, next) => {
       res.status(200).json(response);
     })
     .catch((err) => {
-      console.log(err);
       res.status(500).json({
         error: err,
       });
@@ -68,11 +67,9 @@ exports.signup = (req, res, next) => {
             user
               .save()
               .then((result) => {
-                console.log(result);
                 res.status(200).json(result);
               })
               .catch((err) => {
-                console.log(err);
                 res.status(500).json({
                   error: err,
                 });
@@ -82,10 +79,14 @@ exports.signup = (req, res, next) => {
       }
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
     })
     .catch((err) => {
-      req.flash("errors", err);
+      res.status(500).json({
+        error: err,
+      });
     });
 };
 
@@ -131,12 +132,7 @@ exports.login = (req, res, next) => {
             {
               expiresIn: "1h",
             },
-            function (err, token,response) {
-              //? testing purposes callback.
-              //? console.log("Token:" + token);
-
-              //* a resposta de um user validado vai ser um token que e guardado na storage no react client sided.
-              
+            function (err, token, response) {
               res.status(200).json({
                 userData: user.name + " " + user.lastname,
                 Authorization: token,
@@ -166,7 +162,6 @@ exports.signout = (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.log(err);
       res.status(500).json({
         error: err,
       });

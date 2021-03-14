@@ -160,7 +160,9 @@ exports.criar_divida_Tesoureiro = (req, res, next) => {
       });
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
     });
 };
 
@@ -192,7 +194,9 @@ exports.get_all_dividas = (req, res, next) => {
       return response;
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
     });
 };
 
@@ -207,15 +211,15 @@ exports.get_all_dividas_user = (req, res, next) => {
   })
     .exec()
     .then((dividas) => {
-      console.log(dividas);
       let TotalRet = dividas.map((divida) => {
         return divida;
       });
-      console.log(TotalRet);
       res.status(200).json(TotalRet);
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
     });
 };
 
@@ -230,15 +234,15 @@ exports.get_all_dividas_to_me = (req, res, next) => {
   })
     .exec()
     .then((dividas) => {
-      console.log("a");
       let TotalRet = dividas.map((divida) => {
         return divida;
       });
-      console.log(TotalRet);
       res.status(200).json(TotalRet);
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
     });
 };
 
@@ -253,7 +257,7 @@ exports.dividas_ativas_inativas = (req, res, next) => {
   } else if (url[2] == "inativas?") {
     // se for /dividas/inativas
     estado = true;
-  } else console.log("algo de errado não está certo");
+  }
 
   const token = localStorage.get("Authorization");
   const decoded = jwt.verify(token, "secret");
@@ -288,7 +292,9 @@ exports.dividas_ativas_inativas = (req, res, next) => {
       }
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
     });
 };
 
@@ -302,7 +308,6 @@ exports.dividas_departamento = (req, res, next) => {
     .exec()
     .then((users) => {
       // users - array com todos os users do departamento
-      console.log(users);
       Divida.find({
         $or: [
           // or para considerar os dois "pedidos"
@@ -323,15 +328,18 @@ exports.dividas_departamento = (req, res, next) => {
           let TotalRet = dividas.map((divida) => {
             return divida;
           });
-          console.log(TotalRet);
           res.status(200).json(TotalRet);
         })
         .catch((err) => {
-          console.log(err);
+          res.status(500).json({
+            error: err,
+          });
         });
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
     });
 };
 
@@ -395,18 +403,21 @@ exports.dividas_pordepartamento = (req, res, next) => {
             }
           })
           .catch((err) => {
-            console.log(err);
+            res.status(500).json({
+              error: err,
+            });
           });
       })
       .catch((err) => {
-        console.log(err);
+        res.status(500).json({
+          error: err,
+        });
       });
   });
 };
 
 // Opção para dar uma divida como paga
 exports.altera_divida = (req, res, next) => {
-  console.log("a");
   const id_divida = req.params.dividaID; // id da divida introduizdo no url
 
   // Isto é feito para se so quisermos mudar campos especificos e não ter de mudar tudo
@@ -434,7 +445,9 @@ exports.altera_divida = (req, res, next) => {
       res.status(200).json(result);
     })
     .catch((err) => {
-      console.log(err);
+      res.status(500).json({
+        error: err,
+      });
     });
 };
 

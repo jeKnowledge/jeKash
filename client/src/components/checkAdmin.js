@@ -19,7 +19,6 @@ const AdminReducer = (action, state = {}) => {
         const tok = token.split(" ");
         const decoded = jwt.decode(tok[1], "secret");
         const id_user = decoded.userId;
-        console.log(id_user);
         if (id_user === id_admin) {
           return {
             ...state,
@@ -45,7 +44,6 @@ const Initialstate = {
 const AdminContextProvider = (props) => {
   const [state, dispatch] = useReducer(AdminReducer, Initialstate);
   let value = { state, dispatch };
-  console.log(state.isadmin);
   useEffect(() => {
     dispatch({ type: "CHECKADMINSTATE" });
   }, [state.isadmin]);

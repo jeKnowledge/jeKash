@@ -45,7 +45,6 @@ const DividasTotaisComp = (props) => {
     axios
       .get(url)
       .then((res) => {
-        //console.log(res.data);
         let ino = res.data.ino;
         let int = res.data.int;
         let tech = res.data.tech;
@@ -66,55 +65,51 @@ const DividasTotaisComp = (props) => {
         console.log(err);
       });
   }, []);
-  //console.log(state)
-
 
   return (
     <div className="dividasshow">
       <div className="partecima">
-        
-      <div className="caixa box1">
-        <div className="Ino">
-          <p className="titulo">Departamento Inovação</p>
-          <span id="line"></span>
+        <div className="caixa box1">
+          <div className="Ino">
+            <p className="titulo">Departamento Inovação</p>
+            <span id="line"></span>
+          </div>
+          <div className="textIno">
+            <p>
+              <span>
+                <strong className="color1">Dividas Totais:</strong>{" "}
+              </span>
+              {state.dividasIno} €
+            </p>
+            <p>
+              <span>
+                <strong className="color1">Total Pago:</strong>{" "}
+              </span>
+              {state.dividasPIno} €
+            </p>
+          </div>
         </div>
-        <div className="textIno">
-          <p>
-            <span>
-              <strong className="color1">Dividas Totais:</strong>{" "}
-            </span>
-            {state.dividasIno} €
-          </p>
-          <p>
-            <span>
-              <strong className="color1">Total Pago:</strong>{" "}
-            </span>
-            {state.dividasPIno} €
-          </p>
-        </div>
-      </div>
 
-      <div className="caixa box2">
-        <div className="Int">
-          <p className="titulo">Departamento Interno</p>
-          <span id="line"></span>
+        <div className="caixa box2">
+          <div className="Int">
+            <p className="titulo">Departamento Interno</p>
+            <span id="line"></span>
+          </div>
+          <div className="textInt">
+            <p>
+              <span>
+                <strong className="color2">Dividas Totais:</strong>{" "}
+              </span>
+              {state.dividasInt} €
+            </p>
+            <p>
+              <span>
+                <strong className="color2">Total Pago:</strong>{" "}
+              </span>
+              {state.dividasPInt} €
+            </p>
+          </div>
         </div>
-        <div className="textInt">
-          <p>
-            <span>
-              <strong className="color2">Dividas Totais:</strong>{" "}
-            </span>
-            {state.dividasInt} €
-          </p>
-          <p>
-            <span>
-              <strong className="color2">Total Pago:</strong>{" "}
-            </span>
-            {state.dividasPInt} €
-          </p>
-        </div>
-      </div>
-
       </div>
       <div className="caixa box3">
         <div className="Tech">

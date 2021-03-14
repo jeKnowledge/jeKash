@@ -63,7 +63,6 @@ const CriarDivida = () => {
       return true;
     } else {
       const devedores = divid.devedor.split(",");
-      console.log(devedores);
       for (let i = 0; i < devedores.length; i++) {
         if (devedores[i] === email) {
           return true;
@@ -78,11 +77,10 @@ const CriarDivida = () => {
     // impede que a pagina seja reloadada apos o clique no botao
     e.preventDefault();
     divida.quantia = parseFloat(divida.quantia);
-    console.log(divida);
+
     authcontext.dispatch({ type: "CHECKAUTHSTATE" });
     admincontext.dispatch({ type: "CHECKADMINSTATE" });
     if (authcontext.state.isadmin) {
-      console.log(divida);
       axios
         .post("/dividas/", { divida })
         .then(() => {

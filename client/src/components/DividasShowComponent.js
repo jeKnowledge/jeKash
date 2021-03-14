@@ -82,16 +82,12 @@ const DividasComponent = (props) => {
   };
 
   const DividasPagaNaoPaga = (dividas) => {
-    console.log(dividas);
     const nrdividas = dividas.length;
     const auxNPagas = [];
     const auxPagas = [];
 
-    console.log(dividas);
     for (let i = 0; i < nrdividas; i++) {
-      // ? console.log(i);
       if (dividas[i].paga === false) {
-        //console.log("paga")
         auxNPagas.push(dividas[i]);
       } else {
         auxPagas.push(dividas[i]);
@@ -105,7 +101,6 @@ const DividasComponent = (props) => {
   };
 
   const handleResp = (resp) => {
-    console.log(count);
     if (resp === "sim") {
       if (state.dividasNPagas.length > 0) {
         const url_div = "dividas/" + state.dividasNPagas[count]._id;
@@ -114,7 +109,7 @@ const DividasComponent = (props) => {
           dispatch({ type: "pop1", pop: 2 });
           setTimeout(() => {
             window.location.reload();
-          }, 2000000000);
+          }, 1000);
         });
       } else {
         console.log("Nao ha dividas");
@@ -127,12 +122,10 @@ const DividasComponent = (props) => {
   useEffect(() => {
     authcontext.dispatch({ type: "CHECKAUTHSTATE" });
     admincontext.dispatch({ type: "CHECKADMINSTATE" });
-    console.log(url);
     axios
       .get(url)
       .then((res) => {
         const lastget = res.data;
-        console.log(res.data);
         DividasPagaNaoPaga(lastget);
       })
       .catch((err) => {
