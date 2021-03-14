@@ -10,10 +10,11 @@ let AdminContext = createContext();
 const id_admin = "60328f4b2ff1fe39404a88ef";
 
 //O context só dá render da App quando tiver guardado o token no State
-const AdminReducer = (state = {}, action) => {
+const AdminReducer = (action, state = {}) => {
   const token = localStorage.getItem("Authorization");
 
-  if (action.type == "CHECKADMINSTATE") {
+  switch (action.type) {
+    case "CHECKADMINSTATE":
       if (token) {
         const tok = token.split(" ");
         const decoded = jwt.decode(tok[1], "secret");
@@ -27,13 +28,12 @@ const AdminReducer = (state = {}, action) => {
           };
         }
       }
-      else {
-        return {
-          ...state,
-          status: "default",
-          isadmin: false,
-        };
-      }
+    default:
+      return {
+        ...state,
+        status: "default",
+        isadmin: false,
+      };
   }
 };
 const Initialstate = {

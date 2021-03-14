@@ -202,10 +202,6 @@ const CriarDivida = () => {
               id1="myPopup"
               id2="myPopupText"
             />
-            <div className="circle-div">
-              <span className="circle"></span>
-              <span className="check"></span>
-            </div>
           </div>
         )}
       </form>
