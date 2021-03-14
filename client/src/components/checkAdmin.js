@@ -10,7 +10,7 @@ let AdminContext = createContext();
 const id_admin = "60328f4b2ff1fe39404a88ef";
 
 //O context só dá render da App quando tiver guardado o token no State
-const AdminReducer = (state = {}, action) => {
+const AdminReducer = (action, state = {}) => {
   const token = localStorage.getItem("Authorization");
 
   switch (action.type) {
@@ -39,13 +39,13 @@ const AdminReducer = (state = {}, action) => {
 const Initialstate = {
   //* Initialstate:
   status: "InitalState",
-  isadmin: false
+  isadmin: false,
 };
 
 const AdminContextProvider = (props) => {
   const [state, dispatch] = useReducer(AdminReducer, Initialstate);
   let value = { state, dispatch };
-  //console.log(state);
+  console.log(state.isadmin);
   useEffect(() => {
     dispatch({ type: "CHECKADMINSTATE" });
   }, [state.isadmin]);
