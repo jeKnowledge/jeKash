@@ -81,6 +81,7 @@
 }
 .name-lastname-name input {
   margin-left: 30%;
+  -webkit-appearance: none;
 }
 
 .name-lastname-name input {
@@ -100,6 +101,7 @@
 }
 
 .name-lastname-lastname input {
+  -webkit-appearance: none;
   position: relative;
   width: 60%;
   height: 4vh;
