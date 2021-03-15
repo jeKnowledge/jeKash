@@ -23,8 +23,7 @@ exports.criar_divida_jeK = (req, res, next) => {
   let time =
     today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(); //a string que diz o tempo atual
 
-  devedores = [];
-  devedores = req.body.divida.devedor.split(",");
+  let devedores = req.body.divida.devedor.split(",");
 
   const tokenheader = req.headers.authorization;
   const token = tokenheader.split(" ")[1];
@@ -86,119 +85,6 @@ exports.criar_divida_jeK = (req, res, next) => {
     });
 };
 
-//chamei à logica deste controller "criar_divida_Tesoureiro" visto que
-//e este request que o tesoureiro vai chamar quando criar uma divida
-exports.criar_divida_Tesoureiro = (req, res, next) => {
-  //Quando uma divida é criada preciso de a data, hora e minutos de hoje.
-  let today = new Date(); //com a class Date consigo pedir a data e a hora a que foi criada a divida
-
-  //adicionei os zeros à direita tambem porque assim fica melhor para exportar e fazer contas com as datas
-  let date =
-    today.getFullYear() +
-    "-" +
-    ("0" + (today.getMonth() + 1)).slice(-2) +
-    "-" +
-    ("0" + today.getDate()).slice(-2); //a string que diz a data atual
-  //faço slice(-2) porque slice(-2) da me sempre os ultimos dois characteres da string, e assim se adicionar um zero a mais fico sempre com os ultimos dois characteres e portanto apaga-o
-
-  let time =
-    ("0" + today.getHours()).slice(-2) +
-    ":" +
-    ("0" + today.getMinutes()).slice(-2) +
-    ":" +
-    ("0" + today.getSeconds()).slice(-2); //a string que diz o tempo atual
-
-  // Para ir buscar o id do user logado
-  const token = req.headers.authorization.split(" ")[1];
-  const decoded = jwt.verify(token, "secret");
-  const id = decoded.userId;
-
-  let divida = new Divida({
-    _id: new mongoose.Types.ObjectId(), //crio um novo id para a divida.
-    credor: req.body.credor, //Vou buscar o user a que deve, O EMAIL!
-    devedor: req.body.devedor, //vou buscar o user a Dever atenção meter um email, O EMAIL!
-    quantia: req.body.quantia, //vou buscar a quantia
-    descricao: req.body.descricao, //vou buscar a descrição
-    paga: false, // se vamos criar uma dívida não faz sentido ela estar inativa. Por isso o seu paga inicial será sempre ativa
-    userCriador: id, // User que cria a divida
-    date: date + "T" + time, //e a data de hoje ver quanto tempo passou desde a sua criação
-    timesemailsent: 0,
-  });
-
-  //salvo a divida
-  divida
-    .save()
-    .then((result) => {
-      res.status(201).json({
-        //codigo 201 para indicar que foi tudo feito com sucesso
-        //para confirmar passo um json com a messagem, eventuais warnings e a divida criada
-        message: "Divida criada!",
-        DividaCriada: {
-          //passo o credor, o devedor, a quantia, uma eventual descrição o id criados da divida e o request que apresenta alguma informação
-          credor: result.credor,
-          devedor: result.devedor,
-          credorS: result.name,
-          devedorS: result.name,
-          quantia: result.quantia,
-          descricao: result.descricao,
-          paga: result.paga,
-          userCriador: result.userCriador,
-          date: result.date,
-          _id: result._id,
-          timesemailsent: result.timesemailsent,
-          request: {
-            type: "POST", //o tipo e um POST
-            url:
-              req.protocol +
-              "://" +
-              req.get("host") +
-              req.originalUrl +
-              result._id,
-            //formatei uma string para dar o URL atual
-          },
-        },
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: err,
-      });
-    });
-};
-
-// GET REQUEST DE TODAS AS DIVIDAS
-exports.get_all_dividas = (req, res, next) => {
-  // find() sem argumentos devolve todos as dívidas
-  Divida.find()
-    .exec()
-    .then((dividas) => {
-      const response = {
-        count: dividas.length, // Numero total de dividas
-        Dividas: dividas.map((divida) => {
-          // map cria um array com as informações seguintes de cada divida
-          return {
-            // Return da informação das dividas
-            id: divida._id, //adicionei id porque ajuda a testar
-            paga: divida.paga,
-            credor: divida.credor,
-            devedor: divida.devedor,
-            quantia: divida.quantia,
-            descricao: divida.descricao,
-            userCriador: divida.userCriador,
-            date: divida.date,
-            timesemailsent: divida.timesemailsent,
-          };
-        }),
-      };
-      res.status(200).json(response);
-      return response;
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: err,
-      });
-    });
-};
 
 exports.get_all_dividas_user = (req, res, next) => {
   const tokenheader = req.headers.authorization;
@@ -246,57 +132,6 @@ exports.get_all_dividas_to_me = (req, res, next) => {
     });
 };
 
-// GET DIVIDAS ATIVAS E INATIVAS
-exports.dividas_ativas_inativas = (req, res, next) => {
-  let url = req.originalUrl.split("/"); // vamos buscar o dividas/ativas ou dividas/inativas e criamos uma lista com cada valor separado por /
-  let estado;
-
-  if (url[2] == "ativas?") {
-    // se for /dividas/ativas
-    estado = false;
-  } else if (url[2] == "inativas?") {
-    // se for /dividas/inativas
-    estado = true;
-  }
-
-  const token = localStorage.get("Authorization");
-  const decoded = jwt.verify(token, "secret");
-  const admin = decoded.admin;
-
-  Divida.find({
-    paga: estado,
-  }) // vai buscar as dividas com flag especificada no estadp
-    .select("quantia devedor credor descricao userCriador paga")
-    .exec()
-    .then((dividas) => {
-      if (!estado) {
-        if (admin) {
-          return res.json("dividastotaisadmin", {
-            dividas: dividas.map((divida) => {
-              return divida;
-            }),
-          });
-        } else {
-          return res.json("dividastotais", {
-            dividas: dividas.map((divida) => {
-              return divida;
-            }),
-          });
-        }
-      } else {
-        return res.json("historico", {
-          dividas: dividas.map((divida) => {
-            return divida;
-          }),
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: err,
-      });
-    });
-};
 
 // GET DIVIDAS POR DEPARTAMENTO
 exports.dividas_departamento = (req, res, next) => {
