@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const expressEjsLayout = require("express-ejs-layouts");
-const connectFlash = require("connect-flash");
 const session = require("express-session");
 const path = require("path");
 const cookieParser = require("cookie-parser");
@@ -13,7 +12,6 @@ const cors = require("cors");
 const emails = require("./API/timer/SendingEmails");
 const dividasRoutes = require("./API/routes/dividas");
 const usersRoutes = require("./API/routes/users");
-const indexRoutes = require("./API/routes/index");
 
 mongoose.connect(
   "mongodb+srv://exp-node:givemmb@givemmb.aqww5.mongodb.net/exp-node?retryWrites=true&w=majority",
@@ -67,7 +65,6 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "./build/index.html"));
 });
 
-app.use("/", indexRoutes);
 app.use("/users", usersRoutes);
 app.use("/dividas", dividasRoutes);
 

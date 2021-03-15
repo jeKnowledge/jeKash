@@ -109,7 +109,7 @@ const DividasComponent = (props) => {
           dispatch({ type: "pop1", pop: 2 });
           setTimeout(() => {
             window.location.reload();
-          }, 1000);
+          }, 2000);
         });
       } else {
         console.log("Nao ha dividas");
@@ -195,8 +195,11 @@ const DividasComponent = (props) => {
                       >
                         Pagar
                       </button>
+
                     )}
+
                 </div>
+                <br className = "carrossel-fixed"/>
               </div>
             </div>
           );
