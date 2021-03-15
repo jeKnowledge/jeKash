@@ -3,7 +3,6 @@ const app = express();
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-const expressEjsLayout = require("express-ejs-layouts");
 const session = require("express-session");
 const path = require("path");
 const cookieParser = require("cookie-parser");
@@ -29,7 +28,6 @@ app.set("views", "./views");
 app.use(cors());
 app.use(cookieParser("secret"));
 
-app.use(expressEjsLayout);
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(
