@@ -7,7 +7,6 @@ import jwt from "jsonwebtoken";
 //TODO tirar a porta do front end
 //TODO e defenir a porta como o base url aqui
 let AdminContext = createContext();
-const id_admin = "60328f4b2ff1fe39404a88ef";
 
 //O context só dá render da App quando tiver guardado o token no State
 const AdminReducer = (action, state = {}) => {
@@ -18,8 +17,9 @@ const AdminReducer = (action, state = {}) => {
       if (token) {
         const tok = token.split(" ");
         const decoded = jwt.decode(tok[1], "secret");
-        const id_user = decoded.userId;
-        if (id_user === id_admin) {
+        const isAdminToken = decoded.admin;
+        console.log(decoded);
+        if (isAdminToken === true) {
           return {
             ...state,
             status: "CHECKADMINSTATE",

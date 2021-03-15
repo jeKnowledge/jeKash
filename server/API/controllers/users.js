@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/users");
-const localStorage = require("local-storage");
 
 const admin_email = "goncalocorreia@jeknowledge.com";
 
