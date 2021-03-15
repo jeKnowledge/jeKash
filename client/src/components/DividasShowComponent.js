@@ -175,7 +175,7 @@ const DividasComponent = (props) => {
                   </span>
                   {dividadiv.quantia + "€"}
                 </p>
-                <div className="div-button">
+                {!props.page && <div className="div-button">
                   {button && isPay && (
                     <button
                       type="submit"
@@ -198,7 +198,7 @@ const DividasComponent = (props) => {
 
                     )}
 
-                </div>
+                </div>}
                 <br className = "carrossel-fixed"/>
               </div>
             </div>

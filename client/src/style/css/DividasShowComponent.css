@@ -214,7 +214,7 @@ html {
   color: #000000;
   margin-left: 30vw;
   font-size: 1.5vh;
-  margin-top: -3vh;;
+  margin-top: -3vh;
 }
 
 .carrossel-fixed {
@@ -390,8 +390,7 @@ html {
   .count-slider-Npagas,
   .count-slider-pagas {
     margin-left: 45%;
-    margin-top: 7%;
-    top: 0%;
+    margin-top: -5vh;
     font-size: 2.4vh;
   }
 }
