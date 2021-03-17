@@ -7,11 +7,11 @@ import { Redirect } from "react-router-dom";
 //TODO tirar a porta do front end
 //TODO e defenir a porta como o base url aqui
 let AuthContext = createContext();
-//axios.defaults.baseURL = "http://localhost:61000/";
-axios.defaults.baseURL = "www.api.jekash.jeknowledge.com";
+axios.defaults.baseURL = "http://localhost:61000/";
+//axios.defaults.baseURL = "www.api.jekash.jeknowledge.com";
 
 //O context só dá render da App quando tiver guardado o token no State
-const AuthReducer = (state = {}, action) => {
+const AuthReducer = (action, state = {}) => {
   const token = localStorage.getItem("Authorization");
   if (token === null) {
     return <Redirect to="/" />;
