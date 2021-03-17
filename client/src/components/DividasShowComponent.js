@@ -97,6 +97,7 @@ const DividasComponent = (props) => {
   };
 
   const handlePay = () => {
+    document.getElementById("dividasshowid").style.filter = "blur(1.5px)";
     dispatch({ type: "pop1", pop: 1 });
   };
 
@@ -109,12 +110,13 @@ const DividasComponent = (props) => {
           dispatch({ type: "pop1", pop: 2 });
           setTimeout(() => {
             window.location.reload();
-          }, 2000);
+          }, 20000000);
         });
       } else {
         console.log("Nao ha dividas");
       }
     } else {
+      document.getElementById("dividasshowid").style.filter = "blur(0px)";
       dispatch({ type: "pop1", pop: 0 });
     }
   };
@@ -175,19 +177,9 @@ const DividasComponent = (props) => {
                   </span>
                   {dividadiv.quantia + "€"}
                 </p>
-                {!props.page && <div className="div-button">
-                  {button && isPay && (
-                    <button
-                      type="submit"
-                      className="pay-button"
-                      onClick={handlePay}
-                    >
-                      Pagar
-                    </button>
-                  )}
-                  {admincontext.state.isadmin &&
-                    isPay &&
-                    props.user === "usertoo" && (
+                {!props.page && (
+                  <div className="div-button">
+                    {button && isPay && (
                       <button
                         type="submit"
                         className="pay-button"
@@ -195,11 +187,21 @@ const DividasComponent = (props) => {
                       >
                         Pagar
                       </button>
-
                     )}
-
-                </div>}
-                <br className = "carrossel-fixed"/>
+                    {admincontext.state.isadmin &&
+                      isPay &&
+                      props.user === "usertoo" && (
+                        <button
+                          type="submit"
+                          className="pay-button"
+                          onClick={handlePay}
+                        >
+                          Pagar
+                        </button>
+                      )}
+                  </div>
+                )}
+                <br className="carrossel-fixed" />
               </div>
             </div>
           );
@@ -209,8 +211,8 @@ const DividasComponent = (props) => {
   };
 
   return (
-    <div className="dividasshow" id="dividasshowid">
-      <div class="slider">
+    <div className="dividasshow">
+      <div class="slider" id="dividasshowid">
         <div id="dividasshowid">
           <div className="square">
             <div className="Ppagar" style={{ background: color }}>

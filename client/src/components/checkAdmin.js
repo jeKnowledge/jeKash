@@ -18,7 +18,6 @@ const AdminReducer = (action, state = {}) => {
         const tok = token.split(" ");
         const decoded = jwt.decode(tok[1], "secret");
         const isAdminToken = decoded.admin;
-        console.log(decoded);
         if (isAdminToken === true) {
           return {
             ...state,

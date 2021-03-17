@@ -2,6 +2,7 @@ html {
   width: 100%;
   height: 100%;
 }
+
 .criar-divida-tituloDEV {
   white-space: nowrap;
   position: relative;
@@ -173,7 +174,7 @@ html {
 .div-button {
   width: 90%;
   height: 50%;
-  margin-left: 32%;
+  margin-left: 33%;
   margin-top: 15%;
 }
 .carousel-initialized {
@@ -241,7 +242,7 @@ html {
 
   .div-button {
     width: 60%;
-    margin-left: 24%;
+    margin-left: 21.5%;
     margin-top: 10%;
   }
 
