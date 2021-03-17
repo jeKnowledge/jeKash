@@ -49,7 +49,8 @@
   width: 75%;
 }
 
-.buttontext, .buttontext1 {
+.buttontext,
+.buttontext1 {
   color: #f08a6e;
   z-index: 2;
   position: relative;
@@ -85,7 +86,7 @@
   color: #ffffff;
   z-index: 2;
   font-family: fontenormal;
-  font-size: 3vh;
+  font-size: 2vh;
   line-height: 160%;
   width: 100%;
   background: #f08a6e;
@@ -103,11 +104,13 @@
   position: relative;
   display: flex;
   text-align: center;
-  width: 70%;
-  top: 18%;
+  width: 60%;
+  top: 12%;
 }
 
-.popupzito, .popupzito1, .popupzito2 {
+.popupzito,
+.popupzito1,
+.popupzito2 {
   z-index: 1;
   position: relative;
   display: flex;
@@ -127,17 +130,16 @@
 
 .popupzito1 {
   width: 80%;
-  top: -30vh;
+  top: -20vh;
   left: 23%;
   height: 30vh;
-
 }
 .popupzito2 {
-  width: 80%;
+  width: 100%;
   top: -30vh;
-  left: 0%;
+  left: -9%;
+  right: 80%;
   height: 30vh;
-
 }
 
 .circle {
@@ -157,17 +159,16 @@
     height: 40%;
   }
   .popupzito1 {
-    width: 50%;
+    width: 35%;
     top: 0vw;
-    left: 37%;
+    left: 46%;
     height: 100%;
   }
   .popupzito2 {
-    width: 50%;
-    top: 0vh;
-    left: 37%;
+    width: 47%;
+    top: -2vh;
+    left: 40.5%;
     height: 100%;
-
   }
   .popuptext {
     font-size: 4vh;
