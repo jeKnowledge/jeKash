@@ -36,7 +36,6 @@
   text-shadow: 4px 4px 25px rgba(0, 0, 0, 0.1);
 }
 
-
 .link2signup {
   align-items: center;
   text-align: center;
@@ -73,9 +72,7 @@ p {
   display: none;
 }
 
-
-@media (min-width: 961px){
-
+@media (min-width: 961px) {
   .loginside {
     width: 50%;
     margin-left: 50vw;
@@ -95,12 +92,10 @@ p {
       #f08a6e 100%
     );
   }
-  
-  
 
   .titles-login {
     font-size: 2.5vh;
-  } 
+  }
 
   .inputs-login {
     margin-left: 4vw;
@@ -108,9 +103,8 @@ p {
 
   .button-login {
     width: 40%;
-    margin-top: -12vh;
+    bottom: 30%;
     margin-left: -11vw;
+    margin-top: -10%;
   }
-
-
 }
