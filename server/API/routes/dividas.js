@@ -7,14 +7,13 @@ const checkServer = require("../middleware/check-server");
 const checkUser = require("../middleware/check-user");
 const checkAdmin = require("../middleware/check-admin");
 
-const DividasController = require("../controllers/Dividas");
+const DividasController = require("../controllers/dividas");
 
 //controller das dividas
 //const checkAuth = require("../middleware/check-auth")//a checkAuth é a middleware do log-in
 
 //post de uma divida da JEK e do Tesoureiro
 router.post("/", checkLogin, DividasController.criar_divida_jeK);
-
 
 //* Get Dividas somente para o server Se quiserem fazer um request desta route por favor adicionar ao Postman um header com a chave do server para "simular ser o server"
 router.get(
