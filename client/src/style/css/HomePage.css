@@ -31,7 +31,8 @@
   }
   #btns {
     position: relative;
-    top: 50%;
+    top: 50vh;
+    min-height: 50vh;
     left: 0%;
     display: inline-flex;
 
@@ -108,8 +109,11 @@
 
   #btns {
     position: relative;
-    margin-top: 80%;
+    top: 50vh;
+    min-height: 50vh;
+    left: 0%;
     display: inline-flex;
+
     width: 100%;
   }
 
@@ -172,8 +176,11 @@
 
   #btns {
     position: relative;
-    top: 68%;
+    top: 50vh;
+    min-height: 50vh;
+    left: 0%;
     display: inline-flex;
+
     width: 100%;
   }
 
