@@ -107,4 +107,9 @@ p {
     margin-left: -11vw;
     margin-top: -10%;
   }
+  .error_login {
+    color: #f08a6e;
+    margin-left: 27%;
+    margin-bottom: 20%;
+  }
 }

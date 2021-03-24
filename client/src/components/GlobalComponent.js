@@ -9,6 +9,7 @@ import { Redirect } from "react-router-dom";
 let AuthContext = createContext();
 // axios.defaults.baseURL = "http://localhost:61000/";
 axios.defaults.baseURL = "https://jekash.herokuapp.com/";
+axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 
 //O context só dá render da App quando tiver guardado o token no State
 const AuthReducer = (action, state = {}) => {
