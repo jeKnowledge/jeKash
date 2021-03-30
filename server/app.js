@@ -37,13 +37,14 @@ app.use(
 );
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "/public")));
-app.use(
-  "public/stylesheets",
-  express.static(path.join(__dirname, "public/stylesheets"))
-);
-app.use(express.static("public"));
-app.use(express.static(path.join(__dirname, "./build/")));
+// app.use(express.static(path.join(__dirname, "/public")));
+// app.use(
+//   "public/stylesheets",
+//   express.static(path.join(__dirname, "public/stylesheets"))
+// );
+
+// app.use(express.static("public"));
+// app.use(express.static(path.join(__dirname, "./build/")));
 
 app.use(
   express.urlencoded({
@@ -59,13 +60,6 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "./build/index.html"));
-});
-
-app.use("/users", usersRoutes);
-app.use("/dividas", dividasRoutes);
-
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -74,6 +68,12 @@ app.use(function (req, res, next) {
   );
   next();
 });
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./build/index.html"));
+// });
+
+app.use("/users", usersRoutes);
+app.use("/dividas", dividasRoutes);
 
 // ERROS
 //req = o que recebemos, res = resposta que damos
