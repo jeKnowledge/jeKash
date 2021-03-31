@@ -16,10 +16,10 @@ function toggleNavTOP(x) {
 
   if (top === "100%") {
     document.getElementById("menu").style.top = "-300%";
-    document.getElementById("logoUP").style.transform = "rotate(180deg)";
+    document.getElementById("logoUP").style.transform = "rotate(0deg)";
   } else {
     document.getElementById("menu").style.top = "100%";
-    document.getElementById("logoUP").style.transform = "rotate(0deg)";
+    document.getElementById("logoUP").style.transform = "rotate(180deg)";
   }
   //alert(document.getElementById("menu").style.top);
 }
