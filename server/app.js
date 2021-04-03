@@ -11,6 +11,7 @@ const cors = require("cors");
 const emails = require("./API/timer/SendingEmails");
 const dividasRoutes = require("./API/routes/dividas");
 const usersRoutes = require("./API/routes/users");
+require("dotenv").config();
 
 mongoose.connect(
   "mongodb+srv://exp-node:givemmb@givemmb.aqww5.mongodb.net/exp-node?retryWrites=true&w=majority",
@@ -26,6 +27,31 @@ app.set("view engine", "ejs");
 app.set("views", "./views");
 
 app.use(cors());
+app.use((req, res, next) => {
+  const allowedOrigins = [
+    "https://jekash.herokuapp.com/",
+    "https://jekash.jeknowledge.com/",
+    "127.0.0.1:62133/",
+    "192.168.1.15:62133/",
+  ];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+    return res.status(200).json({});
+  }
+
+  next();
+});
+
 app.use(cookieParser("secret"));
 
 app.use(morgan("dev"));
@@ -42,7 +68,6 @@ app.use(express.json());
 //   "public/stylesheets",
 //   express.static(path.join(__dirname, "public/stylesheets"))
 // );
-
 // app.use(express.static("public"));
 // app.use(express.static(path.join(__dirname, "./build/")));
 
@@ -59,18 +84,6 @@ app.use(
     saveUninitialized: true,
   })
 );
-
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "./build/index.html"));
-// });
 
 app.use("/users", usersRoutes);
 app.use("/dividas", dividasRoutes);
