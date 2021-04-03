@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/users");
 
-const admin_email = "goncalocorreia@jeknowledge.com";
+const admin_email = "sergio.lopes@jeknowledge.com";
 
 exports.get_all_users = (req, res, next) => {
   User.find()
