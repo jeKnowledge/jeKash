@@ -101,7 +101,7 @@ body {
 
 #primbotSTR {
   position: relative;
-  width: 38%;
+  width: 60%;
   height: auto;
   top: 3%;
   left: 15%;
@@ -149,7 +149,7 @@ body {
 
   position: relative;
   width: 3.5%;
-  left: 35%;
+  left: 10%;
   top: 0%;
   transition: 0.6s ease;
 }
@@ -263,7 +263,7 @@ body {
 
 #bottomBarSTR {
   position: relative;
-  width: 40%;
+  width: 70%;
   height: 50%;
   top: 25%;
   left: 20%;
@@ -310,7 +310,7 @@ a {
   }
 
   #primbotSTR {
-    width: 38%;
+    width: 70%;
     top: 0%;
     margin-top: 0%;
     left: 15%;
@@ -326,7 +326,7 @@ a {
   }
 
   #bottomBarSTR {
-    width: 60%;
+    width: 70%;
     top: 25%;
     margin-top: 0%;
     left: 25%;
@@ -338,7 +338,7 @@ a {
 
     position: relative;
     width: 3.5%;
-    left: 40%;
+    left: 5%;
     top: 0%;
     transition: 0.6s ease;
   }
