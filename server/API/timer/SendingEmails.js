@@ -8,8 +8,8 @@ const timer = 86400; //! MAS No final mudar para ser algo diario const timer = 8
 //*url para fazer o request de todas as dividas.
 //! No final mudar para os defenitivos!!
 const GETdividasServerURL =
-  "http://localhost:8000/dividas/all_dividas_para_o_email";
-const GETuserServerURL = "http://localhost:8000/users/getall";
+  process.env.url + "/dividas/all_dividas_para_o_email";
+const GETuserServerURL = process.env.url + "/users/getall";
 
 //Função client que me dá o GET request
 var HttpClient = function () {
