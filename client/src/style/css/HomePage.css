@@ -57,9 +57,9 @@
   }
 
   #btns a {
-    width: 10%; /* mudar a width aqui */
+    width: 16%; /* mudar a width aqui */
     height: 100%;
-    left: 39%; /*mudar o left aqui */
+    left: 33.5%; /*mudar o left aqui */
     margin-right: 2.5%;
   }
 
@@ -123,20 +123,20 @@
   }
 
   #btns a {
-    width: 18%; /* mudar a width aqui */
+    width: 30%; /* mudar a width aqui */
     height: 100%;
     left: 30%; /*mudar o left aqui */
-    margin-right: 4%;
+    margin-right: 0%;
   }
   .LoginStr {
-    width: 100%; /* 35*2 */
+    width: 70%; /* 35*2 */
     background: #ffffff;
     color: #f08a6e;
   }
 
   .RegistarStr {
     left: 0%;
-    width: 100%;
+    width: 70%;
     background: #f08a6e;
     color: #ffffff;
   }
