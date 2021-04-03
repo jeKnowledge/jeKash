@@ -233,9 +233,10 @@ html {
   .normalTopBarCOLOR {
     display: none;
   }
+  
   .square {
     float: left;
-    width: 50%;
+    width: 35%;
     left: 10%;
     height: 100%;
   }
