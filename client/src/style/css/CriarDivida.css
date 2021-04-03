@@ -44,7 +44,7 @@
   box-shadow: 1px 4px 15px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
   border: #ffffff;
-  color: #3A3B3C;
+  color: #3a3b3c;
   -webkit-appearance: none;
 }
 
@@ -87,9 +87,9 @@ input[type="number"] {
 .devedoresWatermark {
   font-family: fontenormal;
   font-weight: 300;
-  font-size: 12px;
+  font-size: 1.4vh;
   margin-top: 2%;
-  margin-left: 18%;
+  margin-left: 16%;
   display: inline;
   letter-spacing: 0.01em;
   width: 67%;
