@@ -23,11 +23,8 @@ html {
 }
 .AppLogo {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   top: 5%;
-  left: 5%;
+  left: 0%;
   height: 40%;
   width: 100%;
 }

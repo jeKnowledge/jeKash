@@ -2,6 +2,10 @@ html {
   width: 100%;
   height: 100%;
 }
+.bg {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
 
 .criar-divida-tituloDEV {
   white-space: nowrap;
@@ -224,6 +228,11 @@ html {
 }
 
 @media (min-width: 961px) {
+  .bg {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
   .criar-divida-tituloDSC {
     width: 30%;
     top: 15vh;
@@ -272,6 +281,7 @@ html {
 
   .dividasshow {
     position: relative;
+    overflow: hidden;
     height: 100%;
     top: 100%;
   }
