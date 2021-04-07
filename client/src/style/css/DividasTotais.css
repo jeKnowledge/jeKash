@@ -1,6 +1,17 @@
-html {
-  overflow: hidden;
+html body {
+  width: 100%;
+  height: 100%;
+  overflow-y: visible;
 }
+
+.bggov {
+  overflow: visible;
+}
+.bgg {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
 .dividasshow {
   position: relative;
   width: 100%;
@@ -17,7 +28,7 @@ html {
   display: inline-block;
   justify-content: center;
   align-items: center;
-  
+
   font-family: fontenormal;
   font-size: 3.5vw;
   letter-spacing: 0.01em;
@@ -105,7 +116,7 @@ html {
   position: relative;
   height: 5vh;
   width: 100%;
-  margin-top: 2vh;
+  margin-top: -1vh;
   font-family: fonteTitulo;
   font-weight: bold;
   font-size: 2vh;
@@ -116,6 +127,11 @@ html {
 }
 
 @media (min-width: 961px) {
+  .bgg {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
   .dividas-globais-titulo {
     width: 70%;
     top: 8vw;
@@ -148,9 +164,8 @@ html {
     transform: translate(0%, 125%);
 
     font-size: 44%;
-
   }
-  
+
   .box1 {
     position: relative;
     left: 40%;

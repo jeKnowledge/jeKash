@@ -1,5 +1,4 @@
 import { Link, useHistory } from "react-router-dom";
-import "../style/css/Sidebar.css";
 import { AuthContext } from "./GlobalComponent";
 import React from "react";
 import "../style/css/Sidebar.css";
@@ -56,22 +55,27 @@ const SideBAR = () => {
 
   return (
     <div id="sbbg">
-      <TopBar
+      <div className="TopBarDiv">
+        <TopBar
         color="sidebarTopBarCOLOR "
-        height="18%" //parece ser 18 na sidebar (10% é o normal)
+        height="100%" //parece ser 18 na sidebar (10% é o normal)
         linkto="dividas/criar"
         logo="whitebg"
       />
-      <div id="criardivida">
-        <Link to="/dividas/criar">
-          <img
-            src={logomais}
-            className="App-logo-plus LogoScale"
-            alt="logoplus"
-          />
-          <span id="primbotSTR">Criar dívida</span>
-        </Link>
       </div>
+      
+      
+      <Link to="/dividas/criar">
+        <div id="criardivida">
+            <img
+              src={logomais}
+              className="App-logo-plus LogoScale"
+              alt="logoplus"
+            />
+            <span id="primbotSTR">Criar dívida</span>
+          
+        </div>
+      </Link>
 
       <div id="mydividasdiv">
         <div id="mydividas" onClick={toggleNav}>
@@ -92,17 +96,21 @@ const SideBAR = () => {
         </div>
 
         <div id="transdivsMINHASDIVIDAS" style={{ top: "-200%" }}>
-          <div id="primbot">
-            <Link to="/dividas/minhasdividas">
+          <Link to="/dividas/minhasdividas">
+            <div id="primbot">
+            
               <span id="subbotSTR">O que devo</span>
-            </Link>
+            
           </div>
-
+          </Link>
+          
+        <Link to="/dividas/adever">
           <div id="primbot">
-            <Link to="/dividas/adever">
+            
               <span id="subbotSTR">O que me devem</span>
-            </Link>
+           
           </div>
+        </Link>
         </div>
       </div>
 

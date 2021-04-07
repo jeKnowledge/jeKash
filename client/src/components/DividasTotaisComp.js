@@ -132,6 +132,7 @@ const DividasTotaisComp = (props) => {
         </div>
       </div>
     </div>
+
   );
 };
 

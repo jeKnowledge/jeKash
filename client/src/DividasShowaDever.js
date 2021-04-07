@@ -16,7 +16,7 @@ const DividasShowaDever = () => {
   };
   return (
     <div>
-      <div id="bg">
+      <div id="bggov">
         <div className="topbar-mobile">
           <TopBar
             color="normalTopBarCOLOR"

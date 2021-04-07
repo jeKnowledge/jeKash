@@ -8,7 +8,7 @@ import "./style/css/font.css";
 const DividasShow = () => {
   return (
     <div>
-       <div id="bg">
+       <div id="bggov">
         <TopBar
           color="normalTopBarCOLOR"
           height="13vh" //parece ser 18 na sidebar (13% é o normal)

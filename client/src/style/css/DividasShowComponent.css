@@ -1,7 +1,8 @@
-html {
+body {
   width: 100%;
   height: 100%;
 }
+
 
 .criar-divida-tituloDEV {
   white-space: nowrap;
@@ -224,6 +225,16 @@ html {
 }
 
 @media (min-width: 961px) {
+  #bggov {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .bgg {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
   .criar-divida-tituloDSC {
     width: 30%;
     top: 15vh;
@@ -233,7 +244,7 @@ html {
   .normalTopBarCOLOR {
     display: none;
   }
-  
+
   .square {
     float: left;
     width: 35%;
@@ -272,8 +283,9 @@ html {
 
   .dividasshow {
     position: relative;
+    overflow: hidden;
     height: 100%;
-    top: 100%;
+    margin-top: -1.5%;
   }
 
   #dividasshowid {
