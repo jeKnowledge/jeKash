@@ -9,7 +9,7 @@ html body {
 }
 .bgg {
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: visible;
 }
 
 .dividasshow {
@@ -116,7 +116,7 @@ html body {
   position: relative;
   height: 5vh;
   width: 100%;
-  margin-top: -1vh;
+  margin-top: -7vh;
   font-family: fonteTitulo;
   font-weight: bold;
   font-size: 2vh;
@@ -134,12 +134,12 @@ html body {
 
   .dividas-globais-titulo {
     width: 70%;
-    top: 8vw;
+    top: 7vw;
     left: 27.5%;
   }
 
   .partecima {
-    margin-top: 7%;
+    margin-top: 15vh;
   }
 
   .caixa {
@@ -175,6 +175,8 @@ html body {
   }
   .box3 {
     left: 52.5%;
-    top: -65%;
+    margin-top: 4%;
+    margin-bottom: 1%;
   }
 }
+
