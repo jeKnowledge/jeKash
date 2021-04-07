@@ -1,8 +1,13 @@
-html {
+body {
   width: 100%;
   height: 100%;
 }
-.bg {
+
+.bgg {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+#bggov {
   overflow-x: hidden;
   overflow-y: visible;
 }
@@ -228,7 +233,12 @@ html {
 }
 
 @media (min-width: 961px) {
-  .bg {
+  #bggov {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
+  .bgg {
     overflow-x: hidden;
     overflow-y: hidden;
   }
@@ -283,7 +293,7 @@ html {
     position: relative;
     overflow: hidden;
     height: 100%;
-    top: 100%;
+    margin-top: -1.5%;
   }
 
   #dividasshowid {

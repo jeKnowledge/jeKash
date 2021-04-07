@@ -1,6 +1,12 @@
-html {
-  overflow: hidden;
+html body {
+  width: 100%;
+  height: 100%;
 }
+.bgg {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
 .dividasshow {
   position: relative;
   width: 100%;
@@ -105,7 +111,7 @@ html {
   position: relative;
   height: 5vh;
   width: 100%;
-  margin-top: 2vh;
+  margin-top: -1vh;
   font-family: fonteTitulo;
   font-weight: bold;
   font-size: 2vh;
@@ -116,6 +122,11 @@ html {
 }
 
 @media (min-width: 961px) {
+  .bgg {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+
   .dividas-globais-titulo {
     width: 70%;
     top: 8vw;

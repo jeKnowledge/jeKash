@@ -8,7 +8,7 @@ import "./style/css/font.css";
 const DividasShowDevo = () => {
   return (
     <div>
-      <div id="bg">
+      <div id="bggov">
         <div className="topbar-mobile">
           <TopBar
             color="normalTopBarCOLOR"
