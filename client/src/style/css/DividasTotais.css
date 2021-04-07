@@ -121,6 +121,10 @@ html body {
   color: #3e3c39;
 }
 
+.box3{
+  margin-bottom: 1%;
+}
+
 @media (min-width: 961px) {
   .bgg {
     overflow-x: hidden;
