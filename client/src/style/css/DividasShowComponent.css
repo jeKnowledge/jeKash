@@ -3,6 +3,14 @@ body {
   height: 100%;
 }
 
+.bgg {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+#bggov {
+  overflow-x: hidden;
+  overflow-y: visible;
+}
 
 .criar-divida-tituloDEV {
   white-space: nowrap;
@@ -43,6 +51,7 @@ body {
   position: relative;
   width: 100%;
   height: 200%;
+  margin: 0%;
 }
 
 .Ppagar {
@@ -101,6 +110,7 @@ body {
   height: 29vh;
   margin-top: 3vh;
   left: 0%;
+  margin-bottom: 1%;
 
   display: inline-block;
   justify-content: center;
@@ -339,7 +349,7 @@ body {
 
   .not-dividas-create {
     font-size: 1.8vw;
-    margin-top: 8vh;
+    margin-top: 0%;
   }
 
   .Ppagar {
