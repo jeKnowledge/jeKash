@@ -4,7 +4,7 @@ html body {
 }
 .bgg {
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: visible;
 }
 
 .dividasshow {
@@ -129,7 +129,7 @@ html body {
 
   .dividas-globais-titulo {
     width: 70%;
-    top: 8vw;
+    top: 7vw;
     left: 27.5%;
   }
 
