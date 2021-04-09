@@ -10,6 +10,7 @@ body {
 #bggov {
   overflow-x: hidden;
   overflow-y: visible;
+  height: 100%;
 }
 
 .criar-divida-tituloDEV {
@@ -107,10 +108,10 @@ body {
   font-family: fontenormal;
   width: 80%;
 
-  height: 29vh;
+  height: 28.5vh;
   margin-top: 3vh;
   left: 0%;
-  margin-bottom: 1%;
+  margin-bottom: 3%;
 
   display: inline-block;
   justify-content: center;
