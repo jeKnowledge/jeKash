@@ -224,10 +224,12 @@ body {
 #subbotSTR {
   position: relative;
   width: 60%;
-  height: 50%;
-  top: 0;
-  padding-top: 2vh;
+  height: 100%;
+  top: 0%;
+  /*
+  padding-top: 6%;
   margin-top: 0%;
+  */
   left: 30%;
 
   font-family: fonteLabel;
