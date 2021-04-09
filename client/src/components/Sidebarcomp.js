@@ -134,7 +134,7 @@ const SideBAR = () => {
 
         <div id="menu" className="menu-hidden" style={{ top: "-300%" }}>
           <div id="botao">
-            <Link to="/dividas/Interno" style={{ marginTop: "-100%" }}>
+            <Link to="/dividas/Interno">
               <span id="subbotSTR">Interno</span>
             </Link>
           </div>
