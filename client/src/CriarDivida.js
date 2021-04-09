@@ -87,7 +87,7 @@ const CriarDivida = () => {
           dispatch({ type: "pop1", pop: 1 });
           setTimeout(() => {
             window.location.reload();
-          }, 2000);
+          }, 1000);
         })
         .catch((err) => {
           dispatch({ type: "errors", errors: true });
