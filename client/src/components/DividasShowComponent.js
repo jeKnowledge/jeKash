@@ -110,7 +110,7 @@ const DividasComponent = (props) => {
           dispatch({ type: "pop1", pop: 2 });
           setTimeout(() => {
             window.location.reload();
-          }, 20000000);
+          }, 1000);
         });
       } else {
         console.log("Nao ha dividas");
