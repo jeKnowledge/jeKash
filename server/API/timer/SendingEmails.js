@@ -3,28 +3,30 @@ const express = require("express");
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const Divida = require("../models/divida");
 //? Se quiserem mudar para testar e recomendado mudar esta variavel
-const timer = 86400; //! MAS No final mudar para ser algo diario const timer = 86400;
+const timer = 1; //! MAS No final mudar para ser algo diario const timer = 86400;
+
+console.log("Started.");
 
 //*url para fazer o request de todas as dividas.
 //! No final mudar para os defenitivos!!
-const GETdividasServerURL =
-  process.env.url + "/dividas/all_dividas_para_o_email";
-const GETuserServerURL = process.env.url + "/users/getall";
+const GETdividasServerURL = "https://jekash.herokuapp.com/dividas/all_dividas_para_o_email";
+const GETuserServerURL = "https://jekash.herokuapp.com/users/getall";
 
 //Função client que me dá o GET request
 var HttpClient = function () {
   this.get = function (aUrl, aCallback) {
     var anHttpRequest = new XMLHttpRequest(); //crio uma nova instancia da class para fazer um request
+    console.log(aCallback)
     anHttpRequest.onreadystatechange = function () {
       //quando a API estiver pronta
       if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
         //e se estiver tudo bem
-        aCallback(anHttpRequest.responseText); //* é como se fosse um return ao minha resposta atraves do callBack
+        console.log(anHttpRequest.responseText)
+      aCallback(anHttpRequest.responseText); //* é como se fosse um return ao minha resposta atraves do callBack
     };
 
     anHttpRequest.open("GET", aUrl, true); //faço um GET request ao Url
     //mando um post com um header a dizer server e com esta server key
-
     //* para provar que sou o server vou as headers e se o header server tiver a localserverkey e porque sou eu.
     anHttpRequest.setRequestHeader("Server", process.env.LOCAL_SERVERKEY);
     anHttpRequest.send(null); //Como e um GET não mando nada
@@ -57,9 +59,11 @@ function checkDates() {
   //função que recebe as datas
   var client = new HttpClient(); //crio uma nova instancia da função acima
 
+
   //*preciso de me autenticar se nao não me deixa fazer o GET request as dividas
   client.get(GETdividasServerURL, function (responseDivida) {
     //e simplesmente faço um get que vai fazer uma função que vai ter como parametro a resposta da API
+    console.log(responseDivida)
     //*preciso de me autenticar se nao não me deixa fazer o GET request aos users!
     client.get(GETuserServerURL, function (responseUser) {
       //passo para JSON visto que a resposta veio em pleno texto
@@ -89,14 +93,16 @@ function checkDates() {
         //*   dividaupdatestatus = 2  --> Ao 14º dia foi mandado outro warning (+7)
         //*   dividaupdatestatus = 3  --> Ao 18º dia foi mandado outro warning (+3) e apartir de agora e diariamente ate cancelar o job.
 
-        //default msg depois podemos mudar:
-        let msg =
-          "Hey, deves " +
-          quantiadivida +
-          "€ há mais de " +
-          Math.floor(tempopassadodias) +
-          " dias!";
+        console.log(dividaID)
         if (paga === false) {
+          //default msg depois podemos mudar:
+          let msg =
+            "Hey, deves " +
+            quantiadivida +
+            "€ há mais de " +
+            Math.floor(tempopassadodias) +
+            " dias!";
+
           if (tempopassadodias >= 21 && emailmandado === 3) {
             //* Vai correr diariamente porque a função corrediaramente
             sendEmail(msg, useremail);
@@ -123,14 +129,11 @@ function checkDates() {
 function dividaupdatestatus(id_divida, emailstatus) {
   const updateOps = {};
   updateOps["timesemailsent"] = emailstatus;
-  Divida.update(
-    {
+  Divida.update({
       _id: id_divida,
-    },
-    {
+    }, {
       $set: updateOps,
-    }
-  )
+    })
     .exec()
     .then((result) => {})
     .catch((err) => {
@@ -175,7 +178,7 @@ async function sendEmail(message, user) {
   });
 
   // ? DEBUGGING EMAILS:
-  // ? console.log("Message sent: %s", info.messageId);
+  console.log("Message sent: %s", info.messageId);
   // ? console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
 
@@ -185,4 +188,4 @@ setInterval(() => {
     //funcao que vai correr e ver se as datas ja passaram ou nao
     checkDates();
   })();
-}, timer); //? um dia
+}, timer * 1000); //? um dia
