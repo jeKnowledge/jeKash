@@ -2,6 +2,8 @@ const nodemailer = require("nodemailer");
 const express = require("express");
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const Divida = require("../models/divida");
+require("dotenv").config(); //! IMPORTANTE PARA LER VALORES
+
 //? Se quiserem mudar para testar e recomendado mudar esta variavel
 const timer = 1; //! MAS No final mudar para ser algo diario const timer = 86400;
 
@@ -9,20 +11,22 @@ console.log("Started.");
 
 //*url para fazer o request de todas as dividas.
 //! No final mudar para os defenitivos!!
-const GETdividasServerURL = "https://jekash.herokuapp.com/dividas/all_dividas_para_o_email";
-const GETuserServerURL = "https://jekash.herokuapp.com/users/getall";
+
+const GETdividasServerURL = process.env.urltest + "dividas/all_dividas_para_o_email";
+const GETuserServerURL = process.env.urltest + "users/getall";
+
 
 //Função client que me dá o GET request
 var HttpClient = function () {
   this.get = function (aUrl, aCallback) {
+
     var anHttpRequest = new XMLHttpRequest(); //crio uma nova instancia da class para fazer um request
-    console.log(aCallback)
     anHttpRequest.onreadystatechange = function () {
       //quando a API estiver pronta
+      console.log("URL: " + aUrl + " || REQ status: " + anHttpRequest.status)
       if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
         //e se estiver tudo bem
-        console.log(anHttpRequest.responseText)
-      aCallback(anHttpRequest.responseText); //* é como se fosse um return ao minha resposta atraves do callBack
+        aCallback(anHttpRequest.responseText); //* é como se fosse um return ao minha resposta atraves do callBack
     };
 
     anHttpRequest.open("GET", aUrl, true); //faço um GET request ao Url
@@ -59,7 +63,7 @@ function checkDates() {
   //função que recebe as datas
   var client = new HttpClient(); //crio uma nova instancia da função acima
 
-
+  console.log(GETdividasServerURL)
   //*preciso de me autenticar se nao não me deixa fazer o GET request as dividas
   client.get(GETdividasServerURL, function (responseDivida) {
     //e simplesmente faço um get que vai fazer uma função que vai ter como parametro a resposta da API
@@ -67,6 +71,7 @@ function checkDates() {
     //*preciso de me autenticar se nao não me deixa fazer o GET request aos users!
     client.get(GETuserServerURL, function (responseUser) {
       //passo para JSON visto que a resposta veio em pleno texto
+      console.log(responseJSONUSER)
       var responseJSONDIVIDAS = JSON.parse(responseDivida);
       var responseJSONUSER = JSON.parse(responseUser);
 

@@ -18,7 +18,6 @@ router.post("/", checkLogin, DividasController.criar_divida_jeK);
 //* Get Dividas somente para o server Se quiserem fazer um request desta route por favor adicionar ao Postman um header com a chave do server para "simular ser o server"
 router.get(
   "/all_dividas_para_o_email",
-  checkServer,
   DividasController.get_all_dividasMail
 );
 

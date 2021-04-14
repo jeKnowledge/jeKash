@@ -288,6 +288,7 @@ exports.altera_divida = (req, res, next) => {
 
 exports.get_all_dividasMail = (req, res, next) => {
   // find() sem argumentos devolve todos as dívidas
+  console.log("GOT IT")
   Divida.find()
     .exec()
     .then((dividas) => {
@@ -311,7 +312,8 @@ exports.get_all_dividasMail = (req, res, next) => {
           };
         }),
       };
-      //res.status(200).json(response);
+      console.log(response)
+      res.status(200).json(response);
     })
     .catch((err) => {
       // se a promise der erro
