@@ -35,7 +35,7 @@ const reducer = (state, action) => {
 const DividasTotaisComp = (props) => {
   const authcontext = React.useContext(AuthContext);
 
-  let url = "http://localhost:8000/dividas/alldep";
+  let url = "dividas/alldep";
 
   const [state, dispatch] = useReducer(reducer, inicialstate);
 

@@ -85,7 +85,6 @@ exports.criar_divida_jeK = (req, res, next) => {
     });
 };
 
-
 exports.get_all_dividas_user = (req, res, next) => {
   const tokenheader = req.headers.authorization;
   const token = tokenheader.split(" ")[1];
@@ -131,7 +130,6 @@ exports.get_all_dividas_to_me = (req, res, next) => {
       });
     });
 };
-
 
 // GET DIVIDAS POR DEPARTAMENTO
 exports.dividas_departamento = (req, res, next) => {
@@ -288,7 +286,6 @@ exports.altera_divida = (req, res, next) => {
 
 exports.get_all_dividasMail = (req, res, next) => {
   // find() sem argumentos devolve todos as dívidas
-  console.log("GOT IT")
   Divida.find()
     .exec()
     .then((dividas) => {
@@ -312,7 +309,7 @@ exports.get_all_dividasMail = (req, res, next) => {
           };
         }),
       };
-      console.log(response)
+      console.log(response);
       res.status(200).json(response);
     })
     .catch((err) => {
