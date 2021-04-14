@@ -12,18 +12,17 @@ console.log("Started.");
 //*url para fazer o request de todas as dividas.
 //! No final mudar para os defenitivos!!
 
-const GETdividasServerURL = process.env.urltest + "dividas/all_dividas_para_o_email";
+const GETdividasServerURL =
+  process.env.urltest + "dividas/all_dividas_para_o_email";
 const GETuserServerURL = process.env.urltest + "users/getall";
-
 
 //Função client que me dá o GET request
 var HttpClient = function () {
   this.get = function (aUrl, aCallback) {
-
     var anHttpRequest = new XMLHttpRequest(); //crio uma nova instancia da class para fazer um request
     anHttpRequest.onreadystatechange = function () {
       //quando a API estiver pronta
-      console.log("URL: " + aUrl + " || REQ status: " + anHttpRequest.status)
+      console.log("URL: " + aUrl + " || REQ status: " + anHttpRequest.status);
       if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
         //e se estiver tudo bem
         aCallback(anHttpRequest.responseText); //* é como se fosse um return ao minha resposta atraves do callBack
@@ -63,15 +62,15 @@ function checkDates() {
   //função que recebe as datas
   var client = new HttpClient(); //crio uma nova instancia da função acima
 
-  console.log(GETdividasServerURL)
+  // console.log(GETdividasServerURL)
   //*preciso de me autenticar se nao não me deixa fazer o GET request as dividas
   client.get(GETdividasServerURL, function (responseDivida) {
     //e simplesmente faço um get que vai fazer uma função que vai ter como parametro a resposta da API
-    console.log(responseDivida)
+    // console.log(responseDivida)
     //*preciso de me autenticar se nao não me deixa fazer o GET request aos users!
     client.get(GETuserServerURL, function (responseUser) {
       //passo para JSON visto que a resposta veio em pleno texto
-      console.log(responseJSONUSER)
+      console.log(responseJSONUSER);
       var responseJSONDIVIDAS = JSON.parse(responseDivida);
       var responseJSONUSER = JSON.parse(responseUser);
 
@@ -98,7 +97,7 @@ function checkDates() {
         //*   dividaupdatestatus = 2  --> Ao 14º dia foi mandado outro warning (+7)
         //*   dividaupdatestatus = 3  --> Ao 18º dia foi mandado outro warning (+3) e apartir de agora e diariamente ate cancelar o job.
 
-        console.log(dividaID)
+        // console.log(dividaID)
         if (paga === false) {
           //default msg depois podemos mudar:
           let msg =
@@ -134,11 +133,14 @@ function checkDates() {
 function dividaupdatestatus(id_divida, emailstatus) {
   const updateOps = {};
   updateOps["timesemailsent"] = emailstatus;
-  Divida.update({
+  Divida.update(
+    {
       _id: id_divida,
-    }, {
+    },
+    {
       $set: updateOps,
-    })
+    }
+  )
     .exec()
     .then((result) => {})
     .catch((err) => {
@@ -176,7 +178,7 @@ async function sendEmail(message, user) {
 
   await transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.log(error);
+      // console.log(error);
     } else {
       console.log("Email sent: " + info.response);
     }
