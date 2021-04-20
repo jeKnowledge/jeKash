@@ -13,10 +13,6 @@ router.get('/logout', (req, res, next) => {
 
 })
 
-//* O server vai precisar desta para conseguir o email de um user!
-router.get("/getall", checkServer, userControllers.get_all_users);
-
-
 router.post("/signup", userControllers.signup);
 
 router.post("/login", userControllers.login);

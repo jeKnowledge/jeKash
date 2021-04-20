@@ -177,6 +177,7 @@ exports.dividas_departamento = (req, res, next) => {
 };
 
 exports.dividas_pordepartamento = (req, res, next) => {
+
   const dep = ["Ino", "Int", "Tech"];
   let tech = 0;
   let ino = 0;
@@ -258,12 +259,6 @@ exports.altera_divida = (req, res, next) => {
     paga: true,
   };
 
-  /* JSON - tem de ser desta forma para podermos usar o que temos em cima
-  [
-    { "propName": "paga", "value": true}
-  ]
-*/
-
   // Vamos procurar a divida com o id dado no url, e atualizamos as informações que foram disponibilix«zadas no JSON
   Divida.update(
     {
@@ -284,38 +279,3 @@ exports.altera_divida = (req, res, next) => {
     });
 };
 
-exports.get_all_dividasMail = (req, res, next) => {
-  // find() sem argumentos devolve todos as dívidas
-  Divida.find()
-    .exec()
-    .then((dividas) => {
-      // array dividas com todos os objetos
-      // OUTPUT
-      const response = {
-        count: dividas.length, // Numero total de dividas
-        Dividas: dividas.map((divida) => {
-          // map cria um array com as informações seguintes de cada divida
-          return {
-            // Return da informação das dividas
-            id: divida._id, //adicionei id porque ajuda a testar
-            paga: divida.paga,
-            credor: divida.credor,
-            devedor: divida.devedor,
-            quantia: divida.quantia,
-            descricao: divida.descricao,
-            userCriador: divida.userCriador,
-            date: divida.date,
-            timesemailsent: divida.timesemailsent,
-          };
-        }),
-      };
-      console.log(response);
-      res.status(200).json(response);
-    })
-    .catch((err) => {
-      // se a promise der erro
-      res.status(500).json({
-        error: err,
-      });
-    });
-};

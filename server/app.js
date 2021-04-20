@@ -20,7 +20,7 @@ mongoose.connect(
     useUnifiedTopology: true,
   }
 );
-// ola
+
 mongoose.Promise = global.Promise;
 
 app.set("view engine", "ejs");
@@ -32,16 +32,17 @@ app.use((req, res, next) => {
     "https://jekash.herokuapp.com/",
     "https://jekash.jeknowledge.com/",
     "127.0.0.1:62133/",
+    "localhost:62133/",
     "192.168.1.15:62133/",
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.header("Access-Control-Allow-Origin", origin);
   }
-
+  
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization, Server"
   );
 
   if (req.method === "OPTIONS") {

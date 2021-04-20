@@ -1,41 +1,18 @@
 const nodemailer = require("nodemailer");
 const express = require("express");
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const Divida = require("../models/divida");
+const User = require("../models/users");
 require("dotenv").config(); //! IMPORTANTE PARA LER VALORES
 
 //? Se quiserem mudar para testar e recomendado mudar esta variavel
-const timer = 1; //! MAS No final mudar para ser algo diario const timer = 86400;
+const timer = 8; //! MAS No final mudar para ser algo diario const timer = 86400;
 
-console.log("Started.");
+// ? console.log("Started.");
 
 //*url para fazer o request de todas as dividas.
 //! No final mudar para os defenitivos!!
 
-const GETdividasServerURL =
-  process.env.urltest + "dividas/all_dividas_para_o_email";
-const GETuserServerURL = process.env.urltest + "users/getall";
-
-//Função client que me dá o GET request
-var HttpClient = function () {
-  this.get = function (aUrl, aCallback) {
-    var anHttpRequest = new XMLHttpRequest(); //crio uma nova instancia da class para fazer um request
-    anHttpRequest.onreadystatechange = function () {
-      //quando a API estiver pronta
-      console.log("URL: " + aUrl + " || REQ status: " + anHttpRequest.status);
-      if (anHttpRequest.readyState == 4 && anHttpRequest.status == 200)
-        //e se estiver tudo bem
-        aCallback(anHttpRequest.responseText); //* é como se fosse um return ao minha resposta atraves do callBack
-    };
-
-    anHttpRequest.open("GET", aUrl, true); //faço um GET request ao Url
-    //mando um post com um header a dizer server e com esta server key
-    //* para provar que sou o server vou as headers e se o header server tiver a localserverkey e porque sou eu.
-    anHttpRequest.setRequestHeader("Server", process.env.LOCAL_SERVERKEY);
-    anHttpRequest.send(null); //Como e um GET não mando nada
-  };
-};
-
+//anHttpRequest.setRequestHeader("Server", process.env.LOCAL_SERVERKEY);
 function timepassed(date) {
   //! em dias
   let dataDivida = new Date(date);
@@ -58,89 +35,83 @@ function timepassed(date) {
   return diferencadias;
 }
 
-function checkDates() {
-  //função que recebe as datas
-  var client = new HttpClient(); //crio uma nova instancia da função acima
+async function checkDates() {
+  var responseJSONDIVIDAS = await get_all_dividasMail();
+  var responseJSONUSER = await get_all_users();
+  /*
+  console.log(responseDivida + "\n" + responseUser);
+  //passo para JSON visto que a resposta veio em pleno texto
+  //console.log(responseDivida);
+  var responseJSONDIVIDAS = JSON.parse(responseDivida);
+  var responseJSONUSER = JSON.parse(responseUser);
+*/
+  for (let dividaskeys in Object.keys(responseJSONDIVIDAS.Dividas)) {
+    //dou assign a values que sa calhar tenho de trabalhar com
+    let dividaID = responseJSONDIVIDAS.Dividas[dividaskeys].id; //Id da divida
+    let paga = responseJSONDIVIDAS.Dividas[dividaskeys].paga; //situação de pagamento
+    let userdivida = responseJSONDIVIDAS.Dividas[dividaskeys].devedor; //id do devedor
+    let quantiadivida = responseJSONDIVIDAS.Dividas[dividaskeys].quantia; //quantia
+    let datadivida = responseJSONDIVIDAS.Dividas[dividaskeys].date; //importante para calcular o levelwarning
+    let emailmandado =
+      responseJSONDIVIDAS.Dividas[dividaskeys].timesemailsent;
+    let tempopassadodias = timepassed(datadivida); //função que calcula qual e o tipo de warning que devo tomar consoante o tempo passado.
 
-  // console.log(GETdividasServerURL)
-  //*preciso de me autenticar se nao não me deixa fazer o GET request as dividas
-  client.get(GETdividasServerURL, function (responseDivida) {
-    //e simplesmente faço um get que vai fazer uma função que vai ter como parametro a resposta da API
-    // console.log(responseDivida)
-    //*preciso de me autenticar se nao não me deixa fazer o GET request aos users!
-    client.get(GETuserServerURL, function (responseUser) {
-      //passo para JSON visto que a resposta veio em pleno texto
-      console.log(responseJSONUSER);
-      var responseJSONDIVIDAS = JSON.parse(responseDivida);
-      var responseJSONUSER = JSON.parse(responseUser);
 
-      for (let dividaskeys in Object.keys(responseJSONDIVIDAS.Dividas)) {
-        //dou assign a values que sa calhar tenho de trabalhar com
-        let dividaID = responseJSONDIVIDAS.Dividas[dividaskeys].id; //Id da divida
-        let paga = responseJSONDIVIDAS.Dividas[dividaskeys].paga; //situação de pagamento
-        let userdivida = responseJSONDIVIDAS.Dividas[dividaskeys].devedor; //id do devedor
-        let quantiadivida = responseJSONDIVIDAS.Dividas[dividaskeys].quantia; //quantia
-        let datadivida = responseJSONDIVIDAS.Dividas[dividaskeys].date; //importante para calcular o levelwarning
-        let emailmandado =
-          responseJSONDIVIDAS.Dividas[dividaskeys].timesemailsent;
-        let tempopassadodias = timepassed(datadivida); //função que calcula qual e o tipo de warning que devo tomar consoante o tempo passado.
+    // ? console.log(dividaID);
 
-        //looping through all users to find the respective one
-        for (let userinDB in Object.keys(responseJSONUSER.list)) {
-          if (responseJSONUSER.list[userinDB]._id === userdivida) {
-            //encontrei o user que corresponde à divida
-            var useremail = responseJSONUSER.list[userinDB].email; //guardo numa variavel o email dela.
-          }
-        }
-        //*   dividaupdatestatus = 0  --> Não estão a ser mandados warnings
-        //*   dividaupdatestatus = 1  --> Ao 7º dia foi mandado um warning
-        //*   dividaupdatestatus = 2  --> Ao 14º dia foi mandado outro warning (+7)
-        //*   dividaupdatestatus = 3  --> Ao 18º dia foi mandado outro warning (+3) e apartir de agora e diariamente ate cancelar o job.
-
-        // console.log(dividaID)
-        if (paga === false) {
-          //default msg depois podemos mudar:
-          let msg =
-            "Hey, deves " +
-            quantiadivida +
-            "€ há mais de " +
-            Math.floor(tempopassadodias) +
-            " dias!";
-
-          if (tempopassadodias >= 21 && emailmandado === 3) {
-            //* Vai correr diariamente porque a função corrediaramente
-            sendEmail(msg, useremail);
-            return;
-          } else if (tempopassadodias >= 18 && emailmandado === 2) {
-            sendEmail(msg, useremail);
-            dividaupdatestatus(dividaID, 3); //para dizer que agora vai ser de 3 em 3 dias e ja estamos no nivel 4
-            return;
-          } else if (tempopassadodias >= 14 && emailmandado === 1) {
-            sendEmail(msg, useremail);
-            dividaupdatestatus(dividaID, 2); //para dizer que agora vai ser de 3 em 3 dias e ja estamos no nivel 2
-            return;
-          } else if (tempopassadodias >= 7 && emailmandado === 0) {
-            sendEmail(msg, useremail);
-            dividaupdatestatus(dividaID, 1); //para dizer que ja foi mandado um email e ja estamos no nivel 1
-            return;
-          }
-        }
+    //looping through all users to find the respective one
+    for (let userinDB in Object.keys(responseJSONUSER.list)) {
+      if (responseJSONUSER.list[userinDB]._id === userdivida) {
+        //encontrei o user que corresponde à divida
+        var useremail = responseJSONUSER.list[userinDB].email; //guardo numa variavel o email dela.
       }
-    });
-  });
+    }
+    //*   dividaupdatestatus = 0  --> Não estão a ser mandados warnings
+    //*   dividaupdatestatus = 1  --> Ao 7º dia foi mandado um warning
+    //*   dividaupdatestatus = 2  --> Ao 14º dia foi mandado outro warning (+7)
+    //*   dividaupdatestatus = 3  --> Ao 18º dia foi mandado outro warning (+3) e apartir de agora e diariamente ate cancelar o job.
+
+    // console.log(dividaID)
+    if (paga === false) {
+      //default msg depois podemos mudar:
+      let msg =
+        "Hey, deves " +
+        quantiadivida +
+        "€ há mais de " +
+        Math.floor(tempopassadodias) +
+        " dias!";
+
+      if (tempopassadodias >= 21 && emailmandado === 3) {
+        //* Vai correr diariamente porque a função corrediaramente
+        sendEmail(msg, useremail);
+        return;
+      } else if (tempopassadodias >= 18 && emailmandado === 2) {
+        sendEmail(msg, useremail);
+        dividaupdatestatus(dividaID, 3); //para dizer que agora vai ser de 3 em 3 dias e ja estamos no nivel 4
+        return;
+      } else if (tempopassadodias >= 14 && emailmandado === 1) {
+        sendEmail(msg, useremail);
+        dividaupdatestatus(dividaID, 2); //para dizer que agora vai ser de 3 em 3 dias e ja estamos no nivel 2
+        return;
+      } else if (tempopassadodias >= 7 && emailmandado === 0) {
+        sendEmail(msg, useremail);
+        dividaupdatestatus(dividaID, 1); //para dizer que ja foi mandado um email e ja estamos no nivel 1
+        return;
+      }
+    }
+  }
+
 }
 
 function dividaupdatestatus(id_divida, emailstatus) {
   const updateOps = {};
+  // ? console.log("Yup");
   updateOps["timesemailsent"] = emailstatus;
-  Divida.update(
-    {
+  Divida.update({
       _id: id_divida,
-    },
-    {
+    }, {
       $set: updateOps,
-    }
-  )
+    })
     .exec()
     .then((result) => {})
     .catch((err) => {
@@ -152,7 +123,7 @@ function dividaupdatestatus(id_divida, emailstatus) {
 
 async function sendEmail(message, user) {
   //esta função pede um "levelofwaning" para indicar o quanto a divida já passou de ser paga.
-
+  //console.log("HELLO")
   // * Ethereal e uma coisa que me vai ajudar a simular mandar emails:
   const transporter = nodemailer.createTransport({
     // host do ethreal que e quem me esta a mandar fake emails
@@ -178,14 +149,14 @@ async function sendEmail(message, user) {
 
   await transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      // console.log(error);
+      console.log(error);
     } else {
       console.log("Email sent: " + info.response);
     }
   });
 
   // ? DEBUGGING EMAILS:
-  console.log("Message sent: %s", info.messageId);
+  // ? console.log("Message sent: %s", info.messageId);
   // ? console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
 
@@ -196,3 +167,70 @@ setInterval(() => {
     checkDates();
   })();
 }, timer * 1000); //? um dia
+
+
+//* EM VEZ DE PARECER UM ESTUPIDO E LITERLAMENTE FAZER UM GET REQUEST PARA O PROPRIO SERVER
+//* VAMOS ENCONTRAR AQUI AS DIVIDAS MAILS E CHAMAR AQUI A FUNÇÃO FIND DO MONGOOSE para o email!
+
+async function get_all_dividasMail() {
+  // find() sem argumentos devolve todos as dívidas
+  const resdiv = await Divida.find()
+    .exec()
+    .then((dividas) => {
+      // array dividas com todos os objetos
+      // OUTPUT
+      const response = {
+        count: dividas.length, // Numero total de dividas
+        Dividas: dividas.map((divida) => {
+          // map cria um array com as informações seguintes de cada divida
+          return {
+            // Return da informação das dividas
+            id: divida._id, //adicionei id porque ajuda a testar
+            paga: divida.paga,
+            credor: divida.credor,
+            devedor: divida.devedor,
+            quantia: divida.quantia,
+            descricao: divida.descricao,
+            userCriador: divida.userCriador,
+            date: divida.date,
+            timesemailsent: divida.timesemailsent,
+          };
+        }),
+      };
+      return response;
+    })
+    .catch((err) => {
+      // se a promise der erro
+      console.log(err);
+    });
+  // ? console.log(resdiv);
+  return resdiv;
+};
+
+async function get_all_users() {
+  const resuser = await User.find()
+    .select()
+    .exec() //array de users
+    .then((list_users) => {
+      const response = {
+        // o que vai ser prinztado no ecrã
+        count: list_users.length,
+        list: list_users.map((doc) => {
+          return {
+            email: doc.email,
+            department: doc.department,
+            admin: doc.admin,
+            _id: doc._id,
+          };
+        }),
+      };
+      return response;
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: err,
+      });
+    });
+
+  return resuser;
+}

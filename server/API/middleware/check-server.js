@@ -3,7 +3,7 @@ module.exports = (req, res, next) => {
         //vou ler um header que e o server
         
         const pw = req.headers.server;
-        console.log(pw)
+        console.log(pw);
         //se esse header corresponder à nossa serverKey
         //quer dizer que sou o server!
         if (pw == process.env.LOCAL_SERVERKEY) {

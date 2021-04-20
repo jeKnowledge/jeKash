@@ -5,31 +5,6 @@ const User = require("../models/users");
 
 const admin_email = "sergio.lopes@jeknowledge.com";
 
-exports.get_all_users = (req, res, next) => {
-  User.find()
-    .select()
-    .exec() //array de users
-    .then((list_users) => {
-      const response = {
-        // o que vai ser printado no ecrã
-        count: list_users.length,
-        list: list_users.map((doc) => {
-          return {
-            email: doc.email,
-            department: doc.department,
-            admin: doc.admin,
-            _id: doc._id,
-          };
-        }),
-      };
-      res.status(200).json(response);
-    })
-    .catch((err) => {
-      res.status(500).json({
-        error: err,
-      });
-    });
-};
 
 exports.signup = (req, res, next) => {
   // criar um novo user no servidor
