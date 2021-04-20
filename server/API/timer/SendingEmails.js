@@ -5,7 +5,7 @@ const User = require("../models/users");
 require("dotenv").config(); //! IMPORTANTE PARA LER VALORES
 
 //? Se quiserem mudar para testar e recomendado mudar esta variavel
-const timer = 8; //! MAS No final mudar para ser algo diario const timer = 86400;
+const timer = 43200; //! MAS No final mudar para ser algo diario const timer = 86400;
 
 // ? console.log("Started.");
 
@@ -50,7 +50,6 @@ async function checkDates() {
     let emailmandado =
       responseJSONDIVIDAS.Dividas[dividaskeys].timesemailsent;
     let tempopassadodias = timepassed(datadivida); //função que calcula qual e o tipo de warning que devo tomar consoante o tempo passado.
-
 
     // ? console.log(dividaID);
 
