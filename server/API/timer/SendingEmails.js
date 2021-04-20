@@ -129,12 +129,12 @@ async function sendEmail(message, user, desc) {
     //secure: false,
     auth: {
       //conta dada para testar:
-      user: "eutestocoisas24@gmail.com", //! --- SUBSTITUIR POR O EMAIL QUE DEPOIS VAMOS USER
-      pass: "eutestocoisasJek", //! --- SUBSTITUIR PALA PASS DO EMAIL QUE VAMOS USAR
+      user: "noreply@jeknowledge.com", //! --- SUBSTITUIR POR O EMAIL QUE DEPOIS VAMOS USER
+      pass: "jeKash2021", //! --- SUBSTITUIR PALA PASS DO EMAIL QUE VAMOS USAR
     },
   });
   var mailOptions = {
-    from: "eutestocoisas24@gmail.com", // ! sender address MUDAR para o defenitivo
+    from: "noreply@jeknowledge.com", // ! sender address MUDAR para o defenitivo
     to: user, //* parametro do email do user que fui buscar
     subject: "Dividas Jeknowledge", // Subject line
     text: message, // plain text body: dizer estas a dever uma certa quantia por agora so
