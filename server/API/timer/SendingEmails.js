@@ -46,7 +46,10 @@ async function checkDates() {
     let paga = responseJSONDIVIDAS.Dividas[dividaskeys].paga; //situação de pagamento
     let userdivida = responseJSONDIVIDAS.Dividas[dividaskeys].devedor; //id do devedor
     let quantiadivida = responseJSONDIVIDAS.Dividas[dividaskeys].quantia; //quantia
-    let datadivida = responseJSONDIVIDAS.Dividas[dividaskeys].date; //importante para calcular o levelwarning
+    let datadivida = responseJSONDIVIDAS.Dividas[dividaskeys].date; //importante para
+    let credor = responseJSONDIVIDAS.Dividas[dividaskeys].credor;
+    let desc = responseJSONDIVIDAS.Dividas[dividaskeys].descricao;
+    // calcular o levelwarning
     let emailmandado =
       responseJSONDIVIDAS.Dividas[dividaskeys].timesemailsent;
     let tempopassadodias = timepassed(datadivida); //função que calcula qual e o tipo de warning que devo tomar consoante o tempo passado.
@@ -69,11 +72,8 @@ async function checkDates() {
     if (paga === false) {
       //default msg depois podemos mudar:
       let msg =
-        "Hey, deves " +
-        quantiadivida +
-        "€ há mais de " +
-        Math.floor(tempopassadodias) +
-        " dias!";
+        "Olá " + userdivida + "\n" + "Foi criada uma dívida na plataforma jeKash que te tem como devedor.\n Divida:\n" +
+        desc + "Credor:" + credor + "\nPreço a pagar:" + quantiadivida + "€" + "\nTempo passado: " + Math.floor(tempopassadodias) + " dias.";
 
       if (tempopassadodias >= 21 && emailmandado === 3) {
         //* Vai correr diariamente porque a função corrediaramente
@@ -115,7 +115,7 @@ function dividaupdatestatus(id_divida, emailstatus) {
     });
 }
 
-async function sendEmail(message, user) {
+async function sendEmail(message, user, desc) {
   //esta função pede um "levelofwaning" para indicar o quanto a divida já passou de ser paga.
   //console.log("HELLO")
   // * Ethereal e uma coisa que me vai ajudar a simular mandar emails:
@@ -136,7 +136,7 @@ async function sendEmail(message, user) {
   var mailOptions = {
     from: "eutestocoisas24@gmail.com", // ! sender address MUDAR para o defenitivo
     to: user, //* parametro do email do user que fui buscar
-    subject: "Dividas Jeknowledge.", // Subject line
+    subject: "Dividas Jeknowledge", // Subject line
     text: message, // plain text body: dizer estas a dever uma certa quantia por agora so
     //html: "<b>Hello world?</b>", // html body para depois fazer isto bonito
   };
@@ -227,4 +227,4 @@ async function get_all_users() {
     });
 
   return resuser;
-}
+};
