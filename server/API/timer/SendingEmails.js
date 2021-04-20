@@ -38,13 +38,8 @@ function timepassed(date) {
 async function checkDates() {
   var responseJSONDIVIDAS = await get_all_dividasMail();
   var responseJSONUSER = await get_all_users();
-  /*
-  console.log(responseDivida + "\n" + responseUser);
-  //passo para JSON visto que a resposta veio em pleno texto
-  //console.log(responseDivida);
-  var responseJSONDIVIDAS = JSON.parse(responseDivida);
-  var responseJSONUSER = JSON.parse(responseUser);
-*/
+
+
   for (let dividaskeys in Object.keys(responseJSONDIVIDAS.Dividas)) {
     //dou assign a values que sa calhar tenho de trabalhar com
     let dividaID = responseJSONDIVIDAS.Dividas[dividaskeys].id; //Id da divida
