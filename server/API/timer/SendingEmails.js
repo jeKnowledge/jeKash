@@ -5,7 +5,7 @@ const User = require("../models/users");
 require("dotenv").config(); //! IMPORTANTE PARA LER VALORES
 
 //? Se quiserem mudar para testar e recomendado mudar esta variavel
-const timer = 43200;
+const timer = 86400;
 
 // ? console.log("Started.");
 
@@ -75,7 +75,7 @@ async function checkDates() {
     if (paga === false) {
       //default msg depois podemos mudar:
       let msg =
-        "Olá " + useremail + "\n" + "Foi criada uma dívida na plataforma jeKash que te tem como devedor.\nDivida:\n\n" +
+        "Olá " + useremail + "\n" + "Foi criada uma dívida na plataforma jeKash que te tem como devedor.\n\bDivida:\n" +
         desc + "\nPreço a pagar: " + quantiadivida + "€" + "\nTempo passado: " + Math.floor(tempopassadodias) + " dias.";
 
       if (tempopassadodias >= 21 && emailmandado === 3) {
@@ -164,7 +164,7 @@ setInterval(() => {
     //funcao que vai correr e ver se as datas ja passaram ou nao
     checkDates();
   })();
-}, timer * 1000); //? um dia
+}, timer * 1000); //? um segundo
 
 
 //* EM VEZ DE PARECER UM ESTUPIDO E LITERLAMENTE FAZER UM GET REQUEST PARA O PROPRIO SERVER
