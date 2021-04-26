@@ -58,7 +58,7 @@ async function checkDates() {
 
     //looping through all users to find the respective one
     for (let userinDB in Object.keys(responseJSONUSER.list)) {
-      console.log(responseJSONUSER.list[userinDB]._id + " : " + userdivida);
+      // ? console.log(responseJSONUSER.list[userinDB]._id + " : " + userdivida);
       if (responseJSONUSER.list[userinDB]._id.toString(8) === userdivida.toString(8)) {
         //encontrei o user que corresponde à divida
         var useremail = responseJSONUSER.list[userinDB].email; //guardo numa variavel o email dela.
@@ -75,7 +75,7 @@ async function checkDates() {
     if (paga === false) {
       //default msg depois podemos mudar:
       let msg =
-        "Olá " + useremail + "\n" + "Foi criada uma dívida na plataforma jeKash que te tem como devedor.\n\bDivida:\n" +
+        "Olá " + useremail + "\n" + "Foi criada uma dívida na plataforma jeKash que te tem como devedor.\nDivida:\n" +
         desc + "\nPreço a pagar: " + quantiadivida + "€" + "\nTempo passado: " + Math.floor(tempopassadodias) + " dias.";
 
       if (tempopassadodias >= 21 && emailmandado === 3) {
