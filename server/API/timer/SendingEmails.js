@@ -5,7 +5,7 @@ const User = require("../models/users");
 require("dotenv").config(); //! IMPORTANTE PARA LER VALORES
 
 //? Se quiserem mudar para testar e recomendado mudar esta variavel
-const timer = 43200; //! MAS No final mudar para ser algo diario const timer = 86400;
+const timer = 43200;
 
 // ? console.log("Started.");
 
@@ -54,13 +54,16 @@ async function checkDates() {
       responseJSONDIVIDAS.Dividas[dividaskeys].timesemailsent;
     let tempopassadodias = timepassed(datadivida); //função que calcula qual e o tipo de warning que devo tomar consoante o tempo passado.
 
-    // ? console.log(dividaID);
+    //? console.log(responseJSONDIVIDAS.Dividas);
 
     //looping through all users to find the respective one
     for (let userinDB in Object.keys(responseJSONUSER.list)) {
-      if (responseJSONUSER.list[userinDB]._id === userdivida) {
+      console.log(responseJSONUSER.list[userinDB]._id + " : " + userdivida);
+      if (responseJSONUSER.list[userinDB]._id.toString(8) === userdivida.toString(8)) {
         //encontrei o user que corresponde à divida
         var useremail = responseJSONUSER.list[userinDB].email; //guardo numa variavel o email dela.
+        //! NÃO ESTOU A CONSEGUIR FAZER O GET DOS EMAILS AQUI DEPOIS DA FIX A ISTO
+        // ? console.log(useremail)
       }
     }
     //*   dividaupdatestatus = 0  --> Não estão a ser mandados warnings
@@ -72,10 +75,11 @@ async function checkDates() {
     if (paga === false) {
       //default msg depois podemos mudar:
       let msg =
-        "Olá " + userdivida + "\n" + "Foi criada uma dívida na plataforma jeKash que te tem como devedor.\n Divida:\n" +
-        desc + "Credor:" + credor + "\nPreço a pagar:" + quantiadivida + "€" + "\nTempo passado: " + Math.floor(tempopassadodias) + " dias.";
+        "Olá " + useremail + "\n" + "Foi criada uma dívida na plataforma jeKash que te tem como devedor.\nDivida:\n\n" +
+        desc + "\nPreço a pagar: " + quantiadivida + "€" + "\nTempo passado: " + Math.floor(tempopassadodias) + " dias.";
 
       if (tempopassadodias >= 21 && emailmandado === 3) {
+        //? console.log(useremail);
         //* Vai correr diariamente porque a função corrediaramente
         sendEmail(msg, useremail);
         return;
@@ -125,14 +129,16 @@ async function sendEmail(message, user, desc) {
     // ? host: "smtp.ethereal.email", //! substituir depois pelo host do email que vamos usar
     // true for 465, false for other ports
 
-    //port: 587,
-    //secure: false,
+    port: 587,
+    secure: false,
     auth: {
       //conta dada para testar:
-      user: "noreply@jeknowledge.com", //! --- SUBSTITUIR POR O EMAIL QUE DEPOIS VAMOS USER
-      pass: "jeKash2021", //! --- SUBSTITUIR PALA PASS DO EMAIL QUE VAMOS USAR
+      user: "noreply.jeknowledge@gmail.com", //! --- SUBSTITUIR POR O EMAIL QUE DEPOIS VAMOS USER
+      pass: "jeKash!2021!", //! --- SUBSTITUIR PALA PASS DO EMAIL QUE VAMOS USAR
     },
   });
+
+
   var mailOptions = {
     from: "noreply@jeknowledge.com", // ! sender address MUDAR para o defenitivo
     to: user, //* parametro do email do user que fui buscar
@@ -141,17 +147,15 @@ async function sendEmail(message, user, desc) {
     //html: "<b>Hello world?</b>", // html body para depois fazer isto bonito
   };
 
-  await transporter.sendMail(mailOptions, function (error, info) {
+  transporter.sendMail(mailOptions, function (error, data) {
     if (error) {
       console.log(error);
     } else {
-      console.log("Email sent: " + info.response);
+      console.log("Email sent: " + data.response);
     }
+    // ? DEBUGGING EMAILS:
+    // ? console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   });
-
-  // ? DEBUGGING EMAILS:
-  // ? console.log("Message sent: %s", info.messageId);
-  // ? console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 }
 
 setInterval(() => {
@@ -225,6 +229,6 @@ async function get_all_users() {
         error: err,
       });
     });
-
+  // ? console.log(resuser);
   return resuser;
 };

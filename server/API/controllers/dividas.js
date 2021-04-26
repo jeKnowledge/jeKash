@@ -7,7 +7,15 @@ const idcontaJEK = "5fdeac8c53a6f54594acee7b"; //! ID DA CONTA PRINCIPAL DA JEK 
 
 //controler para criar uma divida de um User daí o nome "criar_divida_jeK"
 
+function metezeros(pal) {
+  if (pal===0){
+    return "00"
+  }
+  return pal;
+}
+
 exports.criar_divida_jeK = (req, res, next) => {
+  let h,m,s;
   //Quando uma divida é criada preciso de a data, hora e minutos de hoje.
   let today = new Date(); //com a class Date consigo pedir a data e a hora a que foi criada a divida
 
@@ -20,8 +28,12 @@ exports.criar_divida_jeK = (req, res, next) => {
     ("0" + today.getDate()).slice(-2); //a string que diz a data atual
   //faço slice(-2) porque slice(-2) da me sempre os ultimos dois characteres da string, e assim se adicionar um zero a mais fico sempre com os ultimos dois characteres e portanto apaga-o
 
+  h = metezeros(today.getHours())
+  m = metezeros(today.getMinutes())
+  s = metezeros(today.getSeconds())
+
   let time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(); //a string que diz o tempo atual
+    h + ":" + m + ":" +s; //a string que diz o tempo atual
 
   let devedores = req.body.divida.devedor.split(",");
 
