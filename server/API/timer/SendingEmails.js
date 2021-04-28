@@ -163,6 +163,7 @@ setInterval(() => {
   (function () {
     //funcao que vai correr e ver se as datas ja passaram ou nao
     checkDates();
+    console.log("[MSGTESTE] Hey neste momento atualizei os emails.\n O tempo de intervalo para mandar emails neste momento está a: "+ timer+ " segundos.");
   })();
 }, timer * 1000); //? um segundo
 
