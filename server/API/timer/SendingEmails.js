@@ -2,10 +2,11 @@ const nodemailer = require("nodemailer");
 const express = require("express");
 const Divida = require("../models/divida");
 const User = require("../models/users");
+const cron = require("node-cron");
+const {
+  createConnection
+} = require("mongoose");
 require("dotenv").config(); //! IMPORTANTE PARA LER VALORES
-
-//? Se quiserem mudar para testar e recomendado mudar esta variavel
-const timer = 86400;
 
 // ? console.log("Started.");
 
@@ -158,15 +159,6 @@ async function sendEmail(message, user, desc) {
   });
 }
 
-setInterval(() => {
-  //codigo que vai correr de X em X tempo (X=timer)
-  (function () {
-    //funcao que vai correr e ver se as datas ja passaram ou nao
-    checkDates();
-  })();
-}, timer * 1000); //? um segundo
-
-
 //* EM VEZ DE PARECER UM ESTUPIDO E LITERLAMENTE FAZER UM GET REQUEST PARA O PROPRIO SERVER
 //* VAMOS ENCONTRAR AQUI AS DIVIDAS MAILS E CHAMAR AQUI A FUNÇÃO FIND DO MONGOOSE para o email!
 
@@ -232,3 +224,9 @@ async function get_all_users() {
   // ? console.log(resuser);
   return resuser;
 };
+
+
+cron.schedule('00 13 * * * ', function () {
+  checkDates();
+  console.log("Running CheckDates every day @13:00.");
+});
