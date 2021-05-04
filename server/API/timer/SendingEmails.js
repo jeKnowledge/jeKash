@@ -226,7 +226,7 @@ async function get_all_users() {
 };
 
 
-cron.schedule('00 13 * * * ', function () {
+cron.schedule('00 19 * * * ', function () {
   checkDates();
   console.log("Running CheckDates every day @13:00.");
 });
