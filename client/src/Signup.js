@@ -9,13 +9,16 @@ import { useHistory } from "react-router-dom";
 import logo from "./style/logo/logoJek.svg";
 import "./style/css/font.css";
 
-const initialState = {
+var initialState = {
   name: "",
   lastname: "",
   email: "",
   password: "",
   password2: "",
   department: "",
+  error: "Oops! Algo correu mal, verifica se preencheste todos os campos de acordo com os requisitos!",
+  hidden: true,
+
 };
 
 const reducer = (user, action) => {
@@ -23,6 +26,12 @@ const reducer = (user, action) => {
     case "change":
       const { name, value } = action;
       return { ...user, [name]: value };
+
+    case "error":
+      return {
+        ...user,
+        hidden: false,
+      };
 
     default:
       return { ...user };
@@ -50,14 +59,26 @@ const Signup = () => {
       !user.department
     ) {
       console.log("Preencha todos os campos.");
+      initialState.error = "Preencha todos os campos.";
+      dispatch({ type: "error"});
       return;
     } else if (user.password !== user.password2) {
       console.log("Passwords não coincidem.");
+      initialState.error = "Passwords não coincidem.";
+      dispatch({ type: "error"});
       return;
     } else if (user.password < 6) {
       console.log("A Password Tem de ter pelo menos 6 caracteres.");
+      initialState.error = "A Password Tem de ter pelo menos 6 caracteres.";
+      dispatch({ type: "error"});
+      return;
+    } else if (!user.email.includes("@jeknowledge.com")) {
+      console.log("Email invalido. Tens de usar um endereço @jeknowledge.com!");
+      initialState.error = "Email invalido. Tens de usar um endereço @jeknowledge.com!";
+      dispatch({ type: "error"});
       return;
     }
+
     axios
       .post("users/signup", { user })
       .then(() => {
@@ -140,7 +161,7 @@ const Signup = () => {
               <SelectDepartments
                 title="Departamento"
                 name="department"
-                placeholder="Escolhe o teu departamento"
+                placeHolder="Escolhe o teu departamento"
                 onChange={handleInputChange}
                 value={user.department}
                 option1="Departamento de Interno"
@@ -148,6 +169,9 @@ const Signup = () => {
                 option3="Departamento de Tecnologia"
               />
             </div>
+          </div>
+          <div className="error_signup">
+            {!user.hidden && <p>{user.error}</p>}
           </div>
 
           <div className="button-login">

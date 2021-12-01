@@ -4,6 +4,8 @@
   overflow: hidden;
 }
 
+
+
 .titlesg,
 .titlesg2 {
   font-family: fonteTitulo;
@@ -127,10 +129,26 @@
 }
 
 .inputs-signup {
-  margin-bottom: 5vh;
+  margin-bottom: 0vh;
+}
+
+.error_signup {
+  top: 0;
+  margin-top: 0rem;
+  color: #f08a6e;
+  text-align: center;
+  height: 0.8rem;
 }
 
 @media (min-width: 961px) {
+  .error_signup {
+    top: 0;
+    margin-top: -4.5rem;
+    color: #f08a6e;
+    text-align: center;
+    height: 0.4rem;
+  }
+
   .signupside {
     width: 50%;
     margin-left: 50vw;

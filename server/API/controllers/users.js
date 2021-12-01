@@ -16,8 +16,9 @@ exports.signup = (req, res, next) => {
     .then((user) => {
       // verifica se o email do novo usuario ja existe na base de dados
       if (user.length > 0) {
-        res.status(409).json({
-          msg: "Already Registed!",
+        console.log("Email ja registado...");
+        errors.push({
+          msg: "Email already registered",
         });
       } else {
         // se não cria um novo usario
@@ -83,6 +84,7 @@ exports.login = (req, res, next) => {
       }
       bcrypt.compare(req.body.user.password, user.password, (err, result) => {
         if (err) {
+          console.log("Email ja registado...");
           errors.push({
             msg: "email already registered",
           });

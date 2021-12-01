@@ -62,15 +62,16 @@ p {
   height: 11.5vh;
 }
 
-.error_login {
-  color: #f08a6e;
-  margin-left: 18%;
-  margin-bottom: 20%;
-}
 
 .jeKash-side {
   display: none;
 }
+
+.error-login {
+    text-align: center;
+    text-align: center;
+    color: #f08a6e;
+  }
 
 @media (min-width: 961px) {
   .loginside {
@@ -105,11 +106,8 @@ p {
     width: 40%;
     bottom: 30%;
     margin-left: -11vw;
-    margin-top: -10%;
+    margin-top: 0rem;
   }
-  .error_login {
-    color: #f08a6e;
-    margin-left: 27%;
-    margin-bottom: 20%;
-  }
+  
+
 }

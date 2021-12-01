@@ -11,7 +11,7 @@ import "./style/css/font.css";
 const initialState = {
   email: "",
   password: "",
-  error: "Oops! Email ou Passoword incorretos!",
+  error: "Oops! Email ou Password incorretos!",
   hidden: true,
 };
 
@@ -93,7 +93,7 @@ const Login = () => {
               />
             </div>
           </div>
-          <div className="error_login">
+          <div className="error-login">
             {!user.hidden && <p>{user.error}</p>}
           </div>
           <div className="button-login">

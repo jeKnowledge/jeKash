@@ -48,6 +48,9 @@ function toggleNavBOT(x) {
     document.getElementById("logoUPBOT").style.transform = "rotate(0deg)";
   }
 }
+function refreshPage() {
+  window.location.reload();
+}
 
 const SideBAR = () => {
   const history = useHistory();
@@ -177,6 +180,7 @@ const SideBAR = () => {
           onClick={() => {
             authcontext.dispatch({ type: "LOGOUT" });
             history.push("/");
+            refreshPage();
           }}
         >
           <span id="subbotSTR">Log Out</span>
