@@ -132,7 +132,7 @@ const Signup = () => {
                 title="Email"
                 name="email"
                 type="text"
-                placeholder="exemplo@jeknowledge.pt"
+                placeholder="exemplo@jeknowledge.com"
                 onChange={handleInputChange}
                 value={user.email}
               />

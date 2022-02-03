@@ -72,7 +72,12 @@ const CriarDivida = () => {
 
     return false;
   };
+  const headers = {
+    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "PUT, POST, PATCH, DELETE, GET"
 
+  }
   const handleSubmit = (e) => {
     // impede que a pagina seja reloadada apos o clique no botao
     e.preventDefault();
@@ -81,8 +86,11 @@ const CriarDivida = () => {
     authcontext.dispatch({ type: "CHECKAUTHSTATE" });
     admincontext.dispatch({ type: "CHECKADMINSTATE" });
     if (authcontext.state.isadmin) {
+      axios.headers.post["Access-Control-Allow-Origin"] = "*";
       axios
-        .post("/dividas/", { divida })
+        .post("/dividas/", { divida },{
+          headers: headers
+        })
         .then(() => {
           dispatch({ type: "pop1", pop: 1 });
           setTimeout(() => {
@@ -135,7 +143,7 @@ const CriarDivida = () => {
                   title="Credor"
                   name="credor"
                   type="text"
-                  placeholder="exemplo@jeknowledge.pt"
+                  placeholder="exemplo@jeknowledge.com"
                   onChange={handleInputChange}
                   value={divida.credor}
                 />
