@@ -28,16 +28,10 @@ app.set("views", "./views");
 
 app.use(cors());
 app.use((req, res, next) => {
-  const allowedOrigins = [
-    "https://jekash.herokuapp.com/",
-    "https://jekash.jeknowledge.com/",
-    "127.0.0.1:62133/",
-    "192.168.1.15:62133/",
-  ];
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
-  }
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Pass to next layer of middleware
+  next();
 
   res.header(
     "Access-Control-Allow-Headers",
