@@ -102,6 +102,7 @@ app.use((err, req, res, next) => {
   //se exitir erro (por exemplo 404 se nao exitir) envia isto:
   res.status(status).json({
     message: "Error not found! Status: " + status,
+    err: err,
   });
 });
 
