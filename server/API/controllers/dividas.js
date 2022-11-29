@@ -39,7 +39,7 @@ exports.criar_divida_jeK = (req, res, next) => {
 
   const tokenheader = req.headers.authorization;
   const token = tokenheader.split(" ")[1];
-  const decoded = jwt.verify(token, "secret");
+  const decoded = jwt.verify(token, process.env.SECRET_SV_KEY);
   const id = decoded.userId;
 
   User.findOne({
@@ -97,10 +97,22 @@ exports.criar_divida_jeK = (req, res, next) => {
     });
 };
 
+exports.getAllDividas = (req, res, next) => {
+  Divida.find()
+    .select()
+    .exec()
+    .then((docs) => {
+      res.status(200).json(docs);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
+};
+
 exports.get_all_dividas_user = (req, res, next) => {
   const tokenheader = req.headers.authorization;
   const token = tokenheader.split(" ")[1];
-  const decoded = jwt.verify(token, "secret");
+  const decoded = jwt.verify(token, process.env.SECRET_SV_KEY);
   const id = decoded.userId;
 
   Divida.find({
@@ -123,7 +135,7 @@ exports.get_all_dividas_user = (req, res, next) => {
 exports.get_all_dividas_to_me = (req, res, next) => {
   const tokenheader = req.headers.authorization;
   const token = tokenheader.split(" ")[1];
-  const decoded = jwt.verify(token, "secret");
+  const decoded = jwt.verify(token, process.env.SECRET_SV_KEY);
   const id = decoded.userId;
 
   Divida.find({

@@ -15,6 +15,8 @@ const DividasController = require("../controllers/dividas");
 //post de uma divida da JEK e do Tesoureiro
 router.post("/", checkLogin, DividasController.criar_divida_jeK);
 
+router.get("/", checkLogin, DividasController.getAllDividas);
+
 // Opção para dar uma divida como paga
 // GET DIVIDAS POR USER
 router.get("/usertoo", checkLogin, DividasController.get_all_dividas_user);

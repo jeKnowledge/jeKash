@@ -47,7 +47,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cookieParser("secret"));
+app.use(cookieParser(process.env.SECRET_SV_KEY));
 
 app.use(morgan("dev"));
 app.use(bodyParser.json());
@@ -74,7 +74,7 @@ app.use(
 
 app.use(
   session({
-    secret: "secret",
+    secret: process.env.SECRET_SV_KEY,
     resave: true,
     saveUninitialized: true,
   })
@@ -91,9 +91,14 @@ app.use((req, res, next) => {
   next(err);
 });
 
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log("Server Live!");
+  console.log(`Example app listening on port ${port}`)
+})
+
 app.use((err, req, res, next) => {
   const status = err.status || 500; //se nao existir o status do erro, envia 500
-
   //se exitir erro (por exemplo 404 se nao exitir) envia isto:
   res.status(status).json({
     message: "Error not found! Status: " + status,

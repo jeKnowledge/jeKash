@@ -14,17 +14,31 @@ function TokenNotFound() {
 
 module.exports = (req, res, next) => {
   try {
+    const url = req.url;
+    const tokenheader = req.headers.authorization;
+    // check if url is dividas/alldep
     if (
       req.headers.authorization === null ||
-      req.headers.authorization === undefined
+      req.headers.authorization === undefined ||
+      req.headers.authorization === ""
     ) {
       console.log("Desculpa algo correu mal, não estas logged in!");
       throw new TokenNotFound();
     }
-
-    const tokenheader = req.headers.authorization;
+    if(url === "/"){
+      if(req.headers.server === "true") {
+        // verify the token
+        const decoded = jwt.verify(tokenheader, process.env.SECRET_SV_KEY);
+        if (decoded === process.env.LOCAL_SERVERKEY) {
+          next();
+          return;
+        }
+      }
+      throw new TokenNotFound();
+    }
     const token = tokenheader.split(" ")[1];
-    const decoded = jwt.verify(token, "secret");
+    const decoded = jwt.verify(token, process.env.SECRET_SV_KEY);
+    console.log(decoded);
     req.userData = decoded;
     next();
   } catch (error) {
@@ -36,5 +50,8 @@ module.exports = (req, res, next) => {
     } else {
       console.log(error);
     }
+    return res.status(401).json({
+      message: "Not Permitted. Token invalido ou inexistente!",
+    });
   }
 };

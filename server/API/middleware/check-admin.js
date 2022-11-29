@@ -4,7 +4,7 @@ const User = require("../models/users");
 module.exports = (req, res, next) => {
   try {
     const token = localStorage.get("Authorization");
-    const decoded = jwt.verify(token, "secret");
+    const decoded = jwt.verify(token, process.env.SECRET_SV_KEY);
     req.userData = decoded;
     const admin = decoded.admin;
     if (admin == true) {

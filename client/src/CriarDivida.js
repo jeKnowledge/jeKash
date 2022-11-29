@@ -56,7 +56,7 @@ const CriarDivida = () => {
 
   const analiseDivida = (divid) => {
     const tok = authcontext.state.userToken.split(" ");
-    const decoded = jwt.decode(tok[1], "secret");
+    const decoded = jwt.decode(tok[1], process.env.SECRET_SV_KEY);
     const email = decoded.email;
 
     if (divid.credor === email) {

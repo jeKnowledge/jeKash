@@ -104,7 +104,7 @@ exports.login = (req, res, next) => {
               userId: user._id,
               admin: user.admin,
             },
-            "secret",
+            process.env.SECRET_SV_KEY,
             {
               expiresIn: "1h",
             },
