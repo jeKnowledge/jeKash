@@ -26,16 +26,20 @@ mongoose.Promise = global.Promise;
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   // Pass to next layer of middleware
   next();
 
+  res.header("Access-Control-Allow-credentials", "true");
+  res.header("Acces-Control-Allow-Origin", "*");
   res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    "Acces-Control-Allow-Header", 
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-CSRF-Token"
   );
 
   if (req.method === "OPTIONS") {
