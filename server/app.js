@@ -32,9 +32,6 @@ app.use(cors({
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
 
-  // Pass to next layer of middleware
-  next();
-
   res.header("Access-Control-Allow-credentials", "true");
   res.header("Acces-Control-Allow-Origin", "*");
   res.header(
