@@ -80,7 +80,7 @@ const Signup = () => {
 
     axios
       .post("users/signup", { user })
-      .then(() => {
+      .then((res) => {
         console.log("User Created");
         //redirect to login
         navigate("/users/login");

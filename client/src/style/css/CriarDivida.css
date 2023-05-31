@@ -119,6 +119,7 @@ input[type="number"] {
 
   .labelInput {
     width: 100%;
+    font-family: fonteLabel;
   }
 
   .labelInput label {
