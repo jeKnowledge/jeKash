@@ -14,7 +14,7 @@ const usersRoutes = require("./API/routes/users");
 require("dotenv").config();
 
 mongoose.connect(
-  "mongodb+srv://jek:jeKssap22_MDB@cluster0.zexbddv.mongodb.net/?retryWrites=true&w=majority",
+  "mongodb+srv://jekashyo:Hw7Nd3TQkDSgLqRV@cluster0.zexbddv.mongodb.net/?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -31,10 +31,17 @@ app.use(cors({
 }));
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
+  res.header("Acces-Control-Allow-Origin", "*");
 
   res.header("Access-Control-Allow-credentials", "true");
-  res.header("Acces-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+
+
   res.header(
+    "Acces-Control-Allow-Header", 
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-CSRF-Token"
+  );
+  res.setHeader(
     "Acces-Control-Allow-Header", 
     "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-CSRF-Token"
   );

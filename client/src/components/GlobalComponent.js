@@ -8,8 +8,10 @@ import { Link } from "react-router-dom";
 //TODO e defenir a porta como o base url aqui
 let AuthContext = createContext();
 //axios.defaults.baseURL = "http://localhost:61000/";
-axios.defaults.baseURL = "https://jekash.herokuapp.com/";
+axios.defaults.baseURL = "https://je-kash-six.vercel.app/";
 axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
+axios.defaults.headers.post["Content-Type"] = "application/json";
+axios.defaults.headers.post["Accept"] = "application/json";
 
 //O context só dá render da App quando tiver guardado o token no State
 const AuthReducer = (action, state = {}) => {
