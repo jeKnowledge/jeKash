@@ -11,3 +11,7 @@
     font-family: fontenormal;
     src: url(../font/SuisseIntlCond-Thin-WebS.woff);
 }
+
+* {
+  font-family: fonteLabel;
+}

@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect, createContext } from "react";
-import jwt from "jsonwebtoken";
+import { decodeToken, isExpired } from "react-jwt";
 
 //* um context e um componente que tem componentes filhos
 //* pode nao ser um context pode ser apenas um componente global
@@ -16,7 +16,16 @@ const AdminReducer = (action, state = {}) => {
     case "CHECKADMINSTATE":
       if (token) {
         const tok = token.split(" ");
-        const decoded = jwt.decode(tok[1], process.env.SECRET_SV_KEY);
+        const decoded = decodeToken(tok);
+        const isExpiredToken = isExpired(tok);
+        if (isExpiredToken) {
+          return {
+            ...state,
+            status: "CHECKADMINSTATE",
+            isadmin: false,
+          };
+        }
+        
         const isAdminToken = decoded.admin;
         if (isAdminToken === true) {
           return {

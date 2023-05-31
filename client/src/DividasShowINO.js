@@ -8,7 +8,6 @@ import "./style/css/font.css";
 
 
 const DividasShow = () => {
-  const authcontext = React.useContext(AuthContext);
   const admincontext = React.useContext(AdminContext);
 
   const handleifAdmin = () => {

@@ -3,7 +3,6 @@ const Divida = require("../models/divida");
 const User = require("../models/users");
 const jwt = require("jsonwebtoken");
 //! CRIAR NA DATABASE UMA CONTA JEK DEFAULT PARA DAR AS DIVIDAS CRIADAS POR UM JEKER
-const idcontaJEK = "5fdeac8c53a6f54594acee7b"; //! ID DA CONTA PRINCIPAL DA JEK depois mudar para o defenitivo
 
 //controler para criar uma divida de um User daí o nome "criar_divida_jeK"
 

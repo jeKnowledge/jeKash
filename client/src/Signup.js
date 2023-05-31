@@ -1,11 +1,10 @@
 import React, { useReducer } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style/css/Signup.css";
 import axios from "axios";
 import LabelsInputs from "./components/LabelsInputs";
 import SelectDepartments from "./components/Selects";
 import Buttons from "./components/Buttons";
-import { useHistory } from "react-router-dom";
 import logo from "./style/logo/logoJek.svg";
 import "./style/css/font.css";
 
@@ -39,7 +38,7 @@ const reducer = (user, action) => {
 };
 
 const Signup = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [user, dispatch] = useReducer(reducer, initialState);
 
   const handleInputChange = (e) => {
@@ -73,7 +72,7 @@ const Signup = () => {
       dispatch({ type: "error"});
       return;
     } else if (!user.email.includes("@jeknowledge.com")) {
-      console.log("Email invalido. Tens de usar um endereço @jeknowledge.com!");
+      alert("Email invalido. Tens de usar um endereço @jeknowledge.com!");
       initialState.error = "Email invalido. Tens de usar um endereço @jeknowledge.com!";
       dispatch({ type: "error"});
       return;
@@ -84,8 +83,7 @@ const Signup = () => {
       .then(() => {
         console.log("User Created");
         //redirect to login
-
-        history.push("/users/login");
+        navigate("/users/login");
       })
       .catch((err) => {
         //algo correu mal
@@ -179,13 +177,13 @@ const Signup = () => {
           </div>
 
           <div className="link2signup">
-            <p>
+            <span className="bottomLogin">
               Já tens conta? Faz login{" "}
               <Link className="link" to="/users/login">
                 aqui
               </Link>
               .
-            </p>
+            </span>
           </div>
         </div>
       </div>

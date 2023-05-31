@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect, createContext } from "react";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 //* um context e um componente que tem componentes filhos
 //* pode nao ser um context pode ser apenas um componente global
 
@@ -15,7 +15,7 @@ axios.defaults.headers.post["Access-Control-Allow-Origin"] = "*";
 const AuthReducer = (action, state = {}) => {
   const token = localStorage.getItem("Authorization");
   if (token === null) {
-    return <Redirect to="/" />;
+    return <Link to="/" />;
   }
   switch (action.type) {
     case "LOGIN":

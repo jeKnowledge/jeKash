@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style/css/Login.css";
 import logo from "./style/logo/logoJek.svg";
 import axios from "axios";
@@ -39,9 +39,9 @@ const reducer = (user, action) => {
 };
 
 const Login = () => {
+  const navigate = useNavigate();
   const authcontext = React.useContext(AuthContext);
   const [user, dispatch] = useReducer(reducer, initialState);
-  const history = useHistory();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -60,7 +60,8 @@ const Login = () => {
         localStorage.setItem("Name", res.data.userData);
         authcontext.dispatch({ type: "LOGIN" });
 
-        history.push("/home");
+        // redirect /home
+        navigate("/home");
       })
       .catch((err) => {
         dispatch({ type: "error" });
@@ -79,8 +80,7 @@ const Login = () => {
     localStorage.setItem("google", "true");
     authcontext.dispatch({ type: "LOGIN" });
 
-    history.push("/home");
-    //localStorage.setItem("Name", res.data.userData);
+    navigate("/home");
   };
 
   const responseFail = (response) => {
@@ -141,13 +141,13 @@ const Login = () => {
           cookiePolicy={'single_host_origin'}
           hostedDomain={"jeknowledge.com"}
            />
-            <p>
+            <span className="bottomLogin">
               Ainda não tens conta? Regista-te{" "}
               <Link className="link" to="/users/signup">
                 aqui
               </Link>
               .
-            </p>
+            </span>
           </div>
         </div>
       </div>

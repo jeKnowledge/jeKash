@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./GlobalComponent";
 import React from "react";
 import "../style/css/Sidebar.css";
@@ -53,7 +53,7 @@ function refreshPage() {
 }
 
 const SideBAR = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const authcontext = React.useContext(AuthContext);
 
   return (
@@ -179,7 +179,7 @@ const SideBAR = () => {
           style={{ top: "0%" }}
           onClick={() => {
             authcontext.dispatch({ type: "LOGOUT" });
-            history.push("/");
+            navigate("/login");
             refreshPage();
           }}
         >

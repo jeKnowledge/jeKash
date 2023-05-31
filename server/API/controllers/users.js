@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/users");
 
-const admin_email = "sergio.lopes@jeknowledge.com";
+const admin_email = "rita.matos@jeknowledge.com";
 
 
 exports.signup = (req, res, next) => {

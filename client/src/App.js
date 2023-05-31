@@ -1,9 +1,7 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
   Route,
-  Switch,
-  Redirect,
+  Routes
 } from "react-router-dom";
 import HomePage from "./HomePage";
 import Login from "./Login";
@@ -17,71 +15,70 @@ import DividasShowaDever from "./DividasShowaDever";
 import DividasShowDevo from "./DividasShowDevo";
 import DividasTotais from "./DividasTotais";
 import { AuthContext } from "./components/GlobalComponent";
-import { BrowserView, MobileView } from "react-device-detect";
+import Protected from "./Protected";
 
 const App = () => {
   const useAuth = React.useContext(AuthContext);
 
   const userToken = useAuth.state.userToken;
   return (
-    <Router>
-      <Route exact path="/">
-        <HomePage />
-      </Route>
+    <Routes>
+      <Route exact path="/" element={<HomePage />} />
 
-      {userToken ? (
-        <Switch>
-          <Route exact path="/dividas/criar">
-            <CriarDivida />
-          </Route>
+      <Route exact path="/dividas/criar" element={
+        <Protected isLoggedIn={userToken}>
+          <CriarDivida />
+        </Protected>
+      } />
 
-          <Route exact path="/dividas/minhasdividas">
-            <DividasShowDevo />
-          </Route>
+      <Route exact path="/dividas/minhasdividas" element={
+        <Protected isLoggedIn={userToken}>
+          <DividasShowDevo />
+        </Protected>
+      } />
 
-          <Route exact path="/dividas/adever">
-            <DividasShowaDever />
-          </Route>
+      <Route exact path="/dividas/adever" element={
+        <Protected isLoggedIn={userToken}>
+          <DividasShowaDever />
+        </Protected>
+      } />
 
-          <Route exact path="/dividas/Interno">
-            <DividasShowInterno />
-          </Route>
+      <Route exact path="/dividas/Interno" element={
+        <Protected isLoggedIn={userToken}>
+          <DividasShowInterno />
+        </Protected>
+      } />
 
-          <Route exact path="/dividas/Inovacao">
-            <DividasShowInovacao />
-          </Route>
+      <Route exact path="/dividas/Inovacao" element={
+        <Protected isLoggedIn={userToken}>
+          <DividasShowInovacao />
+        </Protected>
+      } />
 
-          <Route exact path="/dividas/Tech">
-            <DividasShowTech />
-          </Route>
+      <Route exact path="/dividas/Tech" element={
+        <Protected isLoggedIn={userToken}>
+          <DividasShowTech />
+        </Protected>
+      } />
 
-          <Route path="/home">
-            <BrowserView>
-              <Route render={() => <Redirect to="/dividas/criar" />} />
-            </BrowserView>
+      <Route path="/home" element={
+        <Protected isLoggedIn={userToken}>
+          <SideBar />
+        </Protected>
+      } />
 
-            <MobileView>
-              <Route render={() => <SideBar />} />
-            </MobileView>
-          </Route>
+      <Route exact path="/dividas/all" element={
+        <Protected isLoggedIn={userToken}>
+          <DividasTotais />
+        </Protected>
+      } />
 
-          <Route exact path="/dividas/all">
-            <DividasTotais />
-          </Route>
-        </Switch>
-      ) : (
-        //* Rotas que não precisam de token.
-        <Switch>
-          <Route exact path="/users/login">
-            <Login />
-          </Route>
 
-          <Route exact path="/users/signup">
-            <Signup />
-          </Route>
-        </Switch>
-      )}
-    </Router>
+      {/* Rotas que não precisam de token. */}
+      <Route exact path="/users/login" element={<Login />} />
+
+      <Route exact path="/users/signup" element={<Signup />} />
+    </Routes>
   );
 };
 

@@ -14,7 +14,7 @@ const usersRoutes = require("./API/routes/users");
 require("dotenv").config();
 
 mongoose.connect(
-  "mongodb+srv://exp-node:givemmb@givemmb.aqww5.mongodb.net/exp-node?retryWrites=true&w=majority",
+  "mongodb+srv://jek:jeKssap22_MDB@cluster0.zexbddv.mongodb.net/?retryWrites=true&w=majority",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,

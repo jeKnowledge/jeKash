@@ -13,7 +13,7 @@
     "restful",
     "api"
   ],
-  "author": "Gonçalo Correia",
+  "author": "jeKnowledge",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",

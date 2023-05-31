@@ -8,7 +8,7 @@ import Buttons from "./components/Buttons";
 import TopBar from "./components/TopBar";
 import Popup from "./components/Popup";
 import SideBar from "./components/Sidebarcomp";
-import jwt from "jsonwebtoken";
+import { useJwt,decodeToken , isExpired } from "react-jwt";
 import { AdminContext } from "./components/checkAdmin";
 
 const initialState = {
@@ -56,7 +56,14 @@ const CriarDivida = () => {
 
   const analiseDivida = (divid) => {
     const tok = authcontext.state.userToken.split(" ");
-    const decoded = jwt.decode(tok[1], process.env.SECRET_SV_KEY);
+    // const decoded = jwt.decode(tok[1], process.env.SECRET_SV_KEY);
+    const  decoded  = decodeToken(tok);
+    const isExpired = isExpired(tok);
+    
+    if (isExpired) {
+      return false;
+    }
+
     const email = decoded.email;
 
     if (divid.credor === email) {
