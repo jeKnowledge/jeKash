@@ -179,7 +179,7 @@ const SideBAR = () => {
           style={{ top: "0%" }}
           onClick={() => {
             authcontext.dispatch({ type: "LOGOUT" });
-            navigate("/login");
+            navigate("/users/login");
             refreshPage();
           }}
         >
