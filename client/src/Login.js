@@ -1,13 +1,15 @@
 import React, { useReducer } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { GoogleLogin } from '@react-oauth/google';
 import "./style/css/Login.css";
 import logo from "./style/logo/logoJek.svg";
 import axios from "axios";
 import LabelsInputs from "./components/LabelsInputs";
 import Buttons from "./components/Buttons";
-import GoogleLogin from "react-google-login";
 import { AuthContext } from "./components/GlobalComponent";
 import "./style/css/font.css";
+import { decodeToken, isExpired } from "react-jwt";
+
 
 const initialState = {
   email: "",
@@ -56,11 +58,10 @@ const Login = () => {
         const token = "Bearer " + res.data.Authorization;
 
         localStorage.setItem("Authorization", token);
-
         localStorage.setItem("Name", res.data.userData);
-        authcontext.dispatch({ type: "LOGIN" });
-
+        
         // redirect /home
+        authcontext.dispatch({ type: "LOGIN" });
         navigate("/home");
       })
       .catch((err) => {
@@ -72,19 +73,36 @@ const Login = () => {
   const responseGoogle = (response) => {
     //console.log(response);
 
-    let token = response.tokenId;
-    let name = response.Ju.tf;
+    const token = response.credential;
+    if (!token) {
+      dispatch({ type: "error" });
+      return;
+    }
 
-    localStorage.setItem("Authorization", "Bearer "+token);
-    localStorage.setItem("Name", name);
-    localStorage.setItem("google", "true");
-    authcontext.dispatch({ type: "LOGIN" });
+    // post to server /users/googlelogin
+    axios
+      .post("users/googlelogin", { token })
+      .then((res) => {
+        const token = "Bearer " + res.data.Authorization;
+        const name = res.data.userData;
 
-    navigate("/home");
+        console.log("navigatings bros");
+        localStorage.setItem("Authorization", token);
+        localStorage.setItem("Name", name);
+        localStorage.setItem("google", "true");
+        authcontext.dispatch({ type: "LOGIN" });
+        
+        navigate("/home");
+      }).catch((err) => {
+        console.log(err);
+        const msg = err.response.data.error;
+        alert(msg);
+        authcontext.dispatch({ type: "error" });
+      });
   };
 
   const responseFail = (response) => {
-    dispatch({ type: "closedauth" });
+    // dispatch({ type: "closedauth" });
     console.log(response);
   };
 
@@ -125,22 +143,15 @@ const Login = () => {
             {!user.hidden && <p>{user.error}</p>}
           </div>
           <div className="button-login">
-            
+
             <Buttons name="Log in" type="submit" title="button" />
           </div>
-          
+
 
 
 
           <div className="link2signup">
-            <GoogleLogin 
-          clientId= "879723079642-5jo7di56hjakea4pig397659gucjlsro.apps.googleusercontent.com"
-          buttonText="Login with google"
-          onSuccess={responseGoogle}
-          onFailure={responseFail}
-          cookiePolicy={'single_host_origin'}
-          hostedDomain={"jeknowledge.com"}
-           />
+            <GoogleLogin onSuccess={responseGoogle} onError={responseFail} hosted_domain="jeknowledge.com" />
             <span className="bottomLogin">
               Ainda não tens conta? Regista-te{" "}
               <Link className="link" to="/users/signup">

@@ -21,5 +21,7 @@ router.post("/login", userControllers.login);
 
 router.delete("/signout", userControllers.signout);
 
+router.post("/googleLogin", userControllers.googleLogin);
+
 
 module.exports = router;

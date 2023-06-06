@@ -20,6 +20,12 @@ const initialState = {
   errors: false,
 };
 
+const headers = {
+  "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "PUT, POST, PATCH, DELETE, GET"
+}
+
 const dividaReducer = (divida, action) => {
   switch (action.type) {
     case "CHANGE":
@@ -55,12 +61,12 @@ const CriarDivida = () => {
   };
 
   const analiseDivida = (divid) => {
-    const tok = authcontext.state.userToken.split(" ");
+    const tok = authcontext.state.userToken.split(" ")[1];
+
     // const decoded = jwt.decode(tok[1], process.env.SECRET_SV_KEY);
     const  decoded  = decodeToken(tok);
-    const isExpired = isExpired(tok);
     
-    if (isExpired) {
+    if (isExpired(tok)) {
       return false;
     }
 
@@ -79,19 +85,17 @@ const CriarDivida = () => {
 
     return false;
   };
-  const headers = {
-    "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "PUT, POST, PATCH, DELETE, GET"
-
-  }
+ 
   const handleSubmit = (e) => {
     // impede que a pagina seja reloadada apos o clique no botao
     e.preventDefault();
     divida.quantia = parseFloat(divida.quantia);
 
+    // first check these, set axios headers also.
     authcontext.dispatch({ type: "CHECKAUTHSTATE" });
     admincontext.dispatch({ type: "CHECKADMINSTATE" });
+
+
     if (authcontext.state.isadmin) {
       axios.headers.post["Access-Control-Allow-Origin"] = "*";
       axios
@@ -100,21 +104,18 @@ const CriarDivida = () => {
         })
         .then(() => {
           dispatch({ type: "pop1", pop: 1 });
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
         })
         .catch((err) => {
           dispatch({ type: "errors", errors: true });
         });
     } else if (analiseDivida(divida)) {
+      console.log("divida criada");
+      console.log(divida);
+
       axios
         .post("/dividas/", { divida })
         .then(() => {
           dispatch({ type: "pop1", pop: 1 });
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
         })
         .catch((err) => {
           dispatch({ type: "errors", errors: true });
@@ -214,6 +215,9 @@ const CriarDivida = () => {
               name2="popuptext"
               id1="myPopup"
               id2="myPopupText"
+              hideClick={() => {
+                dispatch({ type: "RESET" });
+              }}
             />
           </div>
         )}

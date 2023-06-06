@@ -16,11 +16,13 @@ axios.defaults.headers.post["Accept"] = "application/json";
 //O context só dá render da App quando tiver guardado o token no State
 const AuthReducer = (action, state = {}) => {
   const token = localStorage.getItem("Authorization");
+  console.log("authreducer:", token);
   if (token === null) {
     return <Link to="/" />;
   }
   switch (action.type) {
     case "LOGIN":
+      axios.defaults.headers.common["Authorization"] = token;
       return {
         ...state,
         status: "LOGIN",

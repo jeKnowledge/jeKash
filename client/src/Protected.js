@@ -2,8 +2,9 @@ import React from 'react'
 import { Navigate } from "react-router-dom";
 
 function Protected({ isLoggedIn, children }) {
+    console.log("isLoggedIn: ", isLoggedIn);
     if (!isLoggedIn) {
-        return <Navigate to="/home" replace />;
+        return <Navigate to="/" replace />;
     }
     return children;
 }

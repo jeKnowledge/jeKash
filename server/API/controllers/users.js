@@ -1,9 +1,99 @@
 const mongoose = require("mongoose");
+const { OAuth2Client } = require('google-auth-library');
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/users");
-
 const admin_email = "rita.matos@jeknowledge.com";
+
+const CLIENT_ID = process.env.googleAuthSecret;
+exports.googleLogin = (req, res, next) => {
+  const client = new OAuth2Client(CLIENT_ID);
+  const tokenId = req.body.token;
+  console.log("tokenID:", tokenId);
+  if (tokenId) {
+
+    // validate token using google login
+    client.verifyIdToken({
+      idToken: tokenId,
+      audience: CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
+      // Or, if multiple clients access the backend:
+      //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+    }).then((ticket) => {
+      console.log("ticket: ", ticket);
+      const payload = ticket.getPayload();
+      const userid = payload['sub'];
+
+      // check if it expired also
+      const exp = payload['exp'];
+      const now = Date.now() / 1000; 
+      if (now > exp) {
+        console.log("token expired");
+        return res.status(400).json({
+          error: "Something went wrong... Token expired.",
+        });
+      }
+
+      if (userid) {
+        const { email_verified, name, email } = payload;
+        console.log("email_verified: ", email_verified);
+        console.log("name: ", name);
+        console.log("email: ", email);
+
+        if (email_verified) {
+          User.findOne({
+            email: email,
+          })
+          .select()
+          .exec()
+          .then((user) => {
+            console.log("user: ", user);
+              if (user) {
+                jwt.sign(
+                  //payload,privateKey, [options,callback]
+                  {
+                    email: user.email,
+                    userNamefirst: user.name,
+                    userNamelast: user.lastname,
+                    userId: user._id,
+                    admin: user.admin,
+                  },
+                  process.env.SECRET_SV_KEY,
+                  {
+                    expiresIn: "1h",
+                  },
+                  function (err, token, response) {
+                    return res.status(200).json({
+                      userData: user.name + " " + user.lastname,
+                      Authorization: token,
+                    });
+                  }
+                );
+              } else {
+                return res.status(400).json({
+                  error: "User not found...",
+                });
+              }
+          }).catch((err) => {
+            console.log(err);
+            return res.status(400).json({
+              error: "Something went wrong...",
+            });
+          });
+        } else {
+          return res.status(400).json({
+            error: "Something went wrong... Email not verified.",
+          });
+        }
+      }
+    }).catch((err) => {
+      console.log(err);
+      return res.status(400).json({
+        error: "Something went wrong...",
+      });
+    });
+  }
+};
 
 
 exports.signup = (req, res, next) => {
@@ -97,7 +187,7 @@ exports.login = (req, res, next) => {
             user.admin = true; //se o login for feito pelo admin, admin do user passa para true
           }
 
-          const response = jwt.sign(
+          jwt.sign(
             //payload,privateKey, [options,callback]
             {
               email: user.email,
@@ -118,7 +208,7 @@ exports.login = (req, res, next) => {
             }
           );
         } else {
-          res.status(401).json("error");
+          return res.status(401).json("error");
         }
       });
     })

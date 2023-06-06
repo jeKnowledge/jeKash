@@ -108,10 +108,7 @@ const DividasComponent = (props) => {
 
         axios.post(url_div).then((res) => {
           dispatch({ type: "pop1", pop: 2 });
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
-        });
+        })
       } else {
         console.log("Nao ha dividas");
       }
@@ -266,7 +263,7 @@ const DividasComponent = (props) => {
             name1="popupzito1"
             name2="buttontext"
             button="true"
-            func={handleResp}
+            handleResp={handleResp}
           />
         </div>
       )}
@@ -276,6 +273,10 @@ const DividasComponent = (props) => {
             title="Divida paga com sucesso!"
             name1="popupzito2"
             name2="popuptext"
+            hideClick={() => {
+              console.log("ola");
+              dispatch({ type: "RESET" });
+            }}
           />
         </div>
       )}

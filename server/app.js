@@ -100,12 +100,11 @@ app.use((req, res, next) => {
 
 const port = process.env.PORT || 62036;
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Hello!\nExample app listening on port ${port}`)
 })
 
 app.use((err, req, res, next) => {
   const status = err.status || 500; //se nao existir o status do erro, envia 500
-  console.log("Server Live!");
   //se exitir erro (por exemplo 404 se nao exitir) envia isto:
   res.status(status).json({
     message: "Error not found! Status: " + status,
